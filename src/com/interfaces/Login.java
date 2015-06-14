@@ -50,7 +50,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 580, 390);
+		setBounds(100, 100, 550, 385);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,6 +94,7 @@ public class Login extends JFrame {
 		panel_1.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
+		txtUsuario.setText("evaluador01");
 		txtUsuario.setBackground(new Color(223, 223, 233));
 		txtUsuario.setBounds(115, 3, 245, 20);
 		panel_1.add(txtUsuario);
@@ -171,5 +172,4 @@ public class Login extends JFrame {
 	public void ingresar(){
 		JOptionPane.showMessageDialog(null, txtPassword.getText());
 	}
-
 }

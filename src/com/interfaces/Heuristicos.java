@@ -22,6 +22,12 @@ import javax.swing.table.DefaultTableModel;
 
 import com.persistencia.Heuristico;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class Heuristicos extends JFrame {
 
@@ -75,7 +81,7 @@ public class Heuristicos extends JFrame {
 		lblDescripcion.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
 		
 		
-		lblDescripcion.setBounds(140, 143, 1187, 23);
+		lblDescripcion.setBounds(137, 164, 1187, 23);
 		contentPane.add(lblDescripcion);
 		
 		JPanel panel = new JPanel();
@@ -148,6 +154,113 @@ public class Heuristicos extends JFrame {
 		txtContador.setFont(new Font("Dialog", Font.BOLD, 18));
 		txtContador.setBounds(196, 72, 43, 49);
 		contentPane.add(txtContador);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(379, 12, 610, 50);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JButton btnNewButton = new JButton("1");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=1;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		btnNewButton.setBounds(0, 0, 59, 50);
+		panel_1.add(btnNewButton);
+		
+		JButton button = new JButton("2");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=2;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button.setBounds(60, 0, 59, 50);
+		panel_1.add(button);
+		
+		JButton button_1 = new JButton("3");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=3;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_1.setBounds(121, 0, 59, 50);
+		panel_1.add(button_1);
+		
+		JButton button_2 = new JButton("4");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=4;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_2.setBounds(181, 0, 59, 50);
+		panel_1.add(button_2);
+		
+		JButton button_3 = new JButton("8");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				numHeuristico=8;
+				consultar_por_numero(numHeuristico);
+				
+			}
+		});
+		button_3.setBounds(422, 0, 59, 50);
+		panel_1.add(button_3);
+		
+		JButton button_4 = new JButton("7");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=7;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_4.setBounds(362, 0, 59, 50);
+		panel_1.add(button_4);
+		
+		JButton button_5 = new JButton("6");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=6;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_5.setBounds(301, 0, 59, 50);
+		panel_1.add(button_5);
+		
+		JButton button_6 = new JButton("5");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=5;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_6.setBounds(241, 0, 59, 50);
+		panel_1.add(button_6);
+		
+		JButton button_7 = new JButton("10");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=10;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_7.setBounds(542, 0, 59, 50);
+		panel_1.add(button_7);
+		
+		JButton button_8 = new JButton("9");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numHeuristico=9;
+				consultar_por_numero(numHeuristico);
+			}
+		});
+		button_8.setBounds(482, 0, 59, 50);
+		panel_1.add(button_8);
 		
 		
 		formatearTabla();

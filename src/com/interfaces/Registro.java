@@ -1,30 +1,39 @@
 package com.interfaces;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.persistencia.Evaluador;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class Registro extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JTextField txt_nombre;
+	private JTextField txt_apellido;
+	private JTextField txt_username;
+	private JPasswordField txt_password;
+	private JPasswordField txt_passwordR;
+	Evaluador evaluador;
+	static Registro frame = new Registro();
 
 	/**
 	 * Launch the application.
@@ -33,7 +42,7 @@ public class Registro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Registro frame = new Registro();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +55,16 @@ public class Registro extends JFrame {
 	 * Create the frame.
 	 */
 	public Registro() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("EXSHE - REGISTRO");
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				cerrarRegistro();
+			}
+		});
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(cerrar());
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 560, 523);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +74,7 @@ public class Registro extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(223, 223, 233));
-		panel.setBounds(97, 59, 365, 78);
+		panel.setBounds(95, 22, 365, 78);
 		contentPane.add(panel);
 		
 		JLabel label_1 = new JLabel("");
@@ -69,15 +87,10 @@ public class Registro extends JFrame {
 		label_2.setBounds(75, 12, 278, 15);
 		panel.add(label_2);
 		
-		JLabel lblRegistro = new JLabel("Registro de Usuarios");
+		JLabel lblRegistro = new JLabel("Registro de Evaluadores");
 		lblRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblRegistro.setBounds(74, 39, 278, 27);
 		panel.add(lblRegistro);
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Registro.class.getResource("/img/textura.png")));
-		label.setBounds(-20, 0, 580, 107);
-		contentPane.add(label);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -90,12 +103,12 @@ public class Registro extends JFrame {
 		lblNombre.setBounds(42, 5, 152, 15);
 		panel_1.add(lblNombre);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBorder(null);
-		textField.setBackground(new Color(223, 223, 233));
-		textField.setBounds(202, 3, 245, 20);
-		panel_1.add(textField);
+		txt_nombre = new JTextField();
+		txt_nombre.setColumns(10);
+		txt_nombre.setBorder(null);
+		txt_nombre.setBackground(new Color(223, 223, 233));
+		txt_nombre.setBounds(202, 3, 245, 20);
+		panel_1.add(txt_nombre);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -108,12 +121,12 @@ public class Registro extends JFrame {
 		lblApellido.setBounds(44, 5, 153, 15);
 		panel_2.add(lblApellido);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBorder(null);
-		textField_1.setBackground(new Color(223, 223, 233));
-		textField_1.setBounds(202, 3, 245, 20);
-		panel_2.add(textField_1);
+		txt_apellido = new JTextField();
+		txt_apellido.setColumns(10);
+		txt_apellido.setBorder(null);
+		txt_apellido.setBackground(new Color(223, 223, 233));
+		txt_apellido.setBounds(202, 3, 245, 20);
+		panel_2.add(txt_apellido);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
@@ -126,12 +139,12 @@ public class Registro extends JFrame {
 		lblUsuario.setBounds(49, 5, 149, 15);
 		panel_3.add(lblUsuario);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBorder(null);
-		textField_2.setBackground(new Color(223, 223, 233));
-		textField_2.setBounds(200, 3, 245, 20);
-		panel_3.add(textField_2);
+		txt_username = new JTextField();
+		txt_username.setColumns(10);
+		txt_username.setBorder(null);
+		txt_username.setBackground(new Color(223, 223, 233));
+		txt_username.setBounds(200, 3, 245, 20);
+		panel_3.add(txt_username);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
@@ -144,12 +157,12 @@ public class Registro extends JFrame {
 		lblIngreseSuContrasea.setBounds(12, 5, 180, 15);
 		panel_4.add(lblIngreseSuContrasea);
 		
-		passwordField = new JPasswordField();
-		passwordField.setColumns(10);
-		passwordField.setBorder(null);
-		passwordField.setBackground(new Color(223, 223, 233));
-		passwordField.setBounds(199, 3, 245, 20);
-		panel_4.add(passwordField);
+		txt_password = new JPasswordField();
+		txt_password.setColumns(10);
+		txt_password.setBorder(null);
+		txt_password.setBackground(new Color(223, 223, 233));
+		txt_password.setBounds(199, 3, 245, 20);
+		panel_4.add(txt_password);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
@@ -162,14 +175,105 @@ public class Registro extends JFrame {
 		lblRepitaLaContrasea.setBounds(12, 5, 187, 15);
 		panel_5.add(lblRepitaLaContrasea);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setColumns(10);
-		passwordField_1.setBorder(null);
-		passwordField_1.setBackground(new Color(223, 223, 233));
-		passwordField_1.setBounds(202, 3, 245, 20);
-		panel_5.add(passwordField_1);
+		txt_passwordR = new JPasswordField();
+		txt_passwordR.setColumns(10);
+		txt_passwordR.setBorder(null);
+		txt_passwordR.setBackground(new Color(223, 223, 233));
+		txt_passwordR.setBounds(202, 3, 245, 20);
+		panel_5.add(txt_passwordR);
 		
 		final JButton btnIngresar = new JButton("  Guardar");
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String nom=txt_nombre.getText();
+				String ape=txt_apellido.getText();
+				String pass1=txt_password.getText();
+				String pass2=txt_passwordR.getText();	
+				String user=txt_username.getText();
+				
+				
+				if (nom.equals("") || ape.equals("") || user.equals("") || pass1.equals("") || pass2.equals("")){
+					
+					
+					if (pass2.equals("")){
+						txt_passwordR.requestFocus();
+					}
+					
+					
+					if (pass1.equals("")){	
+						txt_password.requestFocus();
+					}
+
+					if (user.equals("")){									
+						txt_username.requestFocus();
+					}
+					
+					if (ape.equals("")){									
+						txt_apellido.requestFocus();
+					}
+					
+					if(nom.equals("") ){						
+						txt_nombre.requestFocus();
+					}
+					
+					JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
+				}else{	
+					
+					if (user.length()>6){
+						
+					
+						if(pass1.length()<6){
+							JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
+							txt_password.setText("");
+							txt_passwordR.setText("");
+							txt_password.requestFocus();
+	
+						}else{
+							
+							if(pass1.equals(pass2)){
+								
+								//Guardar Evaluador
+								evaluador=new Evaluador(nom, ape, pass1, user);
+								int resultado=evaluador.guardar();
+								
+								if (resultado>0){
+									JOptionPane.showMessageDialog(null,"Evaluador guardado exitosamente. Ya puede iniciar sesión");
+									dispose();
+									Login login=new Login();
+									login.txt_username.setText(user);
+									login.txt_password.requestFocus();
+									login.show();
+									
+								}else{
+									JOptionPane.showMessageDialog(null,"No se pudo guardar, intente usar otro username.");
+									txt_username.requestFocus();
+									txt_username.setText("");
+									txt_password.setText("");
+									txt_passwordR.setText("");
+								}
+								
+								
+							}else{
+								
+								JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+								txt_password.requestFocus();
+								txt_password.setText("");
+								txt_passwordR.setText("");
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null,"El username debe tener al menos 6 caracteres.");
+						txt_username.requestFocus();
+						txt_username.setText("");
+						txt_password.setText("");
+						txt_passwordR.setText("");
+					}
+				}
+				
+	
+			}
+		});
 		btnIngresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -185,7 +289,16 @@ public class Registro extends JFrame {
 		btnIngresar.setBounds(375, 425, 117, 38);
 		contentPane.add(btnIngresar);
 		
-		final JButton btnCancelar = new JButton("Cancelar");
+		final JButton btnCancelar = new JButton("Volver");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Acceso acceso=new Acceso();
+				acceso.show();
+				acceso.setExtendedState(MAXIMIZED_BOTH);
+				dispose();
+				
+			}
+		});
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -211,5 +324,22 @@ public class Registro extends JFrame {
 	public  void noResaltar(JButton btn){
 		btn.setBackground(new Color(230,230,230));
 		
+	}
+	
+	public int cerrar(){
+		return 1;
+	}
+	
+	public void cerrarRegistro(){
+		Object [] opciones ={"Aceptar","Cancelar"};
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"Esta seguro que desea cerrar la aplicación","Mensaje de Confirmación",
+		JOptionPane.YES_NO_OPTION,
+		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+		if (eleccion == JOptionPane.YES_OPTION)
+		{
+			System.exit(0);
+		}else{
+			
+		}
 	}
 }

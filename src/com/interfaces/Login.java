@@ -1,34 +1,35 @@
 package com.interfaces;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-
-import java.awt.Color;
-import java.awt.Font;
-
 import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import com.persistencia.Evaluador;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUsuario;
-	private JPasswordField txtPassword;
-
+	public JTextField txt_username;
+	public JPasswordField txt_password;
+	Evaluador evaluador=new Evaluador();
 	/**
 	 * Launch the application.
 	 */
@@ -49,8 +50,16 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 385);
+		setTitle("EXSHE - LOGIN");
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				cerrarLogin();
+			}
+		});
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 550, 349);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,7 +68,7 @@ public class Login extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(223,223,233));
-		panel.setBounds(105, 64, 365, 78);
+		panel.setBounds(105, 32, 365, 78);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -77,15 +86,11 @@ public class Login extends JFrame {
 		lblInicioDeSesi.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblInicioDeSesi.setBounds(74, 39, 278, 15);
 		panel.add(lblInicioDeSesi);
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/img/textura.png")));
-		lblNewLabel.setBounds(-10, 0, 580, 107);
-		contentPane.add(lblNewLabel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(223, 223, 233));
-		panel_1.setBounds(105, 172, 365, 27);
+		panel_1.setBounds(105, 152, 365, 27);
 		contentPane.add(panel_1);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
@@ -93,18 +98,17 @@ public class Login extends JFrame {
 		lblUsuario.setBounds(40, 5, 69, 15);
 		panel_1.add(lblUsuario);
 		
-		txtUsuario = new JTextField();
-		txtUsuario.setText("evaluador01");
-		txtUsuario.setBackground(new Color(223, 223, 233));
-		txtUsuario.setBounds(115, 3, 245, 20);
-		panel_1.add(txtUsuario);
-		txtUsuario.setBorder(null);
-		txtUsuario.setColumns(10);
+		txt_username = new JTextField();
+		txt_username.setBackground(new Color(223, 223, 233));
+		txt_username.setBounds(115, 3, 245, 20);
+		panel_1.add(txt_username);
+		txt_username.setBorder(null);
+		txt_username.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
-		panel_2.setBounds(105, 224, 365, 27);
+		panel_2.setBounds(105, 204, 365, 27);
 		contentPane.add(panel_2);
 		
 		JLabel lblContrase = new JLabel("Contraseña:");
@@ -112,12 +116,12 @@ public class Login extends JFrame {
 		lblContrase.setBounds(10, 5, 89, 15);
 		panel_2.add(lblContrase);
 		
-		txtPassword = new JPasswordField();
-		txtPassword.setColumns(10);
-		txtPassword.setBorder(null);
-		txtPassword.setBackground(new Color(223, 223, 233));
-		txtPassword.setBounds(111, 4, 245, 20);
-		panel_2.add(txtPassword);
+		txt_password = new JPasswordField();
+		txt_password.setColumns(10);
+		txt_password.setBorder(null);
+		txt_password.setBackground(new Color(223, 223, 233));
+		txt_password.setBounds(111, 4, 245, 20);
+		panel_2.add(txt_password);
 		
 		final JButton btnIngresar = new JButton("  Ingresar");
 		btnIngresar.addActionListener(new ActionListener() {
@@ -136,12 +140,20 @@ public class Login extends JFrame {
 				noResaltar(btnIngresar);
 			}
 		});
-		btnIngresar.setBounds(353, 279, 117, 38);
+		btnIngresar.setBounds(353, 259, 117, 38);
 		btnIngresar.setBorder(null);
 		btnIngresar.setBackground(new Color(230,230,230));
 		contentPane.add(btnIngresar);
 		
-		final JButton btnCancelar = new JButton("  Cancelar");
+		final JButton btnCancelar = new JButton("  Volver");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Acceso acceso=new Acceso();
+				acceso.setExtendedState(MAXIMIZED_BOTH);
+				acceso.show();
+				dispose();
+			}
+		});
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -155,7 +167,7 @@ public class Login extends JFrame {
 		btnCancelar.setIcon(new ImageIcon(Login.class.getResource("/img/close.png")));
 		btnCancelar.setBorder(null);
 		btnCancelar.setBackground(SystemColor.controlHighlight);
-		btnCancelar.setBounds(224, 279, 117, 38);
+		btnCancelar.setBounds(224, 259, 117, 38);
 		contentPane.add(btnCancelar);
 	}
 	
@@ -170,6 +182,48 @@ public class Login extends JFrame {
 	}
 	
 	public void ingresar(){
-		JOptionPane.showMessageDialog(null, txtPassword.getText());
+		
+		if(txt_username.getText().equals("") || txt_password.getText().equals("")){
+			if(txt_password.getText().equals("")){
+				txt_password.requestFocus();
+			}
+			if(txt_username.getText().equals("")){
+				txt_username.requestFocus();
+			}
+			JOptionPane.showMessageDialog(null, "Por favor complete los campos.");
+		}else{
+					
+			if(evaluador.verificarDatos(txt_username.getText(), txt_password.getText())){
+				//JOptionPane.showMessageDialog(null, "Usuario Encontrado");
+				Principal prin=new Principal();
+				prin.lbl_evaluador.setText(txt_username.getText());
+				prin.show();
+				prin.setExtendedState(MAXIMIZED_BOTH);
+				dispose();
+			}else{
+				JOptionPane.showMessageDialog(null, "Contraseña o Username incorrecto.");
+				txt_password.setText("");
+				txt_username.setText("");
+				txt_username.requestFocus();
+			}
+				
+		}
+	}
+	
+	public int cerrar(){
+		return 1;
+	}
+	
+	public void cerrarLogin(){
+		Object [] opciones ={"Aceptar","Cancelar"};
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"Esta seguro que desea cerrar la aplicación","Mensaje de Confirmación",
+		JOptionPane.YES_NO_OPTION,
+		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+		if (eleccion == JOptionPane.YES_OPTION)
+		{
+			System.exit(0);
+		}else{
+			
+		}
 	}
 }

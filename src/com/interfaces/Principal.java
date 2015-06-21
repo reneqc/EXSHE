@@ -1,17 +1,16 @@
 package com.interfaces;
 
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.peer.FramePeer;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,22 +22,21 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField txtSistemaEscolsticoUtc;
+	JLabel lbl_evaluador = 	new JLabel("Evaluador conectado para evaluar");
+	public static Principal framePrincipal = new Principal();
+	private JTextField textField;
 	private JTextField textField_1;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
-	public static Principal framePrincipal = new Principal();
 
 	/**
 	 * Launch the application.
@@ -50,6 +48,7 @@ public class Principal extends JFrame {
 				try {
 					
 					framePrincipal.setVisible(true);
+					framePrincipal.setExtendedState(MAXIMIZED_BOTH);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,6 +64,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setTitle("EXSHE - VENTANA PRINCIPAL");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -81,29 +81,56 @@ public class Principal extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(-1, 0, 1366, 70);
+		panel.setBounds(-1, 0, 1600, 89);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 1366, 36);
+		menuBar.setBounds(0, 0, 1600, 36);
 		panel.add(menuBar);
 		
 		JMenu menu = new JMenu("  ");
 		menuBar.add(menu);
+		menu.addSeparator();
 		
-		JMenu mnInicio = new JMenu("  Inicio  ");
-		menuBar.add(mnInicio);
+		JMenu mnNewMenu_2 = new JMenu("   Inicio   ");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
+		mntmAcceso.setAccelerator(
+		         KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
+		mntmAcceso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+
+				  int n = JOptionPane.showConfirmDialog(
+				            null,
+				            "¿Está seguro que desea salir a la ventana de acceso?",
+				            "Mensaje de Confirmación",
+				            JOptionPane.YES_NO_OPTION);
+				  	
+				  		
+				        if(n==0){
+				        	Acceso a1=new Acceso();
+							a1.show();
+							a1.setExtendedState(MAXIMIZED_BOTH);
+							dispose();
+				        }
+				        else {
+				           //No
+				        }
+				        
+				
+			}
+		});
+		mnNewMenu_2.add(mntmAcceso);
 		
 		JMenu mnEvaluaciones = new JMenu("  Evaluaciones  ");
 		menuBar.add(mnEvaluaciones);
 		
-		JMenu mnOpciones = new JMenu("  Opciones  ");
-		menuBar.add(mnOpciones);
-		
 		JMenu mnHeursticas = new JMenu("  Heurísticos  ");
 		menuBar.add(mnHeursticas);
-		
+		mnHeursticas.addSeparator();
 		JMenuItem mntmA = new JMenuItem("1.   Aspectos Generales");
 		mntmA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
@@ -207,25 +234,30 @@ public class Principal extends JFrame {
 		
 		JMenu mnAyuda = new JMenu("  Ayuda  ");
 		menuBar.add(mnAyuda);
+		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
+		
+		lbl_evaluador.setBounds(188, 58, 222, 22);
+		panel.add(lbl_evaluador);
+		
+		JLabel lblEvaluador = new JLabel("Evaluador conectado:");
+		lblEvaluador.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
+		lblEvaluador.setBounds(35, 58, 151, 22);
+		panel.add(lblEvaluador);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(-1, 37, 1351, 25);
-		contentPane.add(panel_1);
 		panel_1.setLayout(null);
+		panel_1.setBounds(0, 34, 1600, 22);
+		panel.add(panel_1);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 1135, 25);
+		menuBar_1.setBounds(0, 0, 1600, 25);
 		panel_1.add(menuBar_1);
 		
-		JMenu mnNewMenu = new JMenu("  ");
+		JMenu mnNewMenu = new JMenu("   ");
 		menuBar_1.add(mnNewMenu);
 		
-		JMenu mnNewMenu_1 = new JMenu(" ");
-		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/nue.png")));
-		menuBar_1.add(mnNewMenu_1);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(34, 244, 436, 422);
+		scrollPane.setBounds(70, 215, 436, 422);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -246,7 +278,7 @@ public class Principal extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
-		panel_2.setBounds(489, 82, 365, 78);
+		panel_2.setBounds(478, 101, 365, 78);
 		contentPane.add(panel_2);
 		
 		JLabel lblLog = new JLabel("LOG");
@@ -263,35 +295,50 @@ public class Principal extends JFrame {
 		lblBienvenido.setBounds(74, 39, 278, 15);
 		panel_2.add(lblBienvenido);
 		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBounds(798, 213, 522, 509);
+		contentPane.add(panel_8);
+		panel_8.setLayout(null);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBackground(new Color(223, 223, 233));
+		panel_5.setBounds(81, 12, 365, 78);
+		panel_8.add(panel_5);
+		
+		JLabel label = new JLabel("NUEVA EVALUACIÓN");
+		label.setFont(new Font("Dialog", Font.BOLD, 16));
+		label.setBounds(96, 28, 204, 19);
+		panel_5.add(label);
+		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(new Color(223, 223, 233));
-		panel_3.setBounds(591, 365, 447, 27);
-		contentPane.add(panel_3);
+		panel_3.setBounds(41, 113, 447, 27);
+		panel_8.add(panel_3);
 		
-		JLabel lblNombreDelSisitio = new JLabel("Aplicación a Evaluar:");
-		lblNombreDelSisitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNombreDelSisitio.setBounds(70, 5, 153, 15);
-		panel_3.add(lblNombreDelSisitio);
+		JLabel label_1 = new JLabel("Aplicación a Evaluar:");
+		label_1.setFont(new Font("Dialog", Font.BOLD, 13));
+		label_1.setBounds(70, 5, 153, 15);
+		panel_3.add(label_1);
 		
-		txtSistemaEscolsticoUtc = new JTextField();
-		txtSistemaEscolsticoUtc.setText("Sistema Escolástico UTC");
-		txtSistemaEscolsticoUtc.setColumns(10);
-		txtSistemaEscolsticoUtc.setBorder(null);
-		txtSistemaEscolsticoUtc.setBackground(new Color(223, 223, 233));
-		txtSistemaEscolsticoUtc.setBounds(249, 3, 198, 20);
-		panel_3.add(txtSistemaEscolsticoUtc);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBorder(null);
+		textField.setBackground(new Color(223, 223, 233));
+		textField.setBounds(249, 3, 198, 20);
+		panel_3.add(textField);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(591, 417, 447, 70);
-		contentPane.add(panel_4);
+		panel_4.setBounds(41, 168, 447, 70);
+		panel_8.add(panel_4);
 		
-		JLabel lblObjetivoDeLa = new JLabel("Objetivo de la Evaluación:");
-		lblObjetivoDeLa.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblObjetivoDeLa.setBounds(33, 5, 198, 15);
-		panel_4.add(lblObjetivoDeLa);
+		JLabel label_3 = new JLabel("Navegador:");
+		label_3.setFont(new Font("Dialog", Font.BOLD, 13));
+		label_3.setBounds(33, 5, 198, 15);
+		panel_4.add(label_3);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
@@ -303,13 +350,13 @@ public class Principal extends JFrame {
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
 		panel_6.setBackground(new Color(223, 223, 233));
-		panel_6.setBounds(591, 506, 447, 56);
-		contentPane.add(panel_6);
+		panel_6.setBounds(41, 277, 447, 56);
+		panel_8.add(panel_6);
 		
-		JLabel lblreasAEvaluar = new JLabel("Áreas a Evaluar:");
-		lblreasAEvaluar.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblreasAEvaluar.setBounds(108, 5, 120, 15);
-		panel_6.add(lblreasAEvaluar);
+		JLabel label_4 = new JLabel("Versión del Navegador");
+		label_4.setFont(new Font("Dialog", Font.BOLD, 13));
+		label_4.setBounds(12, 9, 159, 28);
+		panel_6.add(label_4);
 		
 		passwordField = new JPasswordField();
 		passwordField.setColumns(10);
@@ -321,13 +368,13 @@ public class Principal extends JFrame {
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(591, 574, 447, 27);
-		contentPane.add(panel_7);
+		panel_7.setBounds(41, 375, 447, 27);
+		panel_8.add(panel_7);
 		
-		JLabel lblObservacin = new JLabel("Observación:");
-		lblObservacin.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblObservacin.setBounds(128, 5, 103, 15);
-		panel_7.add(lblObservacin);
+		JLabel label_5 = new JLabel("Url del Sitio");
+		label_5.setFont(new Font("Dialog", Font.BOLD, 13));
+		label_5.setBounds(53, 5, 103, 15);
+		panel_7.add(label_5);
 		
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setColumns(10);
@@ -336,39 +383,23 @@ public class Principal extends JFrame {
 		passwordField_1.setBounds(249, 3, 198, 20);
 		panel_7.add(passwordField_1);
 		
-		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnEliminar.setBorder(null);
-		btnEliminar.setBackground(SystemColor.controlHighlight);
-		btnEliminar.setBounds(631, 627, 117, 38);
-		contentPane.add(btnEliminar);
+		JButton button = new JButton("Actualizar");
+		button.setBorder(null);
+		button.setBackground(SystemColor.controlHighlight);
+		button.setBounds(216, 437, 117, 38);
+		panel_8.add(button);
 		
-		JButton btnEvaluar = new JButton("  Evaluar");
-		btnEvaluar.setBorder(null);
-		btnEvaluar.setBackground(SystemColor.controlHighlight);
-		btnEvaluar.setBounds(922, 627, 117, 38);
-		contentPane.add(btnEvaluar);
+		JButton button_1 = new JButton("  Evaluar");
+		button_1.setBorder(null);
+		button_1.setBackground(SystemColor.controlHighlight);
+		button_1.setBounds(353, 437, 117, 38);
+		panel_8.add(button_1);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setLayout(null);
-		panel_5.setBackground(new Color(223, 223, 233));
-		panel_5.setBounds(631, 245, 365, 78);
-		contentPane.add(panel_5);
-		
-		JLabel lblNueva = new JLabel("NUEVA EVALUACIÓN");
-		lblNueva.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNueva.setBounds(96, 28, 204, 19);
-		panel_5.add(lblNueva);
-		
-		JButton btnActualizar = new JButton("Actualizar");
-		btnActualizar.setBorder(null);
-		btnActualizar.setBackground(SystemColor.controlHighlight);
-		btnActualizar.setBounds(780, 627, 117, 38);
-		contentPane.add(btnActualizar);
+		JButton button_2 = new JButton("Eliminar");
+		button_2.setBorder(null);
+		button_2.setBackground(SystemColor.controlHighlight);
+		button_2.setBounds(55, 437, 117, 38);
+		panel_8.add(button_2);
 	}
 	
 	
@@ -384,5 +415,4 @@ public class Principal extends JFrame {
 			
 		}
 	}
-	
 }

@@ -57,6 +57,8 @@ public class Heuristicos extends JFrame {
 	 * Create the frame.
 	 */
 	public Heuristicos() {
+		setTitle("EXSHE - HEURÍSTICOS");
+		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100,  1366, 768);
 		this.setLocationRelativeTo(null);

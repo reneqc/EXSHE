@@ -12,7 +12,7 @@ public class Evaluador {
 	public String nombre;
 	public String apellido;
 	public String password;
-	public String username;
+	public String email;
 
 	private Connection conex=Conexion.obtenerConexion();
 	
@@ -25,14 +25,14 @@ public class Evaluador {
 		this.nombre=n;
 		this.apellido=a;
 		this.password=p;
-		this.username=u;
+		this.email=u;
 
 	}
 	
 	public int guardar(){
 		try {
 			Statement sentencia = (Statement) conex.createStatement();			
-			String cadena = "insert into evaluador(nombre,apellido,password,username) values ('"+this.nombre+"','"+this.apellido+"','"+this.password+"','"+this.username+"')";
+			String cadena = "insert into evaluador(nombre,apellido,password,username) values ('"+this.nombre+"','"+this.apellido+"','"+this.password+"','"+this.email+"')";
 			sentencia.execute(cadena);
 			return 1;
 		} catch (Exception e) {
@@ -48,13 +48,13 @@ public class Evaluador {
 			String passwordBdd="";
 			
 			Statement sentencia = (Statement) conex.createStatement();
-			String cadena = "SELECT * FROM evaluador WHERE username='"+username+"' and password='"+password+"'";
+			String cadena = "SELECT * FROM evaluador WHERE email='"+username+"' and password='"+password+"'";
 			ResultSet rs = sentencia.executeQuery(cadena);		
 				
 			
 			while(rs.next()){
-				usernameBdd=rs.getString(5).toString();
-				passwordBdd=rs.getString(4);
+				usernameBdd=rs.getString(3).toString();
+				passwordBdd=rs.getString(11);
 			
 			}
 			

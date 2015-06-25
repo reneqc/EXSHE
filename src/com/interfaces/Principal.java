@@ -231,6 +231,20 @@ public class Principal extends JFrame {
 		});
 		mnHeursticas.add(mntmNewMenuItem_8);
 		
+		JMenu mnEvaluadores = new JMenu("Evaluadores");
+		menuBar.add(mnEvaluadores);
+		
+		JMenuItem mntmMantenimiento = new JMenuItem("Mantenimiento");
+		mntmMantenimiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Registro registro1=new Registro();
+				registro1.show();
+				
+				
+			}
+		});
+		mnEvaluadores.add(mntmMantenimiento);
+		
 		
 		JMenu mnAyuda = new JMenu("  Ayuda  ");
 		menuBar.add(mnAyuda);

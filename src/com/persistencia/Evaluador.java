@@ -1,41 +1,80 @@
 package com.persistencia;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-
-import javax.swing.JOptionPane;
-
 public class Evaluador {
 	
-	
+	public int id;
 	public String nombre;
 	public String apellido;
-	public String password;
 	public String email;
-
-	private Connection conex=Conexion.obtenerConexion();
+	public String direccion;
+	public String cargo;
+	public String profesion;
+	public String telefono;
+	public String perfil;
+	public String empresa;
+	public String password;
+	private static Connection conex=Conexion.obtenerConexion();
+	
 	
 	public Evaluador(){
 		
 	}
 	
-	public Evaluador(String n, String a, String p, String u){
+	//Constructor Utilizado para Actualizar Evaluadores
+	public Evaluador(int id,String nombre, String apellido, String email,String direccion, String cargo, String profesion, String telefono, String empresa, String password){
+		this.id=id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.direccion = direccion;
+		this.cargo = cargo;
+		this.profesion = profesion;
+		this.telefono = telefono;
+		this.perfil = "EVALUADOR";
+		this.empresa = empresa;
+		this.password = password;
 		
-		this.nombre=n;
-		this.apellido=a;
-		this.password=p;
-		this.email=u;
-
+	}
+	
+	//Constructor Utilizado para crear nuevos evaluadores
+	public Evaluador(String nombre, String apellido, String email,String direccion, String cargo, String profesion, String telefono, String empresa, String password) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.direccion = direccion;
+		this.cargo = cargo;
+		this.profesion = profesion;
+		this.telefono = telefono;
+		this.perfil = "EVALUADOR";
+		this.empresa = empresa;
+		this.password = password;
 	}
 	
 	public int guardar(){
 		try {
 			Statement sentencia = (Statement) conex.createStatement();			
-			String cadena = "insert into evaluador(nombre,apellido,password,username) values ('"+this.nombre+"','"+this.apellido+"','"+this.password+"','"+this.email+"')";
+			String cadena = "insert into evaluador(nombre,apellido,email,direccion,cargo,profesion,telefono,perfil,empresaEvaluador,password)"
+					+ " values ('"+this.nombre+"','"+this.apellido+"','"+this.email+"','"+this.direccion+"','"+this.cargo+"','"+this.profesion+"','"+this.telefono+"','"+this.perfil+"','"+this.empresa+"','"+this.password+"')";
 			sentencia.execute(cadena);
 			return 1;
-		} catch (Exception e) {
+		} catch (SQLException e ) {
+			System.out.println(e);
+			return 0;
+		}
+
+	}
+	
+	public int actualizar(){
+		try {
+			Statement sentencia = (Statement) conex.createStatement();			
+			String cadena = "update evaluador set apellido='"+this.apellido+"', nombre='"+this.nombre+"', email='"+this.email+"', direccion='"+this.direccion+"', cargo='"+this.cargo+"', profesion='"+this.profesion+"', telefono='"+this.telefono+"', empresaEvaluador='"+this.empresa+"', password='"+this.password+"' where id_evaluador="+this.id;                 
+			sentencia.execute(cadena);
+			return 1;
+		} catch (SQLException e ) {
 			System.out.println(e);
 			return 0;
 		}
@@ -70,7 +109,14 @@ public class Evaluador {
 			return false;
 		}
 		
-		
+	}
+	
+	
+	public static ResultSet consultarTodos() throws SQLException{
+		Statement sentencia = (Statement) conex.createStatement();
+		String cadena = "SELECT * FROM evaluador";
+		ResultSet rs = sentencia.executeQuery(cadena);
+		return rs;
 		
 	}
 

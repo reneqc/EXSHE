@@ -18,7 +18,7 @@ public class Conexion {
 			String usuarioDb="root";
 			String passDb="12345";
 			conexion=(Connection) DriverManager.getConnection(servidor,usuarioDb,passDb);
-			JOptionPane.showMessageDialog(null,"Conexión Exitosa");
+			//JOptionPane.showMessageDialog(null,"Conexión Exitosa");
 		}catch(ClassNotFoundException ex){
 			 JOptionPane.showMessageDialog(null, ex, "Error1 en la Conexión con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
 	            conexion=null;

@@ -148,7 +148,7 @@ public class Login extends JFrame {
 		
 		final JButton btnCancelar = new JButton("  Volver");
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				Acceso acceso=new Acceso();
 				acceso.setExtendedState(MAXIMIZED_BOTH);
 				acceso.show();
@@ -194,13 +194,13 @@ public class Login extends JFrame {
 			JOptionPane.showMessageDialog(null, "Por favor complete los campos.");
 		}else{
 					
-			if(evaluador.verificarDatos(txt_email.getText(), txt_password.getText()).equals("ADMINISTRADOR")){
-				JOptionPane.showMessageDialog(null, "Bienvenido Administrador");
+			if(evaluador.verificarDatos(txt_email.getText(), txt_password.getText()).equals("ADMINISTRADOR")){				
+				JOptionPane.showMessageDialog(null, "Bienvenido Administrador");			
 				PrincipalAdministrador prin=new PrincipalAdministrador();
 				prin.lbl_evaluador.setText(txt_email.getText());
 				prin.show();
-				prin.setExtendedState(MAXIMIZED_BOTH);
-				dispose();
+				prin.setExtendedState(MAXIMIZED_BOTH);				
+				dispose();	
 				
 			}else if(evaluador.verificarDatos(txt_email.getText(), txt_password.getText()).equals("EVALUADOR")){
 				JOptionPane.showMessageDialog(null, "Bienvenido Evaluador");

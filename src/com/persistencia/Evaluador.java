@@ -118,7 +118,7 @@ public class Evaluador {
 	
 	public static ResultSet consultarTodos() throws SQLException{
 		Statement sentencia = (Statement) conex.createStatement();
-		String cadena = "SELECT * FROM evaluador";
+		String cadena = "SELECT * FROM evaluador order by apellido asc";
 		ResultSet rs = sentencia.executeQuery(cadena);
 		return rs;
 		

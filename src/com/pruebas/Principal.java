@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.persistencia.Evaluacion;
 import com.persistencia.Evaluador;
 import com.persistencia.Heuristico;
+import com.persistencia.Proyecto;
 
 public class Principal {
 
@@ -24,10 +25,10 @@ public class Principal {
 	@Test
 	public void actualizarEvaluador() {
 		
-		Evaluador u=new Evaluador(2,"Jose", "Valencia","jvalencia@gmail.com", "Quito", "Secretario", "Ing. Comercial", "0989098789", "UTC", "123456");
+		//Evaluador u=new Evaluador(2,"Jose", "Valencia","jvalencia@gmail.com", "Quito", "Secretario", "Ing. Comercial", "0989098789", "UTC", "123456");
 		
 		
-		assertEquals(1,u.actualizar());
+		//assertEquals(1,u.actualizar());
 		
 	}
 	
@@ -37,7 +38,7 @@ public class Principal {
 		Evaluador u=new Evaluador();
 		
 		//evitando datos repetidos
-		assertEquals(true,u.verificarDatos("admin","admin"));
+		assertEquals("ADMINISTRADOR",u.verificarDatos("admin","admin"));
 	}
 
 	@Test
@@ -58,17 +59,18 @@ public class Principal {
 	
 	
 	
-	/*
+	
 	@Test	
-	public void crearEvaluacion(){
+	public void crearProyecto(){
 		
-		Evaluacion e=new Evaluacion("Youtube","Internet Explorer","V8.1","www.youtube.com",1);
+		Proyecto pry=new Proyecto("www.gmail.com","Gmail","Correo","jvalencia@gmail.com","patricio@gmail.com","bravo@gmail.com","carlos@gmail.com");
+		System.out.println(pry.obtenerFecha());
+		assertEquals(1,pry.guardar());
 		
-		assertEquals(1,e.guardar());
 
 		
 	}
-	*/
+	
 	
 	
 }

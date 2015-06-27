@@ -30,9 +30,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.persistencia.Evaluador;
+import javax.swing.UIManager;
 
 
-public class Registro extends JFrame {
+public class MantenimientoEvaluadores extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_nombre;
@@ -41,7 +42,7 @@ public class Registro extends JFrame {
 	private JPasswordField txt_password;
 	private JPasswordField txt_passwordR;
 	Evaluador evaluador;
-	static Registro frame = new Registro();
+	static MantenimientoEvaluadores frame = new MantenimientoEvaluadores();
 	private JTextField txt_direccion;
 	private JTextField txt_cargo;
 	private JTextField txt_profesion;
@@ -72,7 +73,7 @@ public class Registro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Registro() {
+	public MantenimientoEvaluadores() {
 		setResizable(false);
 		setTitle("EXSHE - REGISTRO");
 		addWindowListener(new WindowAdapter() {
@@ -194,8 +195,8 @@ public class Registro extends JFrame {
 		panel_5.add(txt_passwordR);
 		
 		final JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setIcon(new ImageIcon(Registro.class.getResource("/img/clear.png")));
-		btnLimpiar.setBounds(361, 21, 92, 27);
+		btnLimpiar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/clear.png")));
+		btnLimpiar.setBounds(344, 21, 109, 27);
 		btnLimpiar.setFocusable(false);
 		contenedor_registro.add(btnLimpiar);
 		btnLimpiar.addActionListener(new ActionListener() {
@@ -217,12 +218,12 @@ public class Registro extends JFrame {
 				noResaltar(btnLimpiar);
 			}
 		});
-		btnLimpiar.setBorder(null);
+		btnLimpiar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnLimpiar.setBackground(SystemColor.controlHighlight);
 		
 		btnGuardar = new JButton("  Guardar");
-		btnGuardar.setIcon(new ImageIcon(Registro.class.getResource("/img/save.png")));
-		btnGuardar.setBounds(336, 575, 117, 38);
+		btnGuardar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/save.png")));
+		btnGuardar.setBounds(319, 575, 134, 38);
 		contenedor_registro.add(btnGuardar);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -258,13 +259,15 @@ public class Registro extends JFrame {
 							txt_email.requestFocus();
 						}
 						
+						if(nombre.equals("") ){						
+							txt_nombre.requestFocus();
+						}
+						
 						if (apellido.equals("")){									
 							txt_apellido.requestFocus();
 						}
 						
-						if(nombre.equals("") ){						
-							txt_nombre.requestFocus();
-						}
+						
 						
 						JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
 					}else{	
@@ -337,7 +340,7 @@ public class Registro extends JFrame {
 				noResaltar(btnGuardar);
 			}
 		});
-		btnGuardar.setBorder(null);
+		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnGuardar.setBackground(SystemColor.controlHighlight);
 		
 		JPanel panel_6 = new JPanel();
@@ -432,7 +435,7 @@ public class Registro extends JFrame {
 		
 		btnActualizar = new JButton("  Actualizar");
 		btnActualizar.setToolTipText("Debe seleccionar un evaluador para poder actualizar");
-		btnActualizar.setIcon(new ImageIcon(Registro.class.getResource("/img/update.png")));
+		btnActualizar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/update.png")));
 		btnActualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -553,9 +556,9 @@ public class Registro extends JFrame {
 			}
 			
 		});
-		btnActualizar.setBorder(null);
+		btnActualizar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnActualizar.setBackground(SystemColor.controlHighlight);
-		btnActualizar.setBounds(176, 575, 117, 38);
+		btnActualizar.setBounds(141, 575, 139, 38);
 		contenedor_registro.add(btnActualizar);
 		
 		JPanel panel = new JPanel();
@@ -565,7 +568,7 @@ public class Registro extends JFrame {
 		panel.setBackground(new Color(223, 223, 233));
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(Registro.class.getResource("/img/user.png")));
+		label_1.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/user.png")));
 		label_1.setBounds(12, 4, 50, 54);
 		panel.add(label_1);
 		

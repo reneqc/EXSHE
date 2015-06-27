@@ -84,23 +84,12 @@ public class Acceso extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Login login=new Login();
 				login.show();
-				dispose();
+				
 				
 			}
 		});
 		btnNewButton.setBounds(491, 134, 117, 25);
 		contentPane.add(btnNewButton);
-		
-		JButton btnRegistro = new JButton("Registro");
-		btnRegistro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Registro registro1=new Registro();
-				registro1.show();
-				dispose();
-			}
-		});
-		btnRegistro.setBounds(620, 134, 117, 25);
-		contentPane.add(btnRegistro);
 		
 		JLabel label_3 = new JLabel("<html><center> </center> <br><div style='text-align:justify;'>Esta aplicación tiene por objeto servir de apoyo para la evaluación de la usabilidad de aplicaciones. Es una versión resumida de la guía que nosotros utilizamos en nuestra actividad profesional, aunque lo suficientemente extensa y específica como para resultar de utilidad a aquellos profesionales que requieran de un software base con el que empezar a trabajar en evaluación heurística.<br> <br>La sistema está estructurada en forma de checklist, para facilitar la práctica de la evaluación. Todos las puntos están formulados como preguntas, dónde la respuesta afirmativa implica que que no existe un problema de usabilidad, y la negativa que si.<br><br> Antes de iniciar con la evaluación debe registrarse o si ya dispone de un usuario puede ingresar.</div></html>");
 		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
@@ -155,7 +144,7 @@ public class Acceso extends JFrame {
 				    "</center> <br>"+
 				    "<div style='text-align:justify;'>"+
 				    "Esta aplicación tiene por objeto servir de apoyo para la evaluación de la usabilidad de aplicaciones. Es una versión resumida de la guía que nosotros utilizamos en nuestra actividad profesional, aunque lo suficientemente extensa y específica como para resultar de utilidad a aquellos profesionales que requieran de un software base con el que empezar a trabajar en evaluación heurística.<br> <br>"+			
-				    "La sistema está estructurada en forma de checklist, para facilitar la práctica de la evaluación. Todos las puntos están formulados como preguntas, dónde la respuesta afirmativa implica que que no existe un problema de usabilidad, y la negativa que si.<br><br> Antes de iniciar con la evaluación debe registrarse o si ya dispone de un usuario puede ingresar."+
+				    "La sistema está estructurada en forma de checklist, para facilitar la práctica de la evaluación. Todos las puntos están formulados como preguntas, dónde la respuesta afirmativa implica que que no existe un problema de usabilidad, y la negativa que si.<br><br> Antes de iniciar con la evaluación debe disponer de una cuenta."+
 				    "</div>"+
 				"</html>";
 	}

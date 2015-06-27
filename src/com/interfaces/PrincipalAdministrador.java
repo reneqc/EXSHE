@@ -27,12 +27,12 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class Principal extends JFrame {
+public class PrincipalAdministrador extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	JLabel lbl_evaluador = 	new JLabel("Evaluador conectado para evaluar");
-	public static Principal framePrincipal = new Principal();
+	public static PrincipalAdministrador framePrincipal = new PrincipalAdministrador();
 	private JTextField textField;
 	private JTextField textField_1;
 	private JPasswordField passwordField;
@@ -63,7 +63,7 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Principal() {
+	public PrincipalAdministrador() {
 		setTitle("EXSHE - VENTANA PRINCIPAL");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -97,8 +97,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
-		mntmAcceso.setAccelerator(
-		         KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
+		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
 		mntmAcceso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -125,7 +124,7 @@ public class Principal extends JFrame {
 		});
 		mnNewMenu_2.add(mntmAcceso);
 		
-		JMenu mnEvaluaciones = new JMenu("  Evaluaciones  ");
+		JMenu mnEvaluaciones = new JMenu("  Proyectos");
 		menuBar.add(mnEvaluaciones);
 		
 		JMenu mnHeursticas = new JMenu("  Heurísticos  ");
@@ -231,11 +230,12 @@ public class Principal extends JFrame {
 		});
 		mnHeursticas.add(mntmNewMenuItem_8);
 		
-		JMenu mnEvaluadores = new JMenu("Evaluadores");
+		JMenu mnEvaluadores = new JMenu("Evaluadores");		
 		menuBar.add(mnEvaluadores);
 		
-		JMenuItem mntmMantenimiento = new JMenuItem("Mantenimiento");
-		mntmMantenimiento.addActionListener(new ActionListener() {
+		JMenuItem mnuMantenimientoEvaluadores = new JMenuItem("Mantenimiento");
+		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.SHIFT_MASK));
+		mnuMantenimientoEvaluadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Registro registro1=new Registro();
 				registro1.show();
@@ -243,7 +243,7 @@ public class Principal extends JFrame {
 				
 			}
 		});
-		mnEvaluadores.add(mntmMantenimiento);
+		mnEvaluadores.add(mnuMantenimientoEvaluadores);
 		
 		
 		JMenu mnAyuda = new JMenu("  Ayuda  ");
@@ -320,10 +320,10 @@ public class Principal extends JFrame {
 		panel_5.setBounds(81, 12, 365, 78);
 		panel_8.add(panel_5);
 		
-		JLabel label = new JLabel("NUEVA EVALUACIÓN");
-		label.setFont(new Font("Dialog", Font.BOLD, 16));
-		label.setBounds(96, 28, 204, 19);
-		panel_5.add(label);
+		JLabel lblNuevoProyecto = new JLabel("NUEVO PROYECTO");
+		lblNuevoProyecto.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblNuevoProyecto.setBounds(96, 28, 204, 19);
+		panel_5.add(lblNuevoProyecto);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);

@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
 public class Evaluador {
 	
 	public int id;
@@ -81,32 +83,34 @@ public class Evaluador {
 
 	}
 	
-	public boolean verificarDatos(String username, String password){
+	public String verificarDatos(String email, String password){
 		try {
-			String usernameBdd="";
+			String emailBdd="";
 			String passwordBdd="";
+			String perfil="desconocido";
 			
 			Statement sentencia = (Statement) conex.createStatement();
-			String cadena = "SELECT * FROM evaluador WHERE email='"+username+"' and password='"+password+"'";
+			String cadena = "SELECT email,password,perfil FROM evaluador WHERE email='"+email+"' and password='"+password+"'";
 			ResultSet rs = sentencia.executeQuery(cadena);		
 				
 			
 			while(rs.next()){
-				usernameBdd=rs.getString(3).toString();
-				passwordBdd=rs.getString(11);
+				emailBdd=rs.getString(1).toString();
+				passwordBdd=rs.getString(2);				
+				perfil= rs.getString(3);
+				
 			
 			}
 			
-			if(username.equals(usernameBdd) && password.equals(passwordBdd)){
-				return true;
-			}else{
-				return false;
+			if(email.equals(emailBdd) && password.equals(passwordBdd)){
+				return perfil;
+				
 			}
-			
+			return perfil;
 			
 		} catch (Exception e) {
 			System.out.println(e);
-			return false;
+			return perfil;
 		}
 		
 	}

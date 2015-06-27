@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,13 +23,11 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.persistencia.Evaluador;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	public JTextField txt_username;
+	public JTextField txt_email;
 	public JPasswordField txt_password;
 	Evaluador evaluador=new Evaluador();
 	/**
@@ -50,6 +50,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setResizable(false);
 		setTitle("EXSHE - LOGIN");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -98,12 +99,12 @@ public class Login extends JFrame {
 		lblUsuario.setBounds(40, 5, 69, 15);
 		panel_1.add(lblUsuario);
 		
-		txt_username = new JTextField();
-		txt_username.setBackground(new Color(223, 223, 233));
-		txt_username.setBounds(115, 3, 245, 20);
-		panel_1.add(txt_username);
-		txt_username.setBorder(null);
-		txt_username.setColumns(10);
+		txt_email = new JTextField();
+		txt_email.setBackground(new Color(223, 223, 233));
+		txt_email.setBounds(115, 3, 245, 20);
+		panel_1.add(txt_email);
+		txt_email.setBorder(null);
+		txt_email.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -183,28 +184,36 @@ public class Login extends JFrame {
 	
 	public void ingresar(){
 		
-		if(txt_username.getText().equals("") || txt_password.getText().equals("")){
+		if(txt_email.getText().equals("") || txt_password.getText().equals("")){
 			if(txt_password.getText().equals("")){
 				txt_password.requestFocus();
 			}
-			if(txt_username.getText().equals("")){
-				txt_username.requestFocus();
+			if(txt_email.getText().equals("")){
+				txt_email.requestFocus();
 			}
 			JOptionPane.showMessageDialog(null, "Por favor complete los campos.");
 		}else{
 					
-			if(evaluador.verificarDatos(txt_username.getText(), txt_password.getText())){
-				//JOptionPane.showMessageDialog(null, "Usuario Encontrado");
-				Principal prin=new Principal();
-				prin.lbl_evaluador.setText(txt_username.getText());
+			if(evaluador.verificarDatos(txt_email.getText(), txt_password.getText()).equals("ADMINISTRADOR")){
+				JOptionPane.showMessageDialog(null, "Bienvenido Administrador");
+				PrincipalAdministrador prin=new PrincipalAdministrador();
+				prin.lbl_evaluador.setText(txt_email.getText());
+				prin.show();
+				prin.setExtendedState(MAXIMIZED_BOTH);
+				dispose();
+				
+			}else if(evaluador.verificarDatos(txt_email.getText(), txt_password.getText()).equals("EVALUADOR")){
+				JOptionPane.showMessageDialog(null, "Bienvenido Evaluador");
+				PrincipalEvaluador prin=new PrincipalEvaluador();
+				prin.lbl_evaluador.setText(txt_email.getText());
 				prin.show();
 				prin.setExtendedState(MAXIMIZED_BOTH);
 				dispose();
 			}else{
 				JOptionPane.showMessageDialog(null, "Contraseña o Username incorrecto.");
 				txt_password.setText("");
-				txt_username.setText("");
-				txt_username.requestFocus();
+				txt_email.setText("");
+				txt_email.requestFocus();
 			}
 				
 		}

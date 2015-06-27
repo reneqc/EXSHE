@@ -75,13 +75,13 @@ public class Heuristicos extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		lblNombre.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblNombre.setBounds(241, 82, 855, 29);
+		lblNombre.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblNombre.setBounds(241, 82, 960, 29);
 		contentPane.add(lblNombre);
 		lblDescripcion.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
 		
 		
-		lblDescripcion.setBounds(137, 164, 1187, 23);
+		lblDescripcion.setBounds(130, 143, 1187, 23);
 		contentPane.add(lblDescripcion);
 		
 		JPanel panel = new JPanel();
@@ -128,7 +128,7 @@ public class Heuristicos extends JFrame {
 				}
 			}
 		});
-		btnAnt.setBounds(1199, 82, 40, 28);
+		btnAnt.setBounds(1219, 82, 40, 28);
 		contentPane.add(btnAnt);
 		
 		JScrollPane scrollPane = new JScrollPane();

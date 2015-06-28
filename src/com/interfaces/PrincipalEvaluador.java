@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,20 +25,34 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import com.persistencia.Evaluacion;
+import com.persistencia.Proyecto;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 public class PrincipalEvaluador extends JFrame {
 
 	private JPanel contentPane;
 	JLabel lbl_evaluador = 	new JLabel("Evaluador conectado para evaluar");
 	public static PrincipalEvaluador framePrincipal = new PrincipalEvaluador();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JTextField txt_navegador;
+	private JTable tbl_proyectos;
+	
+	int id_proyecto;
 
+	 Evaluacion evaluacion;
+	 private JTextField txt_version;
+	 private JTextField txt_nombre;
+	 private JTextField txt_url;
 	/**
 	 * Launch the application.
 	 */
@@ -126,6 +142,20 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JMenu mnEvaluaciones = new JMenu("  Evaluaciones  ");
 		menuBar.add(mnEvaluaciones);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Ver y Ejecutar");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				EjecucionEvaluaciones ejecucion=new EjecucionEvaluaciones();
+				ejecucion.lbl_evaluador.setText(lbl_evaluador.getText());
+				
+				ejecucion.show();
+				
+				
+			}
+		});
+		mnEvaluaciones.add(mntmNewMenuItem_9);
 		
 		JMenu mnHeursticas = new JMenu("  Heurísticos  ");
 		menuBar.add(mnHeursticas);
@@ -235,7 +265,7 @@ public class PrincipalEvaluador extends JFrame {
 		menuBar.add(mnAyuda);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
-		lbl_evaluador.setBounds(188, 58, 222, 22);
+		lbl_evaluador.setBounds(187, 54, 222, 31);
 		panel.add(lbl_evaluador);
 		
 		JLabel lblEvaluador = new JLabel("Evaluador conectado:");
@@ -276,14 +306,15 @@ public class PrincipalEvaluador extends JFrame {
 		panel_2.add(lblBienvenido);
 		
 		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(390, 213, 522, 509);
+		panel_8.setBorder(new TitledBorder(null, "Creación de Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_8.setBounds(811, 201, 512, 498);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
 		panel_5.setBackground(new Color(223, 223, 233));
-		panel_5.setBounds(81, 12, 365, 78);
+		panel_5.setBounds(70, 47, 365, 78);
 		panel_8.add(panel_5);
 		
 		JLabel label = new JLabel("NUEVA EVALUACIÓN");
@@ -294,92 +325,165 @@ public class PrincipalEvaluador extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(new Color(223, 223, 233));
-		panel_3.setBounds(41, 113, 447, 27);
+		panel_3.setBounds(30, 279, 447, 27);
 		panel_8.add(panel_3);
 		
-		JLabel label_1 = new JLabel("Aplicación a Evaluar:");
-		label_1.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_1.setBounds(70, 5, 153, 15);
-		panel_3.add(label_1);
+		JLabel lblNavegadorParaLa = new JLabel("Navegador para la evaluación:");
+		lblNavegadorParaLa.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNavegadorParaLa.setBounds(12, 5, 242, 15);
+		panel_3.add(lblNavegadorParaLa);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBorder(null);
-		textField.setBackground(new Color(223, 223, 233));
-		textField.setBounds(249, 3, 198, 20);
-		panel_3.add(textField);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(41, 168, 447, 70);
-		panel_8.add(panel_4);
-		
-		JLabel label_3 = new JLabel("Navegador:");
-		label_3.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_3.setBounds(33, 5, 198, 15);
-		panel_4.add(label_3);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBorder(null);
-		textField_1.setBackground(new Color(223, 223, 233));
-		textField_1.setBounds(249, 3, 198, 55);
-		panel_4.add(textField_1);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setLayout(null);
-		panel_6.setBackground(new Color(223, 223, 233));
-		panel_6.setBounds(41, 277, 447, 56);
-		panel_8.add(panel_6);
-		
-		JLabel label_4 = new JLabel("Versión del Navegador");
-		label_4.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_4.setBounds(12, 9, 159, 28);
-		panel_6.add(label_4);
-		
-		passwordField = new JPasswordField();
-		passwordField.setColumns(10);
-		passwordField.setBorder(null);
-		passwordField.setBackground(new Color(223, 223, 233));
-		passwordField.setBounds(246, 3, 198, 41);
-		panel_6.add(passwordField);
+		txt_navegador = new JTextField();
+		txt_navegador.setColumns(10);
+		txt_navegador.setBorder(null);
+		txt_navegador.setBackground(new Color(223, 223, 233));
+		txt_navegador.setBounds(249, 3, 186, 20);
+		panel_3.add(txt_navegador);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(41, 375, 447, 27);
+		panel_7.setBounds(30, 218, 447, 27);
 		panel_8.add(panel_7);
 		
-		JLabel label_5 = new JLabel("Url del Sitio");
-		label_5.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_5.setBounds(53, 5, 103, 15);
-		panel_7.add(label_5);
+		JLabel lblUrlDelSitio = new JLabel("Url del Sitio:");
+		lblUrlDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblUrlDelSitio.setBounds(12, 5, 103, 15);
+		panel_7.add(lblUrlDelSitio);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setColumns(10);
-		passwordField_1.setBorder(null);
-		passwordField_1.setBackground(new Color(223, 223, 233));
-		passwordField_1.setBounds(249, 3, 198, 20);
-		panel_7.add(passwordField_1);
+		txt_url = new JTextField();
+		txt_url.setEditable(false);
+		txt_url.setColumns(10);
+		txt_url.setBorder(null);
+		txt_url.setBackground(new Color(223, 223, 233));
+		txt_url.setBounds(111, 3, 324, 20);
+		panel_7.add(txt_url);
 		
-		JButton button = new JButton("Actualizar");
-		button.setBorder(null);
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(216, 437, 117, 38);
-		panel_8.add(button);
+		JButton btnGuardar = new JButton("  Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nombre=txt_nombre.getText();
+				String url=txt_url.getText();
+				
+				String navegador=txt_navegador.getText();
+				String version=txt_version.getText();
+				
+				String email=lbl_evaluador.getText();
+				
+				if(nombre.equals("") || url.equals("")){
+					JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla");
+				}else{
+					if(version.equals("")||navegador.equals("")){
+						JOptionPane.showMessageDialog(null, "Por favor complete los campos");	
+						
+						if(version.equals("")){
+							txt_version.requestFocus();
+						}
+						
+						if(navegador.equals("")){
+							txt_navegador.requestFocus();
+						}
+						
+						
+					}else{
+						evaluacion=new Evaluacion(navegador, version);
+						
+						if(evaluacion.guardar(id_proyecto, email)>0){
+							JOptionPane.showMessageDialog(null, "Evaluación creada exitosamente");
+							limpiar();
+						}else{
+							JOptionPane.showMessageDialog(null, "No se pudo crear la evaluación");
+						}
+					}
+					
+				}
+				
+			}
+		});
+		btnGuardar.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/save.png")));
+		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnGuardar.setBackground(SystemColor.controlHighlight);
+		btnGuardar.setBounds(337, 428, 140, 38);
+		panel_8.add(btnGuardar);
 		
-		JButton button_1 = new JButton("  Evaluar");
-		button_1.setBorder(null);
-		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(353, 437, 117, 38);
-		panel_8.add(button_1);
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBackground(new Color(223, 223, 233));
+		panel_4.setBounds(30, 350, 447, 27);
+		panel_8.add(panel_4);
 		
-		JButton button_2 = new JButton("Eliminar");
-		button_2.setBorder(null);
-		button_2.setBackground(SystemColor.controlHighlight);
-		button_2.setBounds(55, 437, 117, 38);
-		panel_8.add(button_2);
+		JLabel lblVersinDelNavegador = new JLabel("Versión del navegador:");
+		lblVersinDelNavegador.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblVersinDelNavegador.setBounds(12, 5, 178, 15);
+		panel_4.add(lblVersinDelNavegador);
+		
+		txt_version = new JTextField();
+		txt_version.setColumns(10);
+		txt_version.setBorder(null);
+		txt_version.setBackground(new Color(223, 223, 233));
+		txt_version.setBounds(188, 3, 259, 20);
+		panel_4.add(txt_version);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setBackground(new Color(223, 223, 233));
+		panel_6.setBounds(30, 161, 447, 27);
+		panel_8.add(panel_6);
+		
+		JLabel lblNombreDelSitio = new JLabel("Nombre del Sitio:");
+		lblNombreDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNombreDelSitio.setBounds(12, 5, 129, 15);
+		panel_6.add(lblNombreDelSitio);
+		
+		txt_nombre = new JTextField();
+		txt_nombre.setEditable(false);
+		txt_nombre.setColumns(10);
+		txt_nombre.setBorder(null);
+		txt_nombre.setBackground(new Color(223, 223, 233));
+		txt_nombre.setBounds(151, 3, 284, 20);
+		panel_6.add(txt_nombre);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setLayout(null);
+		panel_9.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_9.setBounds(44, 201, 728, 499);
+		contentPane.add(panel_9);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		scrollPane.setBounds(12, 35, 704, 437);
+		panel_9.add(scrollPane);
+		
+		tbl_proyectos = new JTable();
+		tbl_proyectos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int indice=tbl_proyectos.getSelectedRow();
+				
+				txt_nombre.setText(tbl_proyectos.getValueAt(indice,2).toString());
+				txt_url.setText(tbl_proyectos.getValueAt(indice,3).toString());
+				id_proyecto=Integer.parseInt(tbl_proyectos.getValueAt(indice,1).toString());
+				//JOptionPane.showMessageDialog(null,id_proyecto);
+
+			}
+		});
+		tbl_proyectos.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"ID_DETALLE","ID_PROYECTO", "NOMBRE DEL SITIO","URL", "EVALUADOR","FECHA", "TIPO DEL SITIO"
+				}
+			));
+		scrollPane.setViewportView(tbl_proyectos);
+		
+		
+		cargarTabla();
 	}
 	
 	
@@ -394,5 +498,97 @@ public class PrincipalEvaluador extends JFrame {
 		}else{
 			
 		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void cargarTabla() {
+		
+		//JOptionPane.showMessageDialog(null,Acceso.conectado());
+		String email=Acceso.conectado();
+		//String email="perez@gmail.com";
+		ResultSet rs=null;
+		try {
+			rs = Evaluacion.consultarProyectosEvaluador(email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DefaultTableModel modelo=new DefaultTableModel();	
+		modelo.addColumn("ID_DETALLE");
+		modelo.addColumn("ID_PROYECTO");
+		modelo.addColumn("NOMBRE DEL SITIO");
+		modelo.addColumn("URL");
+		modelo.addColumn("EVALUADOR");
+		modelo.addColumn("FECHA");
+		modelo.addColumn("TIPO DEL SITIO");		
+		try {
+			while(rs.next()){		
+
+					modelo.addRow(new String[] {rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)+" "+rs.getString(6),rs.getString(7),rs.getString(9)});			
+
+			
+
+				
+					tbl_proyectos.setModel(modelo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		formatearTabla();
+		
+
+	}
+	
+	public void formatearTabla(){
+		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
+		//tbl_subheuristicos.setBackground(new Color(161,202,232));
+		tbl_proyectos.setRowHeight(25);
+		tbl_proyectos.setForeground(new Color(0,0,0));
+		tbl_proyectos.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tbl_proyectos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
+		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
+		tbl_proyectos.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setResizable(false);
+		
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(0);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(1).setResizable(false);
+		
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(200);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(160);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(200);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(250);
+		
+		
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		
+
+		tbl_proyectos.getColumnModel().getColumn(0).setCellRenderer(tcr);
+				
+		tbl_proyectos.getColumnModel().getColumn(2).setCellRenderer(tcr);
+	}
+	
+	
+	public void limpiar(){
+		txt_navegador.setText("");
+		txt_version.setText("");
+		txt_nombre.setText("");
+		txt_url.setText("");
+		txt_navegador.requestFocus();
 	}
 }

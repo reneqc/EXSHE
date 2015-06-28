@@ -28,7 +28,7 @@ import javax.swing.UIManager;
 public class Acceso extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txt_email;
+	private static JTextField txt_email;
 	private JPasswordField txt_password;
 	Evaluador evaluador=new Evaluador();
 	/**
@@ -282,4 +282,7 @@ public class Acceso extends JFrame {
 			
 		}
 	
+		public static String conectado(){
+			return txt_email.getText();
+		}
 }

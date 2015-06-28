@@ -66,7 +66,7 @@ public class Proyecto {
 	private int obtenerUltimoRegistro() throws SQLException{
 		int ultimo_id=0;
 		Statement sentencia = (Statement) conex.createStatement();	
-		String cadena2="select max(id_proyecto) from proyecto";
+		String cadena2="select max(id_proyecto) from proyecto"; 
 		ResultSet rs=sentencia.executeQuery(cadena2);
 		
 		while(rs.next()){

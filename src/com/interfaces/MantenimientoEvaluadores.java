@@ -654,7 +654,7 @@ public class MantenimientoEvaluadores extends JFrame {
 	
 	public void cerrarRegistro(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la Ventana de Registro?","Mensaje de Confirmación",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la Ventana de Mantenimiento de Evaluadores?","Mensaje de Confirmación",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)

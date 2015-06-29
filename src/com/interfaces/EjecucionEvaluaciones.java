@@ -467,8 +467,8 @@ public class EjecucionEvaluaciones extends JFrame {
 	public void cargarTabla() {
 		
 		//JOptionPane.showMessageDialog(null,Acceso.conectado());
-		//String email=Acceso.conectado();
-		String email="perez@gmail.com";
+		String email=Acceso.conectado();
+		//String email="perez@gmail.com";
 		ResultSet rs=null;
 		try {
 			rs = Evaluacion.consultarEvaluacionesEvaluador(email);

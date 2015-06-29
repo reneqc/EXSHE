@@ -48,6 +48,23 @@ public class Evaluacion {
 		try {
 			Statement sentencia = (Statement) conex.createStatement();			
 			String cadena = "insert into evaluacion(navegador,versionNavegador,fecha,finalizada,id_proyecto,id_evaluador)values('"+this.navegador+"','"+this.versionNavegador+"','"+this.fecha+"',"+this.finalizada+","+id_proyecto+",(select evaluador.id_evaluador from evaluador where evaluador.email='"+email+"'))";
+			
+			//Generando el resultado
+			Statement sentencia1 = (Statement) conex.createStatement();	
+			String cadena1="INSERT INTO resultado(id_evaluacion) VALUES ((select max(evaluacion.id_evaluacion) from evaluacion));";
+			sentencia1.execute(cadena1);
+			
+			
+			Statement sentencia2 = (Statement) conex.createStatement();	
+			String cadena2="select subheuristico.id_subheuristico from subheuristico,heuristico where subheuristico.id_heuristico=heuristico.id_heuristico;";
+			ResultSet rs = sentencia2.executeQuery(cadena2);
+			
+			while (rs.next()){
+				Statement sentencia3 = (Statement) conex.createStatement();	
+				String cadena3="INSERT INTO calificacion(id_subheuristico, id_resultado, puntos) VALUES ("+rs.getInt(1)+",(select max(resultado.id_resultado) from resultado),-1);";
+				sentencia3.execute(cadena3);
+			}
+			
 			sentencia.execute(cadena);
 			return 1;
 		} catch (Exception e) {
@@ -74,6 +91,9 @@ public class Evaluacion {
 		return rs;
 		
 	}
+	
+	
+
 	
 	
 	

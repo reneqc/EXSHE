@@ -14,7 +14,7 @@ public class Conexion {
 		Connection conexion=null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			String servidor="jdbc:mysql://localhost:3306/exshe1";
+			String servidor="jdbc:mysql://localhost:3306/exshe2";
 			String usuarioDb="root";
 			String passDb="12345";
 			conexion=(Connection) DriverManager.getConnection(servidor,usuarioDb,passDb);

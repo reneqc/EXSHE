@@ -20,9 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.UIManager;
 
 public class Acceso extends JFrame {
@@ -192,6 +195,8 @@ public class Acceso extends JFrame {
 		btn_ingresar.setBounds(986, 117, 127, 27);
 		contentPane.add(btn_ingresar);
 		this.setLocationRelativeTo(null);
+		
+		//Conexion.obtenerConexion();
 	}
 	
 	

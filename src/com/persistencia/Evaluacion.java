@@ -48,7 +48,7 @@ public class Evaluacion {
 		try {
 			Statement sentencia = (Statement) conex.createStatement();			
 			String cadena = "insert into evaluacion(navegador,versionNavegador,fecha,finalizada,id_proyecto,id_evaluador)values('"+this.navegador+"','"+this.versionNavegador+"','"+this.fecha+"',"+this.finalizada+","+id_proyecto+",(select evaluador.id_evaluador from evaluador where evaluador.email='"+email+"'))";
-			
+			sentencia.execute(cadena);
 			//Generando el resultado
 			Statement sentencia1 = (Statement) conex.createStatement();	
 			String cadena1="INSERT INTO resultado(id_evaluacion) VALUES ((select max(evaluacion.id_evaluacion) from evaluacion));";
@@ -65,7 +65,7 @@ public class Evaluacion {
 				sentencia3.execute(cadena3);
 			}
 			
-			sentencia.execute(cadena);
+			
 			return 1;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -93,6 +93,54 @@ public class Evaluacion {
 	}
 	
 	
+	
+	public static ResultSet consultarCalificaciones(int id_evaluacion) throws SQLException{
+		
+		Statement sentencia = (Statement) conex.createStatement();
+		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion;
+		ResultSet rs = sentencia.executeQuery(cadena);
+		return rs;
+	}
+
+	public static int calificar(int id_calificacion,double puntos) {
+		try {
+			
+			Statement sentencia = (Statement) conex.createStatement();			
+			String cadena = "update calificacion set puntos="+puntos+" where calificacion.id_calificacion="+id_calificacion;
+			sentencia.execute(cadena);
+			return 1;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return 0;
+		}
+	
+	}
+	
+	
+	
+	/*
+	 * Metodo para conocer cual es la calificacion actual de un subheuristico
+	 * 
+	 */
+	public static double consultarCalificacion(int id_evaluacion){
+		double puntos=-1;
+		Statement sentencia;
+		try {
+			sentencia = (Statement) conex.createStatement();
+			String cadena = "SELECT puntos from calificacion where calificacion.id_calificacion="+id_evaluacion+";";
+			ResultSet rs = sentencia.executeQuery(cadena);
+			while(rs.next()){
+				puntos=rs.getInt(1);			
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return puntos;
+		
+	}
 
 	
 	

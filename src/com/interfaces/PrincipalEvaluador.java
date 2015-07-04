@@ -388,7 +388,7 @@ public class PrincipalEvaluador extends JFrame {
 					}else{
 						evaluacion=new Evaluacion(navegador, version);
 						
-						if(evaluacion.guardar(id_proyecto, email)>0){
+						if(evaluacion.guardar(id_proyecto, email)>0){							
 							JOptionPane.showMessageDialog(null, "Evaluación creada exitosamente");
 							limpiar();
 						}else{
@@ -469,7 +469,7 @@ public class PrincipalEvaluador extends JFrame {
 				txt_nombre.setText(tbl_proyectos.getValueAt(indice,2).toString());
 				txt_url.setText(tbl_proyectos.getValueAt(indice,3).toString());
 				id_proyecto=Integer.parseInt(tbl_proyectos.getValueAt(indice,1).toString());
-				//JOptionPane.showMessageDialog(null,id_proyecto);
+				//JOptionPane.showMessageDialog(null,tbl_proyectos.getValueAt(indice,0).toString());
 
 			}
 		});
@@ -519,7 +519,7 @@ public class PrincipalEvaluador extends JFrame {
 			e.printStackTrace();
 		}
 		DefaultTableModel modelo=new DefaultTableModel();	
-		modelo.addColumn("ID_DETALLE");
+		modelo.addColumn("ID_EVALUACION");
 		modelo.addColumn("ID_PROYECTO");
 		modelo.addColumn("NOMBRE DEL SITIO");
 		modelo.addColumn("URL");

@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,7 +31,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import com.persistencia.Evaluacion;
 import com.persistencia.Heuristico;
@@ -43,9 +42,15 @@ public class EjecucionEvaluaciones extends JFrame {
 	private JTextField txt_navegador;
 	private JTable tbl_evaluaciones;
 	JLabel  lbl_evaluador;
+	ResultSet rs;
+	JLabel lbl_criterio;
+	JComboBox comboCalificacion;
+	JPanel contenedor_calificaciones;
 	
+	int id_calificacion;
+	
+	//int contador=1;
 	JButton btnAnterior,btnSiguiente,btnFinalizar;
-	JScrollPane panelSubHeuristicos;
 	int id_evaluacion=-1;
 	public Heuristico h1=new Heuristico();
 	int  numHeuristico=1;
@@ -55,18 +60,11 @@ public class EjecucionEvaluaciones extends JFrame {
 	 private JTextField txt_version;
 	 private JTextField txt_nombre;
 	 private JTextField txt_url;
-	 private JTable tbl_subheuristicos;
 	 JPanel panel_heuristicos;
 	 JPanel panel_descripcion;
 	 
-	 
-	 JComboBox puntuacion1;
-	 String[] opNumericas={"1","2","3","4","5","6","7","8","9","10"};
-	 
-	 
-	 JComboBox puntuacion2;
-	 String[]  opTextuales={"A","B","C","D","E"};
-	 
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -139,7 +137,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(new Color(223, 223, 233));
-		panel_3.setBounds(12, 61, 449, 27);
+		panel_3.setBounds(12, 68, 449, 27);
 		panel_8.add(panel_3);
 		
 		JLabel lblNavegadorParaLa = new JLabel("Navegador para la evaluación:");
@@ -158,7 +156,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(482, 22, 467, 27);
+		panel_7.setBounds(482, 29, 467, 27);
 		panel_8.add(panel_7);
 		
 		JLabel lblUrlDelSitio = new JLabel("Url del Sitio:");
@@ -203,14 +201,25 @@ public class EjecucionEvaluaciones extends JFrame {
 						
 					}else{
 						
-						
+							contenedor_calificaciones.setVisible(true);
 							
 							btnGuardar.setEnabled(false);
 							btnAnterior.setVisible(true);
 							btnSiguiente.setVisible(true);
 							btnFinalizar.setVisible(true);							
 							tbl_evaluaciones.setEnabled(false);
-							panelSubHeuristicos.setVisible(true);
+							
+							
+							
+							try {
+								rs.first();
+								mostrarDatos();
+							
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
 							panel_heuristicos.setVisible(true);
 							panel_descripcion.setVisible(true);
 							JOptionPane.showMessageDialog(null, "Test Iniciado");
@@ -224,13 +233,13 @@ public class EjecucionEvaluaciones extends JFrame {
 		btnGuardar.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/start2.png")));
 		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnGuardar.setBackground(SystemColor.controlHighlight);
-		btnGuardar.setBounds(819, 61, 130, 27);
+		btnGuardar.setBounds(819, 68, 130, 27);
 		panel_8.add(btnGuardar);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(482, 61, 325, 27);
+		panel_4.setBounds(482, 68, 325, 27);
 		panel_8.add(panel_4);
 		
 		JLabel lblVersinDelNavegador = new JLabel("Versión:");
@@ -249,7 +258,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
 		panel_6.setBackground(new Color(223, 223, 233));
-		panel_6.setBounds(12, 22, 449, 27);
+		panel_6.setBounds(12, 29, 449, 27);
 		panel_8.add(panel_6);
 		
 		JLabel lblNombreDelSitio = new JLabel("Nombre del Sitio:");
@@ -265,51 +274,140 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_nombre.setBounds(151, 3, 286, 20);
 		panel_6.add(txt_nombre);
 		
-		btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(numHeuristico<10){
-					numHeuristico++;
-					try {
-						cargarTablaSubheuristicos(numHeuristico);
-						consultar_por_numero(numHeuristico);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-				}
-			}
-		});
-		btnSiguiente.setBorder(UIManager.getBorder("CheckBox.border"));
-		btnSiguiente.setBackground(SystemColor.controlHighlight);
-		btnSiguiente.setBounds(607, 579, 113, 27);
-		panel_8.add(btnSiguiente);
+		contenedor_calificaciones = new JPanel();
+		contenedor_calificaciones.setVisible(false);
+		contenedor_calificaciones.setBounds(12, 119, 937, 452);
+		panel_8.add(contenedor_calificaciones);
+		contenedor_calificaciones.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 261, 937, 42);
+		contenedor_calificaciones.add(panel);
+		panel.setLayout(null);
+		panel.setBackground(SystemColor.inactiveCaptionBorder);
+		
+		lbl_criterio = new JLabel("Criterio a evaluar");
+		lbl_criterio.setFont(new Font("Dialog", Font.PLAIN, 13));
+		lbl_criterio.setBounds(12, 6, 913, 27);
+		panel.add(lbl_criterio);
+		
+		panel_descripcion = new JPanel();
+		panel_descripcion.setBounds(0, 161, 937, 42);
+		contenedor_calificaciones.add(panel_descripcion);
+		panel_descripcion.setLayout(null);
+		panel_descripcion.setBackground(new Color(223, 223, 233));
+		
+		lbl_descripcion = new JLabel("Descripcion del heuristico");
+		lbl_descripcion.setFont(new Font("Dialog", Font.PLAIN, 14));
+		lbl_descripcion.setBounds(12, 0, 913, 42);
+		panel_descripcion.add(lbl_descripcion);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(0, 115, 299, 34);
+		contenedor_calificaciones.add(panel_5);
+		panel_5.setLayout(null);
+		panel_5.setBackground(new Color(223, 223, 233));
+		
+		JLabel lblDescripcinDelHeurstico = new JLabel("DESCRIPCIÓN DEL HEURÍSTICO");
+		lblDescripcinDelHeurstico.setBounds(12, 0, 275, 34);
+		panel_5.add(lblDescripcinDelHeurstico);
+		lblDescripcinDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
+		
+		panel_heuristicos = new JPanel();
+		panel_heuristicos.setBounds(0, 58, 937, 45);
+		contenedor_calificaciones.add(panel_heuristicos);
+		panel_heuristicos.setLayout(null);
+		panel_heuristicos.setBackground(new Color(223, 223, 233));
+		
+		lbl_heuristico = new JLabel("Heurístico a evaluar");
+		lbl_heuristico.setFont(new Font("Dialog", Font.PLAIN, 14));
+		lbl_heuristico.setBounds(12, 0, 900, 40);
+		panel_heuristicos.add(lbl_heuristico);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 12, 253, 34);
+		contenedor_calificaciones.add(panel_1);
+		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(223, 223, 233));
+		
+		JLabel lblNombreDelHeurstico = new JLabel("NOMBRE DEL HEURÍSTICO");
+		lblNombreDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblNombreDelHeurstico.setBounds(12, 0, 234, 34);
+		panel_1.add(lblNombreDelHeurstico);
 		
 		btnAnterior = new JButton("Anterior");
+		btnAnterior.setBounds(469, 413, 113, 27);
+		contenedor_calificaciones.add(btnAnterior);
+		btnAnterior.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(numHeuristico>1){
-					numHeuristico--;
-					try {
-						cargarTablaSubheuristicos(numHeuristico);
-						consultar_por_numero(numHeuristico);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				try {
 					
+						if(rs.isFirst()){
+							JOptionPane.showMessageDialog(null,"Este es el primer criterio que debe evaluar");
+						}else{
+						
+						rs.previous();	
+						actualizarCalificacion();
+						mostrarDatos();
+						
+						
+						
+						}
+						
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+				
+
 			}
 		});
 		btnAnterior.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnAnterior.setBackground(SystemColor.controlHighlight);
-		btnAnterior.setBounds(482, 579, 113, 27);
-		panel_8.add(btnAnterior);
+		
+		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setBounds(594, 413, 113, 27);
+		contenedor_calificaciones.add(btnSiguiente);
+		btnSiguiente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+			
+			}
+		});
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(rs.isLast()){
+						JOptionPane.showMessageDialog(null,"Este fue el último criterio que debe evaluar");
+					}else{
+						rs.next();
+						actualizarCalificacion();
+						mostrarDatos();
+						
+						
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
+		btnSiguiente.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnSiguiente.setBackground(SystemColor.controlHighlight);
 		
 		btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds(719, 413, 113, 27);
+		contenedor_calificaciones.add(btnFinalizar);
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnAnterior.setVisible(false);
@@ -320,53 +418,50 @@ public class EjecucionEvaluaciones extends JFrame {
 				panel_heuristicos.setVisible(false);
 				panel_descripcion.setVisible(false);
 				tbl_evaluaciones.setEnabled(true);
-				panelSubHeuristicos.setVisible(false);
+				contenedor_calificaciones.setVisible(false);
+				
 				JOptionPane.showMessageDialog(null,"Evaluación finalizada");
 			}
 		});
 		btnFinalizar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnFinalizar.setBackground(SystemColor.controlHighlight);
-		btnFinalizar.setBounds(732, 579, 113, 27);
-		panel_8.add(btnFinalizar);
 		
-		panel_heuristicos = new JPanel();
-		panel_heuristicos.setLayout(null);
-		panel_heuristicos.setBackground(new Color(223, 223, 233));
-		panel_heuristicos.setBounds(12, 111, 937, 52);
-		panel_8.add(panel_heuristicos);
+		JPanel panel_11 = new JPanel();
+		panel_11.setLayout(null);
+		panel_11.setBackground(new Color(223, 223, 233));
+		panel_11.setBounds(0, 215, 208, 34);
+		contenedor_calificaciones.add(panel_11);
 		
-		lbl_heuristico = new JLabel("Heurístico a evaluar");
-		lbl_heuristico.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
-		lbl_heuristico.setBounds(12, 0, 913, 52);
-		panel_heuristicos.add(lbl_heuristico);
+		JLabel lblCriterioAEvaluar = new JLabel("CRITERIO A EVALUAR");
+		lblCriterioAEvaluar.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblCriterioAEvaluar.setBounds(12, 0, 192, 34);
+		panel_11.add(lblCriterioAEvaluar);
 		
-		panelSubHeuristicos = new JScrollPane();
-		panelSubHeuristicos.setBounds(12, 230, 937, 336);
-		panel_8.add(panelSubHeuristicos);
+		JPanel panel_10 = new JPanel();
+		panel_10.setLayout(null);
+		panel_10.setBackground(new Color(223, 223, 233));
+		panel_10.setBounds(0, 315, 143, 34);
+		contenedor_calificaciones.add(panel_10);
 		
-		tbl_subheuristicos = new JTable();
-		tbl_subheuristicos.setRowHeight(25);
-		tbl_subheuristicos.setForeground(Color.BLACK);
-		tbl_subheuristicos.setFont(new Font("Dialog", Font.PLAIN, 15));
-		tbl_subheuristicos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		panelSubHeuristicos.setViewportView(tbl_subheuristicos);
+		JLabel lblCalificaci = new JLabel("CALIFICACIÓN");
+		lblCalificaci.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblCalificaci.setBounds(12, 0, 130, 34);
+		panel_10.add(lblCalificaci);
 		
-		panel_descripcion = new JPanel();
-		panel_descripcion.setLayout(null);
-		panel_descripcion.setBackground(new Color(223, 223, 233));
-		panel_descripcion.setBounds(12, 167, 937, 27);
-		panel_8.add(panel_descripcion);
+		comboCalificacion = new JComboBox();
+		comboCalificacion.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		comboCalificacion.setBounds(0, 361, 208, 24);
+		contenedor_calificaciones.add(comboCalificacion);
+		btnFinalizar.setVisible(false);
+		btnSiguiente.setVisible(false);
 		
-		JLabel lblDescripci = new JLabel("  DESCRIPCIÓN:");
-		lblDescripci.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblDescripci.setBounds(0, 0, 116, 26);
-		panel_descripcion.add(lblDescripci);
+		btnAnterior.setVisible(false);
 		
-		lbl_descripcion = new JLabel("Descripcion del heuristico");
-		lbl_descripcion.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lbl_descripcion.setBounds(124, 0, 801, 26);
-		panel_descripcion.add(lbl_descripcion);
-		panelSubHeuristicos.setVisible(false);
+		
+		
+		
+		panel_heuristicos.setVisible(false);
+		panel_descripcion.setVisible(false);
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
 		panel_9.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
@@ -398,8 +493,14 @@ public class EjecucionEvaluaciones extends JFrame {
 				txt_url.setText(tbl_evaluaciones.getValueAt(indice,3).toString());
 				txt_navegador.setText(tbl_evaluaciones.getValueAt(indice,4).toString());
 				txt_version.setText(tbl_evaluaciones.getValueAt(indice,5).toString());
-				id_evaluacion=Integer.parseInt(tbl_evaluaciones.getValueAt(indice,1).toString());
-				//JOptionPane.showMessageDialog(null,id_proyecto);
+				id_evaluacion=Integer.parseInt(tbl_evaluaciones.getValueAt(indice,0).toString());
+				
+				try {
+					verCriterios(id_evaluacion);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
 
@@ -427,21 +528,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		cargarTabla();
 		
-		btnAnterior.setVisible(false);
-		btnSiguiente.setVisible(false);
-		btnFinalizar.setVisible(false);
-		
-		try {
-			cargarTablaSubheuristicos(numHeuristico);
-			consultar_por_numero(numHeuristico);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		panel_heuristicos.setVisible(false);
-		panel_descripcion.setVisible(false);
+	
 	}
 	
 	
@@ -566,75 +653,161 @@ public class EjecucionEvaluaciones extends JFrame {
 	}
 	
 	
-	public void cargarTablaSubheuristicos(int num) throws SQLException{
-		ResultSet rs=h1.consultarSubheuristicos(num);
-		DefaultTableModel modelo=new DefaultTableModel();
-		modelo.addColumn("ID");
-		modelo.addColumn("PTOS");
-		modelo.addColumn("CRITERIO");
-		modelo.addColumn("MÉTRICA");
-		tbl_subheuristicos.setModel(modelo);
+	public void verCriterios(int id) throws SQLException{
+		rs=Evaluacion.consultarCalificaciones(id);
 		
-	
-		while(rs.next()){		
-			if(rs.getString(4).equals("numero")){
-				puntuacion1=new JComboBox(opNumericas);	
-				tbl_subheuristicos.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(puntuacion1));
-				modelo.addRow(new Object[] {1,"Seleccione",rs.getString(3),"Numérica"});
-				
-			}else{	
-				
-				modelo.addRow(new Object[] {1,"Seleccione",rs.getString(3),"Textual"});		
-			}
-			
-		
-			
-			
-		}
-		
-		formatearTabla2();
-
 	}
-	public void formatearTabla2(){
-		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
-		//tbl_subheuristicos.setBackground(new Color(161,202,232));
-		tbl_subheuristicos.setRowHeight(25);
-		tbl_subheuristicos.setForeground(new Color(0,0,0));
-		tbl_subheuristicos.setFont(new Font("Dialog", Font.PLAIN, 15));
-		tbl_subheuristicos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
-		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
-		tbl_subheuristicos.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
-		tbl_subheuristicos.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
-		tbl_subheuristicos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-		tbl_subheuristicos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-		
-		tbl_subheuristicos.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(100);
-		tbl_subheuristicos.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(970);
-		
-		
-		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-		tcr.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		
-		
+	
+	
+	public void cargarComboNumeros(){
+		comboCalificacion.removeAllItems();
+		comboCalificacion.addItem("Seleccione una opción");
+		comboCalificacion.addItem("1");
+		comboCalificacion.addItem("2");
+		comboCalificacion.addItem("3");
+		comboCalificacion.addItem("4");
+		comboCalificacion.addItem("5");
+		comboCalificacion.addItem("6");
+		comboCalificacion.addItem("7");
+		comboCalificacion.addItem("8");
+		comboCalificacion.addItem("9");
+		comboCalificacion.addItem("10");		
+		comboCalificacion.addItem("NA");
+	}
+	
+	public void cargarComboTexto(){
+		comboCalificacion.removeAllItems();
+		comboCalificacion.addItem("Seleccione una opción");
+		comboCalificacion.addItem("NTS");
+		comboCalificacion.addItem("NEP");
+		comboCalificacion.addItem("NPP");
+		comboCalificacion.addItem("NPI");
+		comboCalificacion.addItem("S");
+		comboCalificacion.addItem("NA");
 
-		tbl_subheuristicos.getColumnModel().getColumn(0).setCellRenderer(tcr);
-		tbl_subheuristicos.getColumnModel().getColumn(1).setCellRenderer(tcr);
 
 	}
 	
-	public void consultar_por_numero(int n){
-		numHeuristico=n;
+	public void mostrarDatos(){
+		double puntos=-1;
 		try {
-			h1.consultarHeuristico(n);
-			lbl_heuristico.setText("<html><div> HEURÍSTICO Nº "+numHeuristico+": "+h1.getNombre()+"</div></html>");
-			lbl_descripcion.setText(h1.getDescripcion()+".");
+			
+			try {
+				id_calificacion=rs.getInt(1);
+				//JOptionPane.showMessageDialog(null,id_calificacion);
+				puntos=Evaluacion.consultarCalificacion(id_calificacion);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			lbl_heuristico.setText("<html><div>"+rs.getString(8)+"</html></div>");		
+			lbl_descripcion.setText("<html><div>"+rs.getString(7)+"</html></div>");
+			lbl_criterio.setText("<html><div>"+rs.getString(5)+"</html></div>");
+			
+			
+			if(rs.getString(6).equals("numero")){
+				
+				cargarComboNumeros();	
+				
+				if(puntos==-1){
+					comboCalificacion.setSelectedIndex(0);
+				}else{
+					if(puntos==0){
+						comboCalificacion.setSelectedIndex(11);
+					}else{
+						comboCalificacion.setSelectedIndex((int) puntos);
+					}
+				}
+				
+			}else{
+				cargarComboTexto();
+				if(puntos==-1){
+					comboCalificacion.setSelectedIndex(0);
+				}else{
 
+					if(puntos==0){
+						comboCalificacion.setSelectedIndex(1);					
+					}else{
+						if(puntos==2.5){
+							comboCalificacion.setSelectedIndex(2);					
+						}else{
+							if(puntos==5){
+								comboCalificacion.setSelectedIndex(3);					
+							}else{
+								if(puntos==7.5){
+									comboCalificacion.setSelectedIndex(4);					
+								}else{
+									if(puntos==10){
+										comboCalificacion.setSelectedIndex(5);					
+									}else{
+										comboCalificacion.setSelectedIndex(6);
+									}
+								}
+								
+							}
+						}
+						
+					}
+				}
+
+			
+				
+				
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+	}
+	
+	
+	
+	public void actualizarCalificacion(){
+		double puntos;	
+		if(comboCalificacion.getSelectedIndex()==0){
+			puntos=-1;
+		}else{
+			
+			String valorSeleccionado=comboCalificacion.getSelectedItem().toString();
+			
+			if(valorSeleccionado.equals("NTS")){
+				puntos=2.5;
+			}else{
+				if(valorSeleccionado.equals("NEP")){
+					puntos=3.5;
+				}else{
+					if(valorSeleccionado.equals("NPP")){
+						puntos=5;
+					}else{
+						if(valorSeleccionado.equals("NPI")){
+							puntos=7.5;
+						}else{
+							if(valorSeleccionado.equals("S")){
+								puntos=10;
+							}else{
+								if(valorSeleccionado.equals("NA")){
+									puntos=0;
+								}else{
+									puntos=Integer.parseInt(valorSeleccionado);
+								}
+								
+							}
+							
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
 
+		if(Evaluacion.calificar(id_calificacion, puntos)>0){
+			
+		}else{
+			JOptionPane.showMessageDialog(null,"Error al calificar");
+		}
+	}
 }

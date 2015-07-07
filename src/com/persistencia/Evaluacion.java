@@ -12,7 +12,7 @@ public class Evaluacion {
 	String navegador;
 	String versionNavegador;
 	String fecha;
-	Boolean finalizada;	
+	int finalizada;	
 	private static Connection conex=Conexion.obtenerConexion();
 	
 	public Evaluacion(){
@@ -27,7 +27,7 @@ public class Evaluacion {
 		
 		this.navegador=navegador;
 		this.versionNavegador=versionNavegador;
-		this.finalizada=false;		
+		this.finalizada=0;		
 		this.fecha=obtenerFecha();
 		
 		
@@ -39,7 +39,7 @@ public class Evaluacion {
 		Calendar cal = Calendar.getInstance();
 		//cal.add(Calendar.MONTH,-1);
 		
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		return  format1.format(cal.getTime());
 	}
 	
@@ -51,17 +51,17 @@ public class Evaluacion {
 			sentencia.execute(cadena);
 			//Generando el resultado
 			Statement sentencia1 = (Statement) conex.createStatement();	
-			String cadena1="INSERT INTO resultado(id_evaluacion) VALUES ((select max(evaluacion.id_evaluacion) from evaluacion));";
+			String cadena1="INSERT INTO resultado(id_evaluacion) VALUES ((select max(evaluacion.id_evaluacion) from evaluacion))";
 			sentencia1.execute(cadena1);
 			
 			
 			Statement sentencia2 = (Statement) conex.createStatement();	
-			String cadena2="select subheuristico.id_subheuristico from subheuristico,heuristico where subheuristico.id_heuristico=heuristico.id_heuristico;";
+			String cadena2="select subheuristico.id_subheuristico from subheuristico,heuristico where subheuristico.id_heuristico=heuristico.id_heuristico";
 			ResultSet rs = sentencia2.executeQuery(cadena2);
 			
 			while (rs.next()){
 				Statement sentencia3 = (Statement) conex.createStatement();	
-				String cadena3="INSERT INTO calificacion(id_subheuristico, id_resultado, puntos) VALUES ("+rs.getInt(1)+",(select max(resultado.id_resultado) from resultado),-1);";
+				String cadena3="INSERT INTO calificacion(id_subheuristico, id_resultado, puntos) VALUES ("+rs.getInt(1)+",(select max(resultado.id_resultado) from resultado),-1)";
 				sentencia3.execute(cadena3);
 			}
 			
@@ -128,7 +128,7 @@ public class Evaluacion {
 		Statement sentencia;
 		try {
 			sentencia = (Statement) conex.createStatement();
-			String cadena = "SELECT puntos from calificacion where calificacion.id_calificacion="+id_evaluacion+";";
+			String cadena = "SELECT puntos from calificacion where calificacion.id_calificacion="+id_evaluacion;
 			ResultSet rs = sentencia.executeQuery(cadena);
 			while(rs.next()){
 				puntos=rs.getInt(1);			

@@ -44,6 +44,7 @@ public class EjecucionEvaluaciones extends JFrame {
 	JLabel  lbl_evaluador;
 	ResultSet rs;
 	JLabel lbl_criterio;
+	final JButton btnGuardar;
 	JComboBox comboCalificacion;
 	JPanel contenedor_calificaciones;
 	
@@ -130,7 +131,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(null, "Ejecutar evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_8.setBounds(377, 104, 961, 618);
+		panel_8.setBounds(389, 104, 961, 618);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
@@ -172,7 +173,289 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_url.setBounds(131, 3, 324, 20);
 		panel_7.add(txt_url);
 		
-		final JButton btnGuardar = new JButton("  Iniciar");
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBackground(new Color(223, 223, 233));
+		panel_4.setBounds(482, 68, 467, 27);
+		panel_8.add(panel_4);
+		
+		JLabel lblVersinDelNavegador = new JLabel("Versión:");
+		lblVersinDelNavegador.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblVersinDelNavegador.setBounds(12, 5, 69, 15);
+		panel_4.add(lblVersinDelNavegador);
+		
+		txt_version = new JTextField();
+		txt_version.setEditable(false);
+		txt_version.setColumns(10);
+		txt_version.setBorder(null);
+		txt_version.setBackground(new Color(223, 223, 233));
+		txt_version.setBounds(72, 3, 383, 20);
+		panel_4.add(txt_version);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setBackground(new Color(223, 223, 233));
+		panel_6.setBounds(12, 29, 449, 27);
+		panel_8.add(panel_6);
+		
+		JLabel lblNombreDelSitio = new JLabel("Nombre del Sitio:");
+		lblNombreDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNombreDelSitio.setBounds(12, 5, 129, 15);
+		panel_6.add(lblNombreDelSitio);
+		
+		txt_nombre = new JTextField();
+		txt_nombre.setEditable(false);
+		txt_nombre.setColumns(10);
+		txt_nombre.setBorder(null);
+		txt_nombre.setBackground(new Color(223, 223, 233));
+		txt_nombre.setBounds(151, 3, 286, 20);
+		panel_6.add(txt_nombre);
+		
+		contenedor_calificaciones = new JPanel();
+		contenedor_calificaciones.setVisible(false);
+		contenedor_calificaciones.setBounds(12, 119, 937, 452);
+		panel_8.add(contenedor_calificaciones);
+		contenedor_calificaciones.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 261, 937, 42);
+		contenedor_calificaciones.add(panel);
+		panel.setLayout(null);
+		panel.setBackground(SystemColor.inactiveCaptionBorder);
+		
+		lbl_criterio = new JLabel("Criterio a evaluar");
+		lbl_criterio.setForeground(new Color(0, 0, 0));
+		lbl_criterio.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
+		lbl_criterio.setBounds(12, 6, 913, 27);
+		panel.add(lbl_criterio);
+		
+		panel_descripcion = new JPanel();
+		panel_descripcion.setBounds(0, 161, 937, 42);
+		contenedor_calificaciones.add(panel_descripcion);
+		panel_descripcion.setLayout(null);
+		panel_descripcion.setBackground(new Color(223, 223, 233));
+		
+		lbl_descripcion = new JLabel("Descripcion del heuristico");
+		lbl_descripcion.setFont(new Font("Dialog", Font.PLAIN, 14));
+		lbl_descripcion.setBounds(12, 0, 913, 42);
+		panel_descripcion.add(lbl_descripcion);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(0, 115, 299, 34);
+		contenedor_calificaciones.add(panel_5);
+		panel_5.setLayout(null);
+		panel_5.setBackground(new Color(223, 223, 233));
+		
+		JLabel lblDescripcinDelHeurstico = new JLabel("DESCRIPCIÓN DEL HEURÍSTICO");
+		lblDescripcinDelHeurstico.setBounds(12, 0, 275, 34);
+		panel_5.add(lblDescripcinDelHeurstico);
+		lblDescripcinDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
+		
+		panel_heuristicos = new JPanel();
+		panel_heuristicos.setBounds(0, 58, 937, 45);
+		contenedor_calificaciones.add(panel_heuristicos);
+		panel_heuristicos.setLayout(null);
+		panel_heuristicos.setBackground(new Color(223, 223, 233));
+		
+		lbl_heuristico = new JLabel("Heurístico a evaluar");
+		lbl_heuristico.setFont(new Font("Dialog", Font.PLAIN, 14));
+		lbl_heuristico.setBounds(12, 0, 900, 40);
+		panel_heuristicos.add(lbl_heuristico);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 12, 253, 34);
+		contenedor_calificaciones.add(panel_1);
+		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(223, 223, 233));
+		
+		JLabel lblNombreDelHeurstico = new JLabel("NOMBRE DEL HEURÍSTICO");
+		lblNombreDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblNombreDelHeurstico.setBounds(12, 0, 234, 34);
+		panel_1.add(lblNombreDelHeurstico);
+		
+		btnAnterior = new JButton("Anterior");
+		btnAnterior.setBounds(0, 413, 113, 27);
+		contenedor_calificaciones.add(btnAnterior);
+		btnAnterior.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+						if(rs.isFirst()){
+							JOptionPane.showMessageDialog(null,"Este es el primer criterio que debe evaluar");
+						}else{
+						
+						rs.previous();	
+						actualizarCalificacion();
+						mostrarDatos();
+						
+						
+						
+						}
+						
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+
+			}
+		});
+		btnAnterior.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnAnterior.setBackground(SystemColor.controlHighlight);
+		
+		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setBounds(125, 413, 113, 27);
+		contenedor_calificaciones.add(btnSiguiente);
+		btnSiguiente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+			
+			}
+		});
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(rs.isLast()){
+						JOptionPane.showMessageDialog(null,"Este fue el último criterio que debe evaluar");
+					}else{
+						rs.next();
+						actualizarCalificacion();
+						mostrarDatos();
+						
+						
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
+		btnSiguiente.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnSiguiente.setBackground(SystemColor.controlHighlight);
+		
+		JPanel panel_11 = new JPanel();
+		panel_11.setLayout(null);
+		panel_11.setBackground(new Color(223, 223, 233));
+		panel_11.setBounds(0, 215, 208, 34);
+		contenedor_calificaciones.add(panel_11);
+		
+		JLabel lblCriterioAEvaluar = new JLabel("CRITERIO A EVALUAR");
+		lblCriterioAEvaluar.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblCriterioAEvaluar.setBounds(12, 0, 192, 34);
+		panel_11.add(lblCriterioAEvaluar);
+		
+		JPanel panel_10 = new JPanel();
+		panel_10.setLayout(null);
+		panel_10.setBackground(new Color(223, 223, 233));
+		panel_10.setBounds(0, 315, 143, 34);
+		contenedor_calificaciones.add(panel_10);
+		
+		JLabel lblCalificaci = new JLabel("CALIFICACIÓN");
+		lblCalificaci.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblCalificaci.setBounds(12, 0, 130, 34);
+		panel_10.add(lblCalificaci);
+		
+		comboCalificacion = new JComboBox();
+		comboCalificacion.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		comboCalificacion.setBounds(0, 361, 238, 24);
+		contenedor_calificaciones.add(comboCalificacion);
+		
+		btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds(250, 413, 113, 27);
+		contenedor_calificaciones.add(btnFinalizar);
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnAnterior.setVisible(false);
+				btnSiguiente.setVisible(false);
+				btnFinalizar.setVisible(false);
+				btnGuardar.setEnabled(true);
+				limpiar();				
+				panel_heuristicos.setVisible(false);
+				panel_descripcion.setVisible(false);
+				tbl_evaluaciones.setEnabled(true);
+				contenedor_calificaciones.setVisible(false);
+				
+				JOptionPane.showMessageDialog(null,"Evaluación finalizada");
+			}
+		});
+		btnFinalizar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnFinalizar.setBackground(SystemColor.controlHighlight);
+		btnFinalizar.setVisible(false);
+		btnSiguiente.setVisible(false);
+		
+		btnAnterior.setVisible(false);
+		
+		
+		
+		
+		panel_heuristicos.setVisible(false);
+		panel_descripcion.setVisible(false);
+		JPanel panel_9 = new JPanel();
+		panel_9.setLayout(null);
+		panel_9.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_9.setBounds(0, 104, 387, 618);
+		contentPane.add(panel_9);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		scrollPane.setBounds(12, 57, 363, 519);
+		panel_9.add(scrollPane);
+		
+		tbl_evaluaciones = new JTable();
+		
+		tbl_evaluaciones.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				
+				int indice=tbl_evaluaciones.getSelectedRow();
+				
+				txt_nombre.setText(tbl_evaluaciones.getValueAt(indice,2).toString());
+				txt_url.setText(tbl_evaluaciones.getValueAt(indice,3).toString());
+				txt_navegador.setText(tbl_evaluaciones.getValueAt(indice,4).toString());
+				txt_version.setText(tbl_evaluaciones.getValueAt(indice,5).toString());
+				id_evaluacion=Integer.parseInt(tbl_evaluaciones.getValueAt(indice,0).toString());
+				
+				try {
+					verCriterios(id_evaluacion);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+
+			}
+		});
+		tbl_evaluaciones.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"ID_DETALLE","ID_PROYECTO", "NOMBRE DEL SITIO","URL", "EVALUADOR","FECHA", "TIPO DEL SITIO"
+				}
+			));
+		scrollPane.setViewportView(tbl_evaluaciones);
+		
+		btnGuardar = new JButton("  Calificar");
+		btnGuardar.setBounds(245, 18, 130, 27);
+		panel_9.add(btnGuardar);
 		
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -233,287 +516,6 @@ public class EjecucionEvaluaciones extends JFrame {
 		btnGuardar.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/start2.png")));
 		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnGuardar.setBackground(SystemColor.controlHighlight);
-		btnGuardar.setBounds(819, 68, 130, 27);
-		panel_8.add(btnGuardar);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(482, 68, 325, 27);
-		panel_8.add(panel_4);
-		
-		JLabel lblVersinDelNavegador = new JLabel("Versión:");
-		lblVersinDelNavegador.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblVersinDelNavegador.setBounds(12, 5, 69, 15);
-		panel_4.add(lblVersinDelNavegador);
-		
-		txt_version = new JTextField();
-		txt_version.setEditable(false);
-		txt_version.setColumns(10);
-		txt_version.setBorder(null);
-		txt_version.setBackground(new Color(223, 223, 233));
-		txt_version.setBounds(72, 3, 241, 20);
-		panel_4.add(txt_version);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setLayout(null);
-		panel_6.setBackground(new Color(223, 223, 233));
-		panel_6.setBounds(12, 29, 449, 27);
-		panel_8.add(panel_6);
-		
-		JLabel lblNombreDelSitio = new JLabel("Nombre del Sitio:");
-		lblNombreDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNombreDelSitio.setBounds(12, 5, 129, 15);
-		panel_6.add(lblNombreDelSitio);
-		
-		txt_nombre = new JTextField();
-		txt_nombre.setEditable(false);
-		txt_nombre.setColumns(10);
-		txt_nombre.setBorder(null);
-		txt_nombre.setBackground(new Color(223, 223, 233));
-		txt_nombre.setBounds(151, 3, 286, 20);
-		panel_6.add(txt_nombre);
-		
-		contenedor_calificaciones = new JPanel();
-		contenedor_calificaciones.setVisible(false);
-		contenedor_calificaciones.setBounds(12, 119, 937, 452);
-		panel_8.add(contenedor_calificaciones);
-		contenedor_calificaciones.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 261, 937, 42);
-		contenedor_calificaciones.add(panel);
-		panel.setLayout(null);
-		panel.setBackground(SystemColor.inactiveCaptionBorder);
-		
-		lbl_criterio = new JLabel("Criterio a evaluar");
-		lbl_criterio.setFont(new Font("Dialog", Font.PLAIN, 13));
-		lbl_criterio.setBounds(12, 6, 913, 27);
-		panel.add(lbl_criterio);
-		
-		panel_descripcion = new JPanel();
-		panel_descripcion.setBounds(0, 161, 937, 42);
-		contenedor_calificaciones.add(panel_descripcion);
-		panel_descripcion.setLayout(null);
-		panel_descripcion.setBackground(new Color(223, 223, 233));
-		
-		lbl_descripcion = new JLabel("Descripcion del heuristico");
-		lbl_descripcion.setFont(new Font("Dialog", Font.PLAIN, 14));
-		lbl_descripcion.setBounds(12, 0, 913, 42);
-		panel_descripcion.add(lbl_descripcion);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(0, 115, 299, 34);
-		contenedor_calificaciones.add(panel_5);
-		panel_5.setLayout(null);
-		panel_5.setBackground(new Color(223, 223, 233));
-		
-		JLabel lblDescripcinDelHeurstico = new JLabel("DESCRIPCIÓN DEL HEURÍSTICO");
-		lblDescripcinDelHeurstico.setBounds(12, 0, 275, 34);
-		panel_5.add(lblDescripcinDelHeurstico);
-		lblDescripcinDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
-		
-		panel_heuristicos = new JPanel();
-		panel_heuristicos.setBounds(0, 58, 937, 45);
-		contenedor_calificaciones.add(panel_heuristicos);
-		panel_heuristicos.setLayout(null);
-		panel_heuristicos.setBackground(new Color(223, 223, 233));
-		
-		lbl_heuristico = new JLabel("Heurístico a evaluar");
-		lbl_heuristico.setFont(new Font("Dialog", Font.PLAIN, 14));
-		lbl_heuristico.setBounds(12, 0, 900, 40);
-		panel_heuristicos.add(lbl_heuristico);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 12, 253, 34);
-		contenedor_calificaciones.add(panel_1);
-		panel_1.setLayout(null);
-		panel_1.setBackground(new Color(223, 223, 233));
-		
-		JLabel lblNombreDelHeurstico = new JLabel("NOMBRE DEL HEURÍSTICO");
-		lblNombreDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNombreDelHeurstico.setBounds(12, 0, 234, 34);
-		panel_1.add(lblNombreDelHeurstico);
-		
-		btnAnterior = new JButton("Anterior");
-		btnAnterior.setBounds(469, 413, 113, 27);
-		contenedor_calificaciones.add(btnAnterior);
-		btnAnterior.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
-		btnAnterior.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					
-						if(rs.isFirst()){
-							JOptionPane.showMessageDialog(null,"Este es el primer criterio que debe evaluar");
-						}else{
-						
-						rs.previous();	
-						actualizarCalificacion();
-						mostrarDatos();
-						
-						
-						
-						}
-						
-					
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-
-			}
-		});
-		btnAnterior.setBorder(UIManager.getBorder("CheckBox.border"));
-		btnAnterior.setBackground(SystemColor.controlHighlight);
-		
-		btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.setBounds(594, 413, 113, 27);
-		contenedor_calificaciones.add(btnSiguiente);
-		btnSiguiente.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-			
-			}
-		});
-		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					if(rs.isLast()){
-						JOptionPane.showMessageDialog(null,"Este fue el último criterio que debe evaluar");
-					}else{
-						rs.next();
-						actualizarCalificacion();
-						mostrarDatos();
-						
-						
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-			}
-		});
-		btnSiguiente.setBorder(UIManager.getBorder("CheckBox.border"));
-		btnSiguiente.setBackground(SystemColor.controlHighlight);
-		
-		btnFinalizar = new JButton("Finalizar");
-		btnFinalizar.setBounds(719, 413, 113, 27);
-		contenedor_calificaciones.add(btnFinalizar);
-		btnFinalizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnAnterior.setVisible(false);
-				btnSiguiente.setVisible(false);
-				btnFinalizar.setVisible(false);
-				btnGuardar.setEnabled(true);
-				limpiar();				
-				panel_heuristicos.setVisible(false);
-				panel_descripcion.setVisible(false);
-				tbl_evaluaciones.setEnabled(true);
-				contenedor_calificaciones.setVisible(false);
-				
-				JOptionPane.showMessageDialog(null,"Evaluación finalizada");
-			}
-		});
-		btnFinalizar.setBorder(UIManager.getBorder("CheckBox.border"));
-		btnFinalizar.setBackground(SystemColor.controlHighlight);
-		
-		JPanel panel_11 = new JPanel();
-		panel_11.setLayout(null);
-		panel_11.setBackground(new Color(223, 223, 233));
-		panel_11.setBounds(0, 215, 208, 34);
-		contenedor_calificaciones.add(panel_11);
-		
-		JLabel lblCriterioAEvaluar = new JLabel("CRITERIO A EVALUAR");
-		lblCriterioAEvaluar.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblCriterioAEvaluar.setBounds(12, 0, 192, 34);
-		panel_11.add(lblCriterioAEvaluar);
-		
-		JPanel panel_10 = new JPanel();
-		panel_10.setLayout(null);
-		panel_10.setBackground(new Color(223, 223, 233));
-		panel_10.setBounds(0, 315, 143, 34);
-		contenedor_calificaciones.add(panel_10);
-		
-		JLabel lblCalificaci = new JLabel("CALIFICACIÓN");
-		lblCalificaci.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblCalificaci.setBounds(12, 0, 130, 34);
-		panel_10.add(lblCalificaci);
-		
-		comboCalificacion = new JComboBox();
-		comboCalificacion.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
-		comboCalificacion.setBounds(0, 361, 208, 24);
-		contenedor_calificaciones.add(comboCalificacion);
-		btnFinalizar.setVisible(false);
-		btnSiguiente.setVisible(false);
-		
-		btnAnterior.setVisible(false);
-		
-		
-		
-		
-		panel_heuristicos.setVisible(false);
-		panel_descripcion.setVisible(false);
-		JPanel panel_9 = new JPanel();
-		panel_9.setLayout(null);
-		panel_9.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_9.setBounds(12, 104, 353, 618);
-		contentPane.add(panel_9);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				
-			}
-		});
-		scrollPane.setBounds(12, 35, 336, 541);
-		panel_9.add(scrollPane);
-		
-		tbl_evaluaciones = new JTable();
-		
-		tbl_evaluaciones.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				
-				
-				int indice=tbl_evaluaciones.getSelectedRow();
-				
-				txt_nombre.setText(tbl_evaluaciones.getValueAt(indice,2).toString());
-				txt_url.setText(tbl_evaluaciones.getValueAt(indice,3).toString());
-				txt_navegador.setText(tbl_evaluaciones.getValueAt(indice,4).toString());
-				txt_version.setText(tbl_evaluaciones.getValueAt(indice,5).toString());
-				id_evaluacion=Integer.parseInt(tbl_evaluaciones.getValueAt(indice,0).toString());
-				
-				try {
-					verCriterios(id_evaluacion);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-
-			}
-		});
-		tbl_evaluaciones.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"ID_DETALLE","ID_PROYECTO", "NOMBRE DEL SITIO","URL", "EVALUADOR","FECHA", "TIPO DEL SITIO"
-				}
-			));
-		scrollPane.setViewportView(tbl_evaluaciones);
 		
 		lbl_evaluador = new JLabel("Evaluador conectado para evaluar");
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
@@ -527,6 +529,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		
 		cargarTabla();
+		
 		
 	
 	}
@@ -554,8 +557,8 @@ public class EjecucionEvaluaciones extends JFrame {
 	public void cargarTabla() {
 		
 		//JOptionPane.showMessageDialog(null,Acceso.conectado());
-		String email=Acceso.conectado();
-		//String email="perez@gmail.com";
+		//String email=Acceso.conectado();
+		String email="perez@gmail.com";
 		ResultSet rs=null;
 		try {
 			rs = Evaluacion.consultarEvaluacionesEvaluador(email);
@@ -566,16 +569,19 @@ public class EjecucionEvaluaciones extends JFrame {
 		DefaultTableModel modelo=new DefaultTableModel();	
 		modelo.addColumn("ID_EVALUACION");
 		modelo.addColumn("ID_PROYECTO");
-		modelo.addColumn("NOMBRE DEL SITIO");
+		modelo.addColumn("SITIO");
 		modelo.addColumn("URL");
 		modelo.addColumn("NAVEGADOR");
 		modelo.addColumn("VERSIÓN");
-		modelo.addColumn("FECHA");		
+		modelo.addColumn("ESTADO");		
 		try {
 			while(rs.next()){		
 
-					modelo.addRow(new String[] {rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(10),rs.getString(11),rs.getString(8)});			
-
+				if(rs.getBoolean(12)){
+					modelo.addRow(new String[] {rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(10),rs.getString(11),"Finalizada"});			
+				}else{
+					modelo.addRow(new String[] {rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(10),rs.getString(11),"Pendiente"});
+				}
 			
 
 				
@@ -591,15 +597,25 @@ public class EjecucionEvaluaciones extends JFrame {
 	}
 	
 	public void formatearTabla(){
+		/*
+		modelo.addColumn("ID_EVALUACION"); 0 
+		modelo.addColumn("ID_PROYECTO"); 1
+		modelo.addColumn("NOMBRE DEL SITIO"); 2
+		modelo.addColumn("URL"); 3
+		modelo.addColumn("NAVEGADOR"); 4
+		modelo.addColumn("VERSIÓN"); 5
+		modelo.addColumn("FECHA");	6
+		*/
+		
 		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
 		//tbl_subheuristicos.setBackground(new Color(161,202,232));
-		tbl_evaluaciones.setRowHeight(25);
+		tbl_evaluaciones.setRowHeight(20);
 		tbl_evaluaciones.setForeground(new Color(0,0,0));
-		tbl_evaluaciones.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tbl_evaluaciones.setFont(new Font("Dialog", Font.PLAIN, 13));
 		tbl_evaluaciones.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
 		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
-		tbl_evaluaciones.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
+		tbl_evaluaciones.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 15));
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -610,11 +626,26 @@ public class EjecucionEvaluaciones extends JFrame {
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(1).setResizable(false);
 		
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(200);
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(160);
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(200);
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(250);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(150);
+		
+		//url sitio
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(0);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setResizable(false);
+		
+		//tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(125);
+		
+		
+		//Version
+				tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+				tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+				tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(0);
+				tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(5).setResizable(false);
+		
+		//tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(200);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(80);
 		
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();

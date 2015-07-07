@@ -27,6 +27,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.UIManager;
+import java.awt.Toolkit;
 
 public class Acceso extends JFrame {
 
@@ -55,6 +56,7 @@ public class Acceso extends JFrame {
 	 * Create the frame.
 	 */
 	public Acceso() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Acceso.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - VENTANA DE ACCESO");
 		addWindowListener(new WindowAdapter() {
 			@Override

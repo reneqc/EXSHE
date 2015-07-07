@@ -111,7 +111,7 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
-		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
+		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
 		mntmAcceso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -248,7 +248,7 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnEvaluadores);
 		
 		JMenuItem mnuMantenimientoEvaluadores = new JMenuItem("Mantenimiento");
-		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.SHIFT_MASK));
+		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		mnuMantenimientoEvaluadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MantenimientoEvaluadores registro1=new MantenimientoEvaluadores();

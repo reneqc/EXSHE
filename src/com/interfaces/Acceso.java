@@ -1,13 +1,19 @@
 package com.interfaces;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,17 +23,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.UIManager;
-import java.awt.Toolkit;
 
 public class Acceso extends JFrame {
 
@@ -241,6 +241,33 @@ public class Acceso extends JFrame {
 		lblDeEvaluacin.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblDeEvaluacin.setBounds(1098, 631, 213, 15);
 		contentPane.add(lblDeEvaluacin);
+		
+		final JButton btnAyuda = new JButton("  Ayuda");
+		btnAyuda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				resaltar(btnAyuda);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				noResaltar(btnAyuda);
+			}
+		});
+		btnAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				     File path = new File ("Ayuda/guiaexshe.pdf");
+				     Desktop.getDesktop().open(path);
+				}catch (IOException ex) {
+				     ex.printStackTrace();
+				}
+			}
+		});
+		btnAyuda.setIcon(new ImageIcon(Acceso.class.getResource("/img/help1.png")));
+		btnAyuda.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnAyuda.setBackground(SystemColor.controlHighlight);
+		btnAyuda.setBounds(221, 676, 127, 27);
+		contentPane.add(btnAyuda);
 		this.setLocationRelativeTo(null);
 		
 		//Conexion.obtenerConexion();

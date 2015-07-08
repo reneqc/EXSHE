@@ -1,3 +1,6 @@
 *.class
 bin/com/persistencia/Conexion.class
 *.class
+bdd_exshe/seg0/c81.dat
+*.class
+bin/com/interfaces/AdministracionHeuristicos$8.class

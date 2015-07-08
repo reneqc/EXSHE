@@ -96,7 +96,7 @@ public class Evaluacion {
 	
 	public static ResultSet consultarCalificaciones(int id_evaluacion) throws SQLException{
 		
-		Statement sentencia = (Statement) conex.createStatement();
+		Statement sentencia = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion;
 		ResultSet rs = sentencia.executeQuery(cadena);
 		return rs;
@@ -123,12 +123,12 @@ public class Evaluacion {
 	 * Metodo para conocer cual es la calificacion actual de un subheuristico
 	 * 
 	 */
-	public static double consultarCalificacion(int id_evaluacion){
-		double puntos=-1;
+	public static float consultarCalificacion(int id_calificacion){
+		float puntos=-1;
 		Statement sentencia;
 		try {
 			sentencia = (Statement) conex.createStatement();
-			String cadena = "SELECT puntos from calificacion where calificacion.id_calificacion="+id_evaluacion;
+			String cadena = "SELECT puntos from calificacion where calificacion.id_calificacion="+id_calificacion;
 			ResultSet rs = sentencia.executeQuery(cadena);
 			while(rs.next()){
 				puntos=rs.getInt(1);			
@@ -139,6 +139,32 @@ public class Evaluacion {
 		}
 		
 		return puntos;
+		
+	}
+	
+
+	public static ResultSet verificarFinalizacion(int id_evaluacion) throws SQLException{
+
+		
+		Statement sentencia = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND calificacion.puntos=-1 AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion;
+		ResultSet  rs = sentencia.executeQuery(cadena);
+		return rs;
+
+	}
+	
+	public static int cambiarEstado(int id_evaluacion){
+		
+		try {
+			Statement sentencia= (Statement) conex.createStatement();
+			String cadena="update evaluacion set finalizada=1 where id_evaluacion="+id_evaluacion;			
+			sentencia.execute(cadena);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+			return 0;
+		}
 		
 	}
 

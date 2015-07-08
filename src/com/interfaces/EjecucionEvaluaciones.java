@@ -3,6 +3,7 @@ package com.interfaces;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -375,17 +376,52 @@ public class EjecucionEvaluaciones extends JFrame {
 		contenedor_calificaciones.add(btnFinalizar);
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnAnterior.setVisible(false);
-				btnSiguiente.setVisible(false);
-				btnFinalizar.setVisible(false);
-				btnGuardar.setEnabled(true);
-				limpiar();				
-				panel_heuristicos.setVisible(false);
-				panel_descripcion.setVisible(false);
-				tbl_evaluaciones.setEnabled(true);
-				contenedor_calificaciones.setVisible(false);
+				actualizarCalificacion();
+				ResultSet pendientes;
+				try {
+					pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
+					
+					if(pendientes.next()){
+						int i=0;
+						String criteriosPendientes="";
+						pendientes.beforeFirst();
+						while(pendientes.next()){
+							criteriosPendientes=criteriosPendientes+pendientes.getString(5)+"-";
+							i++;
+						}
+						
+						JOptionPane.showMessageDialog(null,"No se puede finalizar aún tiene "+i+" criterios pendientes de calificar: "+criteriosPendientes);
+						
+					}else{
+						
+						
+						
+					
+						
+						if(Evaluacion.cambiarEstado(id_evaluacion)>0){
+							btnAnterior.setVisible(false);
+							btnSiguiente.setVisible(false);
+							btnFinalizar.setVisible(false);
+							btnGuardar.setEnabled(true);
+							limpiar();				
+							panel_heuristicos.setVisible(false);
+							panel_descripcion.setVisible(false);
+							tbl_evaluaciones.setEnabled(true);
+							contenedor_calificaciones.setVisible(false);
+							JOptionPane.showMessageDialog(null,"Evaluación finalizada exitosamente");
+							cargarTabla();
+						}else{
+							JOptionPane.showMessageDialog(null,"Error al finalizar. Por favor revise que todos los criterios esten calificados");
+						}
+						
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+					
 				
-				JOptionPane.showMessageDialog(null,"Evaluación finalizada");
 			}
 		});
 		btnFinalizar.setBorder(UIManager.getBorder("CheckBox.border"));
@@ -496,6 +532,7 @@ public class EjecucionEvaluaciones extends JFrame {
 							
 							try {
 								rs.first();
+								
 								mostrarDatos();
 							
 							} catch (SQLException e) {
@@ -559,9 +596,9 @@ public class EjecucionEvaluaciones extends JFrame {
 		//JOptionPane.showMessageDialog(null,Acceso.conectado());
 		//String email=Acceso.conectado();
 		String email="perez@gmail.com";
-		ResultSet rs=null;
+		ResultSet rsTabla=null;
 		try {
-			rs = Evaluacion.consultarEvaluacionesEvaluador(email);
+			rsTabla = Evaluacion.consultarEvaluacionesEvaluador(email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -575,12 +612,12 @@ public class EjecucionEvaluaciones extends JFrame {
 		modelo.addColumn("VERSIÓN");
 		modelo.addColumn("ESTADO");		
 		try {
-			while(rs.next()){		
+			while(rsTabla.next()){		
 
-				if(rs.getBoolean(12)){
-					modelo.addRow(new String[] {rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(10),rs.getString(11),"Finalizada"});			
+				if(rsTabla.getBoolean(12)){
+					modelo.addRow(new String[] {rsTabla.getString(1),rsTabla.getString(3),rsTabla.getString(4),rsTabla.getString(5),rsTabla.getString(10),rsTabla.getString(11),"Finalizada"});			
 				}else{
-					modelo.addRow(new String[] {rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(10),rs.getString(11),"Pendiente"});
+					modelo.addRow(new String[] {rsTabla.getString(1),rsTabla.getString(3),rsTabla.getString(4),rsTabla.getString(5),rsTabla.getString(10),rsTabla.getString(11),"Pendiente"});
 				}
 			
 
@@ -684,6 +721,7 @@ public class EjecucionEvaluaciones extends JFrame {
 	}
 	
 	
+	//Para calificar criterios de uno en uno
 	public void verCriterios(int id) throws SQLException{
 		rs=Evaluacion.consultarCalificaciones(id);
 		
@@ -720,7 +758,7 @@ public class EjecucionEvaluaciones extends JFrame {
 	}
 	
 	public void mostrarDatos(){
-		double puntos=-1;
+		float puntos=-1;
 		try {
 			
 			try {
@@ -736,7 +774,7 @@ public class EjecucionEvaluaciones extends JFrame {
 			lbl_criterio.setText("<html><div>"+rs.getString(5)+"</html></div>");
 			
 			
-			if(rs.getString(6).equals("numero")){
+			if(rs.getString(6).equals("Numérico")){
 				
 				cargarComboNumeros();	
 				
@@ -752,36 +790,36 @@ public class EjecucionEvaluaciones extends JFrame {
 				
 			}else{
 				cargarComboTexto();
+				
+			/*	comboCalificacion.addItem("Seleccione una opción"); 0
+				comboCalificacion.addItem("NTS"); 1
+				comboCalificacion.addItem("NEP"); 2 
+				comboCalificacion.addItem("NPP"); 3
+				comboCalificacion.addItem("NPI"); 4
+				comboCalificacion.addItem("S");   5
+				comboCalificacion.addItem("NA");  6
+			*/
+				
 				if(puntos==-1){
 					comboCalificacion.setSelectedIndex(0);
-				}else{
-
-					if(puntos==0){
-						comboCalificacion.setSelectedIndex(1);					
-					}else{
-						if(puntos==2.5){
-							comboCalificacion.setSelectedIndex(2);					
-						}else{
-							if(puntos==5){
-								comboCalificacion.setSelectedIndex(3);					
-							}else{
-								if(puntos==7.5){
-									comboCalificacion.setSelectedIndex(4);					
-								}else{
-									if(puntos==10){
-										comboCalificacion.setSelectedIndex(5);					
-									}else{
-										comboCalificacion.setSelectedIndex(6);
-									}
-								}
-								
-							}
-						}
-						
-					}
 				}
-
-			
+				
+				if(puntos==0){
+						comboCalificacion.setSelectedIndex(1);					
+				}
+				
+				if(puntos>0 && puntos<5){
+					comboCalificacion.setSelectedIndex(2);					
+				}
+				if(puntos==5){
+					comboCalificacion.setSelectedIndex(3);					
+				}
+				if(puntos>5 && puntos<10){
+					comboCalificacion.setSelectedIndex(4);					
+				}
+				if(puntos==10){
+					comboCalificacion.setSelectedIndex(5);					
+				}			
 				
 				
 			}
@@ -802,10 +840,10 @@ public class EjecucionEvaluaciones extends JFrame {
 			String valorSeleccionado=comboCalificacion.getSelectedItem().toString();
 			
 			if(valorSeleccionado.equals("NTS")){
-				puntos=2.5;
+				puntos=0;
 			}else{
 				if(valorSeleccionado.equals("NEP")){
-					puntos=3.5;
+					puntos=2.5;
 				}else{
 					if(valorSeleccionado.equals("NPP")){
 						puntos=5;

@@ -63,12 +63,19 @@ public class Principal {
 	@Test	
 	public void crearProyecto(){
 		
+		/*
 		Proyecto pry=new Proyecto("www.gmail.com","Gmail","Correo","jvalencia@gmail.com","patricio@gmail.com","bravo@gmail.com","carlos@gmail.com");
 		System.out.println(pry.obtenerFecha());
 		assertEquals(1,pry.guardar());
-		
+		*/
 
 		
+	}
+	
+	@Test
+	public void crearHeuristico(){
+		Heuristico h=new Heuristico("ASPECTOS GENERALES","Elementos relacionados con los objetivos del sitio, el look & feel, coherencia y nivel de actualización de contenidos");
+		assertEquals(1,h.guardar());
 	}
 	
 	

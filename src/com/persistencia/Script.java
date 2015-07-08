@@ -46,7 +46,7 @@ public class Script {
 	}
 	
 	public static String crearTablaSubHeuristico(){
-		String script1=" CREATE TABLE  subheuristico  ( id_subheuristico  INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),   codigo  varchar(25) NOT NULL,   criterio  varchar(20000) NOT NULL,   tipo  varchar(45) NOT NULL,   id_heuristico  INTEGER NOT NULL,  PRIMARY KEY ( id_subheuristico ))";
+		String script1=" CREATE TABLE  subheuristico  ( id_subheuristico  INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), criterio  varchar(20000) NOT NULL,   tipo  varchar(45) NOT NULL,   id_heuristico  INTEGER NOT NULL,  PRIMARY KEY ( id_subheuristico ))";
 		return script1;
 	}
 	
@@ -56,9 +56,6 @@ public class Script {
 		
 	}
 	
-	public static String cargarHeuristicos(){
-		String script="insert into heuristico (nombre,descripcion)  values(' ASPECTOS GENERALES','Elementos relacionados con los objetivos del sitio, el look & feel, coherencia y nivel de actualización de contenidos'); insert into heuristico (nombre,descripcion)  values('IDENTIDAD E INFORMACIÓN','Elementos relacionados con la identidad del sitio, la información proporcionada sobre el proveedor y la autoría de los contenidos'); insert into heuristico (nombre,descripcion)  values('ESTRUCTURA Y NAVEGACIÓN','Elementos relacionados con la idoneidad de la arquitectura de la información y la navegación del sitio'); insert into heuristico (nombre,descripcion)  values('ROTULADO','Elementos relacionados con la significación, corrección y familiaridad del rotulado de los contenidos'); insert into heuristico (nombre,descripcion)  values('LAYOUT DE LA PÁGINA','Elementos relacionados con la distribución y el aspecto de los elementos de navegación e información en la interfaz'); insert into heuristico (nombre,descripcion)  values('ENTENDIBILIDAD Y FACILIDAD EN LA INTERACCIÓN','Elementos relacionados con la adecuación y calidad de los contenidos textuales, iconos y controles de la interfaz'); insert into heuristico (nombre,descripcion)  values('CONTROL Y RETORALIMENTACIÓN','Elementos relacionados con libertad del usuario en la navegación y la información proporcionada al mismo en el proceso de interacción con el sitio'); insert into heuristico (nombre,descripcion)  values('ELEMENTOS MULTIMEDIA','Elementos relacionados con el grado de adecuación de los contenidos multimedia al sitio web'); insert into heuristico (nombre,descripcion)  values('BÚSQUEDA','Elementos relacionados con el buscador implementado en el sitio web'); insert into heuristico (nombre,descripcion)  values('AYUDA','Elementos relacionados con la ayuda ofrecida al usuario durante la navegación por el sitio');";
-		return script;
-	}
+
 
 }

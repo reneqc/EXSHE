@@ -3,14 +3,19 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,14 +28,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+
+
+
 import com.persistencia.Evaluador;
-import javax.swing.UIManager;
 
 
 public class MantenimientoEvaluadores extends JFrame {
@@ -99,13 +107,13 @@ public class MantenimientoEvaluadores extends JFrame {
 		JPanel contenedor_registro = new JPanel();
 		contenedor_registro.setBorder(new TitledBorder(null, "Registro de Evaluadores", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		contenedor_registro.setToolTipText("Registro de Evaluadores");
-		contenedor_registro.setBounds(27, 94, 490, 628);
+		contenedor_registro.setBounds(12, 97, 1326, 226);
 		
 		contentPane.add(contenedor_registro);
 		contenedor_registro.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(31, 111, 422, 27);
+		panel_1.setBounds(476, 43, 378, 27);
 		contenedor_registro.add(panel_1);
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(223, 223, 233));
@@ -116,14 +124,20 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_1.add(lblNombre);
 		
 		txt_nombre = new JTextField();
+		txt_nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				validarSoloLetras(e);
+			}
+		});
 		txt_nombre.setColumns(10);
 		txt_nombre.setBorder(null);
 		txt_nombre.setBackground(new Color(223, 223, 233));
-		txt_nombre.setBounds(83, 3, 327, 20);
+		txt_nombre.setBounds(83, 3, 283, 20);
 		panel_1.add(txt_nombre);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(31, 60, 422, 27);
+		panel_2.setBounds(24, 43, 422, 27);
 		contenedor_registro.add(panel_2);
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
@@ -134,6 +148,15 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_2.add(lblApellido);
 		
 		txt_apellido = new JTextField();
+		txt_apellido.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				validarSoloLetras(e);
+				
+		             
+			}
+		});
 		txt_apellido.setColumns(10);
 		txt_apellido.setBorder(null);
 		txt_apellido.setBackground(new Color(223, 223, 233));
@@ -141,7 +164,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_2.add(txt_apellido);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(31, 156, 422, 27);
+		panel_3.setBounds(885, 43, 404, 27);
 		contenedor_registro.add(panel_3);
 		panel_3.setLayout(null);
 		panel_3.setBackground(new Color(223, 223, 233));
@@ -155,11 +178,11 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_email.setColumns(10);
 		txt_email.setBorder(null);
 		txt_email.setBackground(new Color(223, 223, 233));
-		txt_email.setBounds(64, 3, 346, 20);
+		txt_email.setBounds(76, 3, 300, 20);
 		panel_3.add(txt_email);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(31, 483, 422, 27);
+		panel_4.setBounds(24, 164, 422, 27);
 		contenedor_registro.add(panel_4);
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(223, 223, 233));
@@ -177,7 +200,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_4.add(txt_password);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(31, 536, 422, 27);
+		panel_5.setBounds(476, 164, 378, 27);
 		contenedor_registro.add(panel_5);
 		panel_5.setLayout(null);
 		panel_5.setBackground(new Color(223, 223, 233));
@@ -191,12 +214,12 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_passwordR.setColumns(10);
 		txt_passwordR.setBorder(null);
 		txt_passwordR.setBackground(new Color(223, 223, 233));
-		txt_passwordR.setBounds(202, 3, 208, 20);
+		txt_passwordR.setBounds(202, 3, 176, 20);
 		panel_5.add(txt_passwordR);
 		
 		final JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/clear.png")));
-		btnLimpiar.setBounds(344, 21, 109, 27);
+		btnLimpiar.setBounds(887, 153, 109, 38);
 		btnLimpiar.setFocusable(false);
 		contenedor_registro.add(btnLimpiar);
 		btnLimpiar.addActionListener(new ActionListener() {
@@ -221,9 +244,9 @@ public class MantenimientoEvaluadores extends JFrame {
 		btnLimpiar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnLimpiar.setBackground(SystemColor.controlHighlight);
 		
-		btnGuardar = new JButton("  Guardar");
+		btnGuardar = new JButton("Guardar");
 		btnGuardar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/save.png")));
-		btnGuardar.setBounds(319, 575, 134, 38);
+		btnGuardar.setBounds(1163, 153, 120, 38);
 		contenedor_registro.add(btnGuardar);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -283,42 +306,53 @@ public class MantenimientoEvaluadores extends JFrame {
 		
 							}else{
 								
-								if(pass1.equals(pass2)){
-									
-									//Guardar Evaluador
-									evaluador=new Evaluador(nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
-									int resultado=evaluador.guardar();		
-									limpiar();
-									
-									if (resultado>0){
-										JOptionPane.showMessageDialog(null,"Evaluador guardado exitosamente. ");
-										try {
-											cargarTabla();
-										} catch (SQLException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
+								if(validarEmail(email)){
+									if(pass1.equals(pass2)){
+										
+										
+											
+										
+										//Guardar Evaluador
+										evaluador=new Evaluador(nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
+										int resultado=evaluador.guardar();		
+										limpiar();
+										
+										if (resultado>0){
+											JOptionPane.showMessageDialog(null,"Evaluador guardado exitosamente. ");
+											try {
+												cargarTabla();
+											} catch (SQLException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+											
+											
+										}else{
+											JOptionPane.showMessageDialog(null,"No se pudo guardar, intente usar otro email.");
+											txt_email.requestFocus();
+											txt_email.setText("");
+											txt_password.setText("");
+											txt_passwordR.setText("");
 										}
 										
 										
+										
 									}else{
-										JOptionPane.showMessageDialog(null,"No se pudo guardar, intente usar otro email.");
-										txt_email.requestFocus();
-										txt_email.setText("");
+										
+										JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+										txt_password.requestFocus();
 										txt_password.setText("");
 										txt_passwordR.setText("");
 									}
-									
-									
 								}else{
-									
-									JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
-									txt_password.requestFocus();
+									txt_email.setText("");
 									txt_password.setText("");
 									txt_passwordR.setText("");
+									txt_email.requestFocus();
 								}
 							}
 						}else{
-							JOptionPane.showMessageDialog(null,"El username debe tener al menos 6 caracteres.");
+							JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
 							txt_email.requestFocus();
 							txt_email.setText("");
 							txt_password.setText("");
@@ -346,7 +380,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
 		panel_6.setBackground(new Color(223, 223, 233));
-		panel_6.setBounds(31, 211, 422, 27);
+		panel_6.setBounds(24, 86, 422, 27);
 		contenedor_registro.add(panel_6);
 		
 		JLabel lblIndiqueLa = new JLabel("Dirección:");
@@ -364,7 +398,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(31, 430, 422, 27);
+		panel_7.setBounds(476, 121, 378, 27);
 		contenedor_registro.add(panel_7);
 		
 		JLabel lblIndiqueElCargo = new JLabel("Cargo que ocupa:");
@@ -376,13 +410,13 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_cargo.setColumns(10);
 		txt_cargo.setBorder(null);
 		txt_cargo.setBackground(new Color(223, 223, 233));
-		txt_cargo.setBounds(147, 3, 263, 20);
+		txt_cargo.setBounds(147, 3, 219, 20);
 		panel_7.add(txt_cargo);
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setLayout(null);
 		panel_8.setBackground(new Color(223, 223, 233));
-		panel_8.setBounds(31, 317, 422, 27);
+		panel_8.setBounds(885, 82, 404, 27);
 		contenedor_registro.add(panel_8);
 		
 		JLabel lblIndiqueLaProfesin = new JLabel("Indique la profesión:");
@@ -394,13 +428,13 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_profesion.setColumns(10);
 		txt_profesion.setBorder(null);
 		txt_profesion.setBackground(new Color(223, 223, 233));
-		txt_profesion.setBounds(172, 3, 238, 20);
+		txt_profesion.setBounds(174, 3, 202, 20);
 		panel_8.add(txt_profesion);
 		
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
 		panel_9.setBackground(new Color(223, 223, 233));
-		panel_9.setBounds(31, 265, 422, 27);
+		panel_9.setBounds(476, 82, 378, 27);
 		contenedor_registro.add(panel_9);
 		
 		JLabel lblTelfono = new JLabel("Teléfono:");
@@ -409,16 +443,29 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_9.add(lblTelfono);
 		
 		txt_telefono = new JTextField();
+		txt_telefono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				  
+					char c=e.getKeyChar(); 		               
+		          if(!Character.isDigit(e.getKeyChar()) && !Character.isISOControl(e.getKeyChar()))
+		          {
+		               Toolkit.getDefaultToolkit().beep();
+		               e.consume();
+		               JOptionPane.showMessageDialog(null,"Este campo solo acepta números"); 
+		           }
+			}
+		});
 		txt_telefono.setColumns(10);
 		txt_telefono.setBorder(null);
 		txt_telefono.setBackground(new Color(223, 223, 233));
-		txt_telefono.setBounds(90, 3, 320, 20);
+		txt_telefono.setBounds(90, 3, 276, 20);
 		panel_9.add(txt_telefono);
 		
 		JPanel panel_10 = new JPanel();
 		panel_10.setLayout(null);
 		panel_10.setBackground(new Color(223, 223, 233));
-		panel_10.setBounds(31, 376, 422, 27);
+		panel_10.setBounds(24, 125, 422, 27);
 		contenedor_registro.add(panel_10);
 		
 		JLabel lblEmpresa = new JLabel("Empresa:");
@@ -433,7 +480,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_empresa.setBounds(89, 3, 321, 20);
 		panel_10.add(txt_empresa);
 		
-		btnActualizar = new JButton("  Actualizar");
+		btnActualizar = new JButton("Actualizar");
 		btnActualizar.setToolTipText("Debe seleccionar un evaluador para poder actualizar");
 		btnActualizar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/update.png")));
 		btnActualizar.addMouseListener(new MouseAdapter() {
@@ -499,48 +546,51 @@ public class MantenimientoEvaluadores extends JFrame {
 					
 					if (email.length()>6){
 						
-					
-						if(pass1.length()<6){
-							JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
-							txt_password.setText("");
-							txt_passwordR.setText("");
-							txt_password.requestFocus();
-	
-						}else{
-							
-							if(pass1.equals(pass2)){
+						if(validarEmail(email)){
+							if(pass1.length()<6){
+								JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
+								txt_password.setText("");
+								txt_passwordR.setText("");
+								txt_password.requestFocus();
+		
+							}else{
 								
-								//Guardar Evaluador
-								evaluador=new Evaluador(id_evaluador,nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
-								int resultado=evaluador.actualizar();	
-								limpiar();
-								
-								if (resultado>0){
-									JOptionPane.showMessageDialog(null,"Evaluador actualizado exitosamente. ");
-									try {
-										cargarTabla();
-									} catch (SQLException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+								if(pass1.equals(pass2)){
+									
+									//Guardar Evaluador
+									evaluador=new Evaluador(id_evaluador,nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
+									int resultado=evaluador.actualizar();	
+									limpiar();
+									
+									if (resultado>0){
+										JOptionPane.showMessageDialog(null,"Evaluador actualizado exitosamente. ");
+										try {
+											cargarTabla();
+										} catch (SQLException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										
+										
+									}else{
+										JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
+										txt_email.requestFocus();
+										txt_email.setText("");
+										txt_password.setText("");
+										txt_passwordR.setText("");
 									}
 									
 									
 								}else{
-									JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
-									txt_email.requestFocus();
-									txt_email.setText("");
+									
+									JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+									txt_password.requestFocus();
 									txt_password.setText("");
 									txt_passwordR.setText("");
 								}
-								
-								
-							}else{
-								
-								JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
-								txt_password.requestFocus();
-								txt_password.setText("");
-								txt_passwordR.setText("");
 							}
+						}else{
+							txt_email.requestFocus();
 						}
 					}else{
 						JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
@@ -558,38 +608,38 @@ public class MantenimientoEvaluadores extends JFrame {
 		});
 		btnActualizar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnActualizar.setBackground(SystemColor.controlHighlight);
-		btnActualizar.setBounds(141, 575, 139, 38);
+		btnActualizar.setBounds(1008, 153, 143, 38);
 		contenedor_registro.add(btnActualizar);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(478, 12, 367, 62);
+		panel.setBounds(478, 12, 397, 62);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		panel.setBackground(new Color(223, 223, 233));
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/user.png")));
-		label_1.setBounds(12, 4, 50, 54);
+		label_1.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/usuarios.png")));
+		label_1.setBounds(23, 0, 72, 58);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("Expert System of Heuristic Evaluation");
 		label_2.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_2.setBounds(74, 12, 278, 15);
+		label_2.setBounds(107, 12, 278, 15);
 		panel.add(label_2);
 		
 		JLabel lblRegistro = new JLabel("Mantenimiento de Evaluadores");
 		lblRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
-		lblRegistro.setBounds(74, 31, 278, 27);
+		lblRegistro.setBounds(107, 31, 278, 27);
 		panel.add(lblRegistro);
 		
 		JPanel panel_11 = new JPanel();
 		panel_11.setBorder(new TitledBorder(null, "Evaluadores Registrados", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_11.setBounds(536, 94, 788, 450);
+		panel_11.setBounds(12, 337, 1326, 385);
 		contentPane.add(panel_11);
 		panel_11.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 34, 738, 392);
+		scrollPane.setBounds(24, 24, 1290, 349);
 		panel_11.add(scrollPane);
 		
 		tbl_evaluadores = new JTable();
@@ -607,8 +657,8 @@ public class MantenimientoEvaluadores extends JFrame {
 				txt_profesion.setText(tbl_evaluadores.getValueAt(indice,6).toString());
 				txt_empresa.setText(tbl_evaluadores.getValueAt(indice,7).toString());
 				txt_cargo.setText(tbl_evaluadores.getValueAt(indice,8).toString());
-				txt_password.setText(tbl_evaluadores.getValueAt(indice,9).toString());
-				txt_passwordR.setText(tbl_evaluadores.getValueAt(indice,9).toString());
+				txt_password.setText(tbl_evaluadores.getValueAt(indice,10).toString());
+				txt_passwordR.setText(tbl_evaluadores.getValueAt(indice,10).toString());
 				id_evaluador=Integer.parseInt(tbl_evaluadores.getValueAt(indice,0).toString());
 				btnActualizar.setEnabled(true);
 				btnGuardar.setEnabled(false);
@@ -711,11 +761,19 @@ public class MantenimientoEvaluadores extends JFrame {
 		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
 		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
 		tbl_evaluadores.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(120);
+
 		
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(120);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(200);
 		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(200);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(7).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(8).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(9).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(10).setPreferredWidth(150);
+		
 		tbl_evaluadores.getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_evaluadores.getColumnModel().getColumn(0).setMinWidth(0);
 		tbl_evaluadores.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -741,6 +799,35 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_passwordR.setText("");	
 		btnActualizar.setEnabled(false);
 		btnGuardar.setEnabled(true);
+		txt_apellido.requestFocus();
 		
 	}
+	
+	public static void validarSoloLetras(KeyEvent e){
+		
+		char c=e.getKeyChar(); 		
+		
+        if(!Character.isLetter(c) && !Character.isISOControl(c) && !Character.isSpace(c))
+        {
+             Toolkit.getDefaultToolkit().beep();
+             e.consume();
+             JOptionPane.showMessageDialog(null,"Este campo solo acepta letras"); 
+         }
+		
+
+		
+	}
+	
+	public boolean validarEmail(String email){
+		
+		  Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	       Matcher mat = pat.matcher(email);
+	       if(mat.find()){
+	          return true;
+	       }else{
+	          JOptionPane.showMessageDialog(null,"Formato de email incorrecto", "Advertencia",JOptionPane.ERROR_MESSAGE);
+	          return false;
+	     }
+	}
+	
 }

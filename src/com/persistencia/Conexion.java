@@ -47,8 +47,9 @@ public class Conexion {
 			
 		} catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, ex, "Error2 en la Conexión con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se podrá acceder a la información del sistema debido a que la aplicación ya está abierta", "ERROR AL CONECTARSE CON LA BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
             conexion=null;
+            
         }
         catch(Exception ex)
         {

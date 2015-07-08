@@ -161,8 +161,9 @@ public class PrincipalEvaluador extends JFrame {
 		JMenuItem mntmInformes = new JMenuItem(" Informes");
 		mntmInformes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InformesEvaluador info=new InformesEvaluador();
-				info.show();
+				InformesEvaluador informe=new InformesEvaluador();
+				informe.show();
+
 			}
 		});
 		mnEvaluaciones.add(mntmInformes);

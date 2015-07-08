@@ -116,7 +116,7 @@ public class InformesEvaluador extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID","SITIO", "URL", "NAVEGADOR","VERSION", "FECHA"
+				"ID","SITIO", "URL", "NAVEGADOR","VERSION", "FECHA","EVALUADOR"
 			}
 		));
 		scrollPane.setViewportView(tbl_evaluacionesFinalizadas);

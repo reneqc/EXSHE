@@ -90,9 +90,9 @@ public class AdministracionSubHeuristicos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel contenedor_registro = new JPanel();
-		contenedor_registro.setBorder(new TitledBorder(null, "Registro de Heurísticos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		contenedor_registro.setBorder(new TitledBorder(null, "Registro de Sub Heurísticos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		contenedor_registro.setToolTipText("Registro de  Heurísticos");
-		contenedor_registro.setBounds(12, 86, 1326, 249);
+		contenedor_registro.setBounds(12, 99, 1326, 197);
 		
 		contentPane.add(contenedor_registro);
 		contenedor_registro.setLayout(null);
@@ -112,7 +112,7 @@ public class AdministracionSubHeuristicos extends JFrame {
 		txt_criterio.setColumns(10);
 		txt_criterio.setBorder(null);
 		txt_criterio.setBackground(new Color(223, 223, 233));
-		txt_criterio.setBounds(114, 3, 1176, 20);
+		txt_criterio.setBounds(73, 3, 1217, 20);
 		panel_1.add(txt_criterio);
 		
 		JPanel panel_2 = new JPanel();
@@ -130,8 +130,9 @@ public class AdministracionSubHeuristicos extends JFrame {
 		txt_heuristicos.setBounds(191, 0, 528, 24);
 		panel_2.add(txt_heuristicos);
 		
-		JButton button = new JButton("  Guardar");
-		button.addActionListener(new ActionListener() {
+		JButton btnGuardar = new JButton("  Guardar");
+		btnGuardar.setIcon(new ImageIcon(AdministracionSubHeuristicos.class.getResource("/img/save.png")));
+		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String criterio=txt_criterio.getText().toString();
@@ -139,26 +140,39 @@ public class AdministracionSubHeuristicos extends JFrame {
 				
 				String heuristicoAuxiliar=txt_heuristicos.getSelectedItem().toString();
 				
-				String[] id_heuristicoAux=heuristicoAuxiliar.split(":");
 				
 				
-				int id=Integer.parseInt(id_heuristicoAux[0]);
 				
-				//JOptionPane.showMessageDialog(null,criterio+" tipo: "+tipo+" id: "+id); 
-				SubHeuristico subHeuristico=new SubHeuristico(criterio, tipo, id);
-				
-				if(subHeuristico.guardar()>0){
-					JOptionPane.showMessageDialog(null,"SubHeurístico guardado Exitosamente");	
-					limpiar();
-					try {
-						cargarTabla();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+				if(criterio.equals("") || tipo.equals("Por favor seleccione una opción")||heuristicoAuxiliar.equals("Por favor seleccione una opción")){
+					
+					
+					JOptionPane.showMessageDialog(null, "Por favor complete los campos o seleccione la información requerida","Advertencia", JOptionPane.WARNING_MESSAGE);
+					
+					if(criterio.equals("")){
+						txt_criterio.requestFocus();
 					}
-							
+					
+					
 				}else{
-					JOptionPane.showMessageDialog(null,"Error al guardar el subheurístico");						
+					String[] id_heuristicoAux=heuristicoAuxiliar.split(":");
+					
+					
+					int id=Integer.parseInt(id_heuristicoAux[0]);
+					SubHeuristico subHeuristico=new SubHeuristico(criterio, tipo, id);
+					
+					if(subHeuristico.guardar()>0){
+						JOptionPane.showMessageDialog(null,"SubHeurístico guardado Exitosamente");	
+						limpiar();
+						try {
+							cargarTabla();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+								
+					}else{
+						JOptionPane.showMessageDialog(null,"Error al guardar el subheurístico");						
+					}
 				}
 				
 				
@@ -169,48 +183,24 @@ public class AdministracionSubHeuristicos extends JFrame {
 				
 			}
 		});
-		button.setBorder(UIManager.getBorder("CheckBox.border"));
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(1180, 199, 134, 38);
-		contenedor_registro.add(button);
+		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnGuardar.setBackground(SystemColor.controlHighlight);
+		btnGuardar.setBounds(1180, 144, 134, 38);
+		contenedor_registro.add(btnGuardar);
 		
-		JButton button_1 = new JButton("Limpiar");
-		button_1.setFocusable(false);
-		button_1.setBorder(UIManager.getBorder("CheckBox.border"));
-		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(12, 197, 109, 40);
-		contenedor_registro.add(button_1);
-		
-		JButton btnActualizar = new JButton("  Actualizar");
-		btnActualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-				/*
-				String nombre=txt_nombre.getText().toString();
-				String descripcion=txt_descripcion.getText().toString();
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				
-				Heuristico heuristico=new Heuristico(id_heuristico,nombre,descripcion);
-				
-				if(heuristico.actualizar()>0){
-					JOptionPane.showMessageDialog(null, "Heurístico actualizado exitosamente");
-					try {
-						cargarTabla();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Error al actualizar");
-				}
-				
-				*/
-				
+				limpiar();
 			}
 		});
-		btnActualizar.setBorder(UIManager.getBorder("CheckBox.border"));
-		btnActualizar.setBackground(SystemColor.controlHighlight);
-		btnActualizar.setBounds(1022, 199, 134, 38);
-		contenedor_registro.add(btnActualizar);
+		btnLimpiar.setIcon(new ImageIcon(AdministracionSubHeuristicos.class.getResource("/img/clear.png")));
+		btnLimpiar.setFocusable(false);
+		btnLimpiar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnLimpiar.setBackground(SystemColor.controlHighlight);
+		btnLimpiar.setBounds(852, 143, 109, 40);
+		contenedor_registro.add(btnLimpiar);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
@@ -224,39 +214,57 @@ public class AdministracionSubHeuristicos extends JFrame {
 		panel_3.add(lblTipo);
 		
 		txt_tipo = new JComboBox();
-		txt_tipo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción", "Numérico", "Textual"}));
+		txt_tipo.setModel(new DefaultComboBoxModel(new String[] {"Por favor seleccione una opción", "Numérico", "Textual"}));
 		txt_tipo.setBounds(66, 0, 268, 24);
 		panel_3.add(txt_tipo);
 		
+		JButton btnRefrescar = new JButton("Refrescar Datos");
+		btnRefrescar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					cargarHeuristicos();
+					limpiar();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnRefrescar.setIcon(new ImageIcon(AdministracionSubHeuristicos.class.getResource("/img/refresh.png")));
+		btnRefrescar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnRefrescar.setBackground(SystemColor.controlHighlight);
+		btnRefrescar.setBounds(973, 144, 176, 38);
+		contenedor_registro.add(btnRefrescar);
+		
 		JPanel panel = new JPanel();
-		panel.setBounds(478, 12, 367, 62);
+		panel.setBounds(478, 12, 404, 74);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		panel.setBackground(new Color(223, 223, 233));
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(AdministracionSubHeuristicos.class.getResource("/img/user.png")));
-		label_1.setBounds(12, 4, 50, 54);
+		label_1.setIcon(new ImageIcon(AdministracionSubHeuristicos.class.getResource("/img/subheuristicos.png")));
+		label_1.setBounds(22, 0, 90, 82);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("Expert System of Heuristic Evaluation");
 		label_2.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_2.setBounds(74, 12, 278, 15);
+		label_2.setBounds(114, 12, 278, 15);
 		panel.add(label_2);
 		
 		JLabel lblRegistro = new JLabel("Sub Heurísticos");
 		lblRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
-		lblRegistro.setBounds(74, 31, 278, 27);
+		lblRegistro.setBounds(114, 35, 278, 27);
 		panel.add(lblRegistro);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBorder(new TitledBorder(null, "Evaluadores Registrados", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_11.setBounds(12, 353, 1326, 369);
+		panel_11.setBorder(new TitledBorder(null, "Sub heurísticos existentes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_11.setBounds(12, 308, 1326, 414);
 		contentPane.add(panel_11);
 		panel_11.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 47, 1289, 310);
+		scrollPane.setBounds(12, 32, 1302, 370);
 		panel_11.add(scrollPane);
 		
 		tbl_heuristicos = new JTable();
@@ -265,10 +273,13 @@ public class AdministracionSubHeuristicos extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				/*
 				int indice=tbl_heuristicos.getSelectedRow();
 				//txt_nombre.setText(tbl_heuristicos.getValueAt(indice,1).toString());
 				txt_criterio.setText(tbl_heuristicos.getValueAt(indice,2).toString());
 				id_heuristico=Integer.parseInt(tbl_heuristicos.getValueAt(indice,0).toString());
+				
+				*/
 				
 			
 			}

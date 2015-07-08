@@ -43,7 +43,7 @@ public class AdministracionHeuristicos extends JFrame {
 	Evaluador evaluador;
 	static AdministracionHeuristicos frame = new AdministracionHeuristicos();
 	private JTable tbl_heuristicos;
-	
+	final JButton btnActualizar,btnGuardar;
 	private int id_heuristico=-1;
 
 	/**
@@ -91,7 +91,7 @@ public class AdministracionHeuristicos extends JFrame {
 		JPanel contenedor_registro = new JPanel();
 		contenedor_registro.setBorder(new TitledBorder(null, "Registro de Heurísticos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		contenedor_registro.setToolTipText("Registro de  Heurísticos");
-		contenedor_registro.setBounds(12, 86, 1326, 155);
+		contenedor_registro.setBounds(12, 112, 1326, 155);
 		
 		contentPane.add(contenedor_registro);
 		contenedor_registro.setLayout(null);
@@ -132,96 +132,160 @@ public class AdministracionHeuristicos extends JFrame {
 		txt_nombre.setBounds(189, 3, 1101, 20);
 		panel_2.add(txt_nombre);
 		
-		JButton button = new JButton("  Guardar");
-		button.addActionListener(new ActionListener() {
+	    btnGuardar = new JButton("  Guardar");
+		btnGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				resaltar(btnGuardar);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				noResaltar(btnGuardar);
+			}
+		});
+		btnGuardar.setIcon(new ImageIcon(AdministracionHeuristicos.class.getResource("/img/save.png")));
+		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre=txt_nombre.getText().toString();
 				String descripcion=txt_descripcion.getText().toString();
 				
-				Heuristico heuristico=new Heuristico(nombre,descripcion);
-				
-				if(heuristico.guardar()>0){
-					JOptionPane.showMessageDialog(null, "Heurístico guardado exitosamente");
-					try {
-						cargarTabla();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				if(nombre.equals("") || descripcion.equals("")){
+					JOptionPane.showMessageDialog(null, "Por favor complete los campos");
+					txt_descripcion.requestFocus();
+					txt_nombre.requestFocus();
 				}else{
-					JOptionPane.showMessageDialog(null, "Error al guardar");
+				
+					Heuristico heuristico=new Heuristico(nombre,descripcion);
+					
+					if(heuristico.guardar()>0){
+						JOptionPane.showMessageDialog(null, "Heurístico guardado exitosamente");
+						limpiar();
+						try {
+							cargarTabla();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Error al guardar");
+					}
 				}
 			}
 		});
-		button.setBorder(UIManager.getBorder("CheckBox.border"));
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(1167, 105, 134, 38);
-		contenedor_registro.add(button);
+		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnGuardar.setBackground(SystemColor.controlHighlight);
+		btnGuardar.setBounds(1167, 105, 134, 38);
+		contenedor_registro.add(btnGuardar);
 		
-		JButton button_1 = new JButton("Limpiar");
-		button_1.setFocusable(false);
-		button_1.setBorder(UIManager.getBorder("CheckBox.border"));
-		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(12, 103, 109, 40);
-		contenedor_registro.add(button_1);
+		final JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				resaltar(btnLimpiar);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				noResaltar(btnLimpiar);
+			}
+		});
+		btnLimpiar.setIcon(new ImageIcon(AdministracionHeuristicos.class.getResource("/img/clear.png")));
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiar();
+			}
+		});
+		btnLimpiar.setFocusable(false);
+		btnLimpiar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnLimpiar.setBackground(SystemColor.controlHighlight);
+		btnLimpiar.setBounds(854, 105, 109, 38);
+		contenedor_registro.add(btnLimpiar);
 		
-		JButton btnActualizar = new JButton("  Actualizar");
+		btnActualizar = new JButton("  Actualizar");
+		btnActualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				resaltar(btnActualizar);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				noResaltar(btnActualizar);
+			}
+		});
+		btnActualizar.setIcon(new ImageIcon(AdministracionHeuristicos.class.getResource("/img/update.png")));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String nombre=txt_nombre.getText().toString();
 				String descripcion=txt_descripcion.getText().toString();
 				
-				Heuristico heuristico=new Heuristico(id_heuristico,nombre,descripcion);
 				
-				if(heuristico.actualizar()>0){
-					JOptionPane.showMessageDialog(null, "Heurístico actualizado exitosamente");
-					try {
-						cargarTabla();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				if(id_heuristico==-1){
+					JOptionPane.showMessageDialog(null, "Por favor seleccione el heurístico a editar");
 				}else{
-					JOptionPane.showMessageDialog(null, "Error al actualizar");
+				
+					if(nombre.equals("") || descripcion.equals("")){
+						JOptionPane.showMessageDialog(null, "Por favor complete los campos");
+						txt_descripcion.requestFocus();
+						txt_nombre.requestFocus();
+					}else{
+					
+						Heuristico heuristico=new Heuristico(id_heuristico,nombre,descripcion);
+						
+						if(heuristico.actualizar()>0){
+							JOptionPane.showMessageDialog(null, "Heurístico actualizado exitosamente");
+							id_heuristico=-1;
+							btnActualizar.setEnabled(false);
+							btnGuardar.setEnabled(true);
+							limpiar();
+							try {
+								cargarTabla();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, "Error al actualizar");
+						}
+					}
 				}
+				
 				
 			}
 		});
 		btnActualizar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnActualizar.setBackground(SystemColor.controlHighlight);
-		btnActualizar.setBounds(1009, 105, 134, 38);
+		btnActualizar.setBounds(990, 105, 153, 38);
 		contenedor_registro.add(btnActualizar);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(478, 12, 367, 62);
+		panel.setBounds(473, 12, 398, 88);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		panel.setBackground(new Color(223, 223, 233));
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(AdministracionHeuristicos.class.getResource("/img/user.png")));
-		label_1.setBounds(12, 4, 50, 54);
+		label_1.setIcon(new ImageIcon(AdministracionHeuristicos.class.getResource("/img/listado.png")));
+		label_1.setBounds(0, 0, 133, 74);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("Expert System of Heuristic Evaluation");
 		label_2.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_2.setBounds(74, 12, 278, 15);
+		label_2.setBounds(108, 12, 278, 15);
 		panel.add(label_2);
 		
-		JLabel lblRegistro = new JLabel("Heurísticos");
+		JLabel lblRegistro = new JLabel("Administración de Heurísticos");
 		lblRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
-		lblRegistro.setBounds(74, 31, 278, 27);
+		lblRegistro.setBounds(108, 39, 278, 27);
 		panel.add(lblRegistro);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBorder(new TitledBorder(null, "Evaluadores Registrados", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_11.setBounds(12, 272, 1326, 450);
+		panel_11.setBorder(new TitledBorder(null, "Heurísticos Existentes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_11.setBounds(12, 297, 1326, 437);
 		contentPane.add(panel_11);
 		panel_11.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 34, 1289, 392);
+		scrollPane.setBounds(25, 22, 1289, 392);
 		panel_11.add(scrollPane);
 		
 		tbl_heuristicos = new JTable();
@@ -234,6 +298,8 @@ public class AdministracionHeuristicos extends JFrame {
 				txt_nombre.setText(tbl_heuristicos.getValueAt(indice,1).toString());
 				txt_descripcion.setText(tbl_heuristicos.getValueAt(indice,2).toString());
 				id_heuristico=Integer.parseInt(tbl_heuristicos.getValueAt(indice,0).toString());
+				btnActualizar.setEnabled(true);
+				btnGuardar.setEnabled(false);
 				
 			
 			}
@@ -255,6 +321,7 @@ public class AdministracionHeuristicos extends JFrame {
 			e1.printStackTrace();
 		}
 		
+		btnActualizar.setEnabled(false);
 		
 	}
 	
@@ -325,5 +392,25 @@ public class AdministracionHeuristicos extends JFrame {
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
 		tcr.setHorizontalAlignment(SwingConstants.LEFT);
+	}
+	
+	
+	void limpiar(){
+		txt_descripcion.setText("");
+		txt_nombre.setText("");
+		id_heuristico=-1;
+		btnActualizar.setEnabled(false);
+		btnGuardar.setEnabled(true);
+		txt_nombre.requestFocus();
+	}
+	
+	public  void resaltar(JButton btn){
+		btn.setBackground(new Color(200,200,200));
+		
+	}
+	
+	public  void noResaltar(JButton btn){
+		btn.setBackground(new Color(230,230,230));
+		
 	}
 }

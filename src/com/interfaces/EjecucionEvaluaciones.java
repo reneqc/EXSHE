@@ -132,7 +132,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(null, "Ejecutar evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_8.setBounds(389, 104, 961, 618);
+		panel_8.setBounds(389, 104, 949, 618);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
@@ -158,12 +158,12 @@ public class EjecucionEvaluaciones extends JFrame {
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(482, 29, 467, 27);
+		panel_7.setBounds(482, 29, 454, 27);
 		panel_8.add(panel_7);
 		
 		JLabel lblUrlDelSitio = new JLabel("Url del Sitio:");
 		lblUrlDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblUrlDelSitio.setBounds(32, 5, 103, 15);
+		lblUrlDelSitio.setBounds(10, 5, 103, 15);
 		panel_7.add(lblUrlDelSitio);
 		
 		txt_url = new JTextField();
@@ -171,13 +171,13 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_url.setColumns(10);
 		txt_url.setBorder(null);
 		txt_url.setBackground(new Color(223, 223, 233));
-		txt_url.setBounds(131, 3, 324, 20);
+		txt_url.setBounds(106, 3, 336, 20);
 		panel_7.add(txt_url);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(482, 68, 467, 27);
+		panel_4.setBounds(482, 68, 454, 27);
 		panel_8.add(panel_4);
 		
 		JLabel lblVersinDelNavegador = new JLabel("Versión:");
@@ -214,12 +214,12 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		contenedor_calificaciones = new JPanel();
 		contenedor_calificaciones.setVisible(false);
-		contenedor_calificaciones.setBounds(12, 119, 937, 452);
+		contenedor_calificaciones.setBounds(12, 119, 925, 452);
 		panel_8.add(contenedor_calificaciones);
 		contenedor_calificaciones.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 261, 937, 42);
+		panel.setBounds(0, 261, 925, 42);
 		contenedor_calificaciones.add(panel);
 		panel.setLayout(null);
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
@@ -231,7 +231,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		panel.add(lbl_criterio);
 		
 		panel_descripcion = new JPanel();
-		panel_descripcion.setBounds(0, 161, 937, 42);
+		panel_descripcion.setBounds(0, 161, 925, 42);
 		contenedor_calificaciones.add(panel_descripcion);
 		panel_descripcion.setLayout(null);
 		panel_descripcion.setBackground(new Color(223, 223, 233));
@@ -253,7 +253,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		lblDescripcinDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
 		
 		panel_heuristicos = new JPanel();
-		panel_heuristicos.setBounds(0, 58, 937, 45);
+		panel_heuristicos.setBounds(0, 58, 925, 45);
 		contenedor_calificaciones.add(panel_heuristicos);
 		panel_heuristicos.setLayout(null);
 		panel_heuristicos.setBackground(new Color(223, 223, 233));
@@ -439,7 +439,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
 		panel_9.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_9.setBounds(0, 104, 387, 618);
+		panel_9.setBounds(12, 104, 375, 618);
 		contentPane.add(panel_9);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -450,7 +450,7 @@ public class EjecucionEvaluaciones extends JFrame {
 				
 			}
 		});
-		scrollPane.setBounds(12, 57, 363, 519);
+		scrollPane.setBounds(12, 57, 351, 549);
 		panel_9.add(scrollPane);
 		
 		tbl_evaluaciones = new JTable();
@@ -490,7 +490,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		scrollPane.setViewportView(tbl_evaluaciones);
 		
 		btnGuardar = new JButton("  Calificar");
-		btnGuardar.setBounds(245, 18, 130, 27);
+		btnGuardar.setBounds(233, 18, 130, 27);
 		panel_9.add(btnGuardar);
 		
 		btnGuardar.addActionListener(new ActionListener() {

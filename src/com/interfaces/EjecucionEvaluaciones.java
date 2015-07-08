@@ -275,7 +275,8 @@ public class EjecucionEvaluaciones extends JFrame {
 		panel_1.add(lblNombreDelHeurstico);
 		
 		btnAnterior = new JButton("Anterior");
-		btnAnterior.setBounds(0, 413, 113, 27);
+		btnAnterior.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/prev.png")));
+		btnAnterior.setBounds(12, 413, 131, 27);
 		contenedor_calificaciones.add(btnAnterior);
 		btnAnterior.addMouseListener(new MouseAdapter() {
 			@Override
@@ -312,7 +313,8 @@ public class EjecucionEvaluaciones extends JFrame {
 		btnAnterior.setBackground(SystemColor.controlHighlight);
 		
 		btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.setBounds(125, 413, 113, 27);
+		btnSiguiente.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/next.png")));
+		btnSiguiente.setBounds(155, 413, 136, 27);
 		contenedor_calificaciones.add(btnSiguiente);
 		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override
@@ -371,8 +373,9 @@ public class EjecucionEvaluaciones extends JFrame {
 		comboCalificacion.setBounds(0, 361, 238, 24);
 		contenedor_calificaciones.add(comboCalificacion);
 		
-		btnFinalizar = new JButton("Finalizar");
-		btnFinalizar.setBounds(250, 413, 113, 27);
+		btnFinalizar = new JButton("   Finalizar");
+		btnFinalizar.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/stop2.png")));
+		btnFinalizar.setBounds(516, 413, 136, 27);
 		contenedor_calificaciones.add(btnFinalizar);
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -426,6 +429,55 @@ public class EjecucionEvaluaciones extends JFrame {
 		});
 		btnFinalizar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnFinalizar.setBackground(SystemColor.controlHighlight);
+		
+		JButton btnGuardarSesin = new JButton("  Guardar Sesión");
+		btnGuardarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarCalificacion();
+				ResultSet pendientes;
+				
+				try {
+					pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
+					
+					if(pendientes.next()){
+						int i=0;
+						String criteriosPendientes="";
+						pendientes.beforeFirst();
+						while(pendientes.next()){
+							criteriosPendientes=criteriosPendientes+pendientes.getString(5)+"-";
+							i++;
+						}
+						contenedor_calificaciones.setVisible(false);
+						if(Evaluacion.cambiarEstadoAPendiete(id_evaluacion)>0){
+							JOptionPane.showMessageDialog(null,"Sesión guardada exitosamente, recuerde que tiene criterios pendientes de calificar");
+							cargarTabla();
+							tbl_evaluaciones.setEnabled(true);
+							limpiar();
+							btnGuardar.setEnabled(true);
+						}else{
+							JOptionPane.showMessageDialog(null,"Error al guardar la sesión");
+						}
+							
+						
+						
+						
+					}else{
+						
+						JOptionPane.showMessageDialog(null,"Todos los criterios ya han sido calificados, se recomienda que de clic en finalizar para visualizar el informe correspondiente a esta evaluación");
+
+						
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnGuardarSesin.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/puas3.png")));
+		btnGuardarSesin.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnGuardarSesin.setBackground(SystemColor.controlHighlight);
+		btnGuardarSesin.setBounds(330, 414, 174, 27);
+		contenedor_calificaciones.add(btnGuardarSesin);
 		btnFinalizar.setVisible(false);
 		btnSiguiente.setVisible(false);
 		

@@ -168,6 +168,21 @@ public class Evaluacion {
 		
 	}
 	
+	public static int cambiarEstadoAPendiete(int id_evaluacion){
+		
+		try {
+			Statement sentencia= (Statement) conex.createStatement();
+			String cadena="update evaluacion set finalizada=0 where id_evaluacion="+id_evaluacion;			
+			sentencia.execute(cadena);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+			return 0;
+		}
+		
+	}
+	
 	
 	public static ResultSet evaluacionesFinalizadasPorEvaluador(String email) throws SQLException{
 		

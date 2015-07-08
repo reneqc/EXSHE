@@ -68,7 +68,7 @@ public class AdministracionSubHeuristicos extends JFrame {
 	 */
 	public AdministracionSubHeuristicos() {
 		setResizable(false);
-		setTitle("Sub Heurísticos");
+		setTitle("EXSHE - ADMINISTRACIÓN DE SUB HEURÍSTICOS");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

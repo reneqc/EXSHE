@@ -67,7 +67,7 @@ public class AdministracionHeuristicos extends JFrame {
 	 */
 	public AdministracionHeuristicos() {
 		setResizable(false);
-		setTitle("EXSHE - REGISTRO");
+		setTitle("EXSHE - ADMINISTRACIÓN DE HEURISTICOS");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

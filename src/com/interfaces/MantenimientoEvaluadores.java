@@ -83,7 +83,7 @@ public class MantenimientoEvaluadores extends JFrame {
 	 */
 	public MantenimientoEvaluadores() {
 		setResizable(false);
-		setTitle("EXSHE - REGISTRO");
+		setTitle("EXSHE - MANTENIMIENTO DE EVALUADORES");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

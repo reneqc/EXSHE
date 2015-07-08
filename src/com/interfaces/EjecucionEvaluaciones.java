@@ -93,7 +93,7 @@ public class EjecucionEvaluaciones extends JFrame {
 	 * Create the frame.
 	 */
 	public EjecucionEvaluaciones() {
-		setTitle("EXSHE - EVALUACIONES");
+		setTitle("EXSHE - EJECUCIÓN DE EVALUACIONES");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

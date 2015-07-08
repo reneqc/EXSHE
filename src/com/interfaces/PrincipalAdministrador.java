@@ -78,7 +78,7 @@ public class PrincipalAdministrador extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalAdministrador() {
-		setTitle("EXSHE - VENTANA PRINCIPAL");
+		setTitle("EXSHE - VENTANA PRINCIPAL DE ADMINISTRACIÓN");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

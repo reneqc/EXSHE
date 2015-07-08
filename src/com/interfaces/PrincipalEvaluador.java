@@ -82,7 +82,7 @@ public class PrincipalEvaluador extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalEvaluador() {
-		setTitle("EXSHE - VENTANA PRINCIPAL");
+		setTitle("EXSHE - VENTANA PRINCIPAL DE EVALUACIÓN");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

@@ -64,6 +64,7 @@ public class InformesEvaluador extends JFrame {
 	 * Create the frame.
 	 */
 	public InformesEvaluador() {
+		setTitle("EXSHE - INFORMES");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

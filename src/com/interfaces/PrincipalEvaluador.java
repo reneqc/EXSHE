@@ -38,11 +38,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.persistencia.Evaluacion;
+import javax.swing.JToggleButton;
+import javax.swing.JSeparator;
 
 public class PrincipalEvaluador extends JFrame {
 
 	private JPanel contentPane;
-	JLabel lbl_evaluador = 	new JLabel("Evaluador conectado para evaluar");
+	JLabel lbl_evaluador = 	new JLabel("Evaluador conectado");
 	public static PrincipalEvaluador framePrincipal = new PrincipalEvaluador();
 	private JTextField txt_navegador;
 	private JTable tbl_proyectos;
@@ -197,25 +199,127 @@ public class PrincipalEvaluador extends JFrame {
 		menuBar.add(mnAyuda);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
-		lbl_evaluador.setBounds(187, 54, 222, 31);
+		lbl_evaluador.setBounds(180, 59, 222, 31);
 		panel.add(lbl_evaluador);
 		
 		JLabel lblEvaluador = new JLabel("Evaluador conectado:");
 		lblEvaluador.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
-		lblEvaluador.setBounds(35, 58, 151, 22);
+		lblEvaluador.setBounds(30, 63, 151, 22);
 		panel.add(lblEvaluador);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBounds(0, 34, 1600, 22);
+		panel_1.setBackground(new Color(229,229,229));
+		panel_1.setBounds(0, 34, 1600, 31);
 		panel.add(panel_1);
+		panel_1.setLayout(null);
 		
-		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 1600, 25);
-		panel_1.add(menuBar_1);
+		final JLabel label_1 = new JLabel("");
+		label_1.setToolTipText("Ventana de acceso");
+		label_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				  int n = JOptionPane.showConfirmDialog(
+				            null,
+				            "¿Está seguro que desea salir a la ventana de acceso?",
+				            "Mensaje de Confirmación",
+				            JOptionPane.YES_NO_OPTION);
+				  	
+				  		
+				        if(n==0){
+				        	Acceso a1=new Acceso();
+							a1.show();
+							a1.setExtendedState(MAXIMIZED_BOTH);
+							dispose();
+				        }
+				        else {
+				           //No
+				        }
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+			
+			}
+		});
+		label_1.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/home4.png")));
+		label_1.setBounds(39, 0, 24, 31);
+		panel_1.add(label_1);
 		
-		JMenu mnNewMenu = new JMenu("   ");
-		menuBar_1.add(mnNewMenu);
+		JLabel label_3 = new JLabel("");
+		label_3.setToolTipText("Ejecutar evaluaciones");
+		label_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EjecucionEvaluaciones ejecucion=new EjecucionEvaluaciones();
+				ejecucion.lbl_evaluador.setText(lbl_evaluador.getText());
+				
+				ejecucion.show();
+			}
+		});
+		label_3.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/play2.png")));
+		label_3.setBounds(90, 0, 24, 31);
+		panel_1.add(label_3);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setToolTipText("Ver informes");
+		label_4.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/informe1.png")));
+		label_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				InformesEvaluador informe=new InformesEvaluador();
+				informe.show();
+			}
+		});
+		label_4.setBounds(126, 0, 24, 31);
+		panel_1.add(label_4);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdministracionHeuristicos administracion=new AdministracionHeuristicos();
+				administracion.show();
+			}
+		});
+		label_5.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/nue.png")));
+		label_5.setToolTipText("Insertar Heurísticos");
+		label_5.setBounds(190, 0, 24, 31);
+		panel_1.add(label_5);
+		
+		JLabel label_6 = new JLabel("");
+		label_6.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/subheuristico2.png")));
+		label_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdministracionSubHeuristicos adminSub=new AdministracionSubHeuristicos();
+				adminSub.show();
+			}
+		});
+		label_6.setToolTipText("Insertar subheurísticos");
+		label_6.setBounds(238, 0, 24, 31);
+		panel_1.add(label_6);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBounds(162, 0, 2, 31);
+		panel_1.add(panel_9);
+		
+		JPanel panel_11 = new JPanel();
+		panel_11.setBounds(70, 0, 2, 31);
+		panel_1.add(panel_11);
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBounds(280, 0, 2, 31);
+		panel_1.add(panel_12);
+		
+		JLabel label_7 = new JLabel("");
+		label_7.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/help1.png")));
+		label_7.setToolTipText("Ayuda");
+		label_7.setBounds(301, 0, 24, 31);
+		panel_1.add(label_7);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -689,5 +793,15 @@ public void cargarTablaEvaluaciones() {
 		tbl_evaluaciones.getColumnModel().getColumn(0).setCellRenderer(tcr);
 				
 		tbl_evaluaciones.getColumnModel().getColumn(2).setCellRenderer(tcr);
+	}
+	
+	public  void resaltarLabel(JLabel lbl){
+		lbl.setBackground(new Color(200,200,200));
+		
+	}
+	
+	public  void noResaltarLabel(JLabel lbl){
+		lbl.setBackground(new Color(230,230,230));
+		
 	}
 }

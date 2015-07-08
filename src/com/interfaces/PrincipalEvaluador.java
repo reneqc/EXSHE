@@ -158,6 +158,15 @@ public class PrincipalEvaluador extends JFrame {
 		});
 		mnEvaluaciones.add(mntmNewMenuItem_9);
 		
+		JMenuItem mntmInformes = new JMenuItem(" Informes");
+		mntmInformes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InformesEvaluador info=new InformesEvaluador();
+				info.show();
+			}
+		});
+		mnEvaluaciones.add(mntmInformes);
+		
 		JMenu mnHeursticos = new JMenu("    Heurísticos    ");
 		menuBar.add(mnHeursticos);
 		

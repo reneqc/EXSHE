@@ -574,7 +574,7 @@ public class EjecucionEvaluaciones extends JFrame {
 	
 	public void cerrarPrincipal(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"Esta seguro que desea cerrar la Ventana de Evaluaciones","Mensaje de Confirmación",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la ventana de ejecución de evaluaciones?","Mensaje de Confirmación",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)
@@ -594,8 +594,8 @@ public class EjecucionEvaluaciones extends JFrame {
 	public void cargarTabla() {
 		
 		//JOptionPane.showMessageDialog(null,Acceso.conectado());
-		//String email=Acceso.conectado();
-		String email="perez@gmail.com";
+		String email=Acceso.conectado();
+		//String email="perez@gmail.com";
 		ResultSet rsTabla=null;
 		try {
 			rsTabla = Evaluacion.consultarEvaluacionesEvaluador(email);

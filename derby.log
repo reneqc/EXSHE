@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Tue Jul 07 22:57:27 ECT 2015:
- Iniciando instancia a816c00e-014e-6bcf-a347-000004d344c0 de Derby, versión The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): 
-en el directorio de base de datos /home/rene/desktop-workspace/EXSHE/bdd_exshe con el cargador de clases sun.misc.Launcher$AppClassLoader@7451b0af
+Wed Jul 08 09:39:17 ECT 2015:
+ Iniciando instancia a816c00e-014e-6e1b-4212-000004c58328 de Derby, versión The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): 
+en el directorio de base de datos /home/rene/desktop-workspace/EXSHE/bdd_exshe con el cargador de clases sun.misc.Launcher$AppClassLoader@ecfeb11
 Cargado desde file:/home/rene/Recursos%20Desktop/db-derby-10.11.1.1-bin/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_79-b14

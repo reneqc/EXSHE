@@ -95,7 +95,7 @@ public class PrincipalAdministrador extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(-1, 0, 1600, 77);
+		panel.setBounds(-1, 0, 1600, 93);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -161,30 +161,106 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnAyuda);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
-		lbl_evaluador.setBounds(170, 58, 222, 22);
+		lbl_evaluador.setBounds(144, 71, 222, 22);
 		panel.add(lbl_evaluador);
 		
 		JLabel lblEvaluador = new JLabel("Usuario conectado:");
 		lblEvaluador.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
-		lblEvaluador.setBounds(35, 58, 137, 22);
+		lblEvaluador.setBounds(10, 71, 137, 22);
 		panel.add(lblEvaluador);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
-		panel_1.setBounds(0, 34, 1600, 22);
+		panel_1.setBackground(new Color(229, 229, 229));
+		panel_1.setBounds(0, 34, 1600, 31);
 		panel.add(panel_1);
 		
-		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 1600, 25);
-		panel_1.add(menuBar_1);
+		JLabel label = new JLabel("");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+
+				  int n = JOptionPane.showConfirmDialog(
+				            null,
+				            "¿Está seguro que desea salir a la ventana de acceso?",
+				            "Mensaje de Confirmación",
+				            JOptionPane.YES_NO_OPTION);
+				  	
+				  		
+				        if(n==0){
+				        	Acceso a1=new Acceso();
+							a1.show();
+							a1.setExtendedState(MAXIMIZED_BOTH);
+							dispose();
+				        }
+				        else {
+				           //No
+				        }
+			}
+		});
+		label.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/home4.png")));
+		label.setToolTipText("Ventana de acceso");
+		label.setBounds(39, 0, 24, 31);
+		panel_1.add(label);
 		
-		JMenu mnNewMenu = new JMenu("   ");
-		menuBar_1.add(mnNewMenu);
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/proyecto3.png")));
+		label_1.setToolTipText("Ejecutar evaluaciones");
+		label_1.setBounds(90, 0, 24, 31);
+		panel_1.add(label_1);
+		
+		JLabel label_4 = new JLabel("");
+		label_4.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluaciones1.png")));
+		label_4.setToolTipText("Insertar Heurísticos");
+		label_4.setBounds(146, 0, 24, 31);
+		panel_1.add(label_4);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MantenimientoEvaluadores registro1=new MantenimientoEvaluadores();
+				registro1.show();
+			}
+		});
+		label_5.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluadores2.png")));
+		label_5.setToolTipText("Insertar subheurísticos");
+		label_5.setBounds(242, 0, 24, 31);
+		panel_1.add(label_5);
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBounds(126, 0, 2, 31);
+		panel_1.add(panel_12);
+		
+		JPanel panel_13 = new JPanel();
+		panel_13.setBounds(70, 0, 2, 31);
+		panel_1.add(panel_13);
+		
+		JPanel panel_14 = new JPanel();
+		panel_14.setBounds(284, 0, 2, 31);
+		panel_1.add(panel_14);
+		
+		JLabel label_6 = new JLabel("");
+		label_6.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
+		label_6.setToolTipText("Ayuda");
+		label_6.setBounds(304, 0, 24, 31);
+		panel_1.add(label_6);
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setBounds(222, 0, 2, 31);
+		panel_1.add(panel_15);
+		
+		JLabel label_7 = new JLabel("");
+		label_7.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/pendientes2.png")));
+		label_7.setToolTipText("Insertar Heurísticos");
+		label_7.setBounds(182, 0, 24, 31);
+		panel_1.add(label_7);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
-		panel_2.setBounds(481, 89, 386, 77);
+		panel_2.setBounds(481, 105, 386, 77);
 		contentPane.add(panel_2);
 		
 		JLabel lblLog = new JLabel("LOG");

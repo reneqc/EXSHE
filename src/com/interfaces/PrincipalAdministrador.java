@@ -111,7 +111,7 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
-		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
+		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
 		mntmAcceso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -141,114 +141,11 @@ public class PrincipalAdministrador extends JFrame {
 		JMenu mnEvaluaciones = new JMenu("  Proyectos");
 		menuBar.add(mnEvaluaciones);
 		
-		JMenu mnHeursticas = new JMenu("  Heurísticos  ");
-		menuBar.add(mnHeursticas);
-		mnHeursticas.addSeparator();
-		JMenuItem mntmA = new JMenuItem("1.   Aspectos Generales");
-		mntmA.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(1);				
-				h1.setVisible (true); 				
-			}
-		});
-		mnHeursticas.add(mntmA);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("2.   Identidad e Información");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(2);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("3.   Estructura y Navegación");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(3);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("4.   Rotulado");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(4);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_2);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("5.   Layout de la Página");
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(5);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_3);
-		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("6.   Entendibilidad y Facilidad en la Interacción");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(6);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_4);
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("7.   Control y Retroalimentacion");
-		mntmNewMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(7);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_5);
-		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("8.   Elementos Multimedia");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(8);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_6);
-		
-		JMenuItem mntmNewMenuItem_7= new JMenuItem("9.   Búsqueda");
-		mntmNewMenuItem_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(9);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_7);
-		
-		JMenuItem mntmNewMenuItem_8 = new JMenuItem("10. Ayuda");
-		mntmNewMenuItem_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Heuristicos h1 = new Heuristicos();
-				h1.consultar_por_numero(10);
-				h1.setVisible (true);
-			}
-		});
-		mnHeursticas.add(mntmNewMenuItem_8);
-		
 		JMenu mnEvaluadores = new JMenu("Evaluadores");		
 		menuBar.add(mnEvaluadores);
 		
 		JMenuItem mnuMantenimientoEvaluadores = new JMenuItem("Mantenimiento");
-		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.SHIFT_MASK));
+		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		mnuMantenimientoEvaluadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MantenimientoEvaluadores registro1=new MantenimientoEvaluadores();

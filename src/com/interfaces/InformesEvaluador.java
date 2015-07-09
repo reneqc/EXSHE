@@ -3,12 +3,21 @@ package com.interfaces;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,20 +25,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
+import com.persistencia.Conexion;
 import com.persistencia.Evaluacion;
-import javax.swing.JButton;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class InformesEvaluador extends JFrame {
 
@@ -254,10 +264,30 @@ public class InformesEvaluador extends JFrame {
 		
 		
 		if(id_evaluacion==-1){
+			
+			 
 			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar su respectivo informe");
 		}else{
 			
-			JOptionPane.showMessageDialog(null,"Generando Informe.....!");
+			 try{
+	               
+	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+	               
+	                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/reporteIndividualEvaluacion.jrxml");
+	                
+	                Map parametros = new HashMap();
+	                parametros.put("id_evaluacion",id_evaluacion);
+	                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+	                JasperViewer ventanaVisor=new JasperViewer(informe,false);
+	                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
+	                ventanaVisor.setVisible(true);
+	                
+	            
+	            }catch(Exception ex){
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+	                System.out.println(ex);
+	            }
+			  
 			
 		}
 		

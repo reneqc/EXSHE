@@ -88,7 +88,7 @@ public class Proyecto {
 	
 	public static ResultSet consultarEvaluadoresProyectos() throws SQLException{
 		Statement sentencia = (Statement) conex.createStatement();
-		String cadena = "SELECT detalle.id_detalle,proyecto.id_proyecto ,proyecto.nombreSitio, proyecto.urlSitio,evaluador.apellido, evaluador.nombre,  proyecto.fecha, evaluador.email, proyecto.tipoSitio FROM evaluador, detalle, proyecto WHERE evaluador.id_evaluador = detalle.id_evaluador AND proyecto.id_proyecto = detalle.id_proyecto ORDER BY proyecto.fecha DESC ";
+		String cadena = "SELECT detalle.id_detalle,proyecto.id_proyecto ,proyecto.nombreSitio, proyecto.urlSitio,evaluador.apellido, evaluador.nombre,  proyecto.fecha, evaluador.email, proyecto.tipoSitio FROM evaluador, detalle, proyecto WHERE evaluador.id_evaluador = detalle.id_evaluador AND proyecto.id_proyecto = detalle.id_proyecto ORDER BY proyecto.id_proyecto DESC ";
 		ResultSet rs = sentencia.executeQuery(cadena);
 		return rs;
 		

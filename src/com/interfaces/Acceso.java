@@ -14,6 +14,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +29,13 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
+import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
 
 public class Acceso extends JFrame {
@@ -268,6 +277,34 @@ public class Acceso extends JFrame {
 		btnAyuda.setBackground(SystemColor.controlHighlight);
 		btnAyuda.setBounds(221, 676, 127, 27);
 		contentPane.add(btnAyuda);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+	            try{
+	               
+	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+	               
+	                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/reporteEvaluador.jrxml");
+	                
+	                Map parametros = new HashMap();
+	                parametros.put("id",1);
+	                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+	                JasperViewer ventanaVisor=new JasperViewer(informe,false);
+	                ventanaVisor.setTitle("INFORME");
+	                ventanaVisor.setVisible(true);
+	                
+	            
+	            }catch(Exception ex){
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+	                System.out.println(ex);
+	            }
+				
+			}
+		});
+		btnNewButton.setBounds(12, 132, 117, 25);
+		contentPane.add(btnNewButton);
 		this.setLocationRelativeTo(null);
 		
 		//Conexion.obtenerConexion();

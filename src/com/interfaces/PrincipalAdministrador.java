@@ -7,10 +7,15 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -35,10 +40,15 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
+import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
 import com.persistencia.Proyecto;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class PrincipalAdministrador extends JFrame {
 
@@ -141,6 +151,62 @@ public class PrincipalAdministrador extends JFrame {
 		JMenu mnEvaluaciones = new JMenu("  Proyectos");
 		menuBar.add(mnEvaluaciones);
 		
+		JMenu mnEvaluaciones_1 = new JMenu("   Evaluaciones   ");
+		menuBar.add(mnEvaluaciones_1);
+		
+		JMenuItem mntmPendientes = new JMenuItem("Pendientes");
+		mntmPendientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 try{
+		               
+		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+		               
+		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesPendientes.jrxml");
+		                
+		                Map parametros = new HashMap();
+		                parametros.put("finalizada","0");
+		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
+		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
+		                ventanaVisor.setVisible(true);
+		                
+		            
+		            }catch(Exception ex){
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                System.out.println(ex);
+		            }
+			}
+		});
+		mnEvaluaciones_1.add(mntmPendientes);
+		
+		JMenuItem mntmFinalizadas = new JMenuItem("Finalizadas");
+		mntmFinalizadas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+
+				 try{
+		               
+		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+		               
+		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesFinalizadas.jrxml");
+		                
+		                Map parametros = new HashMap();
+		                parametros.put("finalizada","1");
+		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
+		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
+		                ventanaVisor.setVisible(true);
+		                
+		            
+		            }catch(Exception ex){
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                System.out.println(ex);
+		            }
+				
+			}
+		});
+		mnEvaluaciones_1.add(mntmFinalizadas);
+		
 		JMenu mnEvaluadores = new JMenu("Evaluadores");		
 		menuBar.add(mnEvaluadores);
 		
@@ -211,6 +277,32 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(label_1);
 		
 		JLabel label_4 = new JLabel("");
+		label_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+
+				 try{
+		               
+		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+		               
+		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesFinalizadas.jrxml");
+		                
+		                Map parametros = new HashMap();
+		                parametros.put("finalizada","1");
+		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
+		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
+		                ventanaVisor.setVisible(true);
+		                
+		            
+		            }catch(Exception ex){
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                System.out.println(ex);
+		            }
+				
+			}
+		});
 		label_4.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluaciones1.png")));
 		label_4.setToolTipText("Insertar Heurísticos");
 		label_4.setBounds(146, 0, 24, 31);
@@ -252,6 +344,31 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(panel_15);
 		
 		JLabel label_7 = new JLabel("");
+		label_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+
+				 try{
+		               
+		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+		               
+		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesPendientes.jrxml");
+		                
+		                Map parametros = new HashMap();
+		                parametros.put("finalizada","0");
+		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
+		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
+		                ventanaVisor.setVisible(true);
+		                
+		            
+		            }catch(Exception ex){
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                System.out.println(ex);
+		            }
+			}
+		});
 		label_7.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/pendientes2.png")));
 		label_7.setToolTipText("Insertar Heurísticos");
 		label_7.setBounds(182, 0, 24, 31);
@@ -690,8 +807,6 @@ public class PrincipalAdministrador extends JFrame {
 		btn.setBackground(new Color(230,230,230));
 		
 	}
-	
-	
 }
 
 

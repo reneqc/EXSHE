@@ -273,7 +273,7 @@ public class InformesEvaluador extends JFrame {
 	               
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 	               
-	                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/reporteIndividualEvaluacion.jrxml");
+	                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/reporteIndividualEvaluacion.jrxml");
 	                
 	                Map parametros = new HashMap();
 	                parametros.put("id_evaluacion",id_evaluacion);
@@ -284,7 +284,7 @@ public class InformesEvaluador extends JFrame {
 	                
 	            
 	            }catch(Exception ex){
-	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 	                System.out.println(ex);
 	            }
 			  

@@ -288,7 +288,7 @@ public class AdministracionSubHeuristicos extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID", "NOMBRE", "DESCRIPCI\u00D3N"
+				"ID", "HRURISTICO", "CRITERIO","TIPO"
 			}
 		));
 		scrollPane.setViewportView(tbl_heuristicos);

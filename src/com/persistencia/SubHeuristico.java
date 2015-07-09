@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class SubHeuristico {
 	
 	String id;
@@ -65,7 +67,7 @@ public class SubHeuristico {
 			sentencia.execute(cadena);
 			return 1;
 		} catch (Exception e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null,e);
 			return 0;
 		}
 	}

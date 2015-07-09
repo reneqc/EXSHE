@@ -161,7 +161,7 @@ public class PrincipalAdministrador extends JFrame {
 		               
 		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 		               
-		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesPendientes.jrxml");
+		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesPendientes.jrxml");
 		                
 		                Map parametros = new HashMap();
 		                parametros.put("finalizada","0");
@@ -172,7 +172,7 @@ public class PrincipalAdministrador extends JFrame {
 		                
 		            
 		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 		                System.out.println(ex);
 		            }
 			}
@@ -188,7 +188,7 @@ public class PrincipalAdministrador extends JFrame {
 		               
 		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 		               
-		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesFinalizadas.jrxml");
+		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesFinalizadas.jrxml");
 		                
 		                Map parametros = new HashMap();
 		                parametros.put("finalizada","1");
@@ -199,7 +199,7 @@ public class PrincipalAdministrador extends JFrame {
 		                
 		            
 		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 		                System.out.println(ex);
 		            }
 				
@@ -286,7 +286,7 @@ public class PrincipalAdministrador extends JFrame {
 		               
 		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 		               
-		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesFinalizadas.jrxml");
+		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesFinalizadas.jrxml");
 		                
 		                Map parametros = new HashMap();
 		                parametros.put("finalizada","1");
@@ -297,7 +297,7 @@ public class PrincipalAdministrador extends JFrame {
 		                
 		            
 		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 		                System.out.println(ex);
 		            }
 				
@@ -353,7 +353,7 @@ public class PrincipalAdministrador extends JFrame {
 		               
 		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 		               
-		                JasperReport report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/evaluacionesPendientes.jrxml");
+		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesPendientes.jrxml");
 		                
 		                Map parametros = new HashMap();
 		                parametros.put("finalizada","0");
@@ -364,7 +364,7 @@ public class PrincipalAdministrador extends JFrame {
 		                
 		            
 		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte", "ERROR",JOptionPane.ERROR_MESSAGE);
+		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 		                System.out.println(ex);
 		            }
 			}

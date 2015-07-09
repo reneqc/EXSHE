@@ -13,8 +13,9 @@ public class Conexion {
 	@SuppressWarnings("finally")
 	public static Connection obtenerConexion(){
 		Connection conexion=null;
-		String nombreDb="bdd_exshe_v0.1";
+		String nombreDb="bdd_exshe0.1";
 		try{
+
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 			conexion=DriverManager.getConnection("jdbc:derby:"+nombreDb+";create=true");
 			Statement sentencia=conexion.createStatement();
@@ -41,19 +42,18 @@ public class Conexion {
 
 			
 		}catch(ClassNotFoundException ex){
-			 JOptionPane.showMessageDialog(null, ex, "Error1 en la Conexi√≥n con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-	            conexion=null;
-			
+			 JOptionPane.showMessageDialog(null, ex, "Error1 en la ConexiÛn con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+	            conexion=null;			
 			
 		} catch(SQLException ex)
         {
-            JOptionPane.showMessageDialog(null, "No se podr√° acceder a la informaci√≥n del sistema debido a que la aplicaci√≥n ya est√° abierta", "ERROR AL CONECTARSE CON LA BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se podr· acceder a la informaciÛn del sistema debido a que la aplicaciÛn ya est· abierta", "ERROR AL CONECTARSE CON LA BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
             conexion=null;
             
         }
         catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, ex, "Error3 en la Conexi√≥n con la BD "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error3 en la ConexiÛn con la BD"+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
             conexion=null;
         }
         finally

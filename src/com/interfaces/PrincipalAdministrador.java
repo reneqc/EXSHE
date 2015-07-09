@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -49,6 +50,8 @@ import net.sf.jasperreports.view.JasperViewer;
 import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
 import com.persistencia.Proyecto;
+import com.persistencia.RutaBase;
+import com.reportes.AbstractReport;
 
 public class PrincipalAdministrador extends JFrame {
 
@@ -158,18 +161,11 @@ public class PrincipalAdministrador extends JFrame {
 		mntmPendientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 try{
+					 
+					 	//String path = new File("").getAbsolutePath()+"/src/com/reportes/evaluacionesPendientes.jrxml";
+					 	String path =RutaBase.obtenerRuta()+"evaluacionesPendientes.jrxml";
+					 	abrirReporte(path, "Evaluaciones pendientes", "0", "finalizada");
 		               
-		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
-		               
-		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesPendientes.jrxml");
-		                
-		                Map parametros = new HashMap();
-		                parametros.put("finalizada","0");
-		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
-		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
-		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
-		                ventanaVisor.setVisible(true);
-		                
 		            
 		            }catch(Exception ex){
 		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
@@ -185,17 +181,20 @@ public class PrincipalAdministrador extends JFrame {
 				
 
 				 try{
+					 	String path =RutaBase.obtenerRuta()+"evaluacionesFinalizadas.jrxml";
+					 	
+					 	abrirReporte(path, "Evaluaciones finalizadas", "1", "finalizada");
+					 
+		               /*	               
 		               
-		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
-		               
-		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesFinalizadas.jrxml");
+		                JasperReport rutaInforme = JasperCompileManager.compileReport("C:\\EXSHE\\reportes\\evaluacionesFinalizadas.jrxml");
 		                
 		                Map parametros = new HashMap();
 		                parametros.put("finalizada","1");
-		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+		                JasperPrint informe=JasperFillManager.fillReport(rutaInforme,parametros,Conexion.obtenerConexion());
 		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
 		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
-		                ventanaVisor.setVisible(true);
+		                ventanaVisor.setVisible(true);*/
 		                
 		            
 		            }catch(Exception ex){
@@ -283,17 +282,10 @@ public class PrincipalAdministrador extends JFrame {
 				
 
 				 try{
-		               
-		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
-		               
-		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesFinalizadas.jrxml");
-		                
-		                Map parametros = new HashMap();
-		                parametros.put("finalizada","1");
-		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
-		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
-		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
-		                ventanaVisor.setVisible(true);
+					 
+					 String path =RutaBase.obtenerRuta()+"evaluacionesFinalizadas.jrxml";  
+					
+					 abrirReporte(path, "Evaluaciones finalizadas", "1", "finalizada");
 		                
 		            
 		            }catch(Exception ex){
@@ -350,17 +342,9 @@ public class PrincipalAdministrador extends JFrame {
 				
 
 				 try{
-		               
-		                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
-		               
-		                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/evaluacionesPendientes.jrxml");
-		                
-		                Map parametros = new HashMap();
-		                parametros.put("finalizada","0");
-		                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
-		                JasperViewer ventanaVisor=new JasperViewer(informe,false);
-		                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
-		                ventanaVisor.setVisible(true);
+					 String path =RutaBase.obtenerRuta()+"evaluacionesPendientes.jrxml";
+					 
+					 	abrirReporte(path, "Evaluaciones Pendientes", "0", "finalizada");
 		                
 		            
 		            }catch(Exception ex){
@@ -806,6 +790,26 @@ public class PrincipalAdministrador extends JFrame {
 	public  void noResaltar(JButton btn){
 		btn.setBackground(new Color(230,230,230));
 		
+	}
+	public void abrirReporte(String path, String titulo, String parametro,String valorParametro){
+		 try{
+             
+             //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+            
+             JasperReport report = JasperCompileManager.compileReport(path);
+             
+             Map parametros = new HashMap();
+             parametros.put(valorParametro,parametro);
+             JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+             JasperViewer ventanaVisor=new JasperViewer(informe,false);
+             ventanaVisor.setTitle(titulo);
+             ventanaVisor.setVisible(true);
+             
+         
+         }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+             System.out.println(ex);
+         }
 	}
 }
 

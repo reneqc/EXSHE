@@ -67,7 +67,7 @@ public class AdministracionHeuristicos extends JFrame {
 	 */
 	public AdministracionHeuristicos() {
 		setResizable(false);
-		setTitle("EXSHE - ADMINISTRACIÃ“N DE HEURISTICOS");
+		setTitle("EXSHE - ADMINISTRACIÓN DE HEURISTICOS");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -89,8 +89,8 @@ public class AdministracionHeuristicos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel contenedor_registro = new JPanel();
-		contenedor_registro.setBorder(new TitledBorder(null, "Registro de HeurÃ­sticos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		contenedor_registro.setToolTipText("Registro de  HeurÃ­sticos");
+		contenedor_registro.setBorder(new TitledBorder(null, "Registro de Heurísticos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		contenedor_registro.setToolTipText("Registro de  Heurísticos");
 		contenedor_registro.setBounds(12, 112, 1326, 155);
 		
 		contentPane.add(contenedor_registro);
@@ -102,7 +102,7 @@ public class AdministracionHeuristicos extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(223, 223, 233));
 		
-		JLabel lblNombre = new JLabel("DescripciÃ³n:");
+		JLabel lblNombre = new JLabel("Descripción:");
 		lblNombre.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblNombre.setBounds(12, 5, 91, 15);
 		panel_1.add(lblNombre);
@@ -120,7 +120,7 @@ public class AdministracionHeuristicos extends JFrame {
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
 		
-		JLabel lblApellido = new JLabel("Nombre del HeurÃ­stico:");
+		JLabel lblApellido = new JLabel("Nombre del Heurístico:");
 		lblApellido.setFont(new Font("Dialog", Font.BOLD, 13));
 		lblApellido.setBounds(12, 5, 178, 15);
 		panel_2.add(lblApellido);
@@ -158,7 +158,7 @@ public class AdministracionHeuristicos extends JFrame {
 					Heuristico heuristico=new Heuristico(nombre,descripcion);
 					
 					if(heuristico.guardar()>0){
-						JOptionPane.showMessageDialog(null, "HeurÃ­stico guardado exitosamente");
+						JOptionPane.showMessageDialog(null, "Heurístico guardado exitosamente");
 						limpiar();
 						try {
 							cargarTabla();
@@ -220,7 +220,7 @@ public class AdministracionHeuristicos extends JFrame {
 				
 				
 				if(id_heuristico==-1){
-					JOptionPane.showMessageDialog(null, "Por favor seleccione el heurÃ­stico a editar");
+					JOptionPane.showMessageDialog(null, "Por favor seleccione el heurístico a editar");
 				}else{
 				
 					if(nombre.equals("") || descripcion.equals("")){
@@ -232,7 +232,7 @@ public class AdministracionHeuristicos extends JFrame {
 						Heuristico heuristico=new Heuristico(id_heuristico,nombre,descripcion);
 						
 						if(heuristico.actualizar()>0){
-							JOptionPane.showMessageDialog(null, "HeurÃ­stico actualizado exitosamente");
+							JOptionPane.showMessageDialog(null, "Heurístico actualizado exitosamente");
 							id_heuristico=-1;
 							btnActualizar.setEnabled(false);
 							btnGuardar.setEnabled(true);
@@ -273,13 +273,13 @@ public class AdministracionHeuristicos extends JFrame {
 		label_2.setBounds(108, 12, 278, 15);
 		panel.add(label_2);
 		
-		JLabel lblRegistro = new JLabel("AdministraciÃ³n de HeurÃ­sticos");
+		JLabel lblRegistro = new JLabel("Administración de Heurísticos");
 		lblRegistro.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblRegistro.setBounds(108, 39, 278, 27);
 		panel.add(lblRegistro);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBorder(new TitledBorder(null, "HeurÃ­sticos Existentes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_11.setBorder(new TitledBorder(null, "Heurísticos Existentes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		panel_11.setBounds(12, 297, 1326, 437);
 		contentPane.add(panel_11);
 		panel_11.setLayout(null);
@@ -331,7 +331,7 @@ public class AdministracionHeuristicos extends JFrame {
 	
 	public void cerrarAdministracionHeuristicos(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"Â¿EstÃ¡ seguro que desea cerrar la ventana de administraciÃ³n de heurÃ­sticos?","Mensaje de ConfirmaciÃ³n",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la ventana de administración de heurísticos?","Mensaje de Confirmación",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)
@@ -349,7 +349,7 @@ public class AdministracionHeuristicos extends JFrame {
 		
 		modelo.addColumn("ID");
 		modelo.addColumn("NOMBRE");
-		modelo.addColumn("DESCRIPCIÃ“N");
+		modelo.addColumn("DESCRIPCIÓN");
 		
 
 		while(rs.next()){		

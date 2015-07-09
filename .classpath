@@ -3,14 +3,14 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/db-derby-10.11.1.1-bin/lib/derby.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/jasperreports-5.0.0.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/iText-2.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/groovy-all-1.7.5.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/commons-digester-2.1.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/LibreriasIreport/commons-beanutils-1.8.2.jar"/>
-	<classpathentry kind="lib" path="/home/rene/Recursos Desktop/mysql-connector-java-5.1.7/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry kind="lib" path="librerias/derby.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/commons-beanutils-1.8.2.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/groovy-all-1.7.5.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="librerias/LibreriasIreport/jasperreports-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/PC/Documents/Software/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

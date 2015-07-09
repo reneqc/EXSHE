@@ -40,6 +40,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import com.persistencia.Conexion;
 import com.persistencia.Evaluacion;
+import com.persistencia.RutaBase;
 
 public class InformesEvaluador extends JFrame {
 
@@ -272,15 +273,8 @@ public class InformesEvaluador extends JFrame {
 			 try{
 	               
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
-	               
-	                JasperReport report = JasperCompileManager.compileReport("/home/src/com/reportes/reporteIndividualEvaluacion.jrxml");
-	                
-	                Map parametros = new HashMap();
-	                parametros.put("id_evaluacion",id_evaluacion);
-	                JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
-	                JasperViewer ventanaVisor=new JasperViewer(informe,false);
-	                ventanaVisor.setTitle("INFORME DE LA EVALUACIÓN");
-	                ventanaVisor.setVisible(true);
+				 	String path =RutaBase.obtenerRuta()+"reporteIndividualEvaluacion.jrxml";
+	                abrirReporte(path, "Reporte  individual", String.valueOf(id_evaluacion), "id_evaluacion");	                
 	                
 	            
 	            }catch(Exception ex){
@@ -291,5 +285,25 @@ public class InformesEvaluador extends JFrame {
 			
 		}
 		
+	}
+	public void abrirReporte(String path, String titulo, String parametro,String valorParametro){
+		 try{
+            
+            //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+           
+            JasperReport report = JasperCompileManager.compileReport(path);
+            
+            Map parametros = new HashMap();
+            parametros.put(valorParametro,parametro);
+            JasperPrint informe=JasperFillManager.fillReport(report,parametros,Conexion.obtenerConexion());
+            JasperViewer ventanaVisor=new JasperViewer(informe,false);
+            ventanaVisor.setTitle(titulo);
+            ventanaVisor.setVisible(true);
+            
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
+        }
 	}
 }

@@ -114,10 +114,10 @@ public class Acceso extends JFrame {
 		panel_1.setBounds(36, 235, 503, 58);
 		contentPane.add(panel_1);
 		
-		JLabel label_4 = new JLabel("¿Qué es EXSHE?");
-		label_4.setFont(new Font("Dialog", Font.BOLD, 25));
-		label_4.setBounds(147, 12, 235, 30);
-		panel_1.add(label_4);
+		JLabel lblquEsExshe = new JLabel("¿Qué es EXSHE?");
+		lblquEsExshe.setFont(new Font("Dialog", Font.BOLD, 25));
+		lblquEsExshe.setBounds(147, 12, 235, 30);
+		panel_1.add(lblquEsExshe);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -170,10 +170,10 @@ public class Acceso extends JFrame {
 		panel_5.setBounds(622, 149, 304, 27);
 		contentPane.add(panel_5);
 		
-		JLabel label_5 = new JLabel("Contraseña:");
-		label_5.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_5.setBounds(10, 5, 89, 15);
-		panel_5.add(label_5);
+		JLabel lblContrasea = new JLabel("Contraseña:");
+		lblContrasea.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblContrasea.setBounds(10, 5, 89, 15);
+		panel_5.add(lblContrasea);
 		
 		txt_password = new JPasswordField();
 		txt_password.setColumns(10);
@@ -283,18 +283,7 @@ public class Acceso extends JFrame {
 	}
 	
 	
-	public String verInformacion(){
-		return "<html>"+
-				    "<center>"+
-				    " "+
-				    "</center> <br>"+
-				    "<div style='text-align:justify;'>"+
-				    "Esta aplicación tiene por objeto servir de apoyo para la evaluación de la usabilidad de aplicaciones. Es una versión resumida de la guía que nosotros utilizamos en nuestra actividad profesional, aunque lo suficientemente extensa y específica como para resultar de utilidad a aquellos profesionales que requieran de un software base con el que empezar a trabajar en evaluación heurística.<br> <br>"+			
-				    "La sistema está estructurada en forma de checklist, para facilitar la práctica de la evaluación. Todos las puntos están formulados como preguntas, dónde la respuesta afirmativa implica que que no existe un problema de usabilidad, y la negativa que si.<br><br> Antes de iniciar con la evaluación debe disponer de una cuenta."+
-				    "</div>"+
-				"</html>";
-	}
-	
+
 	public String verCriterios(){
 		return 		"<html><ul>"+
 					"<li>ASPECTOS GENERALES</li><br>"+

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-07-09T14:21:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="evaluacionesFinalizadas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4459c043-47c7-4aba-8e58-9244807359ea">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.callouts" value="##Wed Jul 08 23:57:38 ECT 2015"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="finalizada" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -43,30 +46,26 @@ WHERE evaluacion.finalizada =$P{finalizada} and evaluacion.id_proyecto=proyecto.
 	<title>
 		<band height="114" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="d9727226-ed11-4975-be27-567367a519b4" x="181" y="41" width="286" height="22"/>
+				<reportElement x="140" y="41" width="286" height="22" uuid="d9727226-ed11-4975-be27-567367a519b4"/>
 				<textElement>
 					<font size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE EVALUACIONES FINALIZADAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d9727226-ed11-4975-be27-567367a519b4" x="164" y="19" width="328" height="22"/>
+				<reportElement x="133" y="19" width="328" height="22" uuid="d9727226-ed11-4975-be27-567367a519b4"/>
 				<textElement>
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[EXPERT SYSTEM OF HEURISTIC EVALUATION]]></text>
 			</staticText>
-			<image>
-				<reportElement uuid="14e69cb3-1111-407d-aa69-196ee46a0efd" x="80" y="9" width="84" height="75"/>
-				<imageExpression><![CDATA["/home/rene/desktop-workspace/EXSHE/src/img/logo1.png"]]></imageExpression>
-			</image>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement uuid="983687b6-367d-442a-8754-bab9ef9529a0" x="247" y="63" width="134" height="20"/>
+				<reportElement x="221" y="63" width="134" height="20" uuid="983687b6-367d-442a-8754-bab9ef9529a0"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="e3ffa7c3-ff46-4438-aec9-6d31f103c95d" x="0" y="94" width="555" height="1"/>
+				<reportElement x="0" y="94" width="555" height="1" uuid="e3ffa7c3-ff46-4438-aec9-6d31f103c95d"/>
 				<graphicElement>
 					<pen lineWidth="2.0"/>
 				</graphicElement>
@@ -79,108 +78,108 @@ WHERE evaluacion.finalizada =$P{finalizada} and evaluacion.id_proyecto=proyecto.
 	<detail>
 		<band height="233" splitType="Stretch">
 			<textField>
-				<reportElement uuid="89eef991-ee40-4691-8e42-29b43487c44b" x="288" y="104" width="230" height="20"/>
+				<reportElement x="288" y="104" width="230" height="20" uuid="89eef991-ee40-4691-8e42-29b43487c44b"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{navegador}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="005258e7-4229-462a-8c50-3a1489bb4854" x="288" y="164" width="230" height="20"/>
+				<reportElement x="288" y="164" width="230" height="20" uuid="005258e7-4229-462a-8c50-3a1489bb4854"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fechaEvaluacion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f46e38fe-4e45-4b68-bfe2-78b50583254e" x="288" y="64" width="230" height="20"/>
+				<reportElement x="288" y="64" width="230" height="20" uuid="f46e38fe-4e45-4b68-bfe2-78b50583254e"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreSitio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="28653608-6fd0-47f0-bf43-3b5b98224294" x="288" y="144" width="230" height="20"/>
+				<reportElement x="288" y="144" width="230" height="20" uuid="28653608-6fd0-47f0-bf43-3b5b98224294"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="59444179-5ef6-46f5-ae97-3b6c036a8ce1" x="171" y="104" width="100" height="20"/>
+				<reportElement x="171" y="104" width="100" height="20" uuid="59444179-5ef6-46f5-ae97-3b6c036a8ce1"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Navegador:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ca462a8c-6c2f-47ff-963f-c59a0d9152a0" x="142" y="64" width="129" height="20"/>
+				<reportElement x="142" y="64" width="129" height="20" uuid="ca462a8c-6c2f-47ff-963f-c59a0d9152a0"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Nombre del Sitio:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="4e2e62b8-dbda-414e-b872-3222a22b005c" x="288" y="84" width="230" height="20"/>
+				<reportElement x="288" y="84" width="230" height="20" uuid="4e2e62b8-dbda-414e-b872-3222a22b005c"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{urlSitio}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="98d25059-c661-4fad-ad88-a9c532273fd3" x="171" y="84" width="100" height="20"/>
+				<reportElement x="171" y="84" width="100" height="20" uuid="98d25059-c661-4fad-ad88-a9c532273fd3"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[URL:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ae22cd9f-ca87-4ac1-821c-830c4190e7eb" x="171" y="144" width="100" height="20"/>
+				<reportElement x="171" y="144" width="100" height="20" uuid="ae22cd9f-ca87-4ac1-821c-830c4190e7eb"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Email:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="31fc9fbb-ed00-497e-a912-c2732e6275ee" x="121" y="164" width="150" height="20"/>
+				<reportElement x="121" y="164" width="150" height="20" uuid="31fc9fbb-ed00-497e-a912-c2732e6275ee"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Fecha de evaluación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="a1cf3722-806f-484a-88ea-a052c1661e11" x="171" y="124" width="100" height="20"/>
+				<reportElement x="171" y="124" width="100" height="20" uuid="a1cf3722-806f-484a-88ea-a052c1661e11"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Evaluador:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="ceea33c4-a860-46fb-95e4-2ba649730a10" x="288" y="124" width="230" height="20"/>
+				<reportElement x="288" y="124" width="230" height="20" uuid="ceea33c4-a860-46fb-95e4-2ba649730a10"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{apellido}+" "+$F{nombre}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement uuid="df12f514-e360-48d3-9f93-c921f72399c3" x="236" y="18" width="101" height="25" backcolor="#BBBBBB"/>
+				<reportElement x="236" y="18" width="101" height="25" backcolor="#BBBBBB" uuid="df12f514-e360-48d3-9f93-c921f72399c3"/>
 			</rectangle>
 			<textField>
-				<reportElement uuid="855815e6-b6fa-4433-be3c-9b9609e255fc" x="236" y="18" width="101" height="25" backcolor="#B3B3B3"/>
+				<reportElement x="236" y="18" width="101" height="25" backcolor="#B3B3B3" uuid="855815e6-b6fa-4433-be3c-9b9609e255fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="a1708978-7ee8-47bb-a417-b065b4e1bb14" x="164" y="184" width="107" height="20"/>
+				<reportElement x="164" y="184" width="107" height="20" uuid="a1708978-7ee8-47bb-a417-b065b4e1bb14"/>
 				<textElement textAlignment="Right">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Tipo del Sitio:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="bd8e5b82-ca21-4a26-a117-3fdca68ef1f5" x="288" y="184" width="230" height="20"/>
+				<reportElement x="288" y="184" width="230" height="20" uuid="bd8e5b82-ca21-4a26-a117-3fdca68ef1f5"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
@@ -191,12 +190,12 @@ WHERE evaluacion.finalizada =$P{finalizada} and evaluacion.id_proyecto=proyecto.
 	<pageFooter>
 		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement uuid="9d2ccf0f-d209-4b00-ab00-e5f230d320a6" x="373" y="0" width="120" height="20"/>
+				<reportElement x="373" y="0" width="120" height="20" uuid="9d2ccf0f-d209-4b00-ab00-e5f230d320a6"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="c857ee8e-fbde-4ace-a32a-2392e90cf9e9" x="493" y="0" width="40" height="20"/>
+				<reportElement x="493" y="0" width="40" height="20" uuid="c857ee8e-fbde-4ace-a32a-2392e90cf9e9"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

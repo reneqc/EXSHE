@@ -80,7 +80,7 @@ public class ListaEvaluaciones extends JFrame {
 		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 50, 1232, 493);
+		scrollPane.setBounds(23, 35, 1232, 493);
 		panel.add(scrollPane);
 		
 		tbl_evaluacionesFinalizadas = new JTable();
@@ -91,6 +91,8 @@ public class ListaEvaluaciones extends JFrame {
 				int indice=tbl_evaluacionesFinalizadas.getSelectedRow();				
 				id_evaluacion=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
 				Resultados result=new Resultados();
+				result.idEvaluacion=id_evaluacion;
+				result.show();
 				
 			}
 		});

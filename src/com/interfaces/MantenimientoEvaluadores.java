@@ -98,7 +98,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		//setDefaultCloseOperation(cerrar());
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		
-		setBounds(100, 100, 1366, 768);
+		setBounds(100, 100, 1366, 730);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

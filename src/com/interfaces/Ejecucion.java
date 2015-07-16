@@ -33,6 +33,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.ImageIcon;
 
 public class Ejecucion extends JFrame {
 
@@ -122,6 +123,7 @@ public class Ejecucion extends JFrame {
 	 * Create the frame.
 	 */
 	public Ejecucion() {
+		setTitle("EXSHE - EJECUCI\u00D3N DE EVALUACIONES");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -130,7 +132,7 @@ public class Ejecucion extends JFrame {
 		});
 		
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 1366, 768);
+		setBounds(100, 100, 1366, 730);
 		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -141,11 +143,11 @@ public class Ejecucion extends JFrame {
 		panel.setLayout(null);
 		
 		panel.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 335, 708);
+		panel.setBounds(10, 11, 335, 670);
 		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 57, 310, 640);
+		scrollPane.setBounds(10, 57, 310, 596);
 		panel.add(scrollPane);
 		
 		tbl_evaluaciones = new JTable();
@@ -175,6 +177,8 @@ public class Ejecucion extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(tbl_evaluaciones);
+		btn_iniciar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btn_iniciar.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/start2.png")));
 	
 		
 		
@@ -253,11 +257,24 @@ public class Ejecucion extends JFrame {
 		});
 		btn_iniciar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btn_iniciar.setBackground(SystemColor.controlHighlight);
-		btn_iniciar.setBounds(183, 19, 137, 27);
+		btn_iniciar.setBounds(200, 19, 120, 27);
 		panel.add(btn_iniciar);
 		
+		JButton btnAtrs = new JButton("  Atr\u00E1s");
+		btnAtrs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnAtrs.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/atras1.png")));
+		btnAtrs.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnAtrs.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnAtrs.setBackground(SystemColor.controlHighlight);
+		btnAtrs.setBounds(10, 19, 112, 27);
+		panel.add(btnAtrs);
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(355, 11, 985, 708);
+		panel_1.setBounds(355, 11, 985, 670);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		panel_1.setBorder(new TitledBorder(null, "Calificación de criterios", TitledBorder.LEFT, TitledBorder.TOP, null, null));
@@ -265,7 +282,7 @@ public class Ejecucion extends JFrame {
 		JPanel panel_11 = new JPanel();
 		panel_11.setLayout(null);
 		panel_11.setBackground(new Color(223, 223, 233));
-		panel_11.setBounds(26, 32, 455, 27);
+		panel_11.setBounds(26, 23, 455, 27);
 		panel_1.add(panel_11);
 		
 		JLabel label_11 = new JLabel("Nombre del Sitio:");
@@ -284,7 +301,7 @@ public class Ejecucion extends JFrame {
 		JPanel panel_12 = new JPanel();
 		panel_12.setLayout(null);
 		panel_12.setBackground(new Color(223, 223, 233));
-		panel_12.setBounds(26, 65, 455, 27);
+		panel_12.setBounds(26, 56, 455, 27);
 		panel_1.add(panel_12);
 		
 		JLabel label_12 = new JLabel("Navegador para la evaluación:");
@@ -303,7 +320,7 @@ public class Ejecucion extends JFrame {
 		JPanel panel_13 = new JPanel();
 		panel_13.setLayout(null);
 		panel_13.setBackground(new Color(223, 223, 233));
-		panel_13.setBounds(502, 31, 473, 27);
+		panel_13.setBounds(502, 22, 473, 27);
 		panel_1.add(panel_13);
 		
 		JLabel label_13 = new JLabel("Url del Sitio:");
@@ -322,7 +339,7 @@ public class Ejecucion extends JFrame {
 		JPanel panel_14 = new JPanel();
 		panel_14.setLayout(null);
 		panel_14.setBackground(new Color(223, 223, 233));
-		panel_14.setBounds(502, 65, 473, 27);
+		panel_14.setBounds(502, 56, 473, 27);
 		panel_1.add(panel_14);
 		
 		JLabel label_14 = new JLabel("Versión:");
@@ -339,7 +356,7 @@ public class Ejecucion extends JFrame {
 		panel_14.add(txt_version);
 		
 		
-		contenedor_criterios.setBounds(10, 103, 965, 594);
+		contenedor_criterios.setBounds(10, 88, 965, 571);
 		panel_1.add(contenedor_criterios);
 		contenedor_criterios.setLayout(null);
 		
@@ -594,6 +611,8 @@ public class Ejecucion extends JFrame {
 		contenedorCriterio9.add(combo9);
 		
 		JButton button_1 = new JButton("Anterior");
+		button_1.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/prev.png")));
+		button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -613,10 +632,12 @@ public class Ejecucion extends JFrame {
 				}
 			}
 		});
-		button_1.setBounds(19, 559, 89, 23);
+		button_1.setBounds(16, 544, 135, 27);
 		contenedor_criterios.add(button_1);
 		
 		JButton button_2 = new JButton("Siguiente");
+		button_2.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/next.png")));
+		button_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -635,10 +656,12 @@ public class Ejecucion extends JFrame {
 				}
 			}
 		});
-		button_2.setBounds(128, 559, 89, 23);
+		button_2.setBounds(176, 544, 138, 27);
 		contenedor_criterios.add(button_2);
 		
 		JButton button_3 = new JButton("Guardar Sesi\u00F3n");
+		button_3.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/puas3.png")));
+		button_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -684,11 +707,13 @@ public class Ejecucion extends JFrame {
 				
 			}
 		});
-		button_3.setBounds(239, 559, 138, 23);
+		button_3.setBounds(337, 544, 154, 27);
 		contenedor_criterios.add(button_3);
 		
-		JButton button_4 = new JButton("Finalizar");
-		button_4.addActionListener(new ActionListener() {
+		JButton btnFinalizar = new JButton(" Finalizar");
+		btnFinalizar.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/stop3.png")));
+		btnFinalizar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
@@ -746,8 +771,8 @@ public class Ejecucion extends JFrame {
 				
 			}
 		});
-		button_4.setBounds(396, 559, 89, 23);
-		contenedor_criterios.add(button_4);
+		btnFinalizar.setBounds(512, 544, 117, 27);
+		contenedor_criterios.add(btnFinalizar);
 		
 		
 		

@@ -66,7 +66,7 @@ public class PrincipalEvaluador extends JFrame {
 				try {
 					
 					framePrincipal.setVisible(true);
-					framePrincipal.setExtendedState(MAXIMIZED_BOTH);
+					//framePrincipal.setExtendedState(MAXIMIZED_BOTH);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,7 +90,8 @@ public class PrincipalEvaluador extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 1366, 768);
+		//setBounds(100, 100, 1366, 768);
+		setBounds(100, 100, 1366, 730);
 		//setDefaultCloseOperation(cerrarPrincipal());		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -131,7 +132,7 @@ public class PrincipalEvaluador extends JFrame {
 				        if(n==0){
 				        	Acceso a1=new Acceso();
 							a1.show();
-							a1.setExtendedState(MAXIMIZED_BOTH);
+							//a1.setExtendedState(MAXIMIZED_BOTH);
 							dispose();
 				        }
 				        else {
@@ -170,30 +171,6 @@ public class PrincipalEvaluador extends JFrame {
 		});
 		mnEvaluaciones.add(mntmInformes);
 		
-		JMenu mnHeursticos = new JMenu("    Heurísticos    ");
-		menuBar.add(mnHeursticos);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("  Administración");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AdministracionHeuristicos administracion=new AdministracionHeuristicos();
-				administracion.show();
-			}
-		});
-		mnHeursticos.add(mntmNewMenuItem);
-		
-		JMenu mnSubHeursticos = new JMenu("Sub Heurísticos");
-		menuBar.add(mnSubHeursticos);
-		
-		JMenuItem menuItem = new JMenuItem("  Administración");
-		menuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AdministracionSubHeuristicos adminSub=new AdministracionSubHeuristicos();
-				adminSub.show();
-			}
-		});
-		mnSubHeursticos.add(menuItem);
-		
 		
 		JMenu mnAyuda = new JMenu("  Ayuda  ");
 		menuBar.add(mnAyuda);
@@ -228,7 +205,7 @@ public class PrincipalEvaluador extends JFrame {
 				        if(n==0){
 				        	Acceso a1=new Acceso();
 							a1.show();
-							a1.setExtendedState(MAXIMIZED_BOTH);
+							//a1.setExtendedState(MAXIMIZED_BOTH);
 							dispose();
 				        }
 				        else {
@@ -275,32 +252,6 @@ public class PrincipalEvaluador extends JFrame {
 		label_4.setBounds(126, 0, 24, 31);
 		panel_1.add(label_4);
 		
-		JLabel label_5 = new JLabel("");
-		label_5.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AdministracionHeuristicos administracion=new AdministracionHeuristicos();
-				administracion.show();
-			}
-		});
-		label_5.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/nue.png")));
-		label_5.setToolTipText("Insertar Heurísticos");
-		label_5.setBounds(190, 0, 24, 31);
-		panel_1.add(label_5);
-		
-		JLabel label_6 = new JLabel("");
-		label_6.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/subheuristico2.png")));
-		label_6.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AdministracionSubHeuristicos adminSub=new AdministracionSubHeuristicos();
-				adminSub.show();
-			}
-		});
-		label_6.setToolTipText("Insertar subheurísticos");
-		label_6.setBounds(238, 0, 24, 31);
-		panel_1.add(label_6);
-		
 		JPanel panel_9 = new JPanel();
 		panel_9.setBounds(162, 0, 2, 31);
 		panel_1.add(panel_9);
@@ -309,14 +260,10 @@ public class PrincipalEvaluador extends JFrame {
 		panel_11.setBounds(70, 0, 2, 31);
 		panel_1.add(panel_11);
 		
-		JPanel panel_12 = new JPanel();
-		panel_12.setBounds(280, 0, 2, 31);
-		panel_1.add(panel_12);
-		
 		JLabel label_7 = new JLabel("");
 		label_7.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/help1.png")));
 		label_7.setToolTipText("Ayuda");
-		label_7.setBounds(301, 0, 24, 31);
+		label_7.setBounds(174, 0, 24, 31);
 		panel_1.add(label_7);
 		
 		JPanel panel_2 = new JPanel();
@@ -342,25 +289,25 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(null, "Creación de Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_8.setBounds(443, 201, 444, 498);
+		panel_8.setBounds(443, 201, 444, 480);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
 		panel_5.setBackground(new Color(223, 223, 233));
-		panel_5.setBounds(41, 47, 365, 78);
+		panel_5.setBounds(12, 47, 410, 78);
 		panel_8.add(panel_5);
 		
 		JLabel label = new JLabel("NUEVA EVALUACIÓN");
 		label.setFont(new Font("Dialog", Font.BOLD, 16));
-		label.setBounds(89, 29, 204, 19);
+		label.setBounds(132, 29, 204, 19);
 		panel_5.add(label);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(new Color(223, 223, 233));
-		panel_3.setBounds(12, 318, 410, 27);
+		panel_3.setBounds(12, 305, 410, 27);
 		panel_8.add(panel_3);
 		
 		JLabel lblNavegadorParaLa = new JLabel("Navegador para la evaluación:");
@@ -378,7 +325,7 @@ public class PrincipalEvaluador extends JFrame {
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(12, 250, 410, 27);
+		panel_7.setBounds(12, 240, 410, 27);
 		panel_8.add(panel_7);
 		
 		JLabel lblUrlDelSitio = new JLabel("Url del Sitio:");
@@ -445,13 +392,13 @@ public class PrincipalEvaluador extends JFrame {
 		btnGuardar.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/save.png")));
 		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnGuardar.setBackground(SystemColor.controlHighlight);
-		btnGuardar.setBounds(284, 428, 140, 38);
+		btnGuardar.setBounds(282, 418, 140, 38);
 		panel_8.add(btnGuardar);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(12, 380, 410, 27);
+		panel_4.setBounds(12, 365, 410, 27);
 		panel_8.add(panel_4);
 		
 		JLabel lblVersinDelNavegador = new JLabel("Versión del navegador:");
@@ -501,7 +448,7 @@ public class PrincipalEvaluador extends JFrame {
 		contenedor_proyectos = new JPanel();
 		contenedor_proyectos.setLayout(null);
 		contenedor_proyectos.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		contenedor_proyectos.setBounds(22, 201, 409, 499);
+		contenedor_proyectos.setBounds(22, 201, 409, 480);
 		contentPane.add(contenedor_proyectos);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -512,7 +459,7 @@ public class PrincipalEvaluador extends JFrame {
 				
 			}
 		});
-		scrollPane.setBounds(12, 35, 385, 437);
+		scrollPane.setBounds(14, 32, 385, 425);
 		contenedor_proyectos.add(scrollPane);
 		
 		tbl_proyectos = new JTable();
@@ -541,11 +488,11 @@ public class PrincipalEvaluador extends JFrame {
 		JPanel panel_10 = new JPanel();
 		panel_10.setLayout(null);
 		panel_10.setBorder(new TitledBorder(null, "Evaluaciones existentes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_10.setBounds(897, 201, 441, 499);
+		panel_10.setBounds(897, 201, 441, 480);
 		contentPane.add(panel_10);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 35, 417, 437);
+		scrollPane_1.setBounds(12, 35, 417, 419);
 		panel_10.add(scrollPane_1);
 		
 		tbl_evaluaciones = new JTable();
@@ -565,7 +512,7 @@ public class PrincipalEvaluador extends JFrame {
 	
 	public void cerrarPrincipal(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"Esta seguro que desea cerrar la aplicación","Mensaje de Confirmación",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la aplicación?","Mensaje de Confirmación",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)
@@ -625,16 +572,16 @@ public class PrincipalEvaluador extends JFrame {
 	public void formatearTabla(){
 		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
 		//tbl_subheuristicos.setBackground(new Color(161,202,232));
-		tbl_proyectos.setRowHeight(25);
+		tbl_proyectos.setRowHeight(14);
 		tbl_proyectos.setForeground(new Color(0,0,0));
-		tbl_proyectos.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tbl_proyectos.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tbl_proyectos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
 		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
 		
 		
 		
-		tbl_proyectos.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
+		tbl_proyectos.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 11));
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -645,10 +592,10 @@ public class PrincipalEvaluador extends JFrame {
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(0);
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(1).setResizable(false);
 		
-		tbl_proyectos.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(200);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(122);
 		
 		
-		tbl_proyectos.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(130);
 		
 
 		//nombre del evaluador
@@ -664,7 +611,7 @@ public class PrincipalEvaluador extends JFrame {
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(0);
 		tbl_proyectos.getTableHeader().getColumnModel().getColumn(5).setResizable(false);
 		
-		tbl_proyectos.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(250);
+		tbl_proyectos.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(130);
 		
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -743,13 +690,13 @@ public void cargarTablaEvaluaciones() {
 		
 		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
 		//tbl_subheuristicos.setBackground(new Color(161,202,232));
-		tbl_evaluaciones.setRowHeight(25);
+		tbl_evaluaciones.setRowHeight(15);
 		tbl_evaluaciones.setForeground(new Color(0,0,0));
-		tbl_evaluaciones.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tbl_evaluaciones.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tbl_evaluaciones.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
 		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
-		tbl_evaluaciones.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
+		tbl_evaluaciones.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 11));
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -769,7 +716,7 @@ public void cargarTablaEvaluaciones() {
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setResizable(false);
 		
 		//tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(160);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(163);
 		
 		
 		//Version

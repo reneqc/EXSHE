@@ -64,7 +64,6 @@ public class Acceso extends JFrame {
 	 * Create the frame.
 	 */
 	public Acceso() {
-		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Acceso.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - VENTANA DE ACCESO");
 		addWindowListener(new WindowAdapter() {
@@ -103,7 +102,7 @@ public class Acceso extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setIcon(new ImageIcon(Acceso.class.getResource("/img/logo1.png")));
 		
-		JLabel label_3 = new JLabel("<html><center> </center> <br><div style='text-align:justify;'><b>Expert System of Heuristic Evaluation</b> tiene por objeto servir de apoyo para la evaluación de usabilidad en aplicaciones mediante el análisis heurístico, constituyendose en una guía específica para aquellos profesionales que requieran de un software base con el que se pueda desarrollar una evaluación de usabilidad.<br> <br>El sistema permite ejecutar evaluaciones en forma de checklist que ayudan a identificar falencias dentro de una respectiva aplicación, todos las puntos están formulados como preguntas que tienen una posible respuesta en el rango de una escala numérica o textual que permitirá establecer si se evidencia o no un problema de usabilidad.<br><br> Para poder trabajar con EXSHE debe disponer de una cuenta proporcionada por el administrador del sistema.</div></html>");
+		JLabel label_3 = new JLabel("<html><center> </center> <br><div style='text-align:justify;'><b>Expert System of Heuristic Evaluation</b> tiene por objeto servir de apoyo para la evaluación de usabilidad en aplicaciones mediante el análisis heurístico, constituyendose en una guía específica para aquellos profesionales que requieran de un software base con el que se pueda desarrollar una evaluación de usabilidad.<br> <br>El sistema permite ejecutar evaluaciones con las que se búsca identificar falencias dentro de una respectiva aplicación, todos las puntos están formulados como preguntas que tienen una posible respuesta en el rango de una escala numérica o textual que permitirá establecer si se evidencia o no un problema de usabilidad.<br><br> Para poder trabajar con EXSHE debe disponer de una cuenta proporcionada por el administrador del sistema.</div></html>");
 		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_3.setBounds(46, 203, 503, 361);
 		contentPane.add(label_3);
@@ -287,7 +286,7 @@ public class Acceso extends JFrame {
 	
 	public void cerrarAcceso(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"Esta seguro que desea cerrar la aplicación","Mensaje de Confirmación",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la aplicación?","Mensaje de Confirmación",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)
@@ -298,6 +297,7 @@ public class Acceso extends JFrame {
 		}
 	}
 	
+
 	public void ingresar(){
 			
 			if(txt_email.getText().equals("") || txt_password.getText().equals("")){
@@ -323,7 +323,7 @@ public class Acceso extends JFrame {
 					PrincipalEvaluador prin=new PrincipalEvaluador();
 					prin.lbl_evaluador.setText(txt_email.getText());
 					prin.show();
-					prin.setExtendedState(MAXIMIZED_BOTH);
+					//prin.setExtendedState(MAXIMIZED_BOTH);
 					dispose();
 				}else{
 					JOptionPane.showMessageDialog(null, "Contraseña o Username incorrecto.");

@@ -41,6 +41,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import com.persistencia.Conexion;
 import com.persistencia.Evaluacion;
 import com.persistencia.RutaBase;
+import javax.swing.JTextField;
 
 public class InformesEvaluador extends JFrame {
 
@@ -55,6 +56,8 @@ public class InformesEvaluador extends JFrame {
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel lblInformesEvaluaciones;
+	private JTextField txt_evaluacion;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -86,7 +89,7 @@ public class InformesEvaluador extends JFrame {
 		
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 1366, 768);		
+		setBounds(100, 100, 1366, 730);		
 		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,13 +109,13 @@ public class InformesEvaluador extends JFrame {
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(35, 142, 1303, 580);
+		panel.setBounds(35, 142, 1303, 539);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(null, "Historial de evaluaciones finalizadas", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(29, 64, 1232, 492);
+		scrollPane.setBounds(28, 58, 1232, 457);
 		panel.add(scrollPane);
 		
 		tbl_evaluacionesFinalizadas = new JTable();
@@ -121,8 +124,10 @@ public class InformesEvaluador extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				int indice=tbl_evaluacionesFinalizadas.getSelectedRow();				
-			
+				
 				id_evaluacion=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
+				String nombre=tbl_evaluacionesFinalizadas.getValueAt(indice,2).toString();
+				txt_evaluacion.setText(nombre); 
 		}
 		});
 		tbl_evaluacionesFinalizadas.setModel(new DefaultTableModel(
@@ -147,6 +152,16 @@ public class InformesEvaluador extends JFrame {
 		btnVerInforme.setBounds(1139, 24, 122, 27);
 		panel.add(btnVerInforme);
 		
+		txt_evaluacion = new JTextField();
+		txt_evaluacion.setEditable(false);
+		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txt_evaluacion.setBackground(SystemColor.controlHighlight);
+		txt_evaluacion.setBounds(850, 27, 279, 26);
+		panel.add(txt_evaluacion);
+		txt_evaluacion.setColumns(10);
+		txt_evaluacion.setBorder(null);
+		
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(223, 223, 233));
@@ -167,6 +182,20 @@ public class InformesEvaluador extends JFrame {
 		lblInformesEvaluaciones.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblInformesEvaluaciones.setBounds(112, 37, 278, 35);
 		panel_1.add(lblInformesEvaluaciones);
+		
+		button = new JButton("  Atr\u00E1s");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			
+		});
+		button.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/atras1.png")));
+		button.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button.setBorder(UIManager.getBorder("CheckBox.border"));
+		button.setBackground(SystemColor.controlHighlight);
+		button.setBounds(12, 45, 112, 27);
+		contentPane.add(button);
 		cargarTabla();
 	}
 	
@@ -226,11 +255,11 @@ public class InformesEvaluador extends JFrame {
 	public void formatearTabla(){
 
 	
-		tbl_evaluacionesFinalizadas.setRowHeight(20);
+		tbl_evaluacionesFinalizadas.setRowHeight(16);
 		tbl_evaluacionesFinalizadas.setForeground(new Color(0,0,0));
-		tbl_evaluacionesFinalizadas.setFont(new Font("Dialog", Font.PLAIN, 14));
+		tbl_evaluacionesFinalizadas.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tbl_evaluacionesFinalizadas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tbl_evaluacionesFinalizadas.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
+		tbl_evaluacionesFinalizadas.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 13));
 		
 		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
@@ -273,6 +302,7 @@ public class InformesEvaluador extends JFrame {
 			
 			 try{
 	               
+				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 				 	String path =RutaBase.obtenerRuta()+"reporteIndividualEvaluacion.jrxml";
 	                abrirReporte(path, "Reporte de la Evaluación ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                

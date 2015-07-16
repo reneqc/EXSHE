@@ -29,12 +29,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.TitledBorder;
+import javax.swing.JLabel;
 
 public class ListaEvaluaciones extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tbl_evaluacionesFinalizadas;
-	private JTextField txt_evaluacion;
 	int id_evaluacion=-1;
 	/**
 	 * Launch the application.
@@ -70,10 +71,17 @@ public class ListaEvaluaciones extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		this.setLocationRelativeTo(null);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBorder(new TitledBorder(null, "Historial de evaluaciones finalizadas", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel.setBounds(38, 127, 1276, 554);
+		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(183, 320, 1157, 279);
-		contentPane.add(scrollPane);
+		scrollPane.setBounds(23, 35, 1232, 493);
+		panel.add(scrollPane);
 		
 		tbl_evaluacionesFinalizadas = new JTable();
 		tbl_evaluacionesFinalizadas.addMouseListener(new MouseAdapter() {
@@ -82,9 +90,10 @@ public class ListaEvaluaciones extends JFrame {
 				
 				int indice=tbl_evaluacionesFinalizadas.getSelectedRow();				
 				id_evaluacion=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
-				String nombre=tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString()+": "+tbl_evaluacionesFinalizadas.getValueAt(indice,2).toString();
+				Resultados result=new Resultados();
+				result.idEvaluacion=id_evaluacion;
+				result.show();
 				
-				txt_evaluacion.setText(nombre); 
 			}
 		});
 		tbl_evaluacionesFinalizadas.setModel(new DefaultTableModel(
@@ -97,46 +106,38 @@ public class ListaEvaluaciones extends JFrame {
 		
 		scrollPane.setViewportView(tbl_evaluacionesFinalizadas);
 		
-		txt_evaluacion = new JTextField();
-		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txt_evaluacion.setEditable(false);
-		txt_evaluacion.setColumns(10);
-		txt_evaluacion.setBorder(null);
-		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(832, 261, 279, 26);
-		contentPane.add(txt_evaluacion);
-		
-		JButton button = new JButton(" Informe");
-		button.addActionListener(new ActionListener() {
+		JButton button_1 = new JButton("  Atrás");
+		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				if(id_evaluacion==-1){
-					
-					 
-					JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar su respectivo informe");
-				}else{
-					
-					 try{
-						 
-						 JOptionPane.showMessageDialog(null,""+id_evaluacion," ", JOptionPane.ERROR_MESSAGE);
-						 
-					 }catch(Exception ex){
-			               
-			                System.out.println(ex);
-			            }
-				}
-				
-				
-				
+				dispose();
 			}
 		});
-		button.setIcon(new ImageIcon(ListaEvaluaciones.class.getResource("/img/ver.png")));
-		button.setBorder(UIManager.getBorder("CheckBox.border"));
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(1121, 261, 122, 27);
-		contentPane.add(button);
+		button_1.setIcon(new ImageIcon(ListaEvaluaciones.class.getResource("/img/atras1.png")));
+		button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_1.setBorder(UIManager.getBorder("CheckBox.border"));
+		button_1.setBackground(SystemColor.controlHighlight);
+		button_1.setBounds(10, 11, 112, 27);
+		contentPane.add(button_1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(223, 223, 233));
+		panel_1.setBounds(459, 11, 402, 84);
+		contentPane.add(panel_1);
+		
+		JLabel label = new JLabel("LOG");
+		label.setBounds(22, 12, 62, 66);
+		panel_1.add(label);
+		
+		JLabel label_1 = new JLabel("Expert System of Heuristic Evaluation");
+		label_1.setFont(new Font("Dialog", Font.BOLD, 13));
+		label_1.setBounds(112, 12, 278, 33);
+		panel_1.add(label_1);
+		
+		JLabel label_2 = new JLabel("INFORMES DE EVALUACIONES");
+		label_2.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_2.setBounds(112, 37, 278, 35);
+		panel_1.add(label_2);
 		caragarTabla();
 	}
 	

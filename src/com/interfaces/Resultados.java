@@ -54,6 +54,7 @@ public class Resultados extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		obtenerNivelUsabilidad();
 	}
 
 	public void cerrarInformes() {
@@ -63,8 +64,14 @@ public class Resultados extends JFrame {
 	}
 
 	public void obtenerNivelUsabilidad() {
-		float porcentaje;
-		JOptionPane.showMessageDialog(null, "res");		
+		try {
+			float porcentaje= Evaluacion.consultarPorcentajeCalificados(idEvaluacion);
+			JOptionPane.showMessageDialog(null, "res"+ porcentaje);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
 
 	}
 

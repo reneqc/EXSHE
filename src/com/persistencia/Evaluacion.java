@@ -86,7 +86,7 @@ public class Evaluacion {
 	public static float consultarPorcentajeCalificados(int id) throws SQLException{
 		float resultado=0;
 		Statement sentencia = (Statement) conex.createStatement();
-		String cadena = "select  (sum (puntos)*100)/(count(puntos)*10) as porcentaje  from evaluacion, calificacion, resultado where evaluacion.id_evaluacion=resultado.id_evaluacion and puntos > -1 and resultado.id_resultado= calificacion.id_resultado  and evaluacion.id_evaluacion=1";
+		String cadena = "select  (sum (puntos)*100)/(count(puntos)*10) as porcentaje  from evaluacion, calificacion, resultado where evaluacion.id_evaluacion=resultado.id_evaluacion and puntos > -1 and resultado.id_resultado= calificacion.id_resultado  and evaluacion.id_evaluacion="+id;
 		ResultSet rs = sentencia.executeQuery(cadena);
 		while(rs.next()){			
 				resultado= rs.getFloat(1);

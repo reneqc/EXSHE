@@ -22,6 +22,7 @@ public class Resultados extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,11 +35,13 @@ public class Resultados extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
 	 */
-	public Resultados() {
+	public Resultados(int id) {
+		idEvaluacion=id;
 		setTitle("EXSHE - INFORMES");
 		addWindowListener(new WindowAdapter() {
 			@Override

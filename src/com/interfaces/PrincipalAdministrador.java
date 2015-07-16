@@ -208,6 +208,9 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		mnEvaluaciones_1.add(mntmFinalizadas);
 		
+		JMenuItem mntmResultados = new JMenuItem("Resultados");
+		mnEvaluaciones_1.add(mntmResultados);
+		
 		JMenu mnEvaluadores = new JMenu("Evaluadores");		
 		menuBar.add(mnEvaluadores);
 		

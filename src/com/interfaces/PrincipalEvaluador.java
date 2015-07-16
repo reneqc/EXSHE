@@ -354,7 +354,7 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JLabel label = new JLabel("NUEVA EVALUACIÓN");
 		label.setFont(new Font("Dialog", Font.BOLD, 16));
-		label.setBounds(96, 28, 204, 19);
+		label.setBounds(89, 29, 204, 19);
 		panel_5.add(label);
 		
 		JPanel panel_3 = new JPanel();

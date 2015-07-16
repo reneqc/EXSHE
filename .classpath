@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/groovy-all-1.7.5.jar"/>
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/iText-2.1.7.jar"/>
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/jasperreports-5.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/PC/Documents/Software/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

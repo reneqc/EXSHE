@@ -51,6 +51,7 @@ public class InformesEvaluador extends JFrame {
 
 	private JTable tbl_evaluacionesFinalizadas;
 	private JPanel panel_1;
+	
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel lblInformesEvaluaciones;
@@ -274,7 +275,7 @@ public class InformesEvaluador extends JFrame {
 	               
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 				 	String path =RutaBase.obtenerRuta()+"reporteIndividualEvaluacion.jrxml";
-	                abrirReporte(path, "Reporte  individual", String.valueOf(id_evaluacion), "id_evaluacion");	                
+	                abrirReporte(path, "Reporte de la Evaluación ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
 	                
 	            
 	            }catch(Exception ex){

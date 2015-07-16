@@ -1,6 +1,7 @@
 package com.interfaces;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -14,9 +15,11 @@ import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +38,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.persistencia.Evaluacion;
 import com.persistencia.Heuristico;
+import javax.swing.JRadioButton;
 
 public class EjecucionEvaluaciones extends JFrame {
 
@@ -44,26 +48,58 @@ public class EjecucionEvaluaciones extends JFrame {
 	private JTable tbl_evaluaciones;
 	JLabel  lbl_evaluador;
 	ResultSet rs;
-	JLabel lbl_criterio;
-	final JButton btnGuardar;
-	JComboBox comboCalificacion;
+	JLabel lbl_criterio1;
+	JLabel lbl_criterio2;
+	JLabel lbl_criterio3;
+	JLabel lbl_criterio4;
+	JLabel lbl_criterio5;
+	JLabel lbl_criterio6;
+	JLabel lbl_criterio7;
+	JLabel lbl_criterio8;
+	JLabel lbl_criterio9;
+	
+	final JButton btnIniciar;
+	
+	String[] calificaciones;
+	String[] codigos;
+	String[] criterios;
+	
+	
+	int contadorCriterios=0;
+	
+	JComboBox comboCalificacion1;
+	JComboBox comboCalificacion2;
+	JComboBox comboCalificacion3;
+	JComboBox comboCalificacion4;
+	JComboBox comboCalificacion5;
+	JComboBox comboCalificacion6;
+	JComboBox comboCalificacion7;
+	JComboBox comboCalificacion8;
+	JComboBox comboCalificacion9;
+	
 	JPanel contenedor_calificaciones;
 	
-	int id_calificacion;
+
+	int id_calificacion1;	
+	int id_calificacion2;
+	int id_calificacion3;
+	int id_calificacion4;
+	int id_calificacion5;
+	int id_calificacion6;
+	int id_calificacion7;
+	int id_calificacion8;
+	int id_calificacion9;
+	
 	
 	//int contador=1;
 	JButton btnAnterior,btnSiguiente,btnFinalizar;
 	int id_evaluacion=-1;
 	public Heuristico h1=new Heuristico();
 	int  numHeuristico=1;
-	JLabel lbl_heuristico;
-	JLabel lbl_descripcion;
 	 Evaluacion evaluacion;
 	 private JTextField txt_version;
 	 private JTextField txt_nombre;
 	 private JTextField txt_url;
-	 JPanel panel_heuristicos;
-	 JPanel panel_descripcion;
 	 
 
 
@@ -109,30 +145,9 @@ public class EjecucionEvaluaciones extends JFrame {
 		contentPane.setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBackground(new Color(223, 223, 233));
-		panel_2.setBounds(481, 8, 402, 84);
-		contentPane.add(panel_2);
-		
-		JLabel lblLog = new JLabel("LOG");
-		lblLog.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/ejecucion.png")));
-		lblLog.setBounds(22, 12, 62, 66);
-		panel_2.add(lblLog);
-		
-		JLabel label_2 = new JLabel("Expert System of Heuristic Evaluation");
-		label_2.setFont(new Font("Dialog", Font.BOLD, 13));
-		label_2.setBounds(112, 12, 278, 33);
-		panel_2.add(label_2);
-		
-		JLabel lblBienvenido = new JLabel("EVALUACIONES");
-		lblBienvenido.setFont(new Font("Dialog", Font.PLAIN, 16));
-		lblBienvenido.setBounds(112, 37, 278, 35);
-		panel_2.add(lblBienvenido);
-		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(null, "Ejecutar evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_8.setBounds(389, 104, 949, 618);
+		panel_8.setBounds(357, 8, 981, 714);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
@@ -143,8 +158,8 @@ public class EjecucionEvaluaciones extends JFrame {
 		panel_8.add(panel_3);
 		
 		JLabel lblNavegadorParaLa = new JLabel("Navegador para la evaluación:");
-		lblNavegadorParaLa.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNavegadorParaLa.setBounds(12, 5, 242, 15);
+		lblNavegadorParaLa.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNavegadorParaLa.setBounds(12, 5, 170, 15);
 		panel_3.add(lblNavegadorParaLa);
 		
 		txt_navegador = new JTextField();
@@ -152,18 +167,18 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_navegador.setColumns(10);
 		txt_navegador.setBorder(null);
 		txt_navegador.setBackground(new Color(223, 223, 233));
-		txt_navegador.setBounds(249, 3, 188, 20);
+		txt_navegador.setBounds(192, 3, 245, 20);
 		panel_3.add(txt_navegador);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBackground(new Color(223, 223, 233));
-		panel_7.setBounds(482, 29, 454, 27);
+		panel_7.setBounds(482, 29, 473, 27);
 		panel_8.add(panel_7);
 		
 		JLabel lblUrlDelSitio = new JLabel("Url del Sitio:");
-		lblUrlDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblUrlDelSitio.setBounds(10, 5, 103, 15);
+		lblUrlDelSitio.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblUrlDelSitio.setBounds(10, 5, 67, 15);
 		panel_7.add(lblUrlDelSitio);
 		
 		txt_url = new JTextField();
@@ -171,18 +186,18 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_url.setColumns(10);
 		txt_url.setBorder(null);
 		txt_url.setBackground(new Color(223, 223, 233));
-		txt_url.setBounds(106, 3, 336, 20);
+		txt_url.setBounds(87, 3, 376, 20);
 		panel_7.add(txt_url);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(223, 223, 233));
-		panel_4.setBounds(482, 68, 454, 27);
+		panel_4.setBounds(482, 68, 473, 27);
 		panel_8.add(panel_4);
 		
 		JLabel lblVersinDelNavegador = new JLabel("Versión:");
-		lblVersinDelNavegador.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblVersinDelNavegador.setBounds(12, 5, 69, 15);
+		lblVersinDelNavegador.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblVersinDelNavegador.setBounds(12, 5, 47, 15);
 		panel_4.add(lblVersinDelNavegador);
 		
 		txt_version = new JTextField();
@@ -190,18 +205,18 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_version.setColumns(10);
 		txt_version.setBorder(null);
 		txt_version.setBackground(new Color(223, 223, 233));
-		txt_version.setBounds(72, 3, 383, 20);
+		txt_version.setBounds(69, 3, 394, 20);
 		panel_4.add(txt_version);
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
 		panel_6.setBackground(new Color(223, 223, 233));
-		panel_6.setBounds(12, 29, 449, 27);
+		panel_6.setBounds(12, 30, 449, 27);
 		panel_8.add(panel_6);
 		
 		JLabel lblNombreDelSitio = new JLabel("Nombre del Sitio:");
-		lblNombreDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNombreDelSitio.setBounds(12, 5, 129, 15);
+		lblNombreDelSitio.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNombreDelSitio.setBounds(12, 5, 96, 15);
 		panel_6.add(lblNombreDelSitio);
 		
 		txt_nombre = new JTextField();
@@ -209,74 +224,44 @@ public class EjecucionEvaluaciones extends JFrame {
 		txt_nombre.setColumns(10);
 		txt_nombre.setBorder(null);
 		txt_nombre.setBackground(new Color(223, 223, 233));
-		txt_nombre.setBounds(151, 3, 286, 20);
+		txt_nombre.setBounds(118, 3, 319, 20);
 		panel_6.add(txt_nombre);
 		
 		contenedor_calificaciones = new JPanel();
 		contenedor_calificaciones.setVisible(false);
-		contenedor_calificaciones.setBounds(12, 119, 925, 452);
+		contenedor_calificaciones.setBounds(12, 106, 959, 597);
 		panel_8.add(contenedor_calificaciones);
 		contenedor_calificaciones.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 261, 925, 42);
+		panel.setBounds(0, 38, 949, 45);
 		contenedor_calificaciones.add(panel);
+		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setLayout(null);
-		panel.setBackground(SystemColor.inactiveCaptionBorder);
 		
-		lbl_criterio = new JLabel("Criterio a evaluar");
-		lbl_criterio.setForeground(new Color(0, 0, 0));
-		lbl_criterio.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
-		lbl_criterio.setBounds(12, 6, 913, 27);
-		panel.add(lbl_criterio);
+		lbl_criterio1 = new JLabel("Criterio a evaluar");
+		lbl_criterio2 = new JLabel("Criterio a evaluar");
+		lbl_criterio3 = new JLabel("Criterio a evaluar");
+		lbl_criterio4 = new JLabel("Criterio a evaluar");
+		lbl_criterio5 = new JLabel("Criterio a evaluar");
+		lbl_criterio6 = new JLabel("Criterio a evaluar");
+		lbl_criterio7 = new JLabel("Criterio a evaluar");
+		lbl_criterio8 = new JLabel("Criterio a evaluar");
+		lbl_criterio9 = new JLabel("Criterio a evaluar");
 		
-		panel_descripcion = new JPanel();
-		panel_descripcion.setBounds(0, 161, 925, 42);
-		contenedor_calificaciones.add(panel_descripcion);
-		panel_descripcion.setLayout(null);
-		panel_descripcion.setBackground(new Color(223, 223, 233));
+		lbl_criterio1.setBounds(10, 0, 939, 18);
+		panel.add(lbl_criterio1);
+		lbl_criterio1.setForeground(new Color(0, 0, 0));
+		lbl_criterio1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		
-		lbl_descripcion = new JLabel("Descripcion del heuristico");
-		lbl_descripcion.setFont(new Font("Dialog", Font.PLAIN, 14));
-		lbl_descripcion.setBounds(12, 0, 913, 42);
-		panel_descripcion.add(lbl_descripcion);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(0, 115, 299, 34);
-		contenedor_calificaciones.add(panel_5);
-		panel_5.setLayout(null);
-		panel_5.setBackground(new Color(223, 223, 233));
-		
-		JLabel lblDescripcinDelHeurstico = new JLabel("DESCRIPCIÓN DEL HEURÍSTICO");
-		lblDescripcinDelHeurstico.setBounds(12, 0, 275, 34);
-		panel_5.add(lblDescripcinDelHeurstico);
-		lblDescripcinDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
-		
-		panel_heuristicos = new JPanel();
-		panel_heuristicos.setBounds(0, 58, 925, 45);
-		contenedor_calificaciones.add(panel_heuristicos);
-		panel_heuristicos.setLayout(null);
-		panel_heuristicos.setBackground(new Color(223, 223, 233));
-		
-		lbl_heuristico = new JLabel("Heurístico a evaluar");
-		lbl_heuristico.setFont(new Font("Dialog", Font.PLAIN, 14));
-		lbl_heuristico.setBounds(12, 0, 900, 40);
-		panel_heuristicos.add(lbl_heuristico);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 12, 253, 34);
-		contenedor_calificaciones.add(panel_1);
-		panel_1.setLayout(null);
-		panel_1.setBackground(new Color(223, 223, 233));
-		
-		JLabel lblNombreDelHeurstico = new JLabel("NOMBRE DEL HEURÍSTICO");
-		lblNombreDelHeurstico.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNombreDelHeurstico.setBounds(12, 0, 234, 34);
-		panel_1.add(lblNombreDelHeurstico);
+		comboCalificacion1 = new JComboBox();
+		comboCalificacion1.setBounds(10, 20, 155, 21);
+		panel.add(comboCalificacion1);
+		comboCalificacion1.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
 		
 		btnAnterior = new JButton("Anterior");
 		btnAnterior.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/prev.png")));
-		btnAnterior.setBounds(12, 413, 131, 27);
+		btnAnterior.setBounds(10, 565, 131, 23);
 		contenedor_calificaciones.add(btnAnterior);
 		btnAnterior.addMouseListener(new MouseAdapter() {
 			@Override
@@ -287,23 +272,53 @@ public class EjecucionEvaluaciones extends JFrame {
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
-						if(rs.isFirst()){
-							JOptionPane.showMessageDialog(null,"Este es el primer criterio que debe evaluar");
-						}else{
+
+
+						actualizarCalificacion(id_calificacion1,comboCalificacion1);
+						actualizarCalificacion(id_calificacion2,comboCalificacion2);
+						actualizarCalificacion(id_calificacion3,comboCalificacion3);
+						actualizarCalificacion(id_calificacion4,comboCalificacion4);
+						actualizarCalificacion(id_calificacion5,comboCalificacion5);
+						actualizarCalificacion(id_calificacion6,comboCalificacion6);
+						actualizarCalificacion(id_calificacion7,comboCalificacion7);
+						actualizarCalificacion(id_calificacion8,comboCalificacion8);
+						actualizarCalificacion(id_calificacion9,comboCalificacion9);
 						
 						rs.previous();	
-						actualizarCalificacion();
-						mostrarDatos();
+						mostrarCriterioIndividual(lbl_criterio9, comboCalificacion9);
 						
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio8, comboCalificacion8);
 						
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio7, comboCalificacion7);
+
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio6, comboCalificacion6);
 						
-						}
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio5, comboCalificacion5);
+						
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio4, comboCalificacion4);
+						
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio3, comboCalificacion3);
+						
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio2, comboCalificacion2);
+						
+						rs.previous();	
+						mostrarCriterioIndividual(lbl_criterio1, comboCalificacion1);
+						
+						//regresar
+				
 						
 					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Este es el primer criterio que debe evaluar");
 				}
 				
 
@@ -314,7 +329,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/next.png")));
-		btnSiguiente.setBounds(155, 413, 136, 27);
+		btnSiguiente.setBounds(163, 565, 136, 23);
 		contenedor_calificaciones.add(btnSiguiente);
 		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override
@@ -329,15 +344,50 @@ public class EjecucionEvaluaciones extends JFrame {
 					if(rs.isLast()){
 						JOptionPane.showMessageDialog(null,"Este fue el último criterio que debe evaluar");
 					}else{
-						rs.next();
-						actualizarCalificacion();
-						mostrarDatos();
+						
+						try {
+							rs.next();
+							id_calificacion1=mostrarCriterioIndividual(lbl_criterio1,comboCalificacion1);
+							
+						} catch (Exception e2) {
+							lbl_criterio1.setText("----------------------");
+							comboCalificacion1.removeAllItems();
+						}
+						
+						
+						try {
+							rs.next();
+							id_calificacion2=mostrarCriterioIndividual(lbl_criterio2,comboCalificacion2);
+							
+						} catch (Exception e2) {
+							lbl_criterio2.setText("-------------------");
+							comboCalificacion1.removeAllItems();
+						}
+						
+						
+						
+
+						
+					
+						
+						
+						actualizarCalificacion(id_calificacion1,comboCalificacion1);
+						actualizarCalificacion(id_calificacion2,comboCalificacion2);
+						actualizarCalificacion(id_calificacion3,comboCalificacion3);
+						actualizarCalificacion(id_calificacion4,comboCalificacion4);
+						actualizarCalificacion(id_calificacion5,comboCalificacion5);
+						actualizarCalificacion(id_calificacion6,comboCalificacion6);
+						actualizarCalificacion(id_calificacion7,comboCalificacion7);
+						actualizarCalificacion(id_calificacion8,comboCalificacion8);
+						actualizarCalificacion(id_calificacion9,comboCalificacion9);
+						
 						
 						
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Este fue el último criterio que debe evaluar");
 				}
 				
 				
@@ -349,51 +399,51 @@ public class EjecucionEvaluaciones extends JFrame {
 		JPanel panel_11 = new JPanel();
 		panel_11.setLayout(null);
 		panel_11.setBackground(new Color(223, 223, 233));
-		panel_11.setBounds(0, 215, 208, 34);
+		panel_11.setBounds(368, 0, 208, 27);
 		contenedor_calificaciones.add(panel_11);
 		
-		JLabel lblCriterioAEvaluar = new JLabel("CRITERIO A EVALUAR");
-		lblCriterioAEvaluar.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblCriterioAEvaluar.setBounds(12, 0, 192, 34);
+		JLabel lblCriterioAEvaluar = new JLabel("CRITERIOS A EVALUAR");
+		lblCriterioAEvaluar.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblCriterioAEvaluar.setBounds(32, 0, 172, 23);
 		panel_11.add(lblCriterioAEvaluar);
-		
-		JPanel panel_10 = new JPanel();
-		panel_10.setLayout(null);
-		panel_10.setBackground(new Color(223, 223, 233));
-		panel_10.setBounds(0, 315, 143, 34);
-		contenedor_calificaciones.add(panel_10);
-		
-		JLabel lblCalificaci = new JLabel("CALIFICACIÓN");
-		lblCalificaci.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblCalificaci.setBounds(12, 0, 130, 34);
-		panel_10.add(lblCalificaci);
-		
-		comboCalificacion = new JComboBox();
-		comboCalificacion.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
-		comboCalificacion.setBounds(0, 361, 238, 24);
-		contenedor_calificaciones.add(comboCalificacion);
 		
 		btnFinalizar = new JButton("   Finalizar");
 		btnFinalizar.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/stop2.png")));
-		btnFinalizar.setBounds(516, 413, 136, 27);
+		btnFinalizar.setBounds(525, 565, 136, 23);
 		contenedor_calificaciones.add(btnFinalizar);
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				actualizarCalificacion();
+				actualizarCalificacion(id_calificacion1,comboCalificacion1);
+				actualizarCalificacion(id_calificacion1,comboCalificacion2);
+				actualizarCalificacion(id_calificacion1,comboCalificacion3);
+				actualizarCalificacion(id_calificacion1,comboCalificacion4);
+				actualizarCalificacion(id_calificacion1,comboCalificacion5);
+				actualizarCalificacion(id_calificacion1,comboCalificacion6);
+				actualizarCalificacion(id_calificacion1,comboCalificacion7);
+				actualizarCalificacion(id_calificacion1,comboCalificacion8);
+				actualizarCalificacion(id_calificacion1,comboCalificacion9);
 				ResultSet pendientes;
 				try {
 					pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
 					
 					if(pendientes.next()){
-						int i=0;
+						int i=1;
 						String criteriosPendientes="";
 						pendientes.beforeFirst();
 						while(pendientes.next()){
-							criteriosPendientes=criteriosPendientes+pendientes.getString(5)+"-";
+							
+			
+							criteriosPendientes+=pendientes.getString(9)+": "+pendientes.getString(5)+" <br> ";
+						
 							i++;
 						}
 						
-						JOptionPane.showMessageDialog(null,"No se puede finalizar aún tiene "+i+" criterios pendientes de calificar: "+criteriosPendientes);
+
+						//JOptionPane.showMessageDialog(null,"No se puede finalizar aún tiene "+i+" criterios pendientes de calificar: "+criteriosPendientes);
+						
+						MensajePendientes msjPendiente=new MensajePendientes();
+						msjPendiente.mensajeError.setText("<html><div><h3 style='color:red'>No se puede finalizar la evaluación debido a que aún tiene "+(i+-1)+" criterios pendientes de calificar: <br></h3>"+criteriosPendientes+"</div></html>");
+						msjPendiente.show();
 						
 					}else{
 						
@@ -405,10 +455,10 @@ public class EjecucionEvaluaciones extends JFrame {
 							btnAnterior.setVisible(false);
 							btnSiguiente.setVisible(false);
 							btnFinalizar.setVisible(false);
-							btnGuardar.setEnabled(true);
+							btnIniciar.setEnabled(true);
 							limpiar();				
-							panel_heuristicos.setVisible(false);
-							panel_descripcion.setVisible(false);
+							//panel_heuristicos.setVisible(false);
+							//panel_descripcion.setVisible(false);
 							tbl_evaluaciones.setEnabled(true);
 							contenedor_calificaciones.setVisible(false);
 							JOptionPane.showMessageDialog(null,"Evaluación finalizada exitosamente");
@@ -433,7 +483,15 @@ public class EjecucionEvaluaciones extends JFrame {
 		JButton btnGuardarSesin = new JButton("  Guardar Sesión");
 		btnGuardarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actualizarCalificacion();
+				actualizarCalificacion(id_calificacion1,comboCalificacion1);
+				actualizarCalificacion(id_calificacion2,comboCalificacion2);
+				actualizarCalificacion(id_calificacion3,comboCalificacion3);
+				actualizarCalificacion(id_calificacion4,comboCalificacion4);
+				actualizarCalificacion(id_calificacion5,comboCalificacion5);
+				actualizarCalificacion(id_calificacion6,comboCalificacion6);
+				actualizarCalificacion(id_calificacion7,comboCalificacion7);
+				actualizarCalificacion(id_calificacion8,comboCalificacion8);
+				actualizarCalificacion(id_calificacion9,comboCalificacion9);
 				ResultSet pendientes;
 				
 				try {
@@ -453,7 +511,7 @@ public class EjecucionEvaluaciones extends JFrame {
 							cargarTabla();
 							tbl_evaluaciones.setEnabled(true);
 							limpiar();
-							btnGuardar.setEnabled(true);
+							btnIniciar.setEnabled(true);
 						}else{
 							JOptionPane.showMessageDialog(null,"Error al guardar la sesión");
 						}
@@ -476,22 +534,156 @@ public class EjecucionEvaluaciones extends JFrame {
 		btnGuardarSesin.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/puas3.png")));
 		btnGuardarSesin.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnGuardarSesin.setBackground(SystemColor.controlHighlight);
-		btnGuardarSesin.setBounds(330, 414, 174, 27);
+		btnGuardarSesin.setBounds(326, 565, 174, 23);
 		contenedor_calificaciones.add(btnGuardarSesin);
+		
+		JPanel panel_10 = new JPanel();
+		panel_10.setLayout(null);
+		panel_10.setBackground(Color.LIGHT_GRAY);
+		panel_10.setBounds(0, 94, 949, 50);
+		contenedor_calificaciones.add(panel_10);
+		
+	
+		lbl_criterio2.setForeground(Color.BLACK);
+		lbl_criterio2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio2.setBounds(10, 0, 929, 18);
+		panel_10.add(lbl_criterio2);
+		
+		
+		comboCalificacion2 = new JComboBox();
+		comboCalificacion2.setBounds(10, 18, 155, 21);
+		panel_10.add(comboCalificacion2);
+		comboCalificacion2.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_13 = new JPanel();
+		panel_13.setLayout(null);
+		panel_13.setBackground(Color.LIGHT_GRAY);
+		panel_13.setBounds(0, 151, 949, 50);
+		contenedor_calificaciones.add(panel_13);
+		
+		
+		lbl_criterio3.setForeground(Color.BLACK);
+		lbl_criterio3.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio3.setBounds(10, 0, 939, 18);
+		panel_13.add(lbl_criterio3);
+		
+		
+		comboCalificacion3 = new JComboBox();
+		comboCalificacion3.setBounds(10, 18, 155, 21);
+		panel_13.add(comboCalificacion3);
+		comboCalificacion3.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setLayout(null);
+		panel_15.setBackground(Color.LIGHT_GRAY);
+		panel_15.setBounds(0, 207, 949, 50);
+		contenedor_calificaciones.add(panel_15);
+		
+		
+		
+		lbl_criterio4.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio4.setBounds(10, 0, 939, 18);
+		panel_15.add(lbl_criterio4);
+		
+		
+		comboCalificacion4 = new JComboBox();
+		comboCalificacion4.setBounds(10, 18, 155, 21);
+		panel_15.add(comboCalificacion4);
+		comboCalificacion4.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_17 = new JPanel();
+		panel_17.setLayout(null);
+		panel_17.setBackground(Color.LIGHT_GRAY);
+		panel_17.setBounds(0, 264, 949, 50);
+		contenedor_calificaciones.add(panel_17);
+		
+		
+		lbl_criterio5.setForeground(Color.BLACK);
+		lbl_criterio5.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio5.setBounds(10, 0, 939, 18);
+		panel_17.add(lbl_criterio5);
+		
+		
+		comboCalificacion5 = new JComboBox();
+		comboCalificacion5.setBounds(10, 18, 155, 21);
+		panel_17.add(comboCalificacion5);
+		comboCalificacion5.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBackground(Color.LIGHT_GRAY);
+		panel_1.setBounds(0, 320, 949, 50);
+		contenedor_calificaciones.add(panel_1);
+		
+		
+		lbl_criterio6.setForeground(Color.BLACK);
+		lbl_criterio6.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio6.setBounds(10, 0, 939, 18);
+		panel_1.add(lbl_criterio6);
+		
+		comboCalificacion6 = new JComboBox();
+		comboCalificacion6.setBounds(10, 18, 155, 21);
+		panel_1.add(comboCalificacion6);
+		comboCalificacion6.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBackground(Color.LIGHT_GRAY);
+		panel_2.setBounds(0, 375, 949, 50);
+		contenedor_calificaciones.add(panel_2);
+		
+		
+		lbl_criterio7.setForeground(Color.BLACK);
+		lbl_criterio7.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio7.setBounds(10, 0, 939, 18);
+		panel_2.add(lbl_criterio7);
+		
+		comboCalificacion7 = new JComboBox();
+		comboCalificacion7.setBounds(10, 18, 155, 21);
+		panel_2.add(comboCalificacion7);
+		comboCalificacion7.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBackground(Color.LIGHT_GRAY);
+		panel_5.setBounds(0, 431, 949, 50);
+		contenedor_calificaciones.add(panel_5);
+		
+		
+		lbl_criterio8.setForeground(Color.BLACK);
+		lbl_criterio8.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio8.setBounds(10, 0, 939, 18);
+		panel_5.add(lbl_criterio8);
+		
+		comboCalificacion8 = new JComboBox();
+		comboCalificacion8.setBounds(10, 18, 155, 21);
+		panel_5.add(comboCalificacion8);
+		comboCalificacion8.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setLayout(null);
+		panel_12.setBackground(Color.LIGHT_GRAY);
+		panel_12.setBounds(0, 488, 949, 50);
+		contenedor_calificaciones.add(panel_12);
+		
+		
+		lbl_criterio9.setForeground(Color.BLACK);
+		lbl_criterio9.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lbl_criterio9.setBounds(10, 0, 939, 18);
+		panel_12.add(lbl_criterio9);
+		
+		comboCalificacion9 = new JComboBox();
+		comboCalificacion9.setBounds(10, 18, 155, 21);
+		panel_12.add(comboCalificacion9);
+		comboCalificacion9.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una opción"}));
 		btnFinalizar.setVisible(false);
 		btnSiguiente.setVisible(false);
 		
 		btnAnterior.setVisible(false);
-		
-		
-		
-		
-		panel_heuristicos.setVisible(false);
-		panel_descripcion.setVisible(false);
 		JPanel panel_9 = new JPanel();
 		panel_9.setLayout(null);
 		panel_9.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_9.setBounds(12, 104, 375, 618);
+		panel_9.setBounds(12, 49, 335, 673);
 		contentPane.add(panel_9);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -502,7 +694,7 @@ public class EjecucionEvaluaciones extends JFrame {
 				
 			}
 		});
-		scrollPane.setBounds(12, 57, 351, 549);
+		scrollPane.setBounds(12, 57, 310, 605);
 		panel_9.add(scrollPane);
 		
 		tbl_evaluaciones = new JTable();
@@ -541,11 +733,11 @@ public class EjecucionEvaluaciones extends JFrame {
 			));
 		scrollPane.setViewportView(tbl_evaluaciones);
 		
-		btnGuardar = new JButton("  Calificar");
-		btnGuardar.setBounds(233, 18, 130, 27);
-		panel_9.add(btnGuardar);
+		btnIniciar = new JButton("  Calificar");
+		btnIniciar.setBounds(185, 19, 137, 27);
+		panel_9.add(btnIniciar);
 		
-		btnGuardar.addActionListener(new ActionListener() {
+		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre=txt_nombre.getText();
 				String url=txt_url.getText();
@@ -574,7 +766,7 @@ public class EjecucionEvaluaciones extends JFrame {
 						
 							contenedor_calificaciones.setVisible(true);
 							
-							btnGuardar.setEnabled(false);
+							btnIniciar.setEnabled(false);
 							btnAnterior.setVisible(true);
 							btnSiguiente.setVisible(true);
 							btnFinalizar.setVisible(true);							
@@ -583,17 +775,46 @@ public class EjecucionEvaluaciones extends JFrame {
 							
 							
 							try {
-								rs.first();
 								
-								mostrarDatos();
+								
+								rs.first();
+								id_calificacion1=mostrarCriterioIndividual(lbl_criterio1,comboCalificacion1);
+								
+								rs.next();
+								id_calificacion2=mostrarCriterioIndividual(lbl_criterio2,comboCalificacion2);
+								
+								rs.next();
+								id_calificacion3=mostrarCriterioIndividual(lbl_criterio3,comboCalificacion3);
+								
+								
+								rs.next();
+								id_calificacion4=mostrarCriterioIndividual(lbl_criterio4,comboCalificacion4);
+								
+								
+								rs.next();
+								id_calificacion5=mostrarCriterioIndividual(lbl_criterio5,comboCalificacion5);
+								
+								
+								rs.next();
+								id_calificacion6=mostrarCriterioIndividual(lbl_criterio6,comboCalificacion6);
+								
+								
+								rs.next();
+								id_calificacion7=mostrarCriterioIndividual(lbl_criterio7,comboCalificacion7);
+								
+								rs.next();
+								id_calificacion8=mostrarCriterioIndividual(lbl_criterio8,comboCalificacion8);
+								
+								rs.next();
+								id_calificacion9=mostrarCriterioIndividual(lbl_criterio9,comboCalificacion9);
 							
-							} catch (SQLException e) {
+							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							
-							panel_heuristicos.setVisible(true);
-							panel_descripcion.setVisible(true);
+							//panel_heuristicos.setVisible(true);
+							//panel_descripcion.setVisible(true);
 							JOptionPane.showMessageDialog(null, "Test Iniciado");
 							
 					}
@@ -602,9 +823,9 @@ public class EjecucionEvaluaciones extends JFrame {
 				
 			}
 		});
-		btnGuardar.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/start2.png")));
-		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
-		btnGuardar.setBackground(SystemColor.controlHighlight);
+		btnIniciar.setIcon(new ImageIcon(EjecucionEvaluaciones.class.getResource("/img/start2.png")));
+		btnIniciar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnIniciar.setBackground(SystemColor.controlHighlight);
 		
 		lbl_evaluador = new JLabel("Evaluador conectado para evaluar");
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
@@ -635,7 +856,20 @@ public class EjecucionEvaluaciones extends JFrame {
 		}else{
 			
 		}
+		
+		
+		
+		/****************CONSTRUCTOR****************////////
+		
+
+		
+		
+		
+		
+		
 	}
+	
+	
 	
 	
 	
@@ -646,8 +880,8 @@ public class EjecucionEvaluaciones extends JFrame {
 	public void cargarTabla() {
 		
 		//JOptionPane.showMessageDialog(null,Acceso.conectado());
-		String email=Acceso.conectado();
-		//String email="perez@gmail.com";
+		//String email=Acceso.conectado();
+		String email="perez@gmail.com";
 		ResultSet rsTabla=null;
 		try {
 			rsTabla = Evaluacion.consultarEvaluacionesEvaluador(email);
@@ -698,13 +932,13 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
 		//tbl_subheuristicos.setBackground(new Color(161,202,232));
-		tbl_evaluaciones.setRowHeight(20);
+		tbl_evaluaciones.setRowHeight(15);
 		tbl_evaluaciones.setForeground(new Color(0,0,0));
-		tbl_evaluaciones.setFont(new Font("Dialog", Font.PLAIN, 13));
+		tbl_evaluaciones.setFont(new Font("Dialog", Font.PLAIN, 11));
 		tbl_evaluaciones.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
 		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
-		tbl_evaluaciones.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 15));
+		tbl_evaluaciones.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 12));
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -715,7 +949,7 @@ public class EjecucionEvaluaciones extends JFrame {
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(0);
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(1).setResizable(false);
 		
-		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(150);
+		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(100);
 		
 		//url sitio
 		tbl_evaluaciones.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
@@ -743,9 +977,10 @@ public class EjecucionEvaluaciones extends JFrame {
 		
 		
 
-		tbl_evaluaciones.getColumnModel().getColumn(0).setCellRenderer(tcr);
-				
 		tbl_evaluaciones.getColumnModel().getColumn(2).setCellRenderer(tcr);
+				
+		tbl_evaluaciones.getColumnModel().getColumn(4).setCellRenderer(tcr);
+		tbl_evaluaciones.getColumnModel().getColumn(6).setCellRenderer(tcr);
 	}
 	
 	
@@ -774,122 +1009,58 @@ public class EjecucionEvaluaciones extends JFrame {
 	
 	
 	//Para calificar criterios de uno en uno
+	
+	/*
+	 * 
+	 * Se envia el id de la evaluacion y se obtiene un listado de todos los heuristicos
+	 */
 	public void verCriterios(int id) throws SQLException{
-		rs=Evaluacion.consultarCalificaciones(id);
+		//rs=Evaluacion.consultarCalificaciones(id);
+	}
+	
+	
+	public void cargarComboNumeros(JComboBox combo){
+		combo.removeAllItems();
+		combo.addItem("Seleccione una opción");
+		combo.addItem("1");
+		combo.addItem("2");
+		combo.addItem("3");
+		combo.addItem("4");
+		combo.addItem("5");
+		combo.addItem("6");
+		combo.addItem("7");
+		combo.addItem("8");
+		combo.addItem("9");
+		combo.addItem("10");		
+		combo.addItem("NA");
+	}
+	
+	public void cargarComboTexto(JComboBox combo){
+		combo.removeAllItems();
+		combo.addItem("Seleccione una opción");
+		combo.addItem("NTS");
+		combo.addItem("NEP");
+		combo.addItem("NPP");
+		combo.addItem("NPI");
+		combo.addItem("S");
+		combo.addItem("NA");
+
+
+	}
+	
+	
 		
-	}
-	
-	
-	public void cargarComboNumeros(){
-		comboCalificacion.removeAllItems();
-		comboCalificacion.addItem("Seleccione una opción");
-		comboCalificacion.addItem("1");
-		comboCalificacion.addItem("2");
-		comboCalificacion.addItem("3");
-		comboCalificacion.addItem("4");
-		comboCalificacion.addItem("5");
-		comboCalificacion.addItem("6");
-		comboCalificacion.addItem("7");
-		comboCalificacion.addItem("8");
-		comboCalificacion.addItem("9");
-		comboCalificacion.addItem("10");		
-		comboCalificacion.addItem("NA");
-	}
-	
-	public void cargarComboTexto(){
-		comboCalificacion.removeAllItems();
-		comboCalificacion.addItem("Seleccione una opción");
-		comboCalificacion.addItem("NTS");
-		comboCalificacion.addItem("NEP");
-		comboCalificacion.addItem("NPP");
-		comboCalificacion.addItem("NPI");
-		comboCalificacion.addItem("S");
-		comboCalificacion.addItem("NA");
-
-
-	}
-	
-	public void mostrarDatos(){
-		float puntos=-1;
-		try {
-			
-			try {
-				id_calificacion=rs.getInt(1);
-				//JOptionPane.showMessageDialog(null,id_calificacion);
-				puntos=Evaluacion.consultarCalificacion(id_calificacion);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			lbl_heuristico.setText("<html><div>"+rs.getString(8)+"</html></div>");		
-			lbl_descripcion.setText("<html><div>"+rs.getString(7)+"</html></div>");
-			lbl_criterio.setText("<html><div>"+rs.getString(5)+"</html></div>");
-			
-			
-			if(rs.getString(6).equals("Numérico")){
-				
-				cargarComboNumeros();	
-				
-				if(puntos==-1){
-					comboCalificacion.setSelectedIndex(0);
-				}else{
-					if(puntos==0){
-						comboCalificacion.setSelectedIndex(11);
-					}else{
-						comboCalificacion.setSelectedIndex((int) puntos);
-					}
-				}
-				
-			}else{
-				cargarComboTexto();
-				
-			/*	comboCalificacion.addItem("Seleccione una opción"); 0
-				comboCalificacion.addItem("NTS"); 1
-				comboCalificacion.addItem("NEP"); 2 
-				comboCalificacion.addItem("NPP"); 3
-				comboCalificacion.addItem("NPI"); 4
-				comboCalificacion.addItem("S");   5
-				comboCalificacion.addItem("NA");  6
-			*/
-				
-				if(puntos==-1){
-					comboCalificacion.setSelectedIndex(0);
-				}
-				
-				if(puntos==0){
-						comboCalificacion.setSelectedIndex(1);					
-				}
-				
-				if(puntos>0 && puntos<5){
-					comboCalificacion.setSelectedIndex(2);					
-				}
-				if(puntos==5){
-					comboCalificacion.setSelectedIndex(3);					
-				}
-				if(puntos>5 && puntos<10){
-					comboCalificacion.setSelectedIndex(4);					
-				}
-				if(puntos==10){
-					comboCalificacion.setSelectedIndex(5);					
-				}			
-				
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	
 	
-	public void actualizarCalificacion(){
+	
+	public void actualizarCalificacion(int id_cal,JComboBox combo){
 		double puntos;	
-		if(comboCalificacion.getSelectedIndex()==0){
+		if(combo.getSelectedIndex()==0){
 			puntos=-1;
 		}else{
 			
-			String valorSeleccionado=comboCalificacion.getSelectedItem().toString();
+			String valorSeleccionado=combo.getSelectedItem().toString();
 			
 			if(valorSeleccionado.equals("NTS")){
 				puntos=0;
@@ -907,7 +1078,7 @@ public class EjecucionEvaluaciones extends JFrame {
 								puntos=10;
 							}else{
 								if(valorSeleccionado.equals("NA")){
-									puntos=0;
+									puntos=-2;
 								}else{
 									puntos=Integer.parseInt(valorSeleccionado);
 								}
@@ -925,10 +1096,84 @@ public class EjecucionEvaluaciones extends JFrame {
 			
 		}
 
-		if(Evaluacion.calificar(id_calificacion, puntos)>0){
+		if(Evaluacion.calificar(id_cal, puntos)>0){
 			
 		}else{
 			JOptionPane.showMessageDialog(null,"Error al calificar");
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public int mostrarCriterioIndividual(JLabel lbl,JComboBox combo) throws HeadlessException, SQLException{
+		int id_cali=-10;
+		float puntos;
+		/*Primera opcion*/
+		
+		if(rs.isLast()){
+			JOptionPane.showMessageDialog(null,"No hay más criterios que mostrar");
+			
+			lbl.setText("----------------");
+			combo.removeAllItems();
+		}else{
+	
+		id_cali=rs.getInt(1);
+		puntos=Evaluacion.consultarCalificacion(id_cali);
+
+		lbl.setText("<html><div>"+rs.getString(9)+": "+rs.getString(5)+"</html></div>");
+	
+	
+		if(rs.getString(6).equals("Numérico")){
+			
+			cargarComboNumeros(combo);	
+			if(puntos==-1){
+				comboCalificacion1.setSelectedIndex(0);
+				
+			}else{
+				if(puntos==0){
+					combo.setSelectedIndex(11);
+				}else{
+					combo.setSelectedIndex((int) puntos);
+				}
+			}
+			
+		}else{
+		cargarComboTexto(combo);
+
+		if(puntos==-1){
+			combo.setSelectedIndex(0);
+		}
+		
+		if(puntos==0){
+				combo.setSelectedIndex(1);					
+		}
+		
+		if(puntos>0 && puntos<5){
+			combo.setSelectedIndex(2);					
+		}
+		if(puntos==5){
+			comboCalificacion1.setSelectedIndex(3);					
+		}
+		if(puntos>5 && puntos<10){
+			comboCalificacion1.setSelectedIndex(4);					
+		}
+		if(puntos==10){
+			comboCalificacion1.setSelectedIndex(5);					
+		}	
+		if(puntos==-2){
+			comboCalificacion1.setSelectedIndex(6);					
+		}
+	}
+}
+		return id_cali;
+		
+	}
+	
+	
+	
 }

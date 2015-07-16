@@ -13,7 +13,7 @@ public class Conexion {
 	@SuppressWarnings("finally")
 	public static Connection obtenerConexion(){
 		Connection conexion=null;
-		String nombreDb="bdd_exshe0.1";
+		String nombreDb="bdd_exshe_V1.0";
 		try{
 
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();

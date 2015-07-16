@@ -150,8 +150,8 @@ public class PrincipalEvaluador extends JFrame {
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				EjecucionEvaluaciones ejecucion=new EjecucionEvaluaciones();
-				ejecucion.lbl_evaluador.setText(lbl_evaluador.getText());
+				Ejecucion ejecucion=new Ejecucion();
+			
 				
 				ejecucion.show();
 				
@@ -254,9 +254,7 @@ public class PrincipalEvaluador extends JFrame {
 		label_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EjecucionEvaluaciones ejecucion=new EjecucionEvaluaciones();
-				ejecucion.lbl_evaluador.setText(lbl_evaluador.getText());
-				
+				Ejecucion ejecucion=new Ejecucion();
 				ejecucion.show();
 			}
 		});
@@ -367,14 +365,14 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JLabel lblNavegadorParaLa = new JLabel("Navegador para la evaluación:");
 		lblNavegadorParaLa.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNavegadorParaLa.setBounds(12, 5, 242, 15);
+		lblNavegadorParaLa.setBounds(12, 5, 204, 15);
 		panel_3.add(lblNavegadorParaLa);
 		
 		txt_navegador = new JTextField();
 		txt_navegador.setColumns(10);
 		txt_navegador.setBorder(null);
 		txt_navegador.setBackground(new Color(223, 223, 233));
-		txt_navegador.setBounds(249, 3, 149, 20);
+		txt_navegador.setBounds(214, 3, 184, 20);
 		panel_3.add(txt_navegador);
 		
 		JPanel panel_7 = new JPanel();
@@ -385,7 +383,7 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JLabel lblUrlDelSitio = new JLabel("Url del Sitio:");
 		lblUrlDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblUrlDelSitio.setBounds(12, 5, 103, 15);
+		lblUrlDelSitio.setBounds(12, 5, 87, 15);
 		panel_7.add(lblUrlDelSitio);
 		
 		txt_url = new JTextField();
@@ -393,7 +391,7 @@ public class PrincipalEvaluador extends JFrame {
 		txt_url.setColumns(10);
 		txt_url.setBorder(null);
 		txt_url.setBackground(new Color(223, 223, 233));
-		txt_url.setBounds(111, 3, 287, 20);
+		txt_url.setBounds(97, 3, 301, 20);
 		panel_7.add(txt_url);
 		
 		JButton btnGuardar = new JButton("  Guardar");
@@ -458,14 +456,14 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JLabel lblVersinDelNavegador = new JLabel("Versión del navegador:");
 		lblVersinDelNavegador.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblVersinDelNavegador.setBounds(12, 5, 178, 15);
+		lblVersinDelNavegador.setBounds(12, 5, 148, 15);
 		panel_4.add(lblVersinDelNavegador);
 		
 		txt_version = new JTextField();
 		txt_version.setColumns(10);
 		txt_version.setBorder(null);
 		txt_version.setBackground(new Color(223, 223, 233));
-		txt_version.setBounds(188, 3, 202, 20);
+		txt_version.setBounds(165, 3, 225, 20);
 		panel_4.add(txt_version);
 		
 		JPanel panel_6 = new JPanel();
@@ -476,7 +474,7 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JLabel lblNombreDelSitio = new JLabel("Nombre del Sitio:");
 		lblNombreDelSitio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNombreDelSitio.setBounds(12, 5, 129, 15);
+		lblNombreDelSitio.setBounds(12, 5, 117, 15);
 		panel_6.add(lblNombreDelSitio);
 		
 		txt_nombre = new JTextField();
@@ -484,7 +482,7 @@ public class PrincipalEvaluador extends JFrame {
 		txt_nombre.setColumns(10);
 		txt_nombre.setBorder(null);
 		txt_nombre.setBackground(new Color(223, 223, 233));
-		txt_nombre.setBounds(151, 3, 250, 20);
+		txt_nombre.setBounds(128, 3, 273, 20);
 		panel_6.add(txt_nombre);
 		
 		JButton button = new JButton("Limpiar");

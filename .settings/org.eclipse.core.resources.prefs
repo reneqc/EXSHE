@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
-encoding//reportes/evaluacionesFinalizadas.jrxml=UTF-8
 encoding//src/com/interfaces/Acceso.java=UTF-8
 encoding//src/com/interfaces/AdministracionSubHeuristicos.java=UTF-8
 encoding//src/com/interfaces/EjecucionEvaluaciones.java=UTF-8
@@ -9,8 +8,3 @@ encoding//src/com/interfaces/Login.java=UTF-8
 encoding//src/com/interfaces/MantenimientoEvaluadores.java=UTF-8
 encoding//src/com/interfaces/PrincipalAdministrador.java=UTF-8
 encoding//src/com/interfaces/PrincipalEvaluador.java=UTF-8
-encoding//src/com/reportes/Reporte.jrxml=UTF-8
-encoding//src/com/reportes/evaluacionesFinalizadas.jrxml=UTF-8
-encoding//src/com/reportes/evaluacionesPendientes.jrxml=UTF-8
-encoding//src/com/reportes/otro.jrxml=UTF-8
-encoding//src/com/reportes/reporteIndividualEvaluacion.jrxml=UTF-8

@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Thu Jul 09 14:16:54 COT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014e-743f-cb9c-0000050c9408 
-on database directory C:\workspace\EXSHE\bdd_exshe0.1 with class loader sun.misc.Launcher$AppClassLoader@5d593ce6 
+Thu Jul 16 12:29:39 COT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014e-97ea-1764-00000167caa0 
+on database directory C:\workspace\EXSHE\bdd_exshe_V1.0 with class loader sun.misc.Launcher$AppClassLoader@191e0eb 
 Loaded from file:/C:/workspace/EXSHE/librerias/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_25-b17
 user.dir=C:\workspace\EXSHE
-os.name=Windows 8
+os.name=Windows 7
 os.arch=amd64
-os.version=6.2
+os.version=6.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

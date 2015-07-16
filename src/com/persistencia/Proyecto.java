@@ -81,7 +81,7 @@ public class Proyecto {
 		Calendar cal = Calendar.getInstance();
 		//cal.add(Calendar.MONTH,-1);
 		
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		return  format1.format(cal.getTime());
 	}
 

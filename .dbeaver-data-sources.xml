@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="derby-14e91c9bf93-6c84cf42f826aabd" provider="generic" driver="derby" name="Derby - bdd_exshe_V1.0" create-date="1436965132951" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="C:\workspace\EXSHE\bdd_exshe_V1.0" url="jdbc:derby:C:\workspace\EXSHE\bdd_exshe_V1.0" user="" type="dev">
+			<bootstrap/>
+		</connection>
+	</data-source>
+</data-sources>

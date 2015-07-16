@@ -92,15 +92,16 @@ public class Evaluacion {
 		
 	}
 	
-	
+	/*
 	
 	public static ResultSet consultarCalificaciones(int id_evaluacion) throws SQLException{
 		
 		Statement sentencia = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion;
+		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" order by subheuristico.id_subheuristico ASC";
 		ResultSet rs = sentencia.executeQuery(cadena);
 		return rs;
 	}
+	*/
 
 	public static int calificar(int id_calificacion,double puntos) {
 		try {
@@ -147,7 +148,7 @@ public class Evaluacion {
 
 		
 		Statement sentencia = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND calificacion.puntos=-1 AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion;
+		String cadena = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND calificacion.puntos=-1 AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion;
 		ResultSet  rs = sentencia.executeQuery(cadena);
 		return rs;
 
@@ -193,6 +194,55 @@ public class Evaluacion {
 		
 		
 	}
+	
+	
+	public static ResultSet[] consultarCalificaciones(int id_evaluacion) throws SQLException{
+			ResultSet[] rs = new ResultSet[10]; 
+			Statement sentencia0 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia1 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia2 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia3 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia4 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia5 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia6 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia7 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia8 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			Statement sentencia9 = (Statement) conex.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			
+			String cadena0 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico<=9";
+			rs[0] = sentencia0.executeQuery(cadena0);
+			
+			String cadena1 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=10 and subheuristico.id_subheuristico<=18  order by subheuristico.id_subheuristico ASC";
+			rs[1] = sentencia1.executeQuery(cadena1);
+			
+			String cadena2 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=19 and subheuristico.id_subheuristico<=27  order by subheuristico.id_subheuristico ASC";
+			rs[2] = sentencia2.executeQuery(cadena2);
+			
+			String cadena3 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=28 and subheuristico.id_subheuristico<=36  order by subheuristico.id_subheuristico ASC";
+			rs[3] = sentencia3.executeQuery(cadena3);
+			
+			String cadena4 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=37 and subheuristico.id_subheuristico<=45  order by subheuristico.id_subheuristico ASC";
+			rs[4] = sentencia4.executeQuery(cadena4);
+			
+			String cadena5 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=46 and subheuristico.id_subheuristico<=54  order by subheuristico.id_subheuristico ASC";
+			rs[5] = sentencia5.executeQuery(cadena5);
+			
+			
+			String cadena6 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=55 and subheuristico.id_subheuristico<=63  order by subheuristico.id_subheuristico ASC";
+			rs[6] = sentencia6.executeQuery(cadena6);
+			
+			String cadena7 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=64 and subheuristico.id_subheuristico<=72  order by subheuristico.id_subheuristico ASC";
+			rs[7] = sentencia7.executeQuery(cadena7);
+			
+			String cadena8 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>=73 and subheuristico.id_subheuristico<=81  order by subheuristico.id_subheuristico ASC";
+			rs[8] = sentencia8.executeQuery(cadena8);
+			
+			
+			String cadena9 = "SELECT calificacion.id_calificacion, subheuristico.id_subheuristico, resultado.id_resultado, calificacion.puntos, subheuristico.criterio, subheuristico.tipo, heuristico.nombre, heuristico.descripcion, subheuristico.codigo FROM heuristico, subheuristico, resultado, calificacion, evaluacion WHERE heuristico.id_heuristico = subheuristico.id_heuristico AND subheuristico.id_subheuristico = calificacion.id_subheuristico AND resultado.id_resultado = calificacion.id_resultado AND evaluacion.id_evaluacion = resultado.id_evaluacion and evaluacion.id_evaluacion="+id_evaluacion+" and subheuristico.id_subheuristico>81  order by subheuristico.id_subheuristico ASC";
+			rs[9] = sentencia9.executeQuery(cadena9);
+			
+			return rs;
+		}
 
 	
 	

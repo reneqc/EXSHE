@@ -51,7 +51,7 @@ import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
 import com.persistencia.Proyecto;
 import com.persistencia.RutaBase;
-import com.reportes.AbstractReport;
+
 
 public class PrincipalAdministrador extends JFrame {
 

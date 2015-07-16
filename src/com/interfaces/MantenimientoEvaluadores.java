@@ -634,12 +634,12 @@ public class MantenimientoEvaluadores extends JFrame {
 		
 		JPanel panel_11 = new JPanel();
 		panel_11.setBorder(new TitledBorder(null, "Evaluadores Registrados", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_11.setBounds(12, 337, 1326, 385);
+		panel_11.setBounds(12, 337, 1326, 354);
 		contentPane.add(panel_11);
 		panel_11.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(24, 24, 1290, 349);
+		scrollPane.setBounds(24, 24, 1290, 307);
 		panel_11.add(scrollPane);
 		
 		tbl_evaluadores = new JTable();
@@ -754,25 +754,25 @@ public class MantenimientoEvaluadores extends JFrame {
 	public void formatearTabla(){
 		//tbl_subheuristicos.getColumnModel().getColumn(0).setPreferredWidth(1);
 		//tbl_subheuristicos.setBackground(new Color(161,202,232));
-		tbl_evaluadores.setRowHeight(20);
+		tbl_evaluadores.setRowHeight(15);
 		tbl_evaluadores.setForeground(new Color(0,0,0));
-		tbl_evaluadores.setFont(new Font("Dialog", Font.PLAIN, 13));
+		tbl_evaluadores.setFont(new Font("Dialog", Font.PLAIN, 11));
 		tbl_evaluadores.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		//tbl_subheuristicos.getTableHeader().setBackground(new Color(9,125,209));
 		//tbl_subheuristicos.getTableHeader().setForeground(new Color(255,255,255));
-		tbl_evaluadores.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 16));
+		tbl_evaluadores.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 12));
 
 		
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(200);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(200);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(150);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(150);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(150);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(7).setPreferredWidth(150);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(8).setPreferredWidth(150);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(9).setPreferredWidth(150);
-		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(10).setPreferredWidth(150);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(120);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(120);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(140);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(140);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(140);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(140);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(7).setPreferredWidth(140);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(8).setPreferredWidth(140);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(9).setPreferredWidth(105);
+		tbl_evaluadores.getTableHeader().getColumnModel().getColumn(10).setPreferredWidth(100);
 		
 		tbl_evaluadores.getColumnModel().getColumn(0).setMaxWidth(0);
 		tbl_evaluadores.getColumnModel().getColumn(0).setMinWidth(0);
@@ -781,7 +781,18 @@ public class MantenimientoEvaluadores extends JFrame {
 		
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-		tcr.setHorizontalAlignment(SwingConstants.LEFT);
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		tbl_evaluadores.getColumnModel().getColumn(1).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(2).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(3).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(4).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(5).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(6).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(7).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(8).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(9).setCellRenderer(tcr);
+		tbl_evaluadores.getColumnModel().getColumn(10).setCellRenderer(tcr);
 	}
 	
 	

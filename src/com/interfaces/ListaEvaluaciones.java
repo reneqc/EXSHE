@@ -90,9 +90,16 @@ public class ListaEvaluaciones extends JFrame {
 				
 				int indice=tbl_evaluacionesFinalizadas.getSelectedRow();				
 				id_evaluacion=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
-				Resultados result=new Resultados(id_evaluacion);				
-				result.idEvaluacion=id_evaluacion;
-				result.show();
+				Resultados result;
+				try {
+					result = new Resultados(id_evaluacion);
+					result.idEvaluacion=id_evaluacion;
+					result.show();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				
 			}
 		});
@@ -126,7 +133,6 @@ public class ListaEvaluaciones extends JFrame {
 		contentPane.add(panel_1);
 		
 		JLabel label = new JLabel("LOG");
-		label.setIcon(new ImageIcon(ListaEvaluaciones.class.getResource("/img/proyecto.png")));
 		label.setBounds(22, 12, 62, 66);
 		panel_1.add(label);
 		

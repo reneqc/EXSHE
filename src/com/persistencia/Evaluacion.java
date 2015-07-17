@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -110,6 +111,17 @@ public class Evaluacion {
 		}
 		
 		return resultado;
+		
+	}
+	
+	public static ResultSet consultarListaNotas(int id , String nom) throws SQLException{
+		
+		
+		Statement sentencia = (Statement) conex.createStatement();
+		String cadena = "select  puntos, subheuristico.CODIGO  from evaluacion, calificacion, resultado, heuristico, subheuristico where evaluacion.id_evaluacion=resultado.id_evaluacion and puntos > -1 and resultado.id_resultado= calificacion.id_resultado  and evaluacion.id_evaluacion="+id+"  and heuristico.id_heuristico=subheuristico.ID_HEURISTICO and subheuristico.ID_SUBHEURISTICO= calificacion.ID_SUBHEURISTICO and heuristico.CODIGO='"+nom+"'";
+		ResultSet rs = sentencia.executeQuery(cadena);
+				
+		return rs;
 		
 	}
 	

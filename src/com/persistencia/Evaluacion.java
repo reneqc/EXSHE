@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Evaluacion {
 		
@@ -92,6 +94,21 @@ public class Evaluacion {
 				resultado= rs.getFloat(1);
 		}
 
+		return resultado;
+		
+	}
+	
+	
+	public static float consultarPromedioHeuristico(int id , String nom) throws SQLException{
+		float resultado=0;
+		Statement sentencia = (Statement) conex.createStatement();
+		String cadena = "select  avg (puntos)  from evaluacion, calificacion, resultado, heuristico, subheuristico where evaluacion.id_evaluacion=resultado.id_evaluacion and puntos > -1 and resultado.id_resultado= calificacion.id_resultado  and evaluacion.id_evaluacion="+id+"  and heuristico.id_heuristico=subheuristico.ID_HEURISTICO and subheuristico.ID_SUBHEURISTICO= calificacion.ID_SUBHEURISTICO and heuristico.CODIGO='"+nom+"'";
+		ResultSet rs = sentencia.executeQuery(cadena);
+		
+		while(rs.next()){			
+			resultado= rs.getFloat(1);
+		}
+		
 		return resultado;
 		
 	}

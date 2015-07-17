@@ -11,5 +11,7 @@
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/groovy-all-1.7.5.jar"/>
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/iText-2.1.7.jar"/>
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/jasperreports-5.0.0.jar"/>
+	<classpathentry kind="lib" path="librerias/jess.jar"/>
+	<classpathentry kind="lib" path="librerias/jsr94.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

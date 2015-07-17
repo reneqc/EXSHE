@@ -109,7 +109,7 @@ public class ListaEvaluaciones extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"filados", "New column", "filauno"
+				"SITIO", "NAVEGADOR", "EVALUADOR","ESTADO"
 			}
 		));
 		
@@ -152,7 +152,12 @@ public class ListaEvaluaciones extends JFrame {
 		label_2.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_2.setBounds(112, 37, 278, 35);
 		panel_1.add(label_2);
-		caragarTabla();
+		try {
+			caragarTabla();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 	public void cerrarPrincipal(){

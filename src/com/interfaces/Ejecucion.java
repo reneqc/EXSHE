@@ -103,6 +103,7 @@ public class Ejecucion extends JFrame {
 	ResultSet[] rs=new ResultSet[10];
 	
 	int id_evaluacion=-1;
+	private final JLabel label = new JLabel("AY -Ayuda");
 
 	/**
 	 * Launch the application.
@@ -145,11 +146,11 @@ public class Ejecucion extends JFrame {
 		panel.setLayout(null);
 		
 		panel.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 335, 670);
+		panel.setBounds(10, 11, 335, 322);
 		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 57, 310, 596);
+		scrollPane.setBounds(10, 57, 310, 249);
 		panel.add(scrollPane);
 		
 		tbl_evaluaciones = new JTable();
@@ -775,6 +776,51 @@ public class Ejecucion extends JFrame {
 		});
 		btnFinalizar.setBounds(512, 544, 117, 27);
 		contenedor_criterios.add(btnFinalizar);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBorder(new TitledBorder(null, "Criterios", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_2.setBounds(10, 344, 335, 337);
+		contentPane.add(panel_2);
+		
+		JLabel lblAgAspectos = new JLabel("AG - Aspectos Generales");
+		lblAgAspectos.setBounds(52, 50, 232, 14);
+		panel_2.add(lblAgAspectos);
+		
+		JLabel lblIiIdentidad = new JLabel("II - Identidad e Informaci\u00F3n");
+		lblIiIdentidad.setBounds(52, 75, 232, 14);
+		panel_2.add(lblIiIdentidad);
+		
+		JLabel lblAspectosGenerales = new JLabel("EN - Estructura y navegaci\u00F3n");
+		lblAspectosGenerales.setBounds(52, 100, 232, 14);
+		panel_2.add(lblAspectosGenerales);
+		
+		JLabel lblRoRotulado = new JLabel("RO - Rotulado");
+		lblRoRotulado.setBounds(52, 125, 232, 14);
+		panel_2.add(lblRoRotulado);
+		
+		JLabel label_5 = new JLabel("LA - Layout de la página");
+		label_5.setBounds(52, 147, 232, 14);
+		panel_2.add(label_5);
+		
+		JLabel label_6 = new JLabel("EF - Entendibilidad y facilidad en la interacción");
+		label_6.setBounds(52, 172, 232, 14);
+		panel_2.add(label_6);
+		
+		JLabel label_7 = new JLabel("CR - Control y retroalimentación");
+		label_7.setBounds(52, 197, 232, 14);
+		panel_2.add(label_7);
+		
+		JLabel label_8 = new JLabel("EM - Elementos multimedia");
+		label_8.setBounds(52, 222, 232, 14);
+		panel_2.add(label_8);
+		
+		JLabel label_9 = new JLabel("BU - Búsqueda");
+		label_9.setBounds(52, 247, 232, 14);
+		panel_2.add(label_9);
+		label.setBounds(52, 272, 232, 14);
+		
+		panel_2.add(label);
 		
 		
 		

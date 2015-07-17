@@ -40,6 +40,7 @@ import javax.swing.table.DefaultTableModel;
 import com.persistencia.Evaluacion;
 import javax.swing.JToggleButton;
 import javax.swing.JSeparator;
+import java.awt.Toolkit;
 
 public class PrincipalEvaluador extends JFrame {
 
@@ -82,6 +83,7 @@ public class PrincipalEvaluador extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalEvaluador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PrincipalEvaluador.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - VENTANA PRINCIPAL DE EVALUACIÓN");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -148,6 +150,7 @@ public class PrincipalEvaluador extends JFrame {
 		menuBar.add(mnEvaluaciones);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem(" Ejecutar");
+		mntmNewMenuItem_9.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/play2.png")));
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -162,6 +165,7 @@ public class PrincipalEvaluador extends JFrame {
 		mnEvaluaciones.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmInformes = new JMenuItem(" Informes");
+		mntmInformes.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/informe1.png")));
 		mntmInformes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InformesEvaluador informe=new InformesEvaluador();

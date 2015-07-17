@@ -31,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 public class ListaEvaluaciones extends JFrame {
 
@@ -57,6 +58,7 @@ public class ListaEvaluaciones extends JFrame {
 	 * Create the frame.
 	 */
 	public ListaEvaluaciones() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaEvaluaciones.class.getResource("/img/logo1.png")));
 		setTitle("Resultados");
 		addWindowListener(new WindowAdapter() {
 			@Override

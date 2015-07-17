@@ -42,6 +42,7 @@ import com.persistencia.Conexion;
 import com.persistencia.Evaluacion;
 import com.persistencia.RutaBase;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class InformesEvaluador extends JFrame {
 
@@ -79,6 +80,7 @@ public class InformesEvaluador extends JFrame {
 	 * Create the frame.
 	 */
 	public InformesEvaluador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InformesEvaluador.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - INFORMES");
 		addWindowListener(new WindowAdapter() {
 			@Override

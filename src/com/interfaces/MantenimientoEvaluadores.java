@@ -82,6 +82,7 @@ public class MantenimientoEvaluadores extends JFrame {
 	 * Create the frame.
 	 */
 	public MantenimientoEvaluadores() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoEvaluadores.class.getResource("/img/logo1.png")));
 		setResizable(false);
 		setTitle("EXSHE - MANTENIMIENTO DE EVALUADORES");
 		addWindowListener(new WindowAdapter() {

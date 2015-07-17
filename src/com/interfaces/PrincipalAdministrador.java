@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,8 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -41,16 +40,16 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.persistencia.Conexion;
+import com.persistencia.Evaluador;
+import com.persistencia.Proyecto;
+import com.persistencia.RutaBase;
+
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
-
-import com.persistencia.Conexion;
-import com.persistencia.Evaluador;
-import com.persistencia.Proyecto;
-import com.persistencia.RutaBase;
 
 
 public class PrincipalAdministrador extends JFrame {
@@ -91,6 +90,7 @@ public class PrincipalAdministrador extends JFrame {
 	 * Create the frame.
 	 */
 	public PrincipalAdministrador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Acceso.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - VENTANA PRINCIPAL DE ADMINISTRACIÓN");
 		addWindowListener(new WindowAdapter() {
 			@Override

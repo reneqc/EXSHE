@@ -157,6 +157,7 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnEvaluaciones_1);
 		
 		JMenuItem mntmPendientes = new JMenuItem("Pendientes");
+		mntmPendientes.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/pendientes2.png")));
 		mntmPendientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 try{
@@ -176,6 +177,7 @@ public class PrincipalAdministrador extends JFrame {
 		mnEvaluaciones_1.add(mntmPendientes);
 		
 		JMenuItem mntmFinalizadas = new JMenuItem("Finalizadas");
+		mntmFinalizadas.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluaciones1.png")));
 		mntmFinalizadas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -209,6 +211,7 @@ public class PrincipalAdministrador extends JFrame {
 		mnEvaluaciones_1.add(mntmFinalizadas);
 		
 		JMenuItem mntmResultados = new JMenuItem("Resultados");
+		mntmResultados.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/show2.png")));
 		mntmResultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -222,6 +225,7 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnEvaluadores);
 		
 		JMenuItem mnuMantenimientoEvaluadores = new JMenuItem("Mantenimiento");
+		mnuMantenimientoEvaluadores.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluadores2.png")));
 		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		mnuMantenimientoEvaluadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -322,7 +326,7 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		label_5.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluadores2.png")));
 		label_5.setToolTipText("Mantenimiento de evaluadores");
-		label_5.setBounds(242, 0, 24, 31);
+		label_5.setBounds(264, 0, 24, 31);
 		panel_1.add(label_5);
 		
 		JPanel panel_12 = new JPanel();
@@ -334,17 +338,17 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(panel_13);
 		
 		JPanel panel_14 = new JPanel();
-		panel_14.setBounds(284, 0, 2, 31);
+		panel_14.setBounds(297, 0, 2, 31);
 		panel_1.add(panel_14);
 		
 		JLabel label_6 = new JLabel("");
 		label_6.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
 		label_6.setToolTipText("Ayuda");
-		label_6.setBounds(304, 0, 24, 31);
+		label_6.setBounds(309, 0, 24, 31);
 		panel_1.add(label_6);
 		
 		JPanel panel_15 = new JPanel();
-		panel_15.setBounds(222, 0, 2, 31);
+		panel_15.setBounds(252, 0, 2, 31);
 		panel_1.add(panel_15);
 		
 		JLabel label_7 = new JLabel("");
@@ -371,6 +375,19 @@ public class PrincipalAdministrador extends JFrame {
 		label_7.setBounds(182, 0, 24, 31);
 		panel_1.add(label_7);
 		
+		JLabel label_3 = new JLabel("");
+		label_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ListaEvaluaciones le=new ListaEvaluaciones();
+				le.show();
+			}
+		});
+		label_3.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/show2.png")));
+		label_3.setToolTipText("Ver informe de evaluaciones pendientes");
+		label_3.setBounds(218, 0, 24, 31);
+		panel_1.add(label_3);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
@@ -394,7 +411,7 @@ public class PrincipalAdministrador extends JFrame {
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Registro de Proyectos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_8.setBounds(42, 205, 567, 476);
+		panel_8.setBounds(42, 193, 567, 488);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
@@ -413,7 +430,7 @@ public class PrincipalAdministrador extends JFrame {
 		txt_nombre.setColumns(10);
 		txt_nombre.setBorder(null);
 		txt_nombre.setBackground(new Color(223, 223, 233));
-		txt_nombre.setBounds(197, 3, 286, 20);
+		txt_nombre.setBounds(171, 3, 312, 20);
 		panel_3.add(txt_nombre);
 		
 		JPanel panel_4 = new JPanel();
@@ -431,7 +448,7 @@ public class PrincipalAdministrador extends JFrame {
 		txt_url.setColumns(10);
 		txt_url.setBorder(null);
 		txt_url.setBackground(new Color(223, 223, 233));
-		txt_url.setBounds(130, 3, 353, 20);
+		txt_url.setBounds(96, 3, 387, 20);
 		panel_4.add(txt_url);
 		
 		JPanel panel_5 = new JPanel();
@@ -647,7 +664,7 @@ public class PrincipalAdministrador extends JFrame {
 		JPanel panel_11 = new JPanel();
 		panel_11.setLayout(null);
 		panel_11.setBorder(new TitledBorder(null, "Proyectos Recientes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_11.setBounds(614, 204, 724, 477);
+		panel_11.setBounds(614, 193, 724, 488);
 		contentPane.add(panel_11);
 		
 		JScrollPane scrollPane = new JScrollPane();

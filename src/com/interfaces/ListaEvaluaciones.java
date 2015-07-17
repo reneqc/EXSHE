@@ -80,7 +80,7 @@ public class ListaEvaluaciones extends JFrame {
 		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 35, 1232, 493);
+		scrollPane.setBounds(23, 54, 1232, 474);
 		panel.add(scrollPane);
 		
 		tbl_evaluacionesFinalizadas = new JTable();
@@ -105,6 +105,11 @@ public class ListaEvaluaciones extends JFrame {
 		));
 		
 		scrollPane.setViewportView(tbl_evaluacionesFinalizadas);
+		
+		JLabel lblS = new JLabel("Seleccione la evaluaci\u00F3n de la cual desea conocer los resultados:");
+		lblS.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblS.setBounds(25, 29, 382, 14);
+		panel.add(lblS);
 		
 		JButton button_1 = new JButton("  Atrás");
 		button_1.addActionListener(new ActionListener() {

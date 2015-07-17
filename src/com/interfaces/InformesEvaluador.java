@@ -149,7 +149,7 @@ public class InformesEvaluador extends JFrame {
 		btnVerInforme.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/ver.png")));
 		btnVerInforme.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnVerInforme.setBackground(SystemColor.controlHighlight);
-		btnVerInforme.setBounds(1139, 24, 122, 27);
+		btnVerInforme.setBounds(1139, 21, 122, 27);
 		panel.add(btnVerInforme);
 		
 		txt_evaluacion = new JTextField();
@@ -157,7 +157,7 @@ public class InformesEvaluador extends JFrame {
 		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(850, 27, 279, 26);
+		txt_evaluacion.setBounds(850, 21, 279, 26);
 		panel.add(txt_evaluacion);
 		txt_evaluacion.setColumns(10);
 		txt_evaluacion.setBorder(null);

@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Toolkit;
 
 public class MensajePendientes extends JFrame {
 
@@ -41,6 +42,7 @@ public class MensajePendientes extends JFrame {
 	 * Create the frame.
 	 */
 	public MensajePendientes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MensajePendientes.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - ERROR AL FINALIZAR");
 		addWindowListener(new WindowAdapter() {
 			@Override

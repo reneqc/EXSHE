@@ -31,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 public class ListaEvaluaciones extends JFrame {
 
@@ -57,6 +58,7 @@ public class ListaEvaluaciones extends JFrame {
 	 * Create the frame.
 	 */
 	public ListaEvaluaciones() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaEvaluaciones.class.getResource("/img/logo1.png")));
 		setTitle("Resultados");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -80,7 +82,7 @@ public class ListaEvaluaciones extends JFrame {
 		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 35, 1232, 493);
+		scrollPane.setBounds(23, 54, 1232, 474);
 		panel.add(scrollPane);
 		
 		tbl_evaluacionesFinalizadas = new JTable();
@@ -112,6 +114,11 @@ public class ListaEvaluaciones extends JFrame {
 		));
 		
 		scrollPane.setViewportView(tbl_evaluacionesFinalizadas);
+		
+		JLabel lblS = new JLabel("Seleccione la evaluaci\u00F3n de la cual desea conocer los resultados:");
+		lblS.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblS.setBounds(25, 29, 382, 14);
+		panel.add(lblS);
 		
 		JButton button_1 = new JButton("  Atrás");
 		button_1.addActionListener(new ActionListener() {

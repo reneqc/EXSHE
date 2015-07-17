@@ -34,6 +34,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Ejecucion extends JFrame {
 
@@ -123,6 +124,7 @@ public class Ejecucion extends JFrame {
 	 * Create the frame.
 	 */
 	public Ejecucion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ejecucion.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - EJECUCI\u00D3N DE EVALUACIONES");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -173,7 +175,7 @@ public class Ejecucion extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column", "FIla 1"
+				"SITIO", "URL", "NAVEGADOR", "ESTADP", "FILA", "FILA", "FILA"
 			}
 		));
 		scrollPane.setViewportView(tbl_evaluaciones);

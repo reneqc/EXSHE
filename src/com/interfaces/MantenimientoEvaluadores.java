@@ -82,6 +82,7 @@ public class MantenimientoEvaluadores extends JFrame {
 	 * Create the frame.
 	 */
 	public MantenimientoEvaluadores() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MantenimientoEvaluadores.class.getResource("/img/logo1.png")));
 		setResizable(false);
 		setTitle("EXSHE - MANTENIMIENTO DE EVALUADORES");
 		addWindowListener(new WindowAdapter() {
@@ -178,7 +179,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_email.setColumns(10);
 		txt_email.setBorder(null);
 		txt_email.setBackground(new Color(223, 223, 233));
-		txt_email.setBounds(76, 3, 300, 20);
+		txt_email.setBounds(55, 3, 339, 20);
 		panel_3.add(txt_email);
 		
 		JPanel panel_4 = new JPanel();
@@ -196,7 +197,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_password.setColumns(10);
 		txt_password.setBorder(null);
 		txt_password.setBackground(new Color(223, 223, 233));
-		txt_password.setBounds(199, 3, 211, 20);
+		txt_password.setBounds(171, 3, 239, 20);
 		panel_4.add(txt_password);
 		
 		JPanel panel_5 = new JPanel();
@@ -214,7 +215,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_passwordR.setColumns(10);
 		txt_passwordR.setBorder(null);
 		txt_passwordR.setBackground(new Color(223, 223, 233));
-		txt_passwordR.setBounds(202, 3, 176, 20);
+		txt_passwordR.setBounds(172, 3, 206, 20);
 		panel_5.add(txt_passwordR);
 		
 		final JButton btnLimpiar = new JButton("Limpiar");
@@ -392,7 +393,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_direccion.setColumns(10);
 		txt_direccion.setBorder(null);
 		txt_direccion.setBackground(new Color(223, 223, 233));
-		txt_direccion.setBounds(97, 3, 313, 20);
+		txt_direccion.setBounds(79, 3, 331, 20);
 		panel_6.add(txt_direccion);
 		
 		JPanel panel_7 = new JPanel();
@@ -410,7 +411,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_cargo.setColumns(10);
 		txt_cargo.setBorder(null);
 		txt_cargo.setBackground(new Color(223, 223, 233));
-		txt_cargo.setBounds(147, 3, 219, 20);
+		txt_cargo.setBounds(136, 3, 230, 20);
 		panel_7.add(txt_cargo);
 		
 		JPanel panel_8 = new JPanel();
@@ -428,7 +429,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_profesion.setColumns(10);
 		txt_profesion.setBorder(null);
 		txt_profesion.setBackground(new Color(223, 223, 233));
-		txt_profesion.setBounds(174, 3, 202, 20);
+		txt_profesion.setBounds(147, 3, 247, 20);
 		panel_8.add(txt_profesion);
 		
 		JPanel panel_9 = new JPanel();
@@ -459,7 +460,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_telefono.setColumns(10);
 		txt_telefono.setBorder(null);
 		txt_telefono.setBackground(new Color(223, 223, 233));
-		txt_telefono.setBounds(90, 3, 276, 20);
+		txt_telefono.setBounds(80, 3, 286, 20);
 		panel_9.add(txt_telefono);
 		
 		JPanel panel_10 = new JPanel();
@@ -477,7 +478,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_empresa.setColumns(10);
 		txt_empresa.setBorder(null);
 		txt_empresa.setBackground(new Color(223, 223, 233));
-		txt_empresa.setBounds(89, 3, 321, 20);
+		txt_empresa.setBounds(76, 3, 334, 20);
 		panel_10.add(txt_empresa);
 		
 		btnActualizar = new JButton("Actualizar");
@@ -685,6 +686,19 @@ public class MantenimientoEvaluadores extends JFrame {
 		
 		btnActualizar.setEnabled(false);
 		
+		JButton button = new JButton("  Atrás");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		button.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/atras1.png")));
+		button.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button.setBorder(UIManager.getBorder("CheckBox.border"));
+		button.setBackground(SystemColor.controlHighlight);
+		button.setBounds(12, 11, 112, 27);
+		contentPane.add(button);
+		
 		
 	}
 	
@@ -703,16 +717,9 @@ public class MantenimientoEvaluadores extends JFrame {
 	}
 	
 	public void cerrarRegistro(){
-		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la Ventana de Mantenimiento de Evaluadores?","Mensaje de Confirmación",
-		JOptionPane.YES_NO_OPTION,
-		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
-		if (eleccion == JOptionPane.YES_OPTION)
-		{
+		
 			dispose();
-		}else{
-			
-		}
+
 	}
 	
 	
@@ -840,5 +847,4 @@ public class MantenimientoEvaluadores extends JFrame {
 	          return false;
 	     }
 	}
-	
 }

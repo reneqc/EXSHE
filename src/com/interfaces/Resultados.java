@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -100,7 +101,12 @@ public class Resultados extends JFrame {
 			for (int i = 0; i < ides.length ; i++) {
 				motorHeuristicos.assertString("(Heuristico(nombre "+ides[i]+")(promedio "+proms[i]+"))");
 			}
-			motor.assertString("(Informe (nombre "+id+")(porcentaje "+Evaluacion.consultarPorcentajeCalificados(id)+"))");
+			float porcentaje=Evaluacion.consultarPorcentajeCalificados(id);
+			float auxRedondear=(float) (Math.rint(porcentaje*100)/100);
+			porcentaje=auxRedondear;
+
+			
+			motor.assertString("(Informe (nombre "+id+")(porcentaje "+porcentaje+"))");
 			motor.executeCommand("(facts)");
 			motorHeuristicos.executeCommand("(facts)");
 			

@@ -141,7 +141,49 @@ public class InformesEvaluador extends JFrame {
 		));
 		scrollPane.setViewportView(tbl_evaluacionesFinalizadas);
 		
+		txt_evaluacion = new JTextField();
+		txt_evaluacion.setEditable(false);
+		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txt_evaluacion.setBackground(SystemColor.controlHighlight);
+		txt_evaluacion.setBounds(718, 21, 279, 26);
+		panel.add(txt_evaluacion);
+		txt_evaluacion.setColumns(10);
+		txt_evaluacion.setBorder(null);
+		
+		JButton btnResultados = new JButton("Resultados");
+		btnResultados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(id_evaluacion==-1){
+					
+					 
+					JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar sus respectivos resultados");
+				}else{
+
+					Resultados result;
+					try {
+						JOptionPane.showMessageDialog(null, "Generando resultados, por favor espere un momento");
+						result = new Resultados(id_evaluacion);
+						result.idEvaluacion=id_evaluacion;
+						result.show();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		btnResultados.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnResultados.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnResultados.setBackground(SystemColor.controlHighlight);
+		btnResultados.setBounds(1138, 21, 122, 27);
+		panel.add(btnResultados);
+		
 		JButton btnVerInforme = new JButton(" Informe");
+		btnVerInforme.setBounds(1007, 20, 122, 27);
+		panel.add(btnVerInforme);
+		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVerInforme.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -151,18 +193,6 @@ public class InformesEvaluador extends JFrame {
 		btnVerInforme.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/ver.png")));
 		btnVerInforme.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnVerInforme.setBackground(SystemColor.controlHighlight);
-		btnVerInforme.setBounds(1139, 21, 122, 27);
-		panel.add(btnVerInforme);
-		
-		txt_evaluacion = new JTextField();
-		txt_evaluacion.setEditable(false);
-		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(850, 21, 279, 26);
-		panel.add(txt_evaluacion);
-		txt_evaluacion.setColumns(10);
-		txt_evaluacion.setBorder(null);
 		
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -202,16 +232,9 @@ public class InformesEvaluador extends JFrame {
 	}
 	
 	public void cerrarInformes(){
-		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la ventana de informes?","Mensaje de Confirmación",
-		JOptionPane.YES_NO_OPTION,
-		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
-		if (eleccion == JOptionPane.YES_OPTION)
-		{
+
 			dispose();
-		}else{
-			
-		}
+	
 	}
 	
 	public void cargarTabla(){

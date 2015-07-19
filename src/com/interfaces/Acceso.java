@@ -160,7 +160,7 @@ public class Acceso extends JFrame {
 		txt_email.setColumns(10);
 		txt_email.setBorder(null);
 		txt_email.setBackground(new Color(223, 223, 233));
-		txt_email.setBounds(57, 3, 224, 20);
+		txt_email.setBounds(64, 3, 217, 20);
 		panel_4.add(txt_email);
 		
 		JPanel panel_5 = new JPanel();
@@ -178,7 +178,7 @@ public class Acceso extends JFrame {
 		txt_password.setColumns(10);
 		txt_password.setBorder(null);
 		txt_password.setBackground(new Color(223, 223, 233));
-		txt_password.setBounds(90, 4, 203, 20);
+		txt_password.setBounds(97, 4, 196, 20);
 		panel_5.add(txt_password);
 		
 		final JButton btn_ingresar = new JButton("  Ingresar");

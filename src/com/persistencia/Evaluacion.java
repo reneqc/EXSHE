@@ -239,14 +239,14 @@ public class Evaluacion {
 	
 	
 	
-public static ResultSet consultarEvaluacionesFinalizadas() throws SQLException{
-		
-		Statement sentencia = (Statement) conex.createStatement();
-		String cadena = "SELECT evaluacion.id_evaluacion,detalle.id_detalle,proyecto.id_proyecto ,proyecto.nombreSitio, proyecto.urlSitio,evaluador.apellido, evaluador.nombre,  evaluacion.fecha, evaluador.email, evaluacion.navegador,evaluacion.versionNavegador,evaluacion.finalizada FROM evaluador, detalle, proyecto,evaluacion WHERE evaluador.id_evaluador = detalle.id_evaluador AND proyecto.id_proyecto = detalle.id_proyecto AND evaluacion.id_proyecto=proyecto.id_proyecto AND evaluacion.id_evaluador=evaluador.id_evaluador AND evaluacion.finalizada=1  ORDER BY proyecto.fecha DESC ";
-		ResultSet rs = sentencia.executeQuery(cadena);
-		return rs;
-		
-}
+	public static ResultSet consultarEvaluacionesFinalizadas() throws SQLException{
+			
+			Statement sentencia = (Statement) conex.createStatement();
+			String cadena = "SELECT evaluacion.id_evaluacion,detalle.id_detalle,proyecto.id_proyecto ,proyecto.nombreSitio, proyecto.urlSitio,evaluador.apellido, evaluador.nombre,  evaluacion.fecha, evaluador.email, evaluacion.navegador,evaluacion.versionNavegador,evaluacion.finalizada FROM evaluador, detalle, proyecto,evaluacion WHERE evaluador.id_evaluador = detalle.id_evaluador AND proyecto.id_proyecto = detalle.id_proyecto AND evaluacion.id_proyecto=proyecto.id_proyecto AND evaluacion.id_evaluador=evaluador.id_evaluador AND evaluacion.finalizada=1  ORDER BY proyecto.fecha DESC ";
+			ResultSet rs = sentencia.executeQuery(cadena);
+			return rs;
+			
+	}
 	
 	
 	
@@ -297,7 +297,19 @@ public static ResultSet consultarEvaluacionesFinalizadas() throws SQLException{
 			
 			return rs;
 		}
-
+	
+		public static boolean verificarEstado(int id_evaluacion) throws SQLException{
+			boolean estado=false;
+			Statement sentencia = (Statement) conex.createStatement();
+			String cadena = "SELECT evaluacion.finalizada FROM evaluador, detalle, proyecto,evaluacion WHERE evaluador.id_evaluador = detalle.id_evaluador AND proyecto.id_proyecto = detalle.id_proyecto AND evaluacion.id_proyecto=proyecto.id_proyecto AND evaluacion.id_evaluador=evaluador.id_evaluador AND evaluacion.finalizada=1  ORDER BY proyecto.fecha DESC ";
+			ResultSet rs = sentencia.executeQuery(cadena);
+			while(rs.next()){
+				estado=rs.getBoolean(1);					
+			}
+			
+			return estado;
+			
+		}
 	
 	
 	

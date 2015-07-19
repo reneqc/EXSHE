@@ -94,6 +94,7 @@ public class ListaEvaluaciones extends JFrame {
 				id_evaluacion=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
 				Resultados result;
 				try {
+					JOptionPane.showMessageDialog(null, "Generando resultados, por favor espere un momento");
 					result = new Resultados(id_evaluacion);
 					result.idEvaluacion=id_evaluacion;
 					result.show();

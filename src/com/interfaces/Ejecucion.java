@@ -217,22 +217,29 @@ public class Ejecucion extends JFrame {
 						
 					}else{
 						
-						
-						tbl_evaluaciones.setEnabled(false);
-							
-						contenedor_criterios.setVisible(true);
-						btn_iniciar.setEnabled(false);
+				
 							
 							
 							try {
 								
-								//primera carga
-								JOptionPane.showMessageDialog(null, "EXSHE está iniciando el test, por favor espere a que todos los criterios de evaluación sean cargados.");	
-								actualizarNumeroVista();
-								rs=Evaluacion.consultarCalificaciones(id_evaluacion);
 								
-								cargarCriterios();
+							
 								
+								if (!Evaluacion.verificarEstado(id_evaluacion)){
+									
+									tbl_evaluaciones.setEnabled(false);									
+									contenedor_criterios.setVisible(true);
+									btn_iniciar.setEnabled(false);
+									//primera carga
+									JOptionPane.showMessageDialog(null, "EXSHE está iniciando el test, por favor espere a que todos los criterios de evaluación sean cargados.");	
+									actualizarNumeroVista();
+									rs=Evaluacion.consultarCalificaciones(id_evaluacion);
+									
+									cargarCriterios();
+								}else{
+									JOptionPane.showMessageDialog(null,"Esta evaluación ya ha sido finalizada, por favor seleccione otra.");
+									limpiar();
+								}
 								
 												
 								
@@ -804,7 +811,7 @@ public class Ejecucion extends JFrame {
 		panel_2.add(label_5);
 		
 		JLabel label_6 = new JLabel("EF - Entendibilidad y facilidad en la interacción");
-		label_6.setBounds(52, 172, 232, 14);
+		label_6.setBounds(52, 172, 251, 14);
 		panel_2.add(label_6);
 		
 		JLabel label_7 = new JLabel("CR - Control y retroalimentación");

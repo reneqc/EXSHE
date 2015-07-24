@@ -118,7 +118,7 @@ public class Evaluacion {
 		
 		
 		Statement sentencia = (Statement) conex.createStatement();
-		String cadena = "select  puntos, subheuristico.CODIGO  from evaluacion, calificacion, resultado, heuristico, subheuristico where evaluacion.id_evaluacion=resultado.id_evaluacion and puntos > -1 and resultado.id_resultado= calificacion.id_resultado  and evaluacion.id_evaluacion="+id+"  and heuristico.id_heuristico=subheuristico.ID_HEURISTICO and subheuristico.ID_SUBHEURISTICO= calificacion.ID_SUBHEURISTICO and heuristico.CODIGO='"+nom+"'";
+		String cadena = "select  puntos, subheuristico.CODIGO  from evaluacion, calificacion, resultado, heuristico, subheuristico where evaluacion.id_evaluacion=resultado.id_evaluacion and puntos > -1 and resultado.id_resultado= calificacion.id_resultado  and evaluacion.id_evaluacion="+id+"  and heuristico.id_heuristico=subheuristico.ID_HEURISTICO and subheuristico.ID_SUBHEURISTICO= calificacion.ID_SUBHEURISTICO and heuristico.CODIGO='"+nom+"' ORDER by heuristico.ID_HEURISTICO ASC";
 		ResultSet rs = sentencia.executeQuery(cadena);
 				
 		return rs;

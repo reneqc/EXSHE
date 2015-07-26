@@ -811,11 +811,11 @@ public class Ejecucion extends JFrame {
 		panel_2.add(label_5);
 		
 		JLabel label_6 = new JLabel("EF - Entendibilidad y facilidad en la interacción");
-		label_6.setBounds(52, 172, 251, 14);
+		label_6.setBounds(52, 172, 273, 14);
 		panel_2.add(label_6);
 		
 		JLabel label_7 = new JLabel("CR - Control y retroalimentación");
-		label_7.setBounds(52, 197, 232, 14);
+		label_7.setBounds(52, 197, 273, 14);
 		panel_2.add(label_7);
 		
 		JLabel label_8 = new JLabel("EM - Elementos multimedia");

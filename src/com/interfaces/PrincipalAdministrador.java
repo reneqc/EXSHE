@@ -153,6 +153,15 @@ public class PrincipalAdministrador extends JFrame {
 		JMenu mnEvaluaciones = new JMenu("  Proyectos");
 		menuBar.add(mnEvaluaciones);
 		
+		JMenuItem mntmFinalizados = new JMenuItem("Finalizados");
+		mntmFinalizados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InformesProyectos ip=new InformesProyectos();
+				ip.show();
+			}
+		});
+		mnEvaluaciones.add(mntmFinalizados);
+		
 		JMenu mnEvaluaciones_1 = new JMenu("   Evaluaciones   ");
 		menuBar.add(mnEvaluaciones_1);
 		

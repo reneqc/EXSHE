@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="librerias/LibreriasIreport/jasperreports-5.0.0.jar"/>
 	<classpathentry kind="lib" path="librerias/jess.jar"/>
 	<classpathentry kind="lib" path="librerias/jsr94.jar"/>
+	<classpathentry kind="lib" path="librerias/mysql-connector-java-5.1.7-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

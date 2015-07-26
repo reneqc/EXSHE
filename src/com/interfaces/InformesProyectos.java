@@ -40,15 +40,15 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import com.persistencia.Conexion;
 import com.persistencia.Evaluacion;
+import com.persistencia.Proyecto;
 import com.persistencia.RutaBase;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
 
-public class InformesEvaluador extends JFrame {
+public class InformesProyectos extends JFrame {
 
 	private JPanel contentPane;
-	JLabel lbl_evaluador;
-	int id_evaluacion=-1;
+	int id_proyecto=-1;
 	
 
 	private JTable tbl_evaluacionesFinalizadas;
@@ -67,7 +67,7 @@ public class InformesEvaluador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InformesEvaluador frame = new InformesEvaluador();
+					InformesProyectos frame = new InformesProyectos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,8 +79,8 @@ public class InformesEvaluador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InformesEvaluador() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(InformesEvaluador.class.getResource("/img/logo1.png")));
+	public InformesProyectos() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InformesProyectos.class.getResource("/img/logo1.png")));
 		setTitle("EXSHE - INFORMES");
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -98,26 +98,16 @@ public class InformesEvaluador extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label = new JLabel("Evaluador conectado:");
-		label.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
-		label.setBounds(12, 12, 151, 22);
-		contentPane.add(label);
-		
-		lbl_evaluador = new JLabel("Evaluador conectado para evaluar");
-		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lbl_evaluador.setBounds(161, 8, 245, 30);
-		contentPane.add(lbl_evaluador);
-		
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(35, 142, 1303, 539);
+		panel.setBounds(45, 142, 1258, 539);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		panel.setBorder(new TitledBorder(null, "Historial de evaluaciones finalizadas", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Historial de proyectos finalizadas", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(28, 58, 1232, 457);
+		scrollPane.setBounds(34, 58, 1188, 457);
 		panel.add(scrollPane);
 		
 		tbl_evaluacionesFinalizadas = new JTable();
@@ -127,7 +117,7 @@ public class InformesEvaluador extends JFrame {
 				
 				int indice=tbl_evaluacionesFinalizadas.getSelectedRow();				
 				
-				id_evaluacion=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
+				id_proyecto=Integer.parseInt(tbl_evaluacionesFinalizadas.getValueAt(indice,0).toString());
 				String nombre=tbl_evaluacionesFinalizadas.getValueAt(indice,2).toString();
 				txt_evaluacion.setText(nombre); 
 		}
@@ -146,43 +136,27 @@ public class InformesEvaluador extends JFrame {
 		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(718, 21, 279, 26);
+		txt_evaluacion.setBounds(523, 21, 398, 26);
 		panel.add(txt_evaluacion);
 		txt_evaluacion.setColumns(10);
 		txt_evaluacion.setBorder(null);
 		
-		JButton btnResultados = new JButton("Resultados");
-		btnResultados.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/result.png")));
+		JButton btnResultados = new JButton(" Recomendaciones");
+		btnResultados.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/result.png")));
 		btnResultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(id_evaluacion==-1){
-					
-					 
-					JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar sus respectivos resultados");
-				}else{
-
-					Resultados result;
-					try {
-						JOptionPane.showMessageDialog(null, "Generando resultados, por favor espere un momento");
-						result = new Resultados(id_evaluacion);
-						result.idEvaluacion=id_evaluacion;
-						result.show();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+				verInformeDeResultados();
 			}
 		});
 		btnResultados.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnResultados.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnResultados.setBackground(SystemColor.controlHighlight);
-		btnResultados.setBounds(1138, 21, 122, 27);
+		btnResultados.setBounds(1063, 21, 159, 27);
 		panel.add(btnResultados);
 		
 		JButton btnVerInforme = new JButton(" Informe");
-		btnVerInforme.setBounds(1007, 20, 122, 27);
+		btnVerInforme.setBounds(931, 20, 122, 27);
 		panel.add(btnVerInforme);
 		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVerInforme.addActionListener(new ActionListener() {
@@ -191,7 +165,7 @@ public class InformesEvaluador extends JFrame {
 				verInformeDeEvaluacion();
 			}
 		});
-		btnVerInforme.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/ver.png")));
+		btnVerInforme.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/ver.png")));
 		btnVerInforme.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnVerInforme.setBackground(SystemColor.controlHighlight);
 		
@@ -202,7 +176,7 @@ public class InformesEvaluador extends JFrame {
 		contentPane.add(panel_1);
 		
 		label_1 = new JLabel("LOG");
-		label_1.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/reportes.png")));
+		label_1.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/reportes.png")));
 		label_1.setBounds(22, 12, 62, 66);
 		panel_1.add(label_1);
 		
@@ -211,7 +185,7 @@ public class InformesEvaluador extends JFrame {
 		label_2.setBounds(112, 12, 278, 33);
 		panel_1.add(label_2);
 		
-		lblInformesEvaluaciones = new JLabel("INFORMES DE EVALUACIONES");
+		lblInformesEvaluaciones = new JLabel("INFORMES DE PROYECTOS");
 		lblInformesEvaluaciones.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblInformesEvaluaciones.setBounds(112, 37, 278, 35);
 		panel_1.add(lblInformesEvaluaciones);
@@ -223,7 +197,7 @@ public class InformesEvaluador extends JFrame {
 			}
 			
 		});
-		button.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/atras1.png")));
+		button.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/atras1.png")));
 		button.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button.setBorder(UIManager.getBorder("CheckBox.border"));
 		button.setBackground(SystemColor.controlHighlight);
@@ -239,12 +213,10 @@ public class InformesEvaluador extends JFrame {
 	}
 	
 	public void cargarTabla(){
-		String email=Acceso.conectado();
-		//String email="perez@gmail.com";
-		lbl_evaluador.setText(email);
+
 		ResultSet rs=null;
 		try {
-			rs=Evaluacion.evaluacionesFinalizadasPorEvaluador(email);
+			rs=Proyecto.consultarProyectos();
 		} catch (SQLException e) {
 			System.out.println(e);
 			e.printStackTrace();
@@ -252,19 +224,19 @@ public class InformesEvaluador extends JFrame {
 		
 		DefaultTableModel modelo=new DefaultTableModel();	
 		modelo.addColumn("ID");
-		modelo.addColumn("SITIO");
 		modelo.addColumn("URL");
-		modelo.addColumn("NAVEGADOR");
-		modelo.addColumn("VERSIÓN");
+		modelo.addColumn("NOMBRE");
+		modelo.addColumn("TIPO");
 		modelo.addColumn("FECHA");
-		modelo.addColumn("EVALUADOR");
+		
 		
 		try {
 			while(rs.next()){		
-
-		
-					modelo.addRow(new String[] {rs.getString(1),rs.getString(4),rs.getString(5),rs.getString(10),rs.getString(11),rs.getString(8),rs.getString(7)+" "+rs.getString(6)});			
-
+					
+					
+					if(rs.getInt(6)>=4){
+					modelo.addRow(new String[] {rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});			
+					}
 
 			
 
@@ -292,13 +264,11 @@ public class InformesEvaluador extends JFrame {
 		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(0);
 		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(0).setResizable(false);
 
-		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(200);
-		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(200);
-		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(200);
-		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(200);
-		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(200);
-		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(229);
-		
+		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(300);
+		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(300);
+		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(300);
+		tbl_evaluacionesFinalizadas.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(285);
+			
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
 		tcr.setHorizontalAlignment(SwingConstants.CENTER);
@@ -311,8 +281,7 @@ public class InformesEvaluador extends JFrame {
 		tbl_evaluacionesFinalizadas.getColumnModel().getColumn(2).setCellRenderer(tcr);
 		tbl_evaluacionesFinalizadas.getColumnModel().getColumn(3).setCellRenderer(tcr);
 		tbl_evaluacionesFinalizadas.getColumnModel().getColumn(4).setCellRenderer(tcr);
-		tbl_evaluacionesFinalizadas.getColumnModel().getColumn(5).setCellRenderer(tcr);
-		tbl_evaluacionesFinalizadas.getColumnModel().getColumn(6).setCellRenderer(tcr);
+
 	}
 	
 	
@@ -320,18 +289,46 @@ public class InformesEvaluador extends JFrame {
 	public void verInformeDeEvaluacion(){
 		
 		
-		if(id_evaluacion==-1){
+		if(id_proyecto==-1){
 			
 			 
-			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar su respectivo informe");
+			JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla para poder generar su respectivo informe");
 		}else{
 			
 			 try{
 	               
 				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
-				 	String path =RutaBase.obtenerRuta()+"reporteIndividualEvaluacion.jrxml";
-	                abrirReporte(path, "Reporte de la Evaluación ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
+				 	String path =RutaBase.obtenerRuta()+"informeConsolidado.jrxml";
+	                abrirReporte(path, "Reporte Consolidado del Proyecto pry_"+id_proyecto, String.valueOf(id_proyecto), "id_proyecto");	                
+	                
+	            
+	            }catch(Exception ex){
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+	                System.out.println(ex);
+	            }
+			  
+			
+		}
+		
+	}
+	
+	
+public void verInformeDeResultados(){
+		
+		
+		if(id_proyecto==-1){
+			
+			 
+			JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla para poder generar sus respectivos resultados");
+		}else{
+			
+			 try{
+	               
+				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
+	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+				 	String path =RutaBase.obtenerRuta()+"resultadosConsolidado.jrxml";
+	                abrirReporte(path, "Informe de Resultados Consolidados del Proyecto pry_"+id_proyecto, String.valueOf(id_proyecto), "id_proyecto");	                
 	                
 	            
 	            }catch(Exception ex){

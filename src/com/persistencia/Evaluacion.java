@@ -301,7 +301,7 @@ public class Evaluacion {
 		public static boolean verificarEstado(int id_evaluacion) throws SQLException{
 			boolean estado=false;
 			Statement sentencia = (Statement) conex.createStatement();
-			String cadena = "SELECT evaluacion.finalizada FROM evaluador, detalle, proyecto,evaluacion WHERE evaluador.id_evaluador = detalle.id_evaluador AND proyecto.id_proyecto = detalle.id_proyecto AND evaluacion.id_proyecto=proyecto.id_proyecto AND evaluacion.id_evaluador=evaluador.id_evaluador AND evaluacion.finalizada=1  ORDER BY proyecto.fecha DESC ";
+			String cadena = "SELECT evaluacion.finalizada FROM evaluacion where evaluacion.id_evaluacion="+id_evaluacion+" ORDER BY id_evaluacion ";
 			ResultSet rs = sentencia.executeQuery(cadena);
 			while(rs.next()){
 				estado=rs.getBoolean(1);					

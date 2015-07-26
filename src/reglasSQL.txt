@@ -1,0 +1,235 @@
+($F{codigo}.toString()== "AG1" ? "Los objetivos del sitio deben ser concretos y bien definidos":
+        ($F{codigo}.toString()== "AG2" ? "Los contenidos y servicios ofrecidos deben ser precisos y completos":
+            ($F{codigo}.toString()== "AG3" ? "La estructura general del sitio debe estar orientada al usuario":
+                ($F{codigo}.toString()== "AG4" ? "La apariencia general del sitio debe ser consistente con sus objetivos":
+                       ($F{codigo}.toString()== "AG5" ? "El diseño general del sitio web debe ser reconocible":
+                           ($F{codigo}.toString()== "AG6" ? "El diseño general del sitio web debe ser coherente":
+                               ($F{codigo}.toString()== "AG7" ? "Es necesario utilizar el idioma del usuario":
+                                   ($F{codigo}.toString()== "AG8" ? "Es necesario dar soporte en otros idiomas":
+                                       ($F{codigo}.toString()== "AG9" ? "Mejorar la traducción del sitio, ésta debe ser completa y correcta":
+                                           ($F{codigo}.toString()== "AG10" ? "El contenido del sitio debe ser actualizado periódicamente":
+
+
+                                                ($F{codigo}.toString()== "AY1" ? "El enlace a la sección de Ayuda debe estar colocado en una zona visible y estándar":
+                                                    ($F{codigo}.toString()== "AY2" ? "Debe haber fácil acceso y retorno del sistema de ayuda":
+                                                        ($F{codigo}.toString()== "AY3" ? "Es necesario ofrecer ayuda contextual para las tareas complejas":
+                                                            ($F{codigo}.toString()== "AY4" ? "Para la selección de las FAQs debe ser correcta tanto la elección como la redacción de las preguntas":
+                                                                   ($F{codigo}.toString()== "AY5" ? "Debe ser correcta la redacción de las respuestas de las FAQs":
+                                                                       
+                                                                       
+                                                                     ""                     
+                                                                       
+
+                                                                    )
+                                                            )
+                                                       )
+                                                   )
+                                               )
+
+                                           )
+                                        )
+                                   )
+                                )
+                            )
+                       )
+                )
+            )
+
+     )
+)
+
+
+
+
+  ($F{codigo}.toString()== "BU1" ? "Si es necesaria la búsqueda, debe estar accesible desde todas las páginas del sitio":
+        ($F{codigo}.toString()== "BU2" ? "La búsqueda debe ser fácilmente reconocible como tal":
+            ($F{codigo}.toString()== "BU3" ? "La búsqueda debe estar fácilmente accesible":
+                ($F{codigo}.toString()== "BU4" ? "La caja de texto de la búsqueda debe ser lo suficientemente ancha":
+                       ($F{codigo}.toString()== "BU5" ? "El sistema de búsqueda debe ser simple y claro":
+                          ($F{codigo}.toString()== "BU6" ? "Se debe permitir la búsqueda avanzada":
+                                ($F{codigo}.toString()== "BU7" ? "Se debe mostrar los resultados de la búsqueda de forma comprensible para el usuario":
+                                       ($F{codigo}.toString()== "BU8" ? "Debe existir asistencia al usuario en caso de no poder ofrecer resultados para una consulta dada":
+                                       
+                                       
+                                           	($F{codigo}.toString()== "CR1" ? "El usuario debe tener todo el control sobre la interfaz":
+										        ($F{codigo}.toString()== "CR2" ? "Se debe informar al usuario acerca de lo que está pasando en el sitio":
+										            ($F{codigo}.toString()== "CR3" ? "Se debe informar al usuario acerca de lo que ha pasado":
+										                ($F{codigo}.toString()== "CR4" ? "Deben existir sistemas de validación antes de que el usuario envíe información para evitar errores":
+										                       ($F{codigo}.toString()== "CR5" ? "Si se produce un error, se debe informar de forma clara lo ocurrido y cómo solucionar el problema":
+										                           ($F{codigo}.toString()== "CR6" ? "Se debe controlar el tiempo de respuesta":
+										                               ($F{codigo}.toString()== "CR7" ? "Se debe controlar el tiempo de respuesta":
+										                                   ($F{codigo}.toString()== "CR8" ? "Se debe evitar la proliferación de ventanas en la pantalla del usuario":
+										                                       ($F{codigo}.toString()== "CR9" ? "Se debe evitar la descarga por parte del usuario de plugins adicionales":
+										                                           ($F{codigo}.toString()== "CR10" ? "Para las tareas de varios pasos, se debe indicar al usuario en cuál está y cuántos faltan para completar la tarea":
+										                                           		""
+										                                       
+											                        				 )
+										                                        )
+										                                   )
+										                                )
+										                            )
+										                       )
+										                )
+										            )
+										
+										    	 )
+											)
+																					
+				
+                                       )
+                                )
+                           )
+
+                      )
+                )
+           )
+       )
+   )
+				
+				
+				
+
+
+
+($F{codigo}.toString()== "EF1" ? "Debe emplearse un lenguaje claro y conciso":
+       ($F{codigo}.toString()== "EF2" ? "El Lenguaje debe ser amigable, familiar y cercano al usuario":
+           ($F{codigo}.toString()== "EF3" ? "Cada párrafo debe expresar una sola idea":
+               ($F{codigo}.toString()== "EF4" ? "Debe existir un uso consistente de los controles de la interfaz":
+                   ($F{codigo}.toString()== "EF5" ? "Las metáforas visibles deben ser reconocibles y comprensibles":
+                       ($F{codigo}.toString()== "EF6" ? "Los menús desplegables deben estar en orden coherente o alfabético":                                             
+                           ($F{codigo}.toString()== "EF7" ? "Al llenar un campo las opciones disponibles se deben seleccionar en lugar de escribirlas":
+                           
+                           
+                           		 ($F{codigo}.toString()== "EM1" ? "Las fotografías deben estar bien recortadas":
+							           ($F{codigo}.toString()== "EM2" ? "Las fotografías deben ser comprensibles":
+							               ($F{codigo}.toString()== "EM3" ? "Las fotografías deben tener una correcta resolución":
+							                   ($F{codigo}.toString()== "EM4" ? "El uso de imágenes o animaciones deben proporcionar algún valor añadido":
+							                       ($F{codigo}.toString()== "EM5" ? "Se debe evitar el uso de animaciones cíclicas":
+							                           ($F{codigo}.toString()== "EM6" ? "El uso de sonidos debe proporcionar algún tipo de valor añadido":
+							                           		""
+							                       
+							            				 )
+							                        )
+							                   )
+							                )
+							            )
+							       )
+							       
+							       
+                       
+            				 )
+                        )
+                   )
+                )
+            )
+       )
+)
+
+
+
+
+
+
+
+
+
+
+($F{codigo}.toString()== "EN1" ? "Es recomendable no incluir pantalla de bienvenida":
+       ($F{codigo}.toString()== "EN2" ? "Mejorar la estructura de organización y navegación":
+           ($F{codigo}.toString()== "EN3" ? "La organización de los elementos de las páginas, deben ser consistentes con las convenciones":
+               ($F{codigo}.toString()== "EN4" ? "Se debe controlar el número de elementos y de términos por elemento en los menús de navegación":
+                   ($F{codigo}.toString()== "EN5" ? "Debe existir equilibrio entre profundidad y anchura en el caso de las estructuras jerárquicas":
+                       ($F{codigo}.toString()== "EN6" ? "Los enlaces deben ser fácilmente reconocibles como tales":                                             
+                           ($F{codigo}.toString()== "EN7" ? "Los enlaces deben indicar claramente su estado (visitados, activos)":
+                           		 ($F{codigo}.toString()== "EN8" ? "Es importante evitar la redundancia de enlaces":
+							           ($F{codigo}.toString()== "EN9" ? "Es importante evitar la existencia de enlaces rotos":
+							               ($F{codigo}.toString()== "EN10" ? "No deben existir enlaces que lleven a la misma página que se está visualizando":
+							                   ($F{codigo}.toString()== "EN11" ? "Las imágenes de enlace deben indicar el contenido al que se va a acceder":
+							                       ($F{codigo}.toString()== "EN12" ? "Debe existir un enlace para volver al inicio en cada página":
+							                           ($F{codigo}.toString()== "EN13" ? "Deben haber elementos de navegación que orienten al usuario acerca de dónde está y cómo deshacer su navegación":
+							                           		($F{codigo}.toString()== "EN14" ? "Debe existir un mapa del sitio para acceder directamente a los contenidos sin navegar":
+								                           		""
+								                       
+								            				 )
+							                       
+							            				 )
+							                        )
+							                   )
+							                )
+							            )
+							       )
+	            			)
+                        )
+                   )
+                )
+            )
+       )
+)
+										                
+	
+	
+	
+			
+			
+
+($F{codigo}.toString()== "II1" ? "La Identidad o logotipo del sitio debe ser: significativo, identificable y suficientemente visible":
+       ($F{codigo}.toString()== "II2" ? "Mantener la identidad del sitio en todas las páginas":
+           ($F{codigo}.toString()== "II3" ? "El eslogan o tagline deben ser adecuados al objetivo del sitio":
+               ($F{codigo}.toString()== "II4" ? "Debe existir la Información institucional o empresarial":
+                   ($F{codigo}.toString()== "II5" ? "Debe existir mecanismos de contacto":
+                       ($F{codigo}.toString()== "II6" ? "Es necesario ofrecer información sobre la protección de datos de carácter personal o los derechos de autor de los contenidos del sitio web":                                             
+                           ($F{codigo}.toString()== "II7" ? "Es necesario ofrecer información sobre el autor, fuentes y fechas de creación y revisión del documento en artículos, noticias e informes":
+                           
+                           
+                           
+                           				($F{codigo}.toString()== "LA1" ? "Se deben aprovechar las zonas de alta jerarquía informativa de la página para los contenidos de mayor relevancia":
+										       ($F{codigo}.toString()== "LA2" ? "Se debe evitar la sobrecarga informativa":
+										           ($F{codigo}.toString()== "LA3" ? "Las interfaces deben ser limpias, sin ruido visual":
+										               ($F{codigo}.toString()== "LA4" ? "Deben existir zonas en blanco entre los objetos informativos de la página para poder descansar la vista":
+										                   ($F{codigo}.toString()== "LA5" ? "Mejorar el espacio visual de la página":
+										                       ($F{codigo}.toString()== "LA6" ? "Utilizar correctamente la jerarquía visual para la colocación de los diferentes elementos del contenido":                                             
+										                           ($F{codigo}.toString()== "LA7" ? "Controlado la longitud de página":
+										                           		 ($F{codigo}.toString()== "LA8" ? "Mejorar la versión impresa de la página":
+																	           ($F{codigo}.toString()== "LA9" ? "Mejorar el texto de la página para que se pueda leer sin dificultad":
+																	               ($F{codigo}.toString()== "LA10" ? "Evitar utilizar texto parpadeante o deslizante":
+																	         			""
+																	                )
+																	            )
+																	       )
+											            			)
+										                        )
+										                   )
+										                )
+										            )
+										       )
+										)
+		
+							       
+							       
+							       
+							       
+	            			)
+                        )
+                   )
+                )
+            )
+       )
+)
+					
+										                
+										                
+ ($F{codigo}.toString()== "RO1" ? "Los rótulos deben ser significativos":
+       ($F{codigo}.toString()== "RO2" ? "El sistema de rotulado debe ser controlado y preciso":
+           ($F{codigo}.toString()== "RO3" ? "El título de las páginas debe ser correcto y planificado":
+               ($F{codigo}.toString()== "RO4" ? "La URL de la página principal debe ser correcta, clara y fácil de recordar":
+                   ($F{codigo}.toString()== "RO5" ? "Las URL de páginas internas deben ser claras":
+                       ($F{codigo}.toString()== "RO6" ? "Las URL de páginas internas deben ser permanentes":
+                       		""
+                   
+        				 )
+                    )
+               )
+            )
+        )
+   )
+							       										                		                                                  

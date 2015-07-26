@@ -50,7 +50,7 @@
 	=>
 	(if (and (< ?calificacion 5)(= ?nombre CR5)) then
 		(retract ?f1)
-		(assert (Criterio(nombre ?nombre)(calificacion ?calificacion)(condicion "Sí se produce un error, se debe informar de forma clara lo ocurrido y cómo solucionar el problema")))
+		(assert (Criterio(nombre ?nombre)(calificacion ?calificacion)(condicion "Si se produce un error, se debe informar de forma clara lo ocurrido y cómo solucionar el problema")))
 	)
 )
 

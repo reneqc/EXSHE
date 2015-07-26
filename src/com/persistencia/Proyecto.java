@@ -95,6 +95,15 @@ public class Proyecto {
 	}
 	
 	
+	public static ResultSet consultarProyectos() throws SQLException{
+		Statement sentencia = (Statement) conex.createStatement();
+		String cadena = "SELECT  proyecto.ID_PROYECTO,urlSitio,nombreSitio, tipoSitio, proyecto.fecha, COUNT(id_evaluacion) from evaluacion, proyecto where evaluacion.id_proyecto=proyecto.id_proyecto and evaluacion.finalizada=1 GROUP BY proyecto.ID_PROYECTO, urlSitio ,nombreSitio, tipoSitio, proyecto.fecha";
+		ResultSet rs = sentencia.executeQuery(cadena);
+		return rs;
+		
+	}
+	
+	
 	
 
 }

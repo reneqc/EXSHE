@@ -83,6 +83,20 @@ public class Evaluador {
 
 	}
 	
+	
+	public static int actualizarAdministrador(String email, String password){
+		try {
+			Statement sentencia = (Statement) conex.createStatement();			
+			String cadena = "update evaluador set email='"+email+"' , password='"+password+"' where id_evaluador="+1;                 
+			sentencia.execute(cadena);
+			return 1;
+		} catch (SQLException e ) {
+			System.out.println(e);
+			return 0;
+		}
+
+	}
+	
 	public String verificarDatos(String email, String password){
 		try {
 			String emailBdd="";

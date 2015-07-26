@@ -7,7 +7,6 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -16,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -28,10 +29,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -40,16 +41,16 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import com.persistencia.Conexion;
-import com.persistencia.Evaluador;
-import com.persistencia.Proyecto;
-import com.persistencia.RutaBase;
-
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+
+import com.persistencia.Conexion;
+import com.persistencia.Evaluador;
+import com.persistencia.Proyecto;
+import com.persistencia.RutaBase;
 
 
 public class PrincipalAdministrador extends JFrame {
@@ -63,6 +64,10 @@ public class PrincipalAdministrador extends JFrame {
 	JComboBox txt_evaluador1,txt_evaluador2,txt_evaluador3,txt_evaluador4;
 	Proyecto proyecto;
 	private JTable tbl_proyectos;
+	private JTextField txtEmail;
+	private JPasswordField passwordNueva;
+	private JPasswordField passwordConfirmada;
+	final JPanel panelConfiguracion = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -107,6 +112,200 @@ public class PrincipalAdministrador extends JFrame {
 		contentPane.setLayout(null);
 		this.setLocationRelativeTo(null);
 		
+		
+		panelConfiguracion.setBounds(879, 81, 459, 124);
+		panelConfiguracion.setBorder(new TitledBorder(null, "Configuración de la Cuenta de Administrador", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		contentPane.add(panelConfiguracion);
+		panelConfiguracion.setLayout(null);
+		
+		JPanel panel_17 = new JPanel();
+		panel_17.setLayout(null);
+		panel_17.setBackground(new Color(223, 223, 233));
+		panel_17.setBounds(12, 28, 435, 27);
+		panelConfiguracion.add(panel_17);
+		
+		JLabel lblNuevoEmail = new JLabel("Nuevo Email:");
+		lblNuevoEmail.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNuevoEmail.setBounds(12, 5, 104, 15);
+		panel_17.add(lblNuevoEmail);
+		
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBorder(null);
+		txtEmail.setBackground(new Color(223, 223, 233));
+		txtEmail.setBounds(118, 3, 305, 20);
+		panel_17.add(txtEmail);
+		
+		JPanel panel_18 = new JPanel();
+		panel_18.setLayout(null);
+		panel_18.setBackground(new Color(223, 223, 233));
+		panel_18.setBounds(12, 57, 306, 27);
+		panelConfiguracion.add(panel_18);
+		
+		JLabel lblNuevaContrasea = new JLabel("Nueva Contraseña:");
+		lblNuevaContrasea.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblNuevaContrasea.setBounds(12, 5, 140, 15);
+		panel_18.add(lblNuevaContrasea);
+		
+		passwordNueva = new JPasswordField();
+		passwordNueva.setColumns(10);
+		passwordNueva.setBorder(null);
+		passwordNueva.setBackground(new Color(223, 223, 233));
+		passwordNueva.setBounds(156, 3, 140, 20);
+		panel_18.add(passwordNueva);
+		
+		JPanel panel_19 = new JPanel();
+		panel_19.setLayout(null);
+		panel_19.setBackground(new Color(223, 223, 233));
+		panel_19.setBounds(12, 86, 306, 27);
+		panelConfiguracion.add(panel_19);
+		
+		JLabel lblConfirmeLaContrasea = new JLabel("Confirme la Contraseña:");
+		lblConfirmeLaContrasea.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblConfirmeLaContrasea.setBounds(12, 5, 179, 15);
+		panel_19.add(lblConfirmeLaContrasea);
+		
+		passwordConfirmada = new JPasswordField();
+		passwordConfirmada.setColumns(10);
+		passwordConfirmada.setBorder(null);
+		passwordConfirmada.setBackground(new Color(223, 223, 233));
+		passwordConfirmada.setBounds(194, 3, 102, 20);
+		panel_19.add(passwordConfirmada);
+		
+		JButton btnAceptar = new JButton(" Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String email=txtEmail.getText().toString();
+				String password1=passwordNueva.getText().toString();
+				String password2=passwordConfirmada.getText().toString();
+				
+				
+				
+				if (email.equals("") || password1.equals("") || password2.equals("")){
+					
+					
+					if (password2.equals("")){
+						passwordConfirmada.requestFocus();
+					}
+					
+					
+					if (password1.equals("")){	
+						passwordNueva.requestFocus();
+					}
+
+					if (email.equals("")){									
+						txtEmail.requestFocus();
+					}
+					JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
+				}else{	
+					
+					if (email.length()>6){
+						
+					
+						if(password1.length()<6){
+							JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
+							passwordNueva.setText("");
+							passwordConfirmada.setText("");
+							passwordNueva.requestFocus();
+	
+						}else{
+							
+							if(validarEmail(email)){
+								if(password1.equals(password2)){
+									
+									
+		
+									Object [] opciones ={"Aceptar","Cancelar"};
+									int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cambiar los datos de la cuenta de administrador?","Mensaje de Confirmación",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+									if (eleccion == JOptionPane.YES_OPTION)
+									{
+										
+										int resultado=Evaluador.actualizarAdministrador(email, password1);		
+										limpiar();
+										
+										if (resultado>0){
+											JOptionPane.showMessageDialog(null,"Administrador actualizado exitosamente.");
+											panelConfiguracion.setVisible(false);
+											try {
+												cargarTabla();
+											} catch (SQLException ex) {
+												// TODO Auto-generated catch block
+												ex.printStackTrace();
+											}
+											
+											
+										}else{
+											JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
+											txtEmail.requestFocus();
+											txtEmail.setText("");
+											passwordNueva.setText("");
+											passwordConfirmada.setText("");
+										}
+										
+										
+										
+										
+										
+										
+										
+										
+									}else{
+										
+									}
+									
+									
+									
+									
+									
+								}else{
+									
+									JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+									passwordNueva.requestFocus();
+									passwordNueva.setText("");
+									passwordConfirmada.setText("");
+								}
+							}else{
+								txtEmail.setText("");
+								passwordNueva.setText("");
+								passwordConfirmada.setText("");
+								txtEmail.requestFocus();
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
+						txtEmail.requestFocus();
+						txtEmail.setText("");
+						passwordNueva.setText("");
+						passwordConfirmada.setText("");
+					}
+				}
+				
+				
+				
+			}
+		});
+		btnAceptar.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/ok.png")));
+		btnAceptar.setFont(new Font("Dialog", Font.BOLD, 11));
+		btnAceptar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnAceptar.setBackground(SystemColor.controlHighlight);
+		btnAceptar.setBounds(330, 86, 120, 27);
+		panelConfiguracion.add(btnAceptar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/cancel.png")));
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panelConfiguracion.setVisible(false);
+			}
+		});
+		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 11));
+		btnCancelar.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnCancelar.setBackground(SystemColor.controlHighlight);
+		btnCancelar.setBounds(330, 57, 120, 27);
+		panelConfiguracion.add(btnCancelar);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(-1, 0, 1600, 93);
 		contentPane.add(panel);
@@ -124,7 +323,7 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
-		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
+//		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
 		mntmAcceso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -225,7 +424,7 @@ public class PrincipalAdministrador extends JFrame {
 		
 		JMenuItem mnuMantenimientoEvaluadores = new JMenuItem("Mantenimiento");
 		mnuMantenimientoEvaluadores.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluadores2.png")));
-		mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
+		//mnuMantenimientoEvaluadores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		mnuMantenimientoEvaluadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MantenimientoEvaluadores registro1=new MantenimientoEvaluadores();
@@ -240,6 +439,15 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnConfiguracin);
 		
 		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contraseña");
+		mntmCambiarContrasea.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/configuracion.png")));
+		mntmCambiarContrasea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				panelConfiguracion.setVisible(true);
+				txtEmail.requestFocus();
+				
+			}
+		});
 		mnConfiguracin.add(mntmCambiarContrasea);
 		
 		
@@ -342,7 +550,7 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		label_5.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluadores2.png")));
 		label_5.setToolTipText("Mantenimiento de evaluadores");
-		label_5.setBounds(223, 0, 24, 31);
+		label_5.setBounds(236, 0, 24, 31);
 		panel_1.add(label_5);
 		
 		JPanel panel_12 = new JPanel();
@@ -354,13 +562,13 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(panel_13);
 		
 		JPanel panel_14 = new JPanel();
-		panel_14.setBounds(257, 0, 2, 31);
+		panel_14.setBounds(266, 0, 2, 31);
 		panel_1.add(panel_14);
 		
 		JLabel label_6 = new JLabel("");
 		label_6.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
 		label_6.setToolTipText("Ayuda");
-		label_6.setBounds(269, 0, 24, 31);
+		label_6.setBounds(320, 0, 24, 31);
 		panel_1.add(label_6);
 		
 		JPanel panel_15 = new JPanel();
@@ -391,6 +599,23 @@ public class PrincipalAdministrador extends JFrame {
 		label_7.setBounds(182, 0, 24, 31);
 		panel_1.add(label_7);
 		
+		JPanel panel_16 = new JPanel();
+		panel_16.setBounds(309, 0, 2, 31);
+		panel_1.add(panel_16);
+		
+		JLabel label_8 = new JLabel("");
+		label_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelConfiguracion.setVisible(true);
+				txtEmail.requestFocus();
+			}
+		});
+		label_8.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/configuracion.png")));
+		label_8.setBounds(280, 0, 24, 31);
+		panel_1.add(label_8);
+		label_8.setToolTipText("Cambiar Contraseña");
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
@@ -414,7 +639,7 @@ public class PrincipalAdministrador extends JFrame {
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Registro de Proyectos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_8.setBounds(42, 193, 567, 488);
+		panel_8.setBounds(42, 213, 567, 468);
 		contentPane.add(panel_8);
 		panel_8.setLayout(null);
 		
@@ -551,7 +776,7 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnGuardar.setBackground(SystemColor.controlHighlight);
-		btnGuardar.setBounds(404, 423, 128, 38);
+		btnGuardar.setBounds(404, 418, 128, 38);
 		panel_8.add(btnGuardar);
 		
 		JPanel panel_6 = new JPanel();
@@ -661,17 +886,17 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		Refrescar.setBorder(UIManager.getBorder("CheckBox.border"));
 		Refrescar.setBackground(SystemColor.controlHighlight);
-		Refrescar.setBounds(185, 423, 195, 38);
+		Refrescar.setBounds(185, 418, 195, 38);
 		panel_8.add(Refrescar);
 		
 		JPanel panel_11 = new JPanel();
 		panel_11.setLayout(null);
 		panel_11.setBorder(new TitledBorder(null, "Proyectos Recientes", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_11.setBounds(614, 193, 724, 488);
+		panel_11.setBounds(614, 213, 724, 468);
 		contentPane.add(panel_11);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(25, 34, 684, 427);
+		scrollPane.setBounds(25, 34, 684, 422);
 		panel_11.add(scrollPane);
 		
 		tbl_proyectos = new JTable();
@@ -692,12 +917,14 @@ public class PrincipalAdministrador extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		panelConfiguracion.setVisible(false);
 	}
 	
 	
 	public void cerrarPrincipal(){
 		Object [] opciones ={"Aceptar","Cancelar"};
-		int eleccion = JOptionPane.showOptionDialog(rootPane,"Esta seguro que desea cerrar la aplicación","Mensaje de Confirmación",
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cerrar la aplicación?","Mensaje de Confirmación",
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 		if (eleccion == JOptionPane.YES_OPTION)
@@ -849,6 +1076,20 @@ public class PrincipalAdministrador extends JFrame {
              JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
              System.out.println(ex);
          }
+	}
+	
+	
+	
+	public boolean validarEmail(String email){
+		
+		  Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	       Matcher mat = pat.matcher(email);
+	       if(mat.find()){
+	          return true;
+	       }else{
+	          JOptionPane.showMessageDialog(null,"Formato de email incorrecto", "Advertencia",JOptionPane.ERROR_MESSAGE);
+	          return false;
+	     }
 	}
 }
 

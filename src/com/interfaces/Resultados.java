@@ -1,5 +1,7 @@
 package com.interfaces;
 
+
+import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -17,12 +19,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import org.apache.commons.collections.IteratorUtils;
 
 import jess.Fact;
 import jess.JessException;
 import jess.Rete;
 
 import com.persistencia.Evaluacion;
+
+import javax.swing.JTable;
 
 public class Resultados extends JFrame {
 
@@ -31,7 +38,6 @@ public class Resultados extends JFrame {
 	private static Rete motor;
 	private static Rete motorHeuristicos;
 	public JTextArea txtResultado;
-	public Map values = new HashMap();
 	public String[] ides= {"AG","II","EN","RO","LA","EF","CR","EM","BU","AY"};
 	public float[] proms = {0,0,0,0,0,0,0,0,0,0};
 	public String[] resul= null;
@@ -39,7 +45,11 @@ public class Resultados extends JFrame {
 	ArrayList<ResultSet> records;
 	ArrayList<Rete> motores = new ArrayList<Rete>();
 	
+	String[] titulos = { "IDENTIFICADOR", "RECOMENDACION" };
+	DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+	
 	public String[] archivos= {"ag.clp","ii.clp","en.clp","ro.clp","la.clp","ef.clp","cr.clp","em.clp","bu.clp","ay.clp"};
+	private JTable tblRec;
 
 	/**
 	 * Launch the application.
@@ -78,7 +88,9 @@ public class Resultados extends JFrame {
 		for (int i = 0; i < archivos.length; i++) {
 			Rete moto= new Rete();
 			try {
+				System.out.println("Este es el tamaño del resultset"+records.get(i).getFetchSize());
 				moto.batch(archivos[i]);
+				
 				while (records.get(i).next()) {
 					moto.assertString("(Criterio(nombre "+records.get(i).getString(2)+")(calificacion "+records.get(i).getString(1)+"))");				
 				}
@@ -136,12 +148,24 @@ public class Resultados extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(56, 55, 1249, 583);
+		scrollPane.setBounds(56, 55, 1249, 404);
 		contentPane.add(scrollPane);
 		
 		txtResultado = new JTextArea();
 		scrollPane.setViewportView(txtResultado);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(56, 488, 638, 172);
+		contentPane.add(scrollPane_1);
+		
+		
 		obtenerNivelUsabilidad();
+		
+		
+		
+		tblRec = new JTable();
+		tblRec.setModel(modelo);
+		scrollPane_1.setViewportView(tblRec);
 	}
 
 	public void cerrarInformes() {
@@ -211,11 +235,10 @@ public class Resultados extends JFrame {
 			 * 
 			 */
 			for (int i = 0; i < motores.size(); i++) {
-				
+					 
 					motores.get(i).run();
 					Iterator itTest=motores.get(i).listFacts();
 					Fact fauxTest;
-					
 					
 					while(itTest.hasNext()){
 						fauxTest=(Fact)itTest.next();
@@ -225,7 +248,9 @@ public class Resultados extends JFrame {
 							System.out.println("Guarda la rutina");
 							
 								if (!fauxTest.getSlotValue("condicion").toString().equals("nil")) {
-									otro+=fauxTest.getSlotValue("nombre")+" que representa: "+fauxTest.getSlotValue("condicion")+"\n";									
+									otro+=fauxTest.getSlotValue("nombre")+" que representa: "+fauxTest.getSlotValue("condicion")+"\n";
+									String[] row = {""+fauxTest.getSlotValue("nombre"), ""+fauxTest.getSlotValue("condicion")};
+									modelo.addRow(row);
 								}
 							
 						}else{
@@ -260,9 +285,6 @@ public class Resultados extends JFrame {
 	public void obtenerRecomendacionesHeuristicos() throws SQLException {
 		
 		
-		for (int i = 0; i < values.size(); i++) {
-			values.put(ides[i], Evaluacion.consultarPromedioHeuristico(idEvaluacion, ides[i]));
-		}
 		
 
 	}

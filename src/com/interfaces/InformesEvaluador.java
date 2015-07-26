@@ -146,43 +146,26 @@ public class InformesEvaluador extends JFrame {
 		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(718, 21, 279, 26);
+		txt_evaluacion.setBounds(546, 21, 385, 26);
 		panel.add(txt_evaluacion);
 		txt_evaluacion.setColumns(10);
 		txt_evaluacion.setBorder(null);
 		
-		JButton btnResultados = new JButton("Resultados");
+		JButton btnResultados = new JButton("Recomendaciones");
 		btnResultados.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/result.png")));
 		btnResultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				if(id_evaluacion==-1){
-					
-					 
-					JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar sus respectivos resultados");
-				}else{
-
-					Resultados result;
-					try {
-						JOptionPane.showMessageDialog(null, "Generando resultados, por favor espere un momento");
-						result = new Resultados(id_evaluacion);
-						result.idEvaluacion=id_evaluacion;
-						result.show();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+			verInformeDeResultados();
 			}
 		});
 		btnResultados.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnResultados.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnResultados.setBackground(SystemColor.controlHighlight);
-		btnResultados.setBounds(1138, 21, 122, 27);
+		btnResultados.setBounds(1095, 20, 165, 27);
 		panel.add(btnResultados);
 		
 		JButton btnVerInforme = new JButton(" Informe");
-		btnVerInforme.setBounds(1007, 20, 122, 27);
+		btnVerInforme.setBounds(963, 20, 122, 27);
 		panel.add(btnVerInforme);
 		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVerInforme.addActionListener(new ActionListener() {
@@ -362,5 +345,35 @@ public class InformesEvaluador extends JFrame {
             JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
             System.out.println(ex);
         }
+	}
+	
+	
+	
+	
+public void verInformeDeResultados(){
+		
+		
+		if(id_evaluacion==-1){
+			
+			 
+			JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla para poder generar sus respectivos resultados");
+		}else{
+			
+			 try{
+	               
+				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
+	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+				 	String path =RutaBase.obtenerRuta()+"resultadosIndividual.jrxml";
+	                abrirReporte(path, "Informe de Resultados Individuales ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
+	                
+	            
+	            }catch(Exception ex){
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+	                System.out.println(ex);
+	            }
+			  
+			
+		}
+		
 	}
 }

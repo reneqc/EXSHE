@@ -449,6 +449,20 @@ public class PrincipalEvaluador extends JFrame {
 		button.setBounds(312, 150, 109, 27);
 		panel_8.add(button);
 		
+		JButton button_1 = new JButton("  Refrescar Datos");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				cargarTablaEvaluaciones();
+			}
+		});
+		button_1.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/refresh.png")));
+		button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_1.setBorder(UIManager.getBorder("CheckBox.border"));
+		button_1.setBackground(SystemColor.controlHighlight);
+		button_1.setBounds(77, 418, 195, 38);
+		panel_8.add(button_1);
+		
 		contenedor_proyectos = new JPanel();
 		contenedor_proyectos.setLayout(null);
 		contenedor_proyectos.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, null));

@@ -153,7 +153,8 @@ public class PrincipalAdministrador extends JFrame {
 		JMenu mnEvaluaciones = new JMenu("  Proyectos");
 		menuBar.add(mnEvaluaciones);
 		
-		JMenuItem mntmFinalizados = new JMenuItem("Finalizados");
+		JMenuItem mntmFinalizados = new JMenuItem("Resultados");
+		mntmFinalizados.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/proyecto3.png")));
 		mntmFinalizados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				InformesProyectos ip=new InformesProyectos();
@@ -235,9 +236,19 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		mnEvaluadores.add(mnuMantenimientoEvaluadores);
 		
+		JMenu mnConfiguracin = new JMenu("   Configuración");
+		menuBar.add(mnConfiguracin);
+		
+		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contraseña");
+		mnConfiguracin.add(mntmCambiarContrasea);
+		
 		
 		JMenu mnAyuda = new JMenu("  Ayuda  ");
 		menuBar.add(mnAyuda);
+		
+		JMenuItem mntmVer = new JMenuItem("Ver");
+		mntmVer.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
+		mnAyuda.add(mntmVer);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
 		lbl_evaluador.setBounds(144, 71, 222, 22);
@@ -284,8 +295,15 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(label);
 		
 		JLabel label_1 = new JLabel("");
+		label_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				InformesProyectos ip=new InformesProyectos();
+				ip.show();
+			}
+		});
 		label_1.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/proyecto3.png")));
-		label_1.setToolTipText("Ejecutar evaluaciones");
+		label_1.setToolTipText("Resultados de Proyectos");
 		label_1.setBounds(90, 0, 24, 31);
 		panel_1.add(label_1);
 		

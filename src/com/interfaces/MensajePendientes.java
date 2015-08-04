@@ -16,6 +16,8 @@ import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MensajePendientes extends JFrame {
 
@@ -68,6 +70,15 @@ public class MensajePendientes extends JFrame {
 		scrollPane.setViewportView(mensajeError);
 		
 		JButton button = new JButton("OK");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					dispose();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();

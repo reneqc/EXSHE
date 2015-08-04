@@ -35,6 +35,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Ejecucion extends JFrame {
 
@@ -180,6 +182,16 @@ public class Ejecucion extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(tbl_evaluaciones);
+		btn_iniciar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					calificar();
+				}
+			}
+		});
 		btn_iniciar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btn_iniciar.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/start2.png")));
 	
@@ -189,76 +201,10 @@ public class Ejecucion extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				
-				String nombre=txt_nombre.getText();
-				String url=txt_url.getText();
-				
-				String navegador=txt_navegador.getText();
-				String version=txt_version.getText();
-				
-				
-				String email= Acceso.conectado();
-				//String email="perez@gmail.com";
-				
-				if(nombre.equals("") || url.equals("")){
-					JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla");
-				}else{
-					if(version.equals("")||navegador.equals("")){
-						JOptionPane.showMessageDialog(null, "Por favor seleccione una evaluación de la tabla");	
-						
-						if(version.equals("")){
-							txt_version.requestFocus();
-						}
-						
-						if(navegador.equals("")){
-							txt_navegador.requestFocus();
-						}
-						
-						
-					}else{
-						
-				
-							
-							
-							try {
-								
-								
-							
-								
-								if (!Evaluacion.verificarEstado(id_evaluacion)){
-									
-									tbl_evaluaciones.setEnabled(false);									
-									contenedor_criterios.setVisible(true);
-									btn_iniciar.setEnabled(false);
-									//primera carga
-									JOptionPane.showMessageDialog(null, "EXSHE está iniciando el test, por favor espere a que todos los criterios de evaluación sean cargados.");	
-									actualizarNumeroVista();
-									rs=Evaluacion.consultarCalificaciones(id_evaluacion);
-									
-									cargarCriterios();
-								}else{
-									JOptionPane.showMessageDialog(null,"Esta evaluación ya ha sido finalizada, por favor seleccione otra.");
-									limpiar();
-								}
-								
-												
-								
-							
-							} catch (Exception e) {
-								
-								e.printStackTrace();
-							}
-							
-
-							
-							
-					}
-					
-				}
 			
 				
 				
-				
+				calificar();
 				
 				
 				
@@ -271,6 +217,15 @@ public class Ejecucion extends JFrame {
 		panel.add(btn_iniciar);
 		
 		JButton btnAtrs = new JButton("  Atr\u00E1s");
+		btnAtrs.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					dispose();
+				}
+			}
+		});
 		btnAtrs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -287,7 +242,7 @@ public class Ejecucion extends JFrame {
 		panel_1.setBounds(355, 11, 985, 670);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		panel_1.setBorder(new TitledBorder(null, "Calificación de criterios", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(null, "Calificaciï¿½n de criterios", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		
 		JPanel panel_11 = new JPanel();
 		panel_11.setLayout(null);
@@ -314,7 +269,7 @@ public class Ejecucion extends JFrame {
 		panel_12.setBounds(26, 56, 455, 27);
 		panel_1.add(panel_12);
 		
-		JLabel label_12 = new JLabel("Navegador para la evaluación:");
+		JLabel label_12 = new JLabel("Navegador para la evaluaciï¿½n:");
 		label_12.setFont(new Font("Dialog", Font.BOLD, 12));
 		label_12.setBounds(12, 5, 170, 15);
 		panel_12.add(label_12);
@@ -352,7 +307,7 @@ public class Ejecucion extends JFrame {
 		panel_14.setBounds(502, 56, 473, 27);
 		panel_1.add(panel_14);
 		
-		JLabel label_14 = new JLabel("Versión:");
+		JLabel label_14 = new JLabel("Versiï¿½n:");
 		label_14.setFont(new Font("Dialog", Font.BOLD, 12));
 		label_14.setBounds(10, 5, 47, 15);
 		panel_14.add(label_14);
@@ -401,10 +356,10 @@ public class Ejecucion extends JFrame {
 		panel_4.setBounds(16, 0, 949, 27);
 		contenedor_criterios.add(panel_4);
 		
-		JLabel label_1 = new JLabel("CRITERIOS A EVALUAR");
-		label_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		label_1.setBounds(406, 0, 172, 23);
-		panel_4.add(label_1);
+		JLabel lblSubCriteriosA = new JLabel("SUB CRITERIOS A EVALUAR");
+		lblSubCriteriosA.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblSubCriteriosA.setBounds(381, 1, 203, 23);
+		panel_4.add(lblSubCriteriosA);
 		numeroVista.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		
@@ -621,55 +576,59 @@ public class Ejecucion extends JFrame {
 		contenedorCriterio9.add(combo9);
 		
 		JButton button_1 = new JButton("Anterior");
+		button_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					anterior();
+				}
+			}
+		});
 		button_1.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/prev.png")));
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				if(i>0){
-					
-					i--;
-					actualizarNumeroVista();
-					try {
-						cargarCriterios();
-					} catch (SQLException e) {
-						//En caso de falla
-						e.printStackTrace();
-					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Estos son los primeros criterios que debe calificar");
-				}
+				anterior();
 			}
 		});
 		button_1.setBounds(16, 544, 135, 27);
 		contenedor_criterios.add(button_1);
 		
 		JButton button_2 = new JButton("Siguiente");
+		button_2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					siguiente();
+				}
+			}
+		});
 		button_2.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/next.png")));
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(i<9){
-					
-					i++;
-					actualizarNumeroVista();
-					try {
-						cargarCriterios();
-					} catch (SQLException e) {
-						//En caso de falla
-						e.printStackTrace();
-					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Estos son los últimos criterios que debe calificar");
-				}
+				siguiente();
 			}
 		});
 		button_2.setBounds(176, 544, 138, 27);
 		contenedor_criterios.add(button_2);
 		
 		JButton button_3 = new JButton("Guardar Sesi\u00F3n");
+		button_3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					guardarSesion();
+				}
+			}
+		});
 		button_3.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/puas3.png")));
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button_3.addActionListener(new ActionListener() {
@@ -677,43 +636,7 @@ public class Ejecucion extends JFrame {
 				
 				
 				
-	ResultSet pendientes;
-				
-				try {
-					pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
-					
-					if(pendientes.next()){
-						int i=0;
-						String criteriosPendientes="";
-						pendientes.beforeFirst();
-						while(pendientes.next()){
-							criteriosPendientes=criteriosPendientes+pendientes.getString(5)+"-";
-							i++;
-						}
-						contenedor_criterios.setVisible(false);
-						if(Evaluacion.cambiarEstadoAPendiete(id_evaluacion)>0){
-							JOptionPane.showMessageDialog(null,"Sesión guardada exitosamente, recuerde que tiene criterios pendientes de calificar");
-							cargarTabla();
-							tbl_evaluaciones.setEnabled(true);
-							limpiar();
-							btn_iniciar.setEnabled(true);
-						}else{
-							JOptionPane.showMessageDialog(null,"Error al guardar la sesión");
-						}
-							
-						
-						
-						
-					}else{
-						
-						JOptionPane.showMessageDialog(null,"Todos los criterios ya han sido calificados, se recomienda que de clic en finalizar para visualizar el informe correspondiente a esta evaluación");
-
-						
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				guardarSesion();
 				
 			}
 		});
@@ -721,61 +644,23 @@ public class Ejecucion extends JFrame {
 		contenedor_criterios.add(button_3);
 		
 		JButton btnFinalizar = new JButton(" Finalizar");
+		btnFinalizar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					finalizar();
+				}
+			}
+		});
 		btnFinalizar.setIcon(new ImageIcon(Ejecucion.class.getResource("/img/stop3.png")));
 		btnFinalizar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				
-				ResultSet pendientes;
-				try {
-					pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
-					
-					if(pendientes.next()){
-						int i=1;
-						String criteriosPendientes="";
-						pendientes.beforeFirst();
-						while(pendientes.next()){
-							
-			
-							criteriosPendientes+=pendientes.getString(9)+": "+pendientes.getString(5)+" <br> ";
-						
-							i++;
-						}
-						
-
-						//JOptionPane.showMessageDialog(null,"No se puede finalizar aún tiene "+i+" criterios pendientes de calificar: "+criteriosPendientes);
-						
-						MensajePendientes msjPendiente=new MensajePendientes();
-						msjPendiente.mensajeError.setText("<html><div style='margin-top=3px;'><h3 style='color:red'>No se puede finalizar la evaluación debido a que aún tiene "+(i+-1)+" criterios pendientes de calificar: <br></h3>"+criteriosPendientes+"</div></html>");
-						msjPendiente.show();
-						
-					}else{
-						
-						
-						
-					
-						
-						if(Evaluacion.cambiarEstado(id_evaluacion)>0){
-							limpiar();				
-							//panel_heuristicos.setVisible(false);
-							//panel_descripcion.setVisible(false);
-							tbl_evaluaciones.setEnabled(true);
-							contenedor_criterios.setVisible(false);
-							btn_iniciar.setEnabled(true);
-							JOptionPane.showMessageDialog(null,"Evaluación finalizada exitosamente");
-							cargarTabla();
-						}else{
-							JOptionPane.showMessageDialog(null,"Error al finalizar. Por favor revise que todos los criterios esten calificados");
-						}
-						
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
+			finalizar();
 					
 				
 				
@@ -810,17 +695,17 @@ public class Ejecucion extends JFrame {
 		lblRoRotulado.setBounds(52, 66, 232, 14);
 		panel_2.add(lblRoRotulado);
 		
-		JLabel label_5 = new JLabel("LA - Layout de la página");
+		JLabel label_5 = new JLabel("LA - Layout de la pï¿½gina");
 		label_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_5.setBounds(52, 81, 232, 14);
 		panel_2.add(label_5);
 		
-		JLabel label_6 = new JLabel("EF - Entendibilidad y facilidad en la interacción");
+		JLabel label_6 = new JLabel("EF - Entendibilidad y facilidad en la interacciï¿½n");
 		label_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_6.setBounds(53, 96, 273, 14);
 		panel_2.add(label_6);
 		
-		JLabel label_7 = new JLabel("CR - Control y retroalimentación");
+		JLabel label_7 = new JLabel("CR - Control y retroalimentaciï¿½n");
 		label_7.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_7.setBounds(52, 111, 273, 14);
 		panel_2.add(label_7);
@@ -830,7 +715,7 @@ public class Ejecucion extends JFrame {
 		label_8.setBounds(52, 126, 232, 14);
 		panel_2.add(label_8);
 		
-		JLabel label_9 = new JLabel("BU - Búsqueda");
+		JLabel label_9 = new JLabel("BU - Bï¿½squeda");
 		label_9.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_9.setBounds(52, 141, 232, 14);
 		panel_2.add(label_9);
@@ -860,7 +745,7 @@ public class Ejecucion extends JFrame {
 		lblNep.setBounds(49, 46, 264, 14);
 		panel_3.add(lblNep);
 		
-		JLabel lblNpp = new JLabel("NPP - No se cumle en la p\u00E1gina principal");
+		JLabel lblNpp = new JLabel("NPP - No se cumple en la pÃ¡gina principal");
 		lblNpp.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNpp.setBounds(49, 61, 276, 14);
 		panel_3.add(lblNpp);
@@ -908,7 +793,7 @@ public class Ejecucion extends JFrame {
 			modelo.addColumn("SITIO");
 			modelo.addColumn("URL");
 			modelo.addColumn("NAVEGADOR");
-			modelo.addColumn("VERSIÓN");
+			modelo.addColumn("VERSIï¿½N");
 			modelo.addColumn("ESTADO");		
 			try {
 				while(rsTabla.next()){		
@@ -940,7 +825,7 @@ public class Ejecucion extends JFrame {
 		modelo.addColumn("NOMBRE DEL SITIO"); 2
 		modelo.addColumn("URL"); 3
 		modelo.addColumn("NAVEGADOR"); 4
-		modelo.addColumn("VERSIÓN"); 5
+		modelo.addColumn("VERSIï¿½N"); 5
 		modelo.addColumn("FECHA");	6
 		*/
 		
@@ -1021,7 +906,7 @@ public class Ejecucion extends JFrame {
 		lbl.setText("<html><div>"+rs.getString(9)+": "+rs.getString(5)+"</html></div>");
 	
 	
-		if(rs.getString(6).equals("Numérico")){
+		if(rs.getString(6).equals("NumÃ©rico")){
 			
 			
 			
@@ -1034,11 +919,11 @@ public class Ejecucion extends JFrame {
 				
 				combo.setBackground(new Color(r,g, b));//pintando verde
 				if(puntos==-2){
-					combo.setSelectedIndex(11);
+					combo.setSelectedIndex(12);
 					
 				}else{
 										
-					combo.setSelectedIndex((int) puntos);
+					combo.setSelectedIndex((int) puntos+1);
 					
 				}
 			}
@@ -1092,7 +977,8 @@ public class Ejecucion extends JFrame {
 	
 	public void cargarComboNumeros(JComboBox combo){
 		combo.removeAllItems();
-		combo.addItem("Seleccione una opción");
+		combo.addItem("Seleccione una opciï¿½n");
+		combo.addItem("0");
 		combo.addItem("1");
 		combo.addItem("2");
 		combo.addItem("3");
@@ -1108,7 +994,7 @@ public class Ejecucion extends JFrame {
 	
 	public void cargarComboTexto(JComboBox combo){
 		combo.removeAllItems();
-		combo.addItem("Seleccione una opción");
+		combo.addItem("Seleccione una opciï¿½n");
 		combo.addItem("NTS");
 		combo.addItem("NEP");
 		combo.addItem("NPP");
@@ -1263,6 +1149,207 @@ public class Ejecucion extends JFrame {
 	
 	public void actualizarNumeroVista(){
 		numeroVista.setText((i+1)+" de 10");
+	}
+	
+	
+	public void calificar(){
+		
+		
+		String nombre=txt_nombre.getText();
+		String url=txt_url.getText();
+		
+		String navegador=txt_navegador.getText();
+		String version=txt_version.getText();
+		
+		
+		String email= Acceso.conectado();
+		//String email="perez@gmail.com";
+		
+		if(nombre.equals("") || url.equals("")){
+			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaciï¿½n de la tabla");
+		}else{
+			if(version.equals("")||navegador.equals("")){
+				JOptionPane.showMessageDialog(null, "Por favor seleccione una evaluaciï¿½n de la tabla");	
+				
+				if(version.equals("")){
+					txt_version.requestFocus();
+				}
+				
+				if(navegador.equals("")){
+					txt_navegador.requestFocus();
+				}
+				
+				
+			}else{
+				
+		
+					
+					
+					try {
+						
+						
+					
+						
+						if (!Evaluacion.verificarEstado(id_evaluacion)){
+							
+							tbl_evaluaciones.setEnabled(false);									
+							contenedor_criterios.setVisible(true);
+							btn_iniciar.setEnabled(false);
+							//primera carga
+							JOptionPane.showMessageDialog(null, "EXSHE estï¿½ iniciando el test, por favor espere a que todos los criterios de evaluaciï¿½n sean cargados.");	
+							actualizarNumeroVista();
+							rs=Evaluacion.consultarCalificaciones(id_evaluacion);
+							
+							cargarCriterios();
+						}else{
+							JOptionPane.showMessageDialog(null,"Esta evaluaciï¿½n ya ha sido finalizada, por favor seleccione otra.");
+							limpiar();
+						}
+						
+										
+						
+					
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+					}
+					
+
+					
+					
+			}
+			
+		}
+	
+	}
+	
+	public void anterior(){
+		if(i>0){
+			
+			i--;
+			actualizarNumeroVista();
+			try {
+				cargarCriterios();
+			} catch (SQLException e) {
+				//En caso de falla
+				e.printStackTrace();
+			}
+		}else{
+			JOptionPane.showMessageDialog(null, "Estos son los primeros criterios que debe calificar");
+		}
+	}
+	
+	
+	public void siguiente(){
+		
+		if(i<9){
+			
+			i++;
+			actualizarNumeroVista();
+			try {
+				cargarCriterios();
+			} catch (SQLException e) {
+				//En caso de falla
+				e.printStackTrace();
+			}
+		}else{
+			JOptionPane.showMessageDialog(null, "Estos son los ï¿½ltimos criterios que debe calificar");
+		}
+	}
+	
+	
+	
+	public void guardarSesion(){
+		ResultSet pendientes;
+		
+		try {
+			pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
+			
+			if(pendientes.next()){
+				int i=0;
+				String criteriosPendientes="";
+				pendientes.beforeFirst();
+				while(pendientes.next()){
+					criteriosPendientes=criteriosPendientes+pendientes.getString(5)+"-";
+					i++;
+				}
+				contenedor_criterios.setVisible(false);
+				if(Evaluacion.cambiarEstadoAPendiete(id_evaluacion)>0){
+					JOptionPane.showMessageDialog(null,"Sesiï¿½n guardada exitosamente, recuerde que tiene criterios pendientes de calificar");
+					cargarTabla();
+					tbl_evaluaciones.setEnabled(true);
+					limpiar();
+					btn_iniciar.setEnabled(true);
+				}else{
+					JOptionPane.showMessageDialog(null,"Error al guardar la sesiï¿½n");
+				}
+					
+				
+				
+				
+			}else{
+				
+				JOptionPane.showMessageDialog(null,"Todos los criterios ya han sido calificados, se recomienda que de clic en finalizar para visualizar el informe correspondiente a esta evaluaciï¿½n");
+
+				
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	public void finalizar(){
+		
+		ResultSet pendientes;
+		try {
+			pendientes = Evaluacion.verificarFinalizacion(id_evaluacion);
+			
+			if(pendientes.next()){
+				int i=1;
+				String criteriosPendientes="";
+				pendientes.beforeFirst();
+				while(pendientes.next()){
+					
+	
+					criteriosPendientes+=pendientes.getString(9)+": "+pendientes.getString(5)+" <br> ";
+				
+					i++;
+				}
+				
+
+				//JOptionPane.showMessageDialog(null,"No se puede finalizar aï¿½n tiene "+i+" criterios pendientes de calificar: "+criteriosPendientes);
+				
+				MensajePendientes msjPendiente=new MensajePendientes();
+				msjPendiente.mensajeError.setText("<html><div style='margin-top=3px;'><h3 style='color:red'>No se puede finalizar la evaluaciï¿½n debido a que aï¿½n tiene "+(i+-1)+" subcriterios pendientes de calificar: <br></h3>"+criteriosPendientes+"</div></html>");
+				msjPendiente.show();
+				
+			}else{
+				
+				
+				
+			
+				
+				if(Evaluacion.cambiarEstado(id_evaluacion)>0){
+					limpiar();				
+					//panel_heuristicos.setVisible(false);
+					//panel_descripcion.setVisible(false);
+					tbl_evaluaciones.setEnabled(true);
+					contenedor_criterios.setVisible(false);
+					btn_iniciar.setEnabled(true);
+					JOptionPane.showMessageDialog(null,"Evaluaciï¿½n finalizada exitosamente");
+					cargarTabla();
+				}else{
+					JOptionPane.showMessageDialog(null,"Error al finalizar. Por favor revise que todos los criterios esten calificados");
+				}
+				
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
 }
 

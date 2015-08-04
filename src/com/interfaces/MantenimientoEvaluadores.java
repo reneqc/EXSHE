@@ -119,9 +119,9 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(223, 223, 233));
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel("Nombres:");
 		lblNombre.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNombre.setBounds(12, 5, 73, 15);
+		lblNombre.setBounds(12, 5, 83, 15);
 		panel_1.add(lblNombre);
 		
 		txt_nombre = new JTextField();
@@ -134,7 +134,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_nombre.setColumns(10);
 		txt_nombre.setBorder(null);
 		txt_nombre.setBackground(new Color(223, 223, 233));
-		txt_nombre.setBounds(83, 3, 283, 20);
+		txt_nombre.setBounds(100, 3, 266, 20);
 		panel_1.add(txt_nombre);
 		
 		JPanel panel_2 = new JPanel();
@@ -143,9 +143,9 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_2.setLayout(null);
 		panel_2.setBackground(new Color(223, 223, 233));
 		
-		JLabel lblApellido = new JLabel("Apellido:");
+		JLabel lblApellido = new JLabel("Apellidos:");
 		lblApellido.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblApellido.setBounds(12, 5, 70, 15);
+		lblApellido.setBounds(12, 5, 76, 15);
 		panel_2.add(lblApellido);
 		
 		txt_apellido = new JTextField();
@@ -161,7 +161,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		txt_apellido.setColumns(10);
 		txt_apellido.setBorder(null);
 		txt_apellido.setBackground(new Color(223, 223, 233));
-		txt_apellido.setBounds(83, 3, 327, 20);
+		txt_apellido.setBounds(99, 3, 311, 20);
 		panel_2.add(txt_apellido);
 		
 		JPanel panel_3 = new JPanel();
@@ -219,6 +219,15 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_5.add(txt_passwordR);
 		
 		final JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					limpiar();
+				}
+			}
+		});
 		btnLimpiar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/clear.png")));
 		btnLimpiar.setBounds(887, 153, 109, 38);
 		btnLimpiar.setFocusable(false);
@@ -246,120 +255,22 @@ public class MantenimientoEvaluadores extends JFrame {
 		btnLimpiar.setBackground(SystemColor.controlHighlight);
 		
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					guardar();
+				}
+			}
+		});
 		btnGuardar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/save.png")));
 		btnGuardar.setBounds(1163, 153, 120, 38);
 		contenedor_registro.add(btnGuardar);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String nombre=txt_nombre.getText();
-				String apellido=txt_apellido.getText();
-				String email=txt_email.getText();
-				String direccion=txt_direccion.getText();
-				String cargo=txt_cargo.getText();
-				String profesion=txt_profesion.getText();
-				String telefono=txt_telefono.getText();
-				String empresa=txt_empresa.getText();
-				String pass1=txt_password.getText();
-				String pass2=txt_passwordR.getText();	
-				
-				
-				
-					
-				
-					if (nombre.equals("") || apellido.equals("") || email.equals("") || pass1.equals("") || pass2.equals("")){
-						
-						
-						if (pass2.equals("")){
-							txt_passwordR.requestFocus();
-						}
-						
-						
-						if (pass1.equals("")){	
-							txt_password.requestFocus();
-						}
-	
-						if (email.equals("")){									
-							txt_email.requestFocus();
-						}
-						
-						if(nombre.equals("") ){						
-							txt_nombre.requestFocus();
-						}
-						
-						if (apellido.equals("")){									
-							txt_apellido.requestFocus();
-						}
-						
-						
-						
-						JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
-					}else{	
-						
-						if (email.length()>6){
-							
-						
-							if(pass1.length()<6){
-								JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
-								txt_password.setText("");
-								txt_passwordR.setText("");
-								txt_password.requestFocus();
-		
-							}else{
-								
-								if(validarEmail(email)){
-									if(pass1.equals(pass2)){
-										
-										
-											
-										
-										//Guardar Evaluador
-										evaluador=new Evaluador(nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
-										int resultado=evaluador.guardar();		
-										limpiar();
-										
-										if (resultado>0){
-											JOptionPane.showMessageDialog(null,"Evaluador guardado exitosamente. ");
-											try {
-												cargarTabla();
-											} catch (SQLException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-											
-											
-										}else{
-											JOptionPane.showMessageDialog(null,"No se pudo guardar, intente usar otro email.");
-											txt_email.requestFocus();
-											txt_email.setText("");
-											txt_password.setText("");
-											txt_passwordR.setText("");
-										}
-										
-										
-										
-									}else{
-										
-										JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
-										txt_password.requestFocus();
-										txt_password.setText("");
-										txt_passwordR.setText("");
-									}
-								}else{
-									txt_email.setText("");
-									txt_password.setText("");
-									txt_passwordR.setText("");
-									txt_email.requestFocus();
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
-							txt_email.requestFocus();
-							txt_email.setText("");
-							txt_password.setText("");
-							txt_passwordR.setText("");
-						}
-					}
+				guardar();
 					
 		
 				
@@ -482,6 +393,15 @@ public class MantenimientoEvaluadores extends JFrame {
 		panel_10.add(txt_empresa);
 		
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					actualizar();
+				}
+			}
+		});
 		btnActualizar.setToolTipText("Debe seleccionar un evaluador para poder actualizar");
 		btnActualizar.setIcon(new ImageIcon(MantenimientoEvaluadores.class.getResource("/img/update.png")));
 		btnActualizar.addMouseListener(new MouseAdapter() {
@@ -498,110 +418,7 @@ public class MantenimientoEvaluadores extends JFrame {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
-
-				String nombre=txt_nombre.getText();
-				String apellido=txt_apellido.getText();
-				String email=txt_email.getText();
-				String direccion=txt_direccion.getText();
-				String cargo=txt_cargo.getText();
-				String profesion=txt_profesion.getText();
-				String telefono=txt_telefono.getText();
-				String empresa=txt_empresa.getText();
-				String pass1=txt_password.getText();
-				String pass2=txt_passwordR.getText();	
-				
-				
-				
-			if(id_evaluador==-1){
-				JOptionPane.showMessageDialog(null,"Por favor seleccione un evaluador");
-				
-			}else{
-				
-				if (nombre.equals("") || apellido.equals("") || email.equals("") || pass1.equals("") || pass2.equals("")){
-					
-					
-					if (pass2.equals("")){
-						txt_passwordR.requestFocus();
-					}
-					
-					
-					if (pass1.equals("")){	
-						txt_password.requestFocus();
-					}
-
-					if (email.equals("")){									
-						txt_email.requestFocus();
-					}
-					
-					if (apellido.equals("")){									
-						txt_apellido.requestFocus();
-					}
-					
-					if(nombre.equals("") ){						
-						txt_nombre.requestFocus();
-					}
-					
-					JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
-				}else{	
-					
-					if (email.length()>6){
-						
-						if(validarEmail(email)){
-							if(pass1.length()<6){
-								JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
-								txt_password.setText("");
-								txt_passwordR.setText("");
-								txt_password.requestFocus();
-		
-							}else{
-								
-								if(pass1.equals(pass2)){
-									
-									//Guardar Evaluador
-									evaluador=new Evaluador(id_evaluador,nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
-									int resultado=evaluador.actualizar();	
-									limpiar();
-									
-									if (resultado>0){
-										JOptionPane.showMessageDialog(null,"Evaluador actualizado exitosamente. ");
-										try {
-											cargarTabla();
-										} catch (SQLException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										
-										
-									}else{
-										JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
-										txt_email.requestFocus();
-										txt_email.setText("");
-										txt_password.setText("");
-										txt_passwordR.setText("");
-									}
-									
-									
-								}else{
-									
-									JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
-									txt_password.requestFocus();
-									txt_password.setText("");
-									txt_passwordR.setText("");
-								}
-							}
-						}else{
-							txt_email.requestFocus();
-						}
-					}else{
-						JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
-						txt_email.requestFocus();
-						txt_email.setText("");
-						txt_password.setText("");
-						txt_passwordR.setText("");
-					}
-				}
-			}
+			actualizar();
 				
 	
 			}
@@ -670,7 +487,7 @@ public class MantenimientoEvaluadores extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"ID", "Apellido", "Nombre", "Email", "Direcci\u00F3n", "Tel\u00E9fono", "Profesi\u00F3n", "Empresa", "Cargo", "Perfil", "Password"
+				"ID", "Apellidos", "Nombres", "Email", "Direcci\u00F3n", "Tel\u00E9fono", "Profesi\u00F3n", "Empresa", "Cargo", "Perfil", "Password"
 			}
 		));
 		scrollPane.setViewportView(tbl_evaluadores);
@@ -687,6 +504,15 @@ public class MantenimientoEvaluadores extends JFrame {
 		btnActualizar.setEnabled(false);
 		
 		JButton button = new JButton("  Atrás");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					dispose();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -728,8 +554,8 @@ public class MantenimientoEvaluadores extends JFrame {
 		DefaultTableModel modelo=new DefaultTableModel();
 		
 		modelo.addColumn("ID");
-		modelo.addColumn("APELLIDO");
-		modelo.addColumn("NOMBRE");
+		modelo.addColumn("APELLIDOS");
+		modelo.addColumn("NOMBRES");
 		modelo.addColumn("EMAIL");
 		modelo.addColumn("DIRECCIÓN");
 		modelo.addColumn("TELÉFONO");
@@ -846,5 +672,228 @@ public class MantenimientoEvaluadores extends JFrame {
 	          JOptionPane.showMessageDialog(null,"Formato de email incorrecto", "Advertencia",JOptionPane.ERROR_MESSAGE);
 	          return false;
 	     }
+	}
+	
+	
+	public void actualizar(){
+		
+
+		String nombre=txt_nombre.getText();
+		String apellido=txt_apellido.getText();
+		String email=txt_email.getText();
+		String direccion=txt_direccion.getText();
+		String cargo=txt_cargo.getText();
+		String profesion=txt_profesion.getText();
+		String telefono=txt_telefono.getText();
+		String empresa=txt_empresa.getText();
+		String pass1=txt_password.getText();
+		String pass2=txt_passwordR.getText();	
+		
+		
+		
+	if(id_evaluador==-1){
+		JOptionPane.showMessageDialog(null,"Por favor seleccione un evaluador");
+		
+	}else{
+		
+		if (nombre.equals("") || apellido.equals("") || email.equals("") || pass1.equals("") || pass2.equals("")){
+			
+			
+			if (pass2.equals("")){
+				txt_passwordR.requestFocus();
+			}
+			
+			
+			if (pass1.equals("")){	
+				txt_password.requestFocus();
+			}
+
+			if (email.equals("")){									
+				txt_email.requestFocus();
+			}
+			
+			if (apellido.equals("")){									
+				txt_apellido.requestFocus();
+			}
+			
+			if(nombre.equals("") ){						
+				txt_nombre.requestFocus();
+			}
+			
+			JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
+		}else{	
+			
+			if (email.length()>6){
+				
+				if(validarEmail(email)){
+					if(pass1.length()<6){
+						JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
+						txt_password.setText("");
+						txt_passwordR.setText("");
+						txt_password.requestFocus();
+
+					}else{
+						
+						if(pass1.equals(pass2)){
+							
+							//Guardar Evaluador
+							evaluador=new Evaluador(id_evaluador,nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
+							int resultado=evaluador.actualizar();	
+							limpiar();
+							
+							if (resultado>0){
+								JOptionPane.showMessageDialog(null,"Evaluador actualizado exitosamente. ");
+								try {
+									cargarTabla();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+								
+							}else{
+								JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
+								txt_email.requestFocus();
+								txt_email.setText("");
+								txt_password.setText("");
+								txt_passwordR.setText("");
+							}
+							
+							
+						}else{
+							
+							JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+							txt_password.requestFocus();
+							txt_password.setText("");
+							txt_passwordR.setText("");
+						}
+					}
+				}else{
+					txt_email.requestFocus();
+				}
+			}else{
+				JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
+				txt_email.requestFocus();
+				txt_email.setText("");
+				txt_password.setText("");
+				txt_passwordR.setText("");
+			}
+		}
+	}
+	}
+	
+	
+	
+	public void guardar(){
+		
+		
+		String nombre=txt_nombre.getText();
+		String apellido=txt_apellido.getText();
+		String email=txt_email.getText();
+		String direccion=txt_direccion.getText();
+		String cargo=txt_cargo.getText();
+		String profesion=txt_profesion.getText();
+		String telefono=txt_telefono.getText();
+		String empresa=txt_empresa.getText();
+		String pass1=txt_password.getText();
+		String pass2=txt_passwordR.getText();	
+		
+		
+		
+			
+		
+			if (nombre.equals("") || apellido.equals("") || email.equals("") || pass1.equals("") || pass2.equals("")){
+				
+				
+				if (pass2.equals("")){
+					txt_passwordR.requestFocus();
+				}
+				
+				
+				if (pass1.equals("")){	
+					txt_password.requestFocus();
+				}
+
+				if (email.equals("")){									
+					txt_email.requestFocus();
+				}
+				
+				if(nombre.equals("") ){						
+					txt_nombre.requestFocus();
+				}
+				
+				if (apellido.equals("")){									
+					txt_apellido.requestFocus();
+				}
+				
+				
+				
+				JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
+			}else{	
+				
+				if (email.length()>6){
+					
+				
+					if(pass1.length()<6){
+						JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
+						txt_password.setText("");
+						txt_passwordR.setText("");
+						txt_password.requestFocus();
+
+					}else{
+						
+						if(validarEmail(email)){
+							if(pass1.equals(pass2)){
+								
+								
+									
+								
+								//Guardar Evaluador
+								evaluador=new Evaluador(nombre,apellido,email,direccion,cargo,profesion,telefono,empresa,pass1);
+								int resultado=evaluador.guardar();		
+								limpiar();
+								
+								if (resultado>0){
+									JOptionPane.showMessageDialog(null,"Evaluador guardado exitosamente. ");
+									try {
+										cargarTabla();
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
+									
+								}else{
+									JOptionPane.showMessageDialog(null,"No se pudo guardar, intente usar otro email.");
+									txt_email.requestFocus();
+									txt_email.setText("");
+									txt_password.setText("");
+									txt_passwordR.setText("");
+								}
+								
+								
+								
+							}else{
+								
+								JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+								txt_password.requestFocus();
+								txt_password.setText("");
+								txt_passwordR.setText("");
+							}
+						}else{
+							txt_email.setText("");
+							txt_password.setText("");
+							txt_passwordR.setText("");
+							txt_email.requestFocus();
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
+					txt_email.requestFocus();
+					txt_email.setText("");
+					txt_password.setText("");
+					txt_passwordR.setText("");
+				}
+			}
 	}
 }

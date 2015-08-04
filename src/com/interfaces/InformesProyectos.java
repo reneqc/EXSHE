@@ -44,6 +44,8 @@ import com.persistencia.Proyecto;
 import com.persistencia.RutaBase;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class InformesProyectos extends JFrame {
 
@@ -142,6 +144,16 @@ public class InformesProyectos extends JFrame {
 		txt_evaluacion.setBorder(null);
 		
 		JButton btnResultados = new JButton(" Recomendaciones");
+		btnResultados.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					verInformeDeResultados();
+				}
+			}
+		});
 		btnResultados.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/result.png")));
 		btnResultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -156,6 +168,15 @@ public class InformesProyectos extends JFrame {
 		panel.add(btnResultados);
 		
 		JButton btnVerInforme = new JButton(" Informe");
+		btnVerInforme.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					verInformeDeEvaluacion();
+				}
+			}
+		});
 		btnVerInforme.setBounds(931, 20, 122, 27);
 		panel.add(btnVerInforme);
 		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -191,6 +212,15 @@ public class InformesProyectos extends JFrame {
 		panel_1.add(lblInformesEvaluaciones);
 		
 		button = new JButton("  Atr\u00E1s");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					dispose();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -201,7 +231,7 @@ public class InformesProyectos extends JFrame {
 		button.setFont(new Font("Tahoma", Font.BOLD, 11));
 		button.setBorder(UIManager.getBorder("CheckBox.border"));
 		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(12, 45, 112, 27);
+		button.setBounds(12, 12, 112, 27);
 		contentPane.add(button);
 		cargarTabla();
 	}

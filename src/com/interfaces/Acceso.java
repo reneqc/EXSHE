@@ -37,6 +37,8 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import com.persistencia.Conexion;
 import com.persistencia.Evaluador;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Acceso extends JFrame {
 
@@ -104,7 +106,7 @@ public class Acceso extends JFrame {
 		
 		JLabel label_3 = new JLabel("<html><center> </center> <br><div style='text-align:justify;'><b>Expert System of Heuristic Evaluation</b> tiene por objeto servir de apoyo para la evaluación de usabilidad en aplicaciones mediante el análisis heurístico, constituyendose en una guía específica para aquellos profesionales que requieran de un software base con el que se pueda desarrollar una evaluación de usabilidad.<br> <br>El sistema permite ejecutar evaluaciones con las que se búsca identificar falencias dentro de una respectiva aplicación, todos los puntos están formulados como preguntas que tienen una posible respuesta en el rango de una escala numérica o textual que permitirá establecer si se evidencia o no un problema de usabilidad.<br><br> Para poder trabajar con EXSHE debe disponer de una cuenta proporcionada por el administrador del sistema.</div></html>");
 		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_3.setBounds(56, 196, 503, 373);
+		label_3.setBounds(46, 203, 503, 373);
 		contentPane.add(label_3);
 		
 		JPanel panel_1 = new JPanel();
@@ -128,11 +130,6 @@ public class Acceso extends JFrame {
 		lblCriteriosAEvaluar.setFont(new Font("Dialog", Font.BOLD, 25));
 		lblCriteriosAEvaluar.setBounds(53, 0, 286, 39);
 		panel_2.add(lblCriteriosAEvaluar);
-		
-		JLabel criterios = new JLabel(verCriterios());
-		criterios.setFont(new Font("Dialog", Font.PLAIN, 16));
-		criterios.setBounds(551, 251, 398, 430);
-		contentPane.add(criterios);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
@@ -182,6 +179,18 @@ public class Acceso extends JFrame {
 		panel_5.add(txt_password);
 		
 		final JButton btn_ingresar = new JButton("  Ingresar");
+		btn_ingresar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{				
+						
+					ingresar();
+					
+				}
+			}
+		});
 		btn_ingresar.setIcon(new ImageIcon(Acceso.class.getResource("/img/entrar.png")));
 		btn_ingresar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -236,6 +245,18 @@ public class Acceso extends JFrame {
 		contentPane.add(lblInformesDeResultados);
 		
 		final JButton btnAyuda = new JButton("  Ayuda");
+		btnAyuda.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					
+				abrirAyuda();	
+				}
+			}
+		});
+		btnAyuda.setToolTipText("Abrir Contenido de Ayuda");
 		btnAyuda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -248,14 +269,7 @@ public class Acceso extends JFrame {
 		});
 		btnAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-				     File path = new File ("C:\\EXSHE\\ayuda\\ayuda_exshe.pdf");
-				     Desktop.getDesktop().open(path);
-				   // JOptionPane.showMessageDialog(null,"Abriendo archivo de ayuda (.pdf)");
-				}catch (IOException ex) {
-				     ex.printStackTrace();
-				     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
-				}
+				abrirAyuda();
 			}
 		});
 		btnAyuda.setIcon(new ImageIcon(Acceso.class.getResource("/img/help1.png")));
@@ -263,6 +277,72 @@ public class Acceso extends JFrame {
 		btnAyuda.setBackground(SystemColor.controlHighlight);
 		btnAyuda.setBounds(206, 601, 127, 27);
 		contentPane.add(btnAyuda);
+		
+		JLabel lblAspectosGenerales = new JLabel("1. ASPECTOS GENERALES");
+		lblAspectosGenerales.setToolTipText("Se refiere a objetivos, look & feel, coherencia y nivel de actualización de contenidos.");
+		lblAspectosGenerales.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblAspectosGenerales.setBounds(586, 239, 340, 39);
+		contentPane.add(lblAspectosGenerales);
+		
+		JLabel lblIdentidad = new JLabel("2. IDENTIDAD E INFORMACIÓN");
+		lblIdentidad.setToolTipText("Se refiere a la identidad del sitio e información sobre el proveedor y la autoría de los contenidos");
+		lblIdentidad.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblIdentidad.setBounds(586, 278, 340, 39);
+		contentPane.add(lblIdentidad);
+		
+		JLabel lblEstructuraY = new JLabel("3. ESTRUCTURA Y NAVEGACIÓN");
+		lblEstructuraY.setToolTipText("Centrado en la idoneidad de la arquitectura de información y navegación del sitio");
+		lblEstructuraY.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblEstructuraY.setBounds(586, 318, 340, 39);
+		contentPane.add(lblEstructuraY);
+		
+		JLabel lblRotulado = new JLabel("4. ROTULADO");
+		lblRotulado.setToolTipText("Representa la significación y familiaridad del rotulado de los contenidos");
+		lblRotulado.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblRotulado.setBounds(586, 357, 340, 39);
+		contentPane.add(lblRotulado);
+		
+		JLabel lblLayoutDeLa = new JLabel("5. LAYOUT DE LA PÁGINA");
+		lblLayoutDeLa.setToolTipText("Análisis de la distribución y aspecto de los elementos de navegación e información en la interfaz");
+		lblLayoutDeLa.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblLayoutDeLa.setBounds(586, 397, 340, 39);
+		contentPane.add(lblLayoutDeLa);
+		
+		JLabel lblEntendibilidadY = new JLabel("6. ENTENDIBILIDAD Y FACILIDAD EN LA");
+		lblEntendibilidadY.setToolTipText("Representa la calidad de los contenidos textuales");
+		lblEntendibilidadY.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblEntendibilidadY.setBounds(586, 437, 340, 39);
+		contentPane.add(lblEntendibilidadY);
+		
+		JLabel lblElementosMultimedia = new JLabel("7. CONTROL Y RETROALIMENTACIÓN");
+		lblElementosMultimedia.setToolTipText("Se informa al usuario de lo que está ocurriendo en la web");
+		lblElementosMultimedia.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblElementosMultimedia.setBounds(587, 507, 340, 39);
+		contentPane.add(lblElementosMultimedia);
+		
+		JLabel lblElementosMultimedia_1 = new JLabel("8. ELEMENTOS MULTIMEDIA");
+		lblElementosMultimedia_1.setToolTipText("Mide la calidad de los distintos elementos audiovisuales");
+		lblElementosMultimedia_1.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblElementosMultimedia_1.setBounds(587, 548, 340, 39);
+		contentPane.add(lblElementosMultimedia_1);
+		
+		JLabel lblBsqueda = new JLabel("9. BÚSQUEDA");
+		lblBsqueda.setToolTipText("Mide las opciones de búsqueda interna de la página");
+		lblBsqueda.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblBsqueda.setBounds(587, 587, 340, 39);
+		contentPane.add(lblBsqueda);
+		
+		JLabel lblAyuda = new JLabel("10. AYUDA");
+		lblAyuda.setToolTipText("Mide los elementos de apoyo para que el usuario tenga una navegación fluida");
+		lblAyuda.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblAyuda.setBounds(586, 627, 340, 39);
+		contentPane.add(lblAyuda);
+		
+		JLabel lblInteraccin = new JLabel("INTERACCIÓN");
+		lblInteraccin.setToolTipText("Representa la calidad de los contenidos textuales");
+		lblInteraccin.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblInteraccin.setBounds(608, 463, 340, 39);
+		contentPane.add(lblInteraccin);
 		this.setLocationRelativeTo(null);
 		
 		//Conexion.obtenerConexion();
@@ -348,5 +428,17 @@ public class Acceso extends JFrame {
 	
 		public static String conectado(){
 			return txt_email.getText();
+		}
+		
+		
+		public void abrirAyuda(){
+			try {
+			     File path = new File ("C:\\EXSHE\\ayuda\\ayuda_exshe.pdf");
+			     Desktop.getDesktop().open(path);
+			   // JOptionPane.showMessageDialog(null,"Abriendo archivo de ayuda (.pdf)");
+			}catch (IOException ex) {
+			     ex.printStackTrace();
+			     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
+			}
 		}
 }

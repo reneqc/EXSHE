@@ -43,6 +43,8 @@ import com.persistencia.Evaluacion;
 import com.persistencia.RutaBase;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class InformesEvaluador extends JFrame {
 
@@ -152,6 +154,16 @@ public class InformesEvaluador extends JFrame {
 		txt_evaluacion.setBorder(null);
 		
 		JButton btnResultados = new JButton("Recomendaciones");
+		btnResultados.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					verInformeDeResultados();
+				}
+			}
+		});
 		btnResultados.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/result.png")));
 		btnResultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -165,6 +177,16 @@ public class InformesEvaluador extends JFrame {
 		panel.add(btnResultados);
 		
 		JButton btnVerInforme = new JButton(" Informe");
+		btnVerInforme.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					verInformeDeEvaluacion();
+				}
+			}
+		});
 		btnVerInforme.setBounds(963, 20, 122, 27);
 		panel.add(btnVerInforme);
 		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -200,6 +222,15 @@ public class InformesEvaluador extends JFrame {
 		panel_1.add(lblInformesEvaluaciones);
 		
 		button = new JButton("  Atr\u00E1s");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					dispose();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

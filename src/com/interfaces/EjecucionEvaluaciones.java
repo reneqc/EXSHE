@@ -402,9 +402,9 @@ public class EjecucionEvaluaciones extends JFrame {
 		panel_11.setBounds(368, 0, 208, 27);
 		contenedor_calificaciones.add(panel_11);
 		
-		JLabel lblCriterioAEvaluar = new JLabel("CRITERIOS A EVALUAR");
+		JLabel lblCriterioAEvaluar = new JLabel("SUB CRITERIOS A EVALUAR");
 		lblCriterioAEvaluar.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblCriterioAEvaluar.setBounds(32, 0, 172, 23);
+		lblCriterioAEvaluar.setBounds(12, 0, 192, 23);
 		panel_11.add(lblCriterioAEvaluar);
 		
 		btnFinalizar = new JButton("   Finalizar");

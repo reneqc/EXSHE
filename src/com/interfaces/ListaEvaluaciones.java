@@ -32,6 +32,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ListaEvaluaciones extends JFrame {
 
@@ -121,7 +123,16 @@ public class ListaEvaluaciones extends JFrame {
 		lblS.setBounds(25, 29, 382, 14);
 		panel.add(lblS);
 		
-		JButton button_1 = new JButton("  Atrás");
+		JButton button_1 = new JButton("  Atrï¿½s");
+		button_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					dispose();
+				}
+			}
+		});
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -180,7 +191,7 @@ public void caragarTabla(){
 	modelo.addColumn("SITIO");
 	modelo.addColumn("URL");
 	modelo.addColumn("NAVEGADOR");
-	modelo.addColumn("VERSIÓN");
+	modelo.addColumn("VERSIï¿½N");
 	modelo.addColumn("FECHA");
 	modelo.addColumn("EVALUADOR");
 	

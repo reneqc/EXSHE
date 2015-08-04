@@ -38,6 +38,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.persistencia.Evaluacion;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PrincipalEvaluador extends JFrame {
 
@@ -88,6 +90,7 @@ public class PrincipalEvaluador extends JFrame {
 				cerrarPrincipal();
 			}
 		});
+		UIManager.put("Menu.selectionBackground", Color.GRAY); 
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		//setBounds(100, 100, 1366, 768);
 		setBounds(100, 100, 1366, 730);
@@ -183,6 +186,33 @@ public class PrincipalEvaluador extends JFrame {
 		});
 		mntmVerAyuda.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/help1.png")));
 		mnAyuda.add(mntmVerAyuda);
+		
+		JMenu menu_1 = new JMenu("Salir");
+		menuBar.add(menu_1);
+		
+		JMenuItem menuItem = new JMenuItem("Salir");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				 int n = JOptionPane.showConfirmDialog(
+				            null,
+				            "¿Está seguro que desea salir de la aplicación?",
+				            "Mensaje de Confirmación",
+				            JOptionPane.YES_NO_OPTION);
+				  	
+				  		
+				        if(n==0){
+				        	
+							//a1.setExtendedState(MAXIMIZED_BOTH);
+							System.exit(0);
+				        }
+				        else {
+				           //No
+				        }
+			}
+		});
+		menuItem.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/cancel.png")));
+		menu_1.add(menuItem);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
 		lbl_evaluador.setBounds(163, 59, 222, 31);
@@ -357,50 +387,18 @@ public class PrincipalEvaluador extends JFrame {
 		panel_7.add(txt_url);
 		
 		JButton btnGuardar = new JButton("  Guardar");
+		btnGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					guardar();
+				}
+			}
+		});
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nombre=txt_nombre.getText();
-				String url=txt_url.getText();
-				
-				String navegador=txt_navegador.getText();
-				String version=txt_version.getText();
-				
-				String email=lbl_evaluador.getText();
-				
-				if(nombre.equals("") || url.equals("")){
-					contenedor_proyectos.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, Color.red));
-					JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla");
-					
-					
-					//contenedor_proyectos.setBackground(new Color(204,116,128));
-					contenedor_proyectos.setForeground(new Color(204,116,128));
-				}else{
-					if(version.equals("")||navegador.equals("")){
-						JOptionPane.showMessageDialog(null, "Por favor complete los campos");	
-						
-						if(version.equals("")){
-							txt_version.requestFocus();
-						}
-						
-						if(navegador.equals("")){
-							txt_navegador.requestFocus();
-						}
-						
-						
-					}else{
-						evaluacion=new Evaluacion(navegador, version);
-						
-						if(evaluacion.guardar(id_proyecto, email)>0){						
-							contenedor_proyectos.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-							JOptionPane.showMessageDialog(null, "Evaluación creada exitosamente");
-							limpiar();
-							cargarTablaEvaluaciones();
-						}else{
-							JOptionPane.showMessageDialog(null, "No se pudo crear la evaluación");
-						}
-					}
-					
-				}
+				guardar();
 				
 			}
 		});
@@ -448,6 +446,15 @@ public class PrincipalEvaluador extends JFrame {
 		panel_6.add(txt_nombre);
 		
 		JButton button = new JButton("Limpiar");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					limpiar();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpiar();
@@ -461,6 +468,16 @@ public class PrincipalEvaluador extends JFrame {
 		panel_8.add(button);
 		
 		JButton button_1 = new JButton("  Refrescar Datos");
+		button_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					cargarTablaEvaluaciones();
+				}
+			}
+		});
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -788,6 +805,64 @@ public void cargarTablaEvaluaciones() {
 		}catch (IOException ex) {
 		     ex.printStackTrace();
 		     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
+		}
+	}
+	
+	public void guardar(){
+		String nombre=txt_nombre.getText();
+		String url=txt_url.getText();
+		
+		String navegador=txt_navegador.getText();
+		String version=txt_version.getText();
+		
+		String email=lbl_evaluador.getText();
+		
+		if(nombre.equals("") || url.equals("")){
+			contenedor_proyectos.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, Color.red));
+			JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla");
+			
+			
+			//contenedor_proyectos.setBackground(new Color(204,116,128));
+			contenedor_proyectos.setForeground(new Color(204,116,128));
+		}else{
+			if(version.equals("")||navegador.equals("")){
+				JOptionPane.showMessageDialog(null, "Por favor complete los campos");	
+				
+				if(version.equals("")){
+					txt_version.requestFocus();
+				}
+				
+				if(navegador.equals("")){
+					txt_navegador.requestFocus();
+				}
+				
+				
+			}else{
+				evaluacion=new Evaluacion(navegador, version);
+				
+				
+				Object [] opciones ={"Aceptar","Cancelar"};
+				int eleccion = JOptionPane.showOptionDialog(rootPane,"Antes de guardar, verifique la información ingresada acerca del navegador seleccionado para la evaluación, dicha información luego de ser guardada no podrá ser modificada","Mensaje de Confirmación",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+				if (eleccion == JOptionPane.YES_OPTION)
+				{
+					if(evaluacion.guardar(id_proyecto, email)>0){						
+						contenedor_proyectos.setBorder(new TitledBorder(null, "Proyectos disponibles para evaluar", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+						JOptionPane.showMessageDialog(null, "Evaluación creada exitosamente");
+						limpiar();
+						cargarTablaEvaluaciones();
+					}else{
+						JOptionPane.showMessageDialog(null, "No se pudo crear la evaluación");
+					}
+				}else{
+					
+				}
+				
+				
+				
+			}
+			
 		}
 	}
 }

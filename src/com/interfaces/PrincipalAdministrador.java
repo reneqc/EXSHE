@@ -54,6 +54,10 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.event.MenuListener;
+import javax.swing.event.MenuEvent;
 
 
 public class PrincipalAdministrador extends JFrame {
@@ -115,6 +119,7 @@ public class PrincipalAdministrador extends JFrame {
 		contentPane.setLayout(null);
 		this.setLocationRelativeTo(null);
 		
+		UIManager.put("Menu.selectionBackground", Color.GRAY); 
 		
 		panelConfiguracion.setBounds(879, 81, 459, 124);
 		panelConfiguracion.setBorder(new TitledBorder(null, "Configuración de la Cuenta de Administrador", TitledBorder.LEFT, TitledBorder.TOP, null, null));
@@ -176,121 +181,18 @@ public class PrincipalAdministrador extends JFrame {
 		panel_19.add(passwordConfirmada);
 		
 		JButton btnAceptar = new JButton(" Aceptar");
+		btnAceptar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					cambiarCuenta();
+				}
+			}
+		});
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String email=txtEmail.getText().toString();
-				String password1=passwordNueva.getText().toString();
-				String password2=passwordConfirmada.getText().toString();
-				
-				
-				
-				if (email.equals("") || password1.equals("") || password2.equals("")){
-					
-					
-					if (password2.equals("")){
-						passwordConfirmada.requestFocus();
-					}
-					
-					
-					if (password1.equals("")){	
-						passwordNueva.requestFocus();
-					}
-
-					if (email.equals("")){									
-						txtEmail.requestFocus();
-					}
-					JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
-				}else{	
-					
-					if (email.length()>6){
-						
-					
-						if(password1.length()<6){
-							JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
-							passwordNueva.setText("");
-							passwordConfirmada.setText("");
-							passwordNueva.requestFocus();
-	
-						}else{
-							
-							if(validarEmail(email)){
-								if(password1.equals(password2)){
-									
-									
-		
-									Object [] opciones ={"Aceptar","Cancelar"};
-									int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cambiar los datos de la cuenta de administrador?","Mensaje de Confirmación",
-									JOptionPane.YES_NO_OPTION,
-									JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
-									if (eleccion == JOptionPane.YES_OPTION)
-									{
-										
-										int resultado=Evaluador.actualizarAdministrador(email, password1);		
-										limpiar();
-										
-										if (resultado>0){
-											JOptionPane.showMessageDialog(null,"Administrador actualizado exitosamente.");
-											panelConfiguracion.setVisible(false);											
-											lbl_evaluador.setText(email);
-											txtEmail.setText("");
-											passwordNueva.setText("");
-											passwordConfirmada.setText("");
-											try {
-												cargarTabla();
-											} catch (SQLException ex) {
-												// TODO Auto-generated catch block
-												ex.printStackTrace();
-											}
-											
-											
-										}else{
-											JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
-											txtEmail.requestFocus();
-											txtEmail.setText("");
-											passwordNueva.setText("");
-											passwordConfirmada.setText("");
-										}
-										
-										
-										
-										
-										
-										
-										
-										
-									}else{
-										
-									}
-									
-									
-									
-									
-									
-								}else{
-									
-									JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
-									passwordNueva.requestFocus();
-									passwordNueva.setText("");
-									passwordConfirmada.setText("");
-								}
-							}else{
-								txtEmail.setText("");
-								passwordNueva.setText("");
-								passwordConfirmada.setText("");
-								txtEmail.requestFocus();
-							}
-						}
-					}else{
-						JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
-						txtEmail.requestFocus();
-						txtEmail.setText("");
-						passwordNueva.setText("");
-						passwordConfirmada.setText("");
-					}
-				}
-				
-				
-				
+				cambiarCuenta();
 			}
 		});
 		btnAceptar.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/ok.png")));
@@ -301,13 +203,19 @@ public class PrincipalAdministrador extends JFrame {
 		panelConfiguracion.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					cancelarCambio();
+				}
+			}
+		});
 		btnCancelar.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/cancel.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				panelConfiguracion.setVisible(false);
-				txtEmail.setText("");
-				passwordNueva.setText("");
-				passwordConfirmada.setText("");
+				cancelarCambio();
 			}
 		});
 		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 11));
@@ -329,10 +237,21 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(menu);
 		menu.addSeparator();
 		
-		JMenu mnNewMenu_2 = new JMenu("   Inicio   ");
-		menuBar.add(mnNewMenu_2);
+		final JMenu mnuInicio = new JMenu("   Inicio   ");
+		mnuInicio.addMenuListener(new MenuListener() {
+			public void menuCanceled(MenuEvent arg0) {
+			}
+			public void menuDeselected(MenuEvent arg0) {
+			}
+			public void menuSelected(MenuEvent arg0) {
+				
+			}
+		});
+		mnuInicio.setSelectedIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/clear.png")));
+		menuBar.add(mnuInicio);
 		
 		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
+		mntmAcceso.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/home4.png")));
 //		mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
 		mntmAcceso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -357,10 +276,12 @@ public class PrincipalAdministrador extends JFrame {
 				
 			}
 		});
-		mnNewMenu_2.add(mntmAcceso);
+		mnuInicio.add(mntmAcceso);
 		
-		JMenu mnEvaluaciones = new JMenu("  Proyectos");
-		menuBar.add(mnEvaluaciones);
+		JMenu mnuProyectos = new JMenu("  Proyectos");
+		mnuProyectos.setBackground(UIManager.getColor("CheckBoxMenuItem.acceleratorForeground"));
+		mnuProyectos.setForeground(SystemColor.activeCaptionText);
+		menuBar.add(mnuProyectos);
 		
 		JMenuItem mntmFinalizados = new JMenuItem("Resultados");
 		mntmFinalizados.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/proyecto3.png")));
@@ -370,7 +291,7 @@ public class PrincipalAdministrador extends JFrame {
 				ip.show();
 			}
 		});
-		mnEvaluaciones.add(mntmFinalizados);
+		mnuProyectos.add(mntmFinalizados);
 		
 		JMenu mnEvaluaciones_1 = new JMenu("   Evaluaciones   ");
 		menuBar.add(mnEvaluaciones_1);
@@ -473,6 +394,33 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		mntmVer.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
 		mnAyuda.add(mntmVer);
+		
+		JMenu mnSalir = new JMenu("Salir");
+		menuBar.add(mnSalir);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				 int n = JOptionPane.showConfirmDialog(
+				            null,
+				            "¿Está seguro que desea salir de la aplicación?",
+				            "Mensaje de Confirmación",
+				            JOptionPane.YES_NO_OPTION);
+				  	
+				  		
+				        if(n==0){
+				        	
+							//a1.setExtendedState(MAXIMIZED_BOTH);
+							System.exit(0);
+				        }
+				        else {
+				           //No
+				        }
+			}
+		});
+		mntmNewMenuItem.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/cancel.png")));
+		mnSalir.add(mntmNewMenuItem);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
 		lbl_evaluador.setBounds(129, 71, 222, 22);
@@ -725,6 +673,15 @@ public class PrincipalAdministrador extends JFrame {
 		panel_5.add(txt_tipo);
 		
 		final JButton btnGuardar = new JButton("  Guardar");
+		btnGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					guardar();
+				}
+			}
+		});
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -739,64 +696,7 @@ public class PrincipalAdministrador extends JFrame {
 		btnGuardar.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/save.png")));
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				String tipo=txt_tipo.getSelectedItem().toString();
-				String nombre=txt_nombre.getText();
-				String url=txt_url.getText();
-				
-				
-				String evaluador1=txt_evaluador1.getSelectedItem().toString();
-				String evaluador2=txt_evaluador2.getSelectedItem().toString();
-				String evaluador3=txt_evaluador3.getSelectedItem().toString();
-				String evaluador4=txt_evaluador4.getSelectedItem().toString();
-				
-				String[] e1=evaluador1.split(":");
-				String[] e2=evaluador2.split(":");
-				String[] e3=evaluador3.split(":");
-				String[] e4=evaluador4.split(":");
-				
-				if (tipo.equals("Por favor seleccione una opción") || nombre.equals("") || url.equals("")){
-					JOptionPane.showMessageDialog(null, "Por favor complete los campos o seleccione un tipo de sitio");
-					if(tipo.equals("")){
-						txt_tipo.requestFocus();						
-					}
-					if(url.equals("")){
-						txt_url.requestFocus();						
-					}
-					if(nombre.equals("")){
-						txt_nombre.requestFocus();						
-					}
-					
-				}else{
-					if(evaluador1.equals("Por favor seleccione una opción") || evaluador2.equals("Por favor seleccione una opción") || evaluador3.equals("Por favor seleccione una opción") || evaluador4.equals("Por favor seleccione una opción")){
-						JOptionPane.showMessageDialog(null, "Por favor seleccione los evaluadores");
-					}else{
-						Boolean repetidos=(evaluador1==evaluador2 || evaluador1==evaluador3 || evaluador1==evaluador4 || evaluador2==evaluador3 || evaluador2==evaluador4 || evaluador3==evaluador4);
-						if(repetidos){
-							JOptionPane.showMessageDialog(null, "Debe seleccionar diferentes evaluadores");
-						
-							
-							}else{
-								proyecto=new Proyecto(url, nombre, tipo,e1[1],e2[1],e3[1],e4[1]);
-				 				
-								if(proyecto.guardar()>0){
-									JOptionPane.showMessageDialog(null,"Proyecto guardado Exitosamente");	
-									limpiar();
-									try {
-										cargarTabla();
-									} catch (SQLException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									
-								}else{
-									JOptionPane.showMessageDialog(null,"Error al guardar el proyecto");						
-								}
-								
-							
-							}
-					}
-				}
+				guardar();
 			}
 		});
 		btnGuardar.setBorder(UIManager.getBorder("CheckBox.border"));
@@ -885,16 +785,19 @@ public class PrincipalAdministrador extends JFrame {
 		panel_10.add(txt_evaluador4);
 		
 		final JButton Refrescar = new JButton("  Refrescar Datos");
+		Refrescar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
+				{
+					refrescar();
+				}
+			}
+		});
 		Refrescar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		Refrescar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					cargarEvaluadores();
-					cargarTabla();
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				refrescar();
 				
 			}
 		});
@@ -1126,6 +1029,218 @@ public class PrincipalAdministrador extends JFrame {
 		}catch (IOException ex) {
 		     ex.printStackTrace();
 		     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
+		}
+	}
+	
+	
+	public void cambiarCuenta(){
+		
+		
+		String email=txtEmail.getText().toString();
+		String password1=passwordNueva.getText().toString();
+		String password2=passwordConfirmada.getText().toString();
+		
+		
+		
+		if (email.equals("") || password1.equals("") || password2.equals("")){
+			
+			
+			if (password2.equals("")){
+				passwordConfirmada.requestFocus();
+			}
+			
+			
+			if (password1.equals("")){	
+				passwordNueva.requestFocus();
+			}
+
+			if (email.equals("")){									
+				txtEmail.requestFocus();
+			}
+			JOptionPane.showMessageDialog(null,"Por favor complete los campos.");
+		}else{	
+			
+			if (email.length()>6){
+				
+			
+				if(password1.length()<6){
+					JOptionPane.showMessageDialog(null,"La contraseña debe tener al menos 6 caracteres.");
+					passwordNueva.setText("");
+					passwordConfirmada.setText("");
+					passwordNueva.requestFocus();
+
+				}else{
+					
+					if(validarEmail(email)){
+						if(password1.equals(password2)){
+							
+							
+
+							Object [] opciones ={"Aceptar","Cancelar"};
+							int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Está seguro que desea cambiar los datos de la cuenta de administrador?","Mensaje de Confirmación",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+							if (eleccion == JOptionPane.YES_OPTION)
+							{
+								
+								int resultado=Evaluador.actualizarAdministrador(email, password1);		
+								limpiar();
+								
+								if (resultado>0){
+									JOptionPane.showMessageDialog(null,"Administrador actualizado exitosamente.");
+									panelConfiguracion.setVisible(false);											
+									lbl_evaluador.setText(email);
+									txtEmail.setText("");
+									passwordNueva.setText("");
+									passwordConfirmada.setText("");
+									try {
+										cargarTabla();
+									} catch (SQLException ex) {
+										// TODO Auto-generated catch block
+										ex.printStackTrace();
+									}
+									
+									
+								}else{
+									JOptionPane.showMessageDialog(null,"No se pudo actualizar, intente usar otro email.");
+									txtEmail.requestFocus();
+									txtEmail.setText("");
+									passwordNueva.setText("");
+									passwordConfirmada.setText("");
+								}
+								
+								
+								
+								
+								
+								
+								
+								
+							}else{
+								
+							}
+							
+							
+							
+							
+							
+						}else{
+							
+							JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden.");
+							passwordNueva.requestFocus();
+							passwordNueva.setText("");
+							passwordConfirmada.setText("");
+						}
+					}else{
+						txtEmail.setText("");
+						passwordNueva.setText("");
+						passwordConfirmada.setText("");
+						txtEmail.requestFocus();
+					}
+				}
+			}else{
+				JOptionPane.showMessageDialog(null,"El email debe tener al menos 6 caracteres.");
+				txtEmail.requestFocus();
+				txtEmail.setText("");
+				passwordNueva.setText("");
+				passwordConfirmada.setText("");
+			}
+		}
+		
+		
+
+	}
+	
+	
+	public void cancelarCambio(){
+		panelConfiguracion.setVisible(false);
+		txtEmail.setText("");
+		passwordNueva.setText("");
+		passwordConfirmada.setText("");
+	}
+	
+	
+	public void guardar(){
+		
+		String tipo=txt_tipo.getSelectedItem().toString();
+		String nombre=txt_nombre.getText();
+		String url=txt_url.getText();
+		
+		
+		String evaluador1=txt_evaluador1.getSelectedItem().toString();
+		String evaluador2=txt_evaluador2.getSelectedItem().toString();
+		String evaluador3=txt_evaluador3.getSelectedItem().toString();
+		String evaluador4=txt_evaluador4.getSelectedItem().toString();
+		
+		String[] e1=evaluador1.split(":");
+		String[] e2=evaluador2.split(":");
+		String[] e3=evaluador3.split(":");
+		String[] e4=evaluador4.split(":");
+		
+		if (tipo.equals("Por favor seleccione una opción") || nombre.equals("") || url.equals("")){
+			JOptionPane.showMessageDialog(null, "Por favor complete los campos o seleccione un tipo de sitio");
+			if(tipo.equals("")){
+				txt_tipo.requestFocus();						
+			}
+			if(url.equals("")){
+				txt_url.requestFocus();						
+			}
+			if(nombre.equals("")){
+				txt_nombre.requestFocus();						
+			}
+			
+		}else{
+			if(evaluador1.equals("Por favor seleccione una opción") || evaluador2.equals("Por favor seleccione una opción") || evaluador3.equals("Por favor seleccione una opción") || evaluador4.equals("Por favor seleccione una opción")){
+				JOptionPane.showMessageDialog(null, "Por favor seleccione los evaluadores");
+			}else{
+				Boolean repetidos=(evaluador1==evaluador2 || evaluador1==evaluador3 || evaluador1==evaluador4 || evaluador2==evaluador3 || evaluador2==evaluador4 || evaluador3==evaluador4);
+				if(repetidos){
+					JOptionPane.showMessageDialog(null, "Debe seleccionar diferentes evaluadores");
+				
+					
+					}else{
+						proyecto=new Proyecto(url, nombre, tipo,e1[1],e2[1],e3[1],e4[1]);
+		 				
+							Object [] opciones ={"Aceptar","Cancelar"};
+							int eleccion = JOptionPane.showOptionDialog(rootPane,"Antes de guardar, verifique la información ingresada acerca del proyecto y los evaluadores, dicha información luego de ser guardada no podrá ser modificada","Mensaje de Confirmación",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+							if (eleccion == JOptionPane.YES_OPTION)
+							{
+								
+							if(proyecto.guardar()>0){
+								JOptionPane.showMessageDialog(null,"Proyecto guardado Exitosamente");	
+								limpiar();
+								try {
+									cargarTabla();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+							}else{
+								JOptionPane.showMessageDialog(null,"Error al guardar el proyecto");						
+							}
+						
+						
+						}else{
+							
+						}
+						
+					
+					}
+			}
+		}
+	}
+	
+	
+	public void refrescar(){
+		try {
+			cargarEvaluadores();
+			cargarTabla();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 }

@@ -1,20 +1,22 @@
 package com.interfaces;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,20 +29,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.persistencia.Evaluacion;
-import javax.swing.JToggleButton;
-import javax.swing.JSeparator;
-import java.awt.Toolkit;
 
 public class PrincipalEvaluador extends JFrame {
 
@@ -118,8 +115,7 @@ public class PrincipalEvaluador extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmAcceso = new JMenuItem("Ventana de Acceso");
-		mntmAcceso.setAccelerator(
-		         KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
+		//mntmAcceso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.SHIFT_MASK));
 		mntmAcceso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -178,9 +174,18 @@ public class PrincipalEvaluador extends JFrame {
 		
 		JMenu mnAyuda = new JMenu("  Ayuda  ");
 		menuBar.add(mnAyuda);
+		
+		JMenuItem mntmVerAyuda = new JMenuItem("Ver Ayuda");
+		mntmVerAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirAyuda();
+			}
+		});
+		mntmVerAyuda.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/help1.png")));
+		mnAyuda.add(mntmVerAyuda);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
-		lbl_evaluador.setBounds(180, 59, 222, 31);
+		lbl_evaluador.setBounds(163, 59, 222, 31);
 		panel.add(lbl_evaluador);
 		
 		JLabel lblEvaluador = new JLabel("Evaluador conectado:");
@@ -265,6 +270,12 @@ public class PrincipalEvaluador extends JFrame {
 		panel_1.add(panel_11);
 		
 		JLabel label_7 = new JLabel("");
+		label_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				abrirAyuda();
+			}
+		});
 		label_7.setIcon(new ImageIcon(PrincipalEvaluador.class.getResource("/img/help1.png")));
 		label_7.setToolTipText("Ayuda");
 		label_7.setBounds(174, 0, 24, 31);
@@ -766,5 +777,17 @@ public void cargarTablaEvaluaciones() {
 	public  void noResaltarLabel(JLabel lbl){
 		lbl.setBackground(new Color(230,230,230));
 		
+	}
+	
+	
+	public void abrirAyuda(){
+		try {
+		     File path = new File ("C:\\EXSHE\\ayuda\\ayuda_exshe.pdf");
+		     Desktop.getDesktop().open(path);
+		   // JOptionPane.showMessageDialog(null,"Abriendo archivo de ayuda (.pdf)");
+		}catch (IOException ex) {
+		     ex.printStackTrace();
+		     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
+		}
 	}
 }

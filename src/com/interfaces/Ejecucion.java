@@ -146,11 +146,11 @@ public class Ejecucion extends JFrame {
 		panel.setLayout(null);
 		
 		panel.setBorder(new TitledBorder(null, "Evaluaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 335, 322);
+		panel.setBounds(10, 11, 335, 356);
 		contentPane.add(panel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 57, 310, 249);
+		scrollPane.setBounds(10, 57, 310, 288);
 		panel.add(scrollPane);
 		
 		tbl_evaluaciones = new JTable();
@@ -787,47 +787,93 @@ public class Ejecucion extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(null, "Criterios", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 344, 335, 337);
+		panel_2.setBounds(11, 376, 335, 180);
 		contentPane.add(panel_2);
 		
 		JLabel lblAgAspectos = new JLabel("AG - Aspectos Generales");
-		lblAgAspectos.setBounds(52, 50, 232, 14);
+		lblAgAspectos.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblAgAspectos.setBounds(52, 21, 232, 14);
 		panel_2.add(lblAgAspectos);
 		
 		JLabel lblIiIdentidad = new JLabel("II - Identidad e Informaci\u00F3n");
-		lblIiIdentidad.setBounds(52, 75, 232, 14);
+		lblIiIdentidad.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblIiIdentidad.setBounds(58, 37, 232, 14);
 		panel_2.add(lblIiIdentidad);
 		
 		JLabel lblAspectosGenerales = new JLabel("EN - Estructura y navegaci\u00F3n");
-		lblAspectosGenerales.setBounds(52, 100, 232, 14);
+		lblAspectosGenerales.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblAspectosGenerales.setBounds(52, 51, 232, 14);
 		panel_2.add(lblAspectosGenerales);
 		
 		JLabel lblRoRotulado = new JLabel("RO - Rotulado");
-		lblRoRotulado.setBounds(52, 125, 232, 14);
+		lblRoRotulado.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblRoRotulado.setBounds(52, 66, 232, 14);
 		panel_2.add(lblRoRotulado);
 		
 		JLabel label_5 = new JLabel("LA - Layout de la página");
-		label_5.setBounds(52, 147, 232, 14);
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label_5.setBounds(52, 81, 232, 14);
 		panel_2.add(label_5);
 		
 		JLabel label_6 = new JLabel("EF - Entendibilidad y facilidad en la interacción");
-		label_6.setBounds(52, 172, 273, 14);
+		label_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label_6.setBounds(53, 96, 273, 14);
 		panel_2.add(label_6);
 		
 		JLabel label_7 = new JLabel("CR - Control y retroalimentación");
-		label_7.setBounds(52, 197, 273, 14);
+		label_7.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label_7.setBounds(52, 111, 273, 14);
 		panel_2.add(label_7);
 		
 		JLabel label_8 = new JLabel("EM - Elementos multimedia");
-		label_8.setBounds(52, 222, 232, 14);
+		label_8.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label_8.setBounds(52, 126, 232, 14);
 		panel_2.add(label_8);
 		
 		JLabel label_9 = new JLabel("BU - Búsqueda");
-		label_9.setBounds(52, 247, 232, 14);
+		label_9.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label_9.setBounds(52, 141, 232, 14);
 		panel_2.add(label_9);
-		label.setBounds(52, 272, 232, 14);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		label.setBounds(52, 156, 232, 14);
 		
 		panel_2.add(label);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setBorder(new TitledBorder(null, "Equivalencias", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_3.setBounds(10, 569, 335, 112);
+		contentPane.add(panel_3);
+		
+		JLabel lblNaNo = new JLabel("NA - Criterio no aplicable en el sitio");
+		lblNaNo.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNaNo.setBounds(53, 16, 276, 14);
+		panel_3.add(lblNaNo);
+		
+		JLabel lblNts = new JLabel("NTS - No se cumple en todo el sitio");
+		lblNts.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNts.setBounds(49, 32, 264, 14);
+		panel_3.add(lblNts);
+		
+		JLabel lblNep = new JLabel("NEP - No se cumple en los enlaces principales");
+		lblNep.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNep.setBounds(49, 46, 264, 14);
+		panel_3.add(lblNep);
+		
+		JLabel lblNpp = new JLabel("NPP - No se cumle en la p\u00E1gina principal");
+		lblNpp.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNpp.setBounds(49, 61, 276, 14);
+		panel_3.add(lblNpp);
+		
+		JLabel lblNpi = new JLabel("NPI - No se cumple en alguna p\u00E1gina interior");
+		lblNpi.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNpi.setBounds(51, 73, 264, 14);
+		panel_3.add(lblNpi);
+		
+		JLabel lblS = new JLabel("S - Se cumple el criterio");
+		lblS.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblS.setBounds(61, 86, 264, 14);
+		panel_3.add(lblS);
 		
 		
 		

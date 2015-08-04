@@ -249,10 +249,12 @@ public class Acceso extends JFrame {
 		btnAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-				     File path = new File ("Ayuda/guiaexshe.pdf");
+				     File path = new File ("C:\\EXSHE\\ayuda\\ayuda_exshe.pdf");
 				     Desktop.getDesktop().open(path);
+				   // JOptionPane.showMessageDialog(null,"Abriendo archivo de ayuda (.pdf)");
 				}catch (IOException ex) {
 				     ex.printStackTrace();
+				     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
 				}
 			}
 		});

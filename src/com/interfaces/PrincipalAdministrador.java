@@ -1,6 +1,7 @@
 package com.interfaces;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -11,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -41,16 +44,16 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.persistencia.Conexion;
+import com.persistencia.Evaluador;
+import com.persistencia.Proyecto;
+import com.persistencia.RutaBase;
+
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
-
-import com.persistencia.Conexion;
-import com.persistencia.Evaluador;
-import com.persistencia.Proyecto;
-import com.persistencia.RutaBase;
 
 
 public class PrincipalAdministrador extends JFrame {
@@ -124,16 +127,16 @@ public class PrincipalAdministrador extends JFrame {
 		panel_17.setBounds(12, 28, 435, 27);
 		panelConfiguracion.add(panel_17);
 		
-		JLabel lblNuevoEmail = new JLabel("Nuevo Email:");
+		JLabel lblNuevoEmail = new JLabel("Email:");
 		lblNuevoEmail.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNuevoEmail.setBounds(12, 5, 104, 15);
+		lblNuevoEmail.setBounds(12, 5, 46, 15);
 		panel_17.add(lblNuevoEmail);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
 		txtEmail.setBackground(new Color(223, 223, 233));
-		txtEmail.setBounds(118, 3, 305, 20);
+		txtEmail.setBounds(57, 3, 366, 20);
 		panel_17.add(txtEmail);
 		
 		JPanel panel_18 = new JPanel();
@@ -151,7 +154,7 @@ public class PrincipalAdministrador extends JFrame {
 		passwordNueva.setColumns(10);
 		passwordNueva.setBorder(null);
 		passwordNueva.setBackground(new Color(223, 223, 233));
-		passwordNueva.setBounds(156, 3, 140, 20);
+		passwordNueva.setBounds(144, 3, 152, 20);
 		panel_18.add(passwordNueva);
 		
 		JPanel panel_19 = new JPanel();
@@ -169,7 +172,7 @@ public class PrincipalAdministrador extends JFrame {
 		passwordConfirmada.setColumns(10);
 		passwordConfirmada.setBorder(null);
 		passwordConfirmada.setBackground(new Color(223, 223, 233));
-		passwordConfirmada.setBounds(194, 3, 102, 20);
+		passwordConfirmada.setBounds(173, 3, 123, 20);
 		panel_19.add(passwordConfirmada);
 		
 		JButton btnAceptar = new JButton(" Aceptar");
@@ -227,7 +230,11 @@ public class PrincipalAdministrador extends JFrame {
 										
 										if (resultado>0){
 											JOptionPane.showMessageDialog(null,"Administrador actualizado exitosamente.");
-											panelConfiguracion.setVisible(false);
+											panelConfiguracion.setVisible(false);											
+											lbl_evaluador.setText(email);
+											txtEmail.setText("");
+											passwordNueva.setText("");
+											passwordConfirmada.setText("");
 											try {
 												cargarTabla();
 											} catch (SQLException ex) {
@@ -290,7 +297,7 @@ public class PrincipalAdministrador extends JFrame {
 		btnAceptar.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnAceptar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnAceptar.setBackground(SystemColor.controlHighlight);
-		btnAceptar.setBounds(330, 86, 120, 27);
+		btnAceptar.setBounds(328, 86, 120, 27);
 		panelConfiguracion.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -298,12 +305,15 @@ public class PrincipalAdministrador extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panelConfiguracion.setVisible(false);
+				txtEmail.setText("");
+				passwordNueva.setText("");
+				passwordConfirmada.setText("");
 			}
 		});
 		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 11));
 		btnCancelar.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnCancelar.setBackground(SystemColor.controlHighlight);
-		btnCancelar.setBounds(330, 57, 120, 27);
+		btnCancelar.setBounds(327, 57, 120, 27);
 		panelConfiguracion.add(btnCancelar);
 		
 		JPanel panel = new JPanel();
@@ -444,6 +454,7 @@ public class PrincipalAdministrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				panelConfiguracion.setVisible(true);
+				txtEmail.setText(lbl_evaluador.getText().toString());
 				txtEmail.requestFocus();
 				
 			}
@@ -455,11 +466,16 @@ public class PrincipalAdministrador extends JFrame {
 		menuBar.add(mnAyuda);
 		
 		JMenuItem mntmVer = new JMenuItem("Ver");
+		mntmVer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirAyuda();
+			}
+		});
 		mntmVer.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
 		mnAyuda.add(mntmVer);
 		lbl_evaluador.setFont(new Font("Dialog", Font.ITALIC, 12));
 		
-		lbl_evaluador.setBounds(144, 71, 222, 22);
+		lbl_evaluador.setBounds(129, 71, 222, 22);
 		panel.add(lbl_evaluador);
 		
 		JLabel lblEvaluador = new JLabel("Usuario conectado:");
@@ -566,6 +582,13 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(panel_14);
 		
 		JLabel label_6 = new JLabel("");
+		label_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				abrirAyuda();
+			}
+		});
 		label_6.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
 		label_6.setToolTipText("Ayuda");
 		label_6.setBounds(320, 0, 24, 31);
@@ -608,7 +631,9 @@ public class PrincipalAdministrador extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panelConfiguracion.setVisible(true);
+				txtEmail.setText(lbl_evaluador.getText().toString());
 				txtEmail.requestFocus();
+				
 			}
 		});
 		label_8.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/configuracion.png")));
@@ -1090,6 +1115,18 @@ public class PrincipalAdministrador extends JFrame {
 	          JOptionPane.showMessageDialog(null,"Formato de email incorrecto", "Advertencia",JOptionPane.ERROR_MESSAGE);
 	          return false;
 	     }
+	}
+	
+	
+	public void abrirAyuda(){
+		try {
+		     File path = new File ("C:\\EXSHE\\ayuda\\ayuda_exshe.pdf");
+		     Desktop.getDesktop().open(path);
+		   // JOptionPane.showMessageDialog(null,"Abriendo archivo de ayuda (.pdf)");
+		}catch (IOException ex) {
+		     ex.printStackTrace();
+		     JOptionPane.showMessageDialog(null,"No se pudo abrir el archivo de ayuda, puede ser que no tenga un programa lector de archivos (.pdf) instalado en su sistema");
+		}
 	}
 }
 

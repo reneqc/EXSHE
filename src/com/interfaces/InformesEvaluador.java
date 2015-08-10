@@ -43,8 +43,6 @@ import com.persistencia.Evaluacion;
 import com.persistencia.RutaBase;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class InformesEvaluador extends JFrame {
 
@@ -148,22 +146,12 @@ public class InformesEvaluador extends JFrame {
 		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(546, 21, 385, 26);
+		txt_evaluacion.setBounds(381, 20, 385, 26);
 		panel.add(txt_evaluacion);
 		txt_evaluacion.setColumns(10);
 		txt_evaluacion.setBorder(null);
 		
 		JButton btnResultados = new JButton("Recomendaciones");
-		btnResultados.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
-				{
-					verInformeDeResultados();
-				}
-			}
-		});
 		btnResultados.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/result.png")));
 		btnResultados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -177,17 +165,7 @@ public class InformesEvaluador extends JFrame {
 		panel.add(btnResultados);
 		
 		JButton btnVerInforme = new JButton(" Informe");
-		btnVerInforme.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
-				{
-					verInformeDeEvaluacion();
-				}
-			}
-		});
-		btnVerInforme.setBounds(963, 20, 122, 27);
+		btnVerInforme.setBounds(811, 20, 122, 27);
 		panel.add(btnVerInforme);
 		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVerInforme.addActionListener(new ActionListener() {
@@ -199,6 +177,20 @@ public class InformesEvaluador extends JFrame {
 		btnVerInforme.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/ver.png")));
 		btnVerInforme.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnVerInforme.setBackground(SystemColor.controlHighlight);
+		
+		JButton btnProbemas = new JButton("  Probemas");
+		btnProbemas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				verInformeDeProblemas();
+			}
+		});
+		btnProbemas.setIcon(new ImageIcon(InformesEvaluador.class.getResource("/img/cancelar12.png")));
+		btnProbemas.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProbemas.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnProbemas.setBackground(SystemColor.controlHighlight);
+		btnProbemas.setBounds(952, 20, 122, 27);
+		panel.add(btnProbemas);
 		
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -222,15 +214,6 @@ public class InformesEvaluador extends JFrame {
 		panel_1.add(lblInformesEvaluaciones);
 		
 		button = new JButton("  Atr\u00E1s");
-		button.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==KeyEvent.VK_ENTER) 
-				{
-					dispose();
-				}
-			}
-		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -269,7 +252,7 @@ public class InformesEvaluador extends JFrame {
 		modelo.addColumn("SITIO");
 		modelo.addColumn("URL");
 		modelo.addColumn("NAVEGADOR");
-		modelo.addColumn("VERSIÓN");
+		modelo.addColumn("VERSIÃ“N");
 		modelo.addColumn("FECHA");
 		modelo.addColumn("EVALUADOR");
 		
@@ -337,7 +320,7 @@ public class InformesEvaluador extends JFrame {
 		if(id_evaluacion==-1){
 			
 			 
-			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluación de la tabla para poder generar su respectivo informe");
+			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaciÃ³n de la tabla para poder generar su respectivo informe");
 		}else{
 			
 			 try{
@@ -345,7 +328,7 @@ public class InformesEvaluador extends JFrame {
 				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 				 	String path =RutaBase.obtenerRuta()+"reporteIndividualEvaluacion.jrxml";
-	                abrirReporte(path, "Reporte de la Evaluación ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
+	                abrirReporte(path, "Reporte de la EvaluaciÃ³n ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
 	                
 	            
 	            }catch(Exception ex){
@@ -357,6 +340,38 @@ public class InformesEvaluador extends JFrame {
 		}
 		
 	}
+	
+	
+	
+public void verInformeDeProblemas(){
+		
+		
+		if(id_evaluacion==-1){
+			
+			 
+			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaciÃ³n de la tabla para poder generar su respectivo informe de problemas");
+		}else{
+			
+			 try{
+	               
+				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
+	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+				 	String path =RutaBase.obtenerRuta()+"problemasEvaluacion.jrxml";
+	                abrirReporte(path, "Reporte de Problemas de la EvaluaciÃ³n ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
+	                
+	            
+	            }catch(Exception ex){
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+	                System.out.println(ex);
+	            }
+			  
+			
+		}
+		
+	}
+
+
+
 	public void abrirReporte(String path, String titulo, String parametro,String valorParametro){
 		 try{
             

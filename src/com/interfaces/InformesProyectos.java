@@ -138,7 +138,7 @@ public class InformesProyectos extends JFrame {
 		txt_evaluacion.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_evaluacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txt_evaluacion.setBackground(SystemColor.controlHighlight);
-		txt_evaluacion.setBounds(523, 21, 398, 26);
+		txt_evaluacion.setBounds(337, 21, 398, 26);
 		panel.add(txt_evaluacion);
 		txt_evaluacion.setColumns(10);
 		txt_evaluacion.setBorder(null);
@@ -177,7 +177,7 @@ public class InformesProyectos extends JFrame {
 				}
 			}
 		});
-		btnVerInforme.setBounds(931, 20, 122, 27);
+		btnVerInforme.setBounds(770, 21, 122, 27);
 		panel.add(btnVerInforme);
 		btnVerInforme.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVerInforme.addActionListener(new ActionListener() {
@@ -189,6 +189,20 @@ public class InformesProyectos extends JFrame {
 		btnVerInforme.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/ver.png")));
 		btnVerInforme.setBorder(UIManager.getBorder("CheckBox.border"));
 		btnVerInforme.setBackground(SystemColor.controlHighlight);
+		
+		JButton btnProblemas = new JButton("Problemas");
+		btnProblemas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				verInformeDeProblemas();
+			}
+		});
+		btnProblemas.setIcon(new ImageIcon(InformesProyectos.class.getResource("/img/cancelar12.png")));
+		btnProblemas.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProblemas.setBorder(UIManager.getBorder("CheckBox.border"));
+		btnProblemas.setBackground(SystemColor.controlHighlight);
+		btnProblemas.setBounds(918, 23, 122, 27);
+		panel.add(btnProblemas);
 		
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -331,6 +345,34 @@ public class InformesProyectos extends JFrame {
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 				 	String path =RutaBase.obtenerRuta()+"informeConsolidado.jrxml";
 	                abrirReporte(path, "Reporte Consolidado del Proyecto pry_"+id_proyecto, String.valueOf(id_proyecto), "id_proyecto");	                
+	                
+	            
+	            }catch(Exception ex){
+	                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+	                System.out.println(ex);
+	            }
+			  
+			
+		}
+		
+	}
+	
+	
+	public void verInformeDeProblemas(){
+		
+		
+		if(id_proyecto==-1){
+			
+			 
+			JOptionPane.showMessageDialog(null,"Por favor seleccione un proyecto de la tabla para poder generar su respectivos problemas");
+		}else{
+			
+			 try{
+	               
+				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
+	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
+				 	String path =RutaBase.obtenerRuta()+"problemasConsolidado.jrxml";
+	                abrirReporte(path, "Lista de Probemas del Proyecto pry_"+id_proyecto, String.valueOf(id_proyecto), "id_proyecto");	                
 	                
 	            
 	            }catch(Exception ex){

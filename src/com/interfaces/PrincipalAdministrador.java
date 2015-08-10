@@ -296,27 +296,7 @@ public class PrincipalAdministrador extends JFrame {
 		JMenu mnEvaluaciones_1 = new JMenu("   Evaluaciones   ");
 		menuBar.add(mnEvaluaciones_1);
 		
-		JMenuItem mntmPendientes = new JMenuItem("Pendientes");
-		mntmPendientes.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/pendientes2.png")));
-		mntmPendientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 try{
-					 
-					 JOptionPane.showMessageDialog(null, "Abriendo reporte de evaluaciones pendientes, por favor espere un momento");
-					 	//String path = new File("").getAbsolutePath()+"/src/com/reportes/evaluacionesPendientes.jrxml";
-					 	String path =RutaBase.obtenerRuta()+"evaluacionesPendientes.jrxml";
-					 	abrirReporte(path, "Evaluaciones pendientes", "0", "finalizada");
-		               
-		            
-		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
-		                System.out.println(ex);
-		            }
-			}
-		});
-		mnEvaluaciones_1.add(mntmPendientes);
-		
-		JMenuItem mntmFinalizadas = new JMenuItem("Finalizadas");
+		JMenuItem mntmFinalizadas = new JMenuItem("Histórico de Evaluaciones");
 		mntmFinalizadas.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluaciones1.png")));
 		mntmFinalizadas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -342,7 +322,7 @@ public class PrincipalAdministrador extends JFrame {
 		                
 		            
 		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+		                JOptionPane.showMessageDialog(null,"ERROR al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 		                System.out.println(ex);
 		            }
 				
@@ -493,14 +473,14 @@ public class PrincipalAdministrador extends JFrame {
 		                
 		            
 		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
+		                JOptionPane.showMessageDialog(null,"ERROR al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
 		                System.out.println(ex);
 		            }
 				
 			}
 		});
 		label_4.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluaciones1.png")));
-		label_4.setToolTipText("Ver informe de evaluaciones finalizadas");
+		label_4.setToolTipText("Ver histórico de evaluaciones");
 		label_4.setBounds(146, 0, 24, 31);
 		panel_1.add(label_4);
 		
@@ -514,7 +494,7 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		label_5.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/evaluadores2.png")));
 		label_5.setToolTipText("Mantenimiento de evaluadores");
-		label_5.setBounds(236, 0, 24, 31);
+		label_5.setBounds(192, 0, 24, 31);
 		panel_1.add(label_5);
 		
 		JPanel panel_12 = new JPanel();
@@ -526,7 +506,7 @@ public class PrincipalAdministrador extends JFrame {
 		panel_1.add(panel_13);
 		
 		JPanel panel_14 = new JPanel();
-		panel_14.setBounds(266, 0, 2, 31);
+		panel_14.setBounds(226, 0, 2, 31);
 		panel_1.add(panel_14);
 		
 		JLabel label_6 = new JLabel("");
@@ -539,39 +519,15 @@ public class PrincipalAdministrador extends JFrame {
 		});
 		label_6.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/help1.png")));
 		label_6.setToolTipText("Ayuda");
-		label_6.setBounds(320, 0, 24, 31);
+		label_6.setBounds(280, 0, 24, 31);
 		panel_1.add(label_6);
 		
 		JPanel panel_15 = new JPanel();
-		panel_15.setBounds(216, 0, 2, 31);
+		panel_15.setBounds(180, 0, 2, 31);
 		panel_1.add(panel_15);
 		
-		JLabel label_7 = new JLabel("");
-		label_7.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-
-				 try{
-					 JOptionPane.showMessageDialog(null, "Abriendo reporte de evaluaciones pendientes, por favor espere un momento");
-					 String path =RutaBase.obtenerRuta()+"evaluacionesPendientes.jrxml";
-					 
-					 	abrirReporte(path, "Evaluaciones Pendientes", "0", "finalizada");
-		                
-		            
-		            }catch(Exception ex){
-		                JOptionPane.showMessageDialog(null,"Error al cargar el reporte: "+ex, "ERROR",JOptionPane.ERROR_MESSAGE);
-		                System.out.println(ex);
-		            }
-			}
-		});
-		label_7.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/pendientes2.png")));
-		label_7.setToolTipText("Ver informe de evaluaciones pendientes");
-		label_7.setBounds(182, 0, 24, 31);
-		panel_1.add(label_7);
-		
 		JPanel panel_16 = new JPanel();
-		panel_16.setBounds(309, 0, 2, 31);
+		panel_16.setBounds(269, 0, 2, 31);
 		panel_1.add(panel_16);
 		
 		JLabel label_8 = new JLabel("");
@@ -585,7 +541,7 @@ public class PrincipalAdministrador extends JFrame {
 			}
 		});
 		label_8.setIcon(new ImageIcon(PrincipalAdministrador.class.getResource("/img/configuracion.png")));
-		label_8.setBounds(280, 0, 24, 31);
+		label_8.setBounds(240, 0, 24, 31);
 		panel_1.add(label_8);
 		label_8.setToolTipText("Cambiar Contraseña");
 		

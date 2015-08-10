@@ -906,7 +906,7 @@ public class Ejecucion extends JFrame {
 		lbl.setText("<html><div>"+rs.getString(9)+": "+rs.getString(5)+"</html></div>");
 	
 	
-		if(rs.getString(6).equals("NumÃ©rico")){
+		if(rs.getString(6).equals("Numérico")){
 			
 			
 			
@@ -977,7 +977,7 @@ public class Ejecucion extends JFrame {
 	
 	public void cargarComboNumeros(JComboBox combo){
 		combo.removeAllItems();
-		combo.addItem("Seleccione una opciï¿½n");
+		combo.addItem("Seleccione una opción");
 		combo.addItem("0");
 		combo.addItem("1");
 		combo.addItem("2");

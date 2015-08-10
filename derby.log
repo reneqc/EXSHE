@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Aug 10 08:51:41 COT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014f-17e1-8bcd-0000025fa598 
+Mon Aug 10 10:53:45 COT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014f-1851-4de8-0000025fa598 
 on database directory C:\workspace\EXSHE\bdd_exshe_V1.0 with class loader sun.misc.Launcher$AppClassLoader@191e0eb 
 Loaded from file:/C:/workspace/EXSHE/librerias/derby.jar
 java.vendor=Oracle Corporation

@@ -252,7 +252,7 @@ public class InformesEvaluador extends JFrame {
 		modelo.addColumn("SITIO");
 		modelo.addColumn("URL");
 		modelo.addColumn("NAVEGADOR");
-		modelo.addColumn("VERSIÃ“N");
+		modelo.addColumn("VERSI�N");
 		modelo.addColumn("FECHA");
 		modelo.addColumn("EVALUADOR");
 		
@@ -320,7 +320,7 @@ public class InformesEvaluador extends JFrame {
 		if(id_evaluacion==-1){
 			
 			 
-			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaciÃ³n de la tabla para poder generar su respectivo informe");
+			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaci�n de la tabla para poder generar su respectivo informe");
 		}else{
 			
 			 try{
@@ -328,7 +328,7 @@ public class InformesEvaluador extends JFrame {
 				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 				 	String path =RutaBase.obtenerRuta()+"reporteIndividualEvaluacion.jrxml";
-	                abrirReporte(path, "Reporte de la EvaluaciÃ³n ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
+	                abrirReporte(path, "Reporte de la Evaluaci�n ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
 	                
 	            
 	            }catch(Exception ex){
@@ -349,7 +349,7 @@ public void verInformeDeProblemas(){
 		if(id_evaluacion==-1){
 			
 			 
-			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaciÃ³n de la tabla para poder generar su respectivo informe de problemas");
+			JOptionPane.showMessageDialog(null,"Por favor seleccione una evaluaci�n de la tabla para poder generar su respectivo informe de problemas");
 		}else{
 			
 			 try{
@@ -357,7 +357,7 @@ public void verInformeDeProblemas(){
 				 	JOptionPane.showMessageDialog(null,"Generando el reporte, por favor espere un momento");
 	                //String rutaInforme="\\reportes\\reporteEvaluador.jasper";
 				 	String path =RutaBase.obtenerRuta()+"problemasEvaluacion.jrxml";
-	                abrirReporte(path, "Reporte de Problemas de la EvaluaciÃ³n ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
+	                abrirReporte(path, "Reporte de Problemas de la Evaluaci�n ev_"+id_evaluacion, String.valueOf(id_evaluacion), "id_evaluacion");	                
 	                
 	            
 	            }catch(Exception ex){
